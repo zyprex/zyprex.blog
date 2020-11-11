@@ -325,8 +325,8 @@ blockquote {
 /* ---}}}  animation --- */
 /* ---  hexagon tag {{{--- */
 .hexagon-tag {
-  font-family: Arial,"KaiTi",Serif;
-  font-size: 17px;
+  font-family: San-Serif;
+  font-size: 14px;
   text-decoration: none;
   position: relative;
   left: auto;
