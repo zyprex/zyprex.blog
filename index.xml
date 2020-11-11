@@ -55,7 +55,8 @@
 &lt;p&gt;tasklist (GFM: Github Flavored Markdown)&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; checked&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; unchecked
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; unchecked&lt;/li&gt;
+&lt;/ul&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -77,8 +78,6 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;hr&gt;
 &lt;p&gt;inline &lt;code&gt;code&lt;/code&gt; inline&lt;/p&gt;
 &lt;p&gt;sample of code block&lt;/p&gt;
