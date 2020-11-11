@@ -137,8 +137,8 @@ var config = {
   </div>
   <br/><br/>
   <div class="entrance" onclick="location.href='/about'">About</div>
-  <div class="entrance" onclick="location.href='\//gems'">Gems</div>
-  <div class="entrance" onclick="location.href='\//notions'">Notions</div>
+  <div class="entrance" onclick="location.href='/gems'">Gems</div>
+  <div class="entrance" onclick="location.href='/notions'">Notions</div>
 </div>
 
 
@@ -208,10 +208,10 @@ var config = {
 - about 919 words
 ( read in 2 min )
 
-<br/>Last Modified At 2020-11-11 Wed 11:16
+<br/>[Last Modified] 2020-11-11 Wed 11:16
 
 
-<br/>Expiry Time: 2099-11-09 Mon 00:00
+<br/>[Expiry Time] 2099-11-09 Mon 00:00
 
 <br/>
 
@@ -220,7 +220,7 @@ var config = {
 
 
 <a href="/tags/hugo/" >
-  <span class="hexagon-tag">
+  <span class="tag-label">
     #hugo
   </span>
 </a>
@@ -711,16 +711,23 @@ hugo
 
 <script>
 function showCodeType() {
-  let pare = page_content.querySelectorAll('div.highlight')
-  
+  let pare = page_content.querySelectorAll('div.highlight');
   for (let p=0;p<pare.length;p++) {
-    let code_elem = pare[p].querySelectorAll('pre>code')
+    let code_elem = pare[p].querySelectorAll('pre>code');
     for (let i=0;i<code_elem.length;i++) {
       let lang = code_elem[i].getAttribute('data-lang');
       if (lang != null) { 
         pare[p].insertAdjacentHTML('beforebegin'
           ,'<span class="code-type-tag">'+lang+'</span>');
       }
+    }
+  }
+  let pa = page_content.querySelectorAll('pre>code');
+  for (let i=0;i<pa.length;i++) {
+    let lang = pa[i].getAttribute('data-lang');
+      if (lang != null && pa[i].parentNode.parentNode.id == "page_content") {
+        pa[i].parentNode.insertAdjacentHTML('beforebegin'
+          ,'<span class="code-type-tag">'+lang+'</span>');
     }
   }
 }

@@ -24,22 +24,22 @@ a:active {
   color: yellow;
 }
 p {
-  font-family: Helvetica,"PingFang SC","KaiTi",Georgia,Tahoma,Arial,Serif;
+  font-family: San-Serif;
   font-size:110%;
 }
 ul,ol {
-  font-family: Helvetica,"PingFang SC","KaiTi",Georgia,Tahoma,Arial,Serif;
+  font-family: San-Serif;
 }
 li>p {
   margin: 0rem;
   text-indent:0;
 }
 h1,h2,h3  {
-  font-family: Arial;
+  font-family: San-Serif;
   font-size: 1.5rem;
 }
 h4,h5,h6  {
-  font-family: Arial;
+  font-family: San-Serif;
   font-size: 1rem;
 }
 h1:before {
@@ -81,30 +81,29 @@ img {
 }
 code,code>span {
   /* https://developer.mozilla.org/en-US/docs/Web/CSS/font-family */
-  font-family:Fixedsys,Consolas,"Lucida Console","DejaVu Sans Mono","Liberation Mono",monospace;
+  font-family: Fixedsys,Consolas,"Lucida Console","DejaVu Sans Mono","Liberation Mono",monospace;
 }
 pre {
   overflow: auto;
-  margin: 0px;
-  padding: 5px 5px;
+  /* margin: initial; */
+  width:100%;
+  margin: 0px !important;
+  /* padding-left: 5px; */
   background-color: #333333;
   color: #ddd;
 }
-
 p>code {
   border: 1px solid #aaaaaa70;
   padding: 1px 4px;
   background-color:#69696920;
   border-radius: 3px;
 }
-
 kbd {
   background-color:#78787880;
   padding: 4px ;
   border-radius: 3px;
   border-bottom: 2px solid #808080;
 }
-
 table {
   margin: 0 auto;
 }
@@ -324,35 +323,49 @@ blockquote {
 
 /* ---}}}  animation --- */
 /* ---  hexagon tag {{{--- */
-.hexagon-tag {
-  font-family: San-Serif;
-  font-size: 14px;
-  text-decoration: none;
-  position: relative;
-  left: auto;
-  margin: 0rem 0.7rem 0rem 0.7rem;
-  background-color: grey;
-  color: white;
-  border: 0.1rem solid grey;
-  border-right-width: 0;
-}
-.hexagon-tag:before {
-  content: '';
-  position: absolute;
-  left: -1.5rem;
-  border-width: 0.7rem;
-  border-style: solid;
-  border-color: transparent grey transparent transparent;
-}
-.hexagon-tag:after {
-  content: '';
-  position: absolute;
-  left: auto;
-  border-width: 0.7rem;
-  border-style: solid;
-  border-color: transparent transparent transparent grey;
-}
+/* .hexagon-tag { */
+  /* font-family: San-Serif; */
+  /* font-size: 14px; */
+  /* text-decoration: none; */
+  /* position: relative; */
+  /* left: auto; */
+  /* margin: 0rem 0.7rem 0rem 0.7rem; */
+  /* background-color: grey; */
+  /* color: white; */
+  /* border: 0.1rem solid grey; */
+  /* border-right-width: 0; */
+/* } */
+/* .hexagon-tag:before { */
+  /* content: ''; */
+  /* position: absolute; */
+  /* left: -1.5rem; */
+  /* border-width: 0.7rem; */
+  /* border-style: solid; */
+  /* border-color: transparent grey transparent transparent; */
+/* } */
+/* .hexagon-tag:after { */
+  /* content: ''; */
+  /* position: absolute; */
+  /* left: auto; */
+  /* border-width: 0.7rem; */
+  /* border-style: solid; */
+  /* border-color: transparent transparent transparent grey; */
+/* } */
 /* ---}}}  hexagon tag --- */
+/* ---  label style {{{--- */
+.tag-label {
+  border-left: 4px solid #78f967;
+  padding: 0 4px;
+  color: white;
+  background-color: grey;
+}
+.cat-label {
+  border-left: 4px solid #f97867;
+  padding: 0 4px;
+  color: white;
+  background-color: grey;
+}
+/* ---}}}  label style */
 /* ---  hexagon img {{{--- */
 .hexagon-img {
   width: 10rem;
@@ -416,8 +429,8 @@ blockquote {
   background: #cdba96;
   color: black;
   border-radius: 8px 8px 0 0 ;
-  padding: 0 15px;
-  margin-left: 15px;
+  padding: 0 8px;
+  margin: 0;
 }
 .page-np {
   flex:1;
@@ -428,11 +441,11 @@ blockquote {
   background-color: #8f8f8f68;
 }
 #page_content {
- margin: 5px 2rem;
+ margin: 0.5rem 2rem;
 }
 @media screen and (max-width: 600px) {
     #page_content {
-        margin: 5px 1rem;
+        margin: 0.2rem 1rem;
     }
 }
 .article-cover {
