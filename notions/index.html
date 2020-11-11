@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html>
+  <head><meta charset="UTF-8">
+
+<link rel="icon" type="image/png" href="/img/git_face.png">
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link disabled id="dark-mode-theme" rel="stylesheet" href="/css/dark.css">
+<meta name="generator" content="Hugo 0.76.5" />
+
+
+
+
+
+    <title>Zyprex&#39;s Blog</title>
+  </head>
+  <body style="margin:0;"><nav class="navbar-top">
+  <span style="flex:50%;">
+    
+    <a style="font-weight:800;color:#20b2aa;text-decoration:none;" href="/">Zyprex&#39;s Blog</a>
+    <a><span onclick="sidebar_open('sidebar-l');">&nbsp;♦♦♦&nbsp;</span></a>
+    Maverick
+    
+  </span>
+  
+  <span style="flex:1;text-align:right;">
+    <a id="dark-mode-toggle" class="light-theme">&nbsp;🌙&nbsp;</a>
+     
+    <a style="color:white" onclick="sidebar_open('sidebar-r')">&nbsp;〓&nbsp;</a>
+    
+  </span>
+</nav>
+
+<div id="sidebar-l" class="sidebar-l" onclick="this.className='sidebar-l ani-push-l'">
+  <div style="background:#ffffff80;display:flex;">
+    <span style="flex:100%;width:50%;"></span>
+  <div style="width:100%;">
+    <div class="hexagon-img">
+    
+      <img class="hexagon-cont" src="/img/git_face.png" alt="Avatar" />
+    
+    </div>
+  </div>
+    <span style="flex:100%;width:50%;"></span>
+  </div>
+  <br/><br/>
+  <div class="entrance" onclick="location.href='\//about'">About</div>
+  <div class="entrance" onclick="location.href='\//gems'">Gems</div>
+  <div class="entrance" onclick="location.href='\//notions'">Notions</div>
+</div>
+
+
+
+
+<div id="sidebar-r" class="sidebar-r">
+<div onclick="hiddenAll();" class="sb-tree-title">taxonomies</div>
+<div id="sb_tree" class="sb-tree">
+  
+  <div id="sb_tree_lv1" class="sb-tree-lv1">
+  <span onclick="">categories<sup>0</sup></span>
+    
+  </div>
+  
+  <div id="sb_tree_lv1" class="sb-tree-lv1">
+  <span onclick="">tags<sup>1</sup></span>
+    
+    <div id="sb_tree_lv2" class="sb-tree-lv2">
+    <span onclick="">hugo<sup>1</sup></span>
+      <div id="sb_tree_lv3" class="sb-tree-lv3">
+      
+       
+       <a href="/guide/hugo-start-guide/">Hugo Start Guide</a><br/>
+      
+      </div>
+    </div>
+    
+  </div>
+  
+</div>
+</div>
+
+<script>
+  for (let atree of sb_tree.querySelectorAll('div')) {
+    if ( atree.id == 'sb_tree_lv3' ) atree.hidden = 1;
+  }
+  function hiddenAll() {
+    for (let atree of sb_tree.querySelectorAll('div')) {
+      if ( atree.id == 'sb_tree_lv2' ) atree.hidden = 0;
+      if ( atree.id == 'sb_tree_lv3' ) atree.hidden = 1;
+    }
+  }
+  sb_tree.onclick = function toggleSubtree(){
+    let tag_name = event.target.tagName;
+    if ( tag_name == 'SPAN' ) {
+      let childrenContainer =
+        event.target.parentNode.querySelectorAll("div");
+      for (let i of childrenContainer) {
+        i.hidden = !i.hidden;
+      }
+    } else if ( tag_name == 'SUP' ) {
+      let childrenContainer =
+        event.target.parentNode.parentNode.querySelectorAll("div");
+      for (let i of childrenContainer) {
+        i.hidden = !i.hidden;
+      }
+    }
+  }
+</script>
+<div id="content">
+      
+<div style="margin:10px;padding:10px;">
+  <div style="width:100%;text-align:right;">
+    <span style="border-right:0.5rem solid #1e90ff;"></span> &nbsp;
+    <b>Notions</b>
+  </div>
+
+</div>
+
+    </div>
+    <div style="background-color:#3e3e3e70;padding:10px;">
+&copy; 2020 Powerd By <a href="https://gohugo.io">Hugo 0.76.5</a>
+Last Build Time : 2020-10-14 Wed 15:16:53 
+
+<span style="margin-left:1rem;margin-right:1rem;float:right;color:green;">📜4</span>
+
+</div>
+
+  </body>
+</html>
+
+<script src="/js/script.js"></script>

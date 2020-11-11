@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Guides on Zyprex&#39;s Blog</title>
+    <link>/guide/</link>
+    <description>Recent content in Guides on Zyprex&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 09 Nov 2020 12:32:48 +0000</lastBuildDate><atom:link href="/guide/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo Start Guide</title>
+      <link>/guide/hugo-start-guide/</link>
+      <pubDate>Mon, 09 Nov 2020 12:32:48 +0000</pubDate>
+      
+      <guid>/guide/hugo-start-guide/</guid>
+      <description>基本 MD 样式范例 (basic markdown style test) title 1 title 2 title 3 title 4 title 5 title 6 italic bold italic bold strikethrough bold&amp;amp;italic blockquote item1 item1-1 item1-2 item1-3 item1-3-1 item1-3-2 item1-3-3 item2 item3 item4 item1 item2 item3 item4 tasklist (GFM: Github Flavored Markdown) checked unchecked % Apple Banana price 12.0 34.0 count 3900 NaN inline code inline sample of code block 1 2 3 4 5 6 7 8 9 10 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34;&amp;gt; &amp;lt;title&amp;gt;Document&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;p&amp;gt;html document skeleton&amp;lt;/p&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; code block with tab indent &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt; &amp;lt;title&amp;gt;Document&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;p&amp;gt;html document skeleton&amp;lt;/p&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; home footnote1 原始 html 样式 🔔 开启 html 内容支持需要以下站点配置(hugo v0.76.5) 1 2 3 # 📁/config.toml [markup.goldmark.renderer] unsafe = true GIF 上标123 下标123 mark ctrl键 hugo 的 shortcode shortcode2 可代替 raw HTML 全局 emoji 支持 🔔 开启 emoji 支持需要以</description>
+    </item>
+    
+  </channel>
+</rss>
