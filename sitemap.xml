@@ -4,26 +4,31 @@
   
   <url>
     <loc>/guide/</loc>
-    <lastmod>2020-11-11T11:16:35+00:00</lastmod>
+    <lastmod>2020-11-13T13:47:35+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/hugo/</loc>
-    <lastmod>2020-11-11T11:16:35+00:00</lastmod>
+    <lastmod>2020-11-13T13:47:35+00:00</lastmod>
   </url>
   
   <url>
     <loc>/guide/hugo-start-guide/</loc>
-    <lastmod>2020-11-11T11:16:35+00:00</lastmod>
+    <lastmod>2020-11-13T13:47:35+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2020-11-11T11:16:35+00:00</lastmod>
+    <lastmod>2020-11-13T13:47:35+00:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
+    <lastmod>2020-11-13T13:47:35+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/guide/hugo-style-test/</loc>
     <lastmod>2020-11-11T11:16:35+00:00</lastmod>
   </url>
   

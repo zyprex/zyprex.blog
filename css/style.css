@@ -109,16 +109,22 @@ table {
 }
 tr,td {
   /* border: 0px solid black; */
+  min-width: 50px;
+  word-break: break-all;
   border-bottom: 1px solid grey;
-  padding: 5px;
+  padding: 0 5px;
+  margin: 0 15px;
+  /* empty-cells: hide; */
 }
 th {
   /* border: 0px solid white; */
-  color: white;
-  padding: 0.2rem;
+  /* min-width:15%; */
+  color: black;
+  font-weight: 900;
+  padding: 5px;
+  margin: 0 15px;
   background-color: darkgrey;
 }
-
 blockquote {
   border-left: 4px solid #2f4f4f;
   padding: 0.1rem 1rem;

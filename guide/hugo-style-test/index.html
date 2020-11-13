@@ -1,0 +1,738 @@
+
+<!DOCTYPE html>
+<html>
+  <head><meta charset="UTF-8">
+
+<link rel="icon" type="image/png" href="/img/git_face.png">
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link disabled id="dark-mode-theme" rel="stylesheet" href="/css/dark.css">
+<meta name="generator" content="Hugo 0.76.5" />
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous" 
+ onload="renderMathInElement(document.body,
+{
+  delimiters:
+  [
+    {left: '$$', right: '$$', display: true},
+    {left: '$', right: '$', display: false},
+    {left: '\\(', right: '\\)', display: false},
+    {left: '\\[', right: '\\]', display: true}
+  ]
+});"></script>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+var config = {
+    theme:'default',
+    themeVariables:{
+      'darkMode': true,
+    },
+    logLevel:'fatal',
+    securityLevel:'strict',
+    startOnLoad:true,
+    arrowMarkerAbsolute:false,
+
+    er:{
+      diagramPadding:20,
+      layoutDirection:'TB',
+      minEntityWidth:100,
+      minEntityHeight:75,
+      entityPadding:15,
+      stroke:'gray',
+      fill:'honeydew',
+      fontSize:12,
+      useMaxWidth:true,
+    },
+    flowchart:{
+      diagramPadding:8,
+      htmlLabels:true,
+      curve:'linear',
+    },
+    sequence:{
+      diagramMarginX:50,
+      diagramMarginY:10,
+      actorMargin:50,
+      width:150,
+      height:65,
+      boxMargin:10,
+      boxTextMargin:5,
+      noteMargin:10,
+      messageMargin:35,
+      messageAlign:'center',
+      mirrorActors:true,
+      bottomMarginAdj:1,
+      useMaxWidth:true,
+      rightAngles:false,
+      showSequenceNumbers:false,
+    },
+    gantt:{
+      titleTopMargin:25,
+      barHeight:20,
+      barGap:4,
+      topPadding:50,
+      leftPadding:75,
+      gridLineStartPadding:35,
+      fontSize:11,
+      fontFamily:'"Open-Sans", "sans-serif"',
+      numberSectionStyles:4,
+      axisFormat:'%Y-%m-%d',
+    }
+  };
+  mermaid.initialize(config);
+</script>
+
+
+
+
+
+    <title>
+  Hugo Style Test | Zyprex&#39;s Blog
+</title>
+  </head>
+  <body style="margin:0;"><nav class="navbar-top">
+  <span style="flex:50%;">
+    
+    <a style="font-weight:800;color:#20b2aa;text-decoration:none;" href="/">Zyprex&#39;s Blog</a>
+    <a><span onclick="sidebar_open('sidebar-l');">&nbsp;♦♦♦&nbsp;</span></a>
+    Maverick
+    
+  </span>
+  
+  <span style="flex:1;text-align:right;">
+    <a id="dark-mode-toggle" class="light-theme">&nbsp;🌙&nbsp;</a>
+    
+    <a onclick="article_toc.hidden=!article_toc.hidden">&nbsp;⚓&nbsp;</a>
+     
+    <a style="color:white" onclick="sidebar_open('sidebar-r')">&nbsp;〓&nbsp;</a>
+    
+  </span>
+</nav>
+
+<div id="sidebar-l" class="sidebar-l" onclick="this.className='sidebar-l ani-push-l'">
+  <div style="background:#ffffff80;display:flex;">
+    <span style="flex:100%;width:50%;"></span>
+  <div style="width:100%;">
+    <div class="hexagon-img">
+    
+      <img class="hexagon-cont" src="/img/git_face.png" alt="Avatar" />
+    
+    </div>
+  </div>
+    <span style="flex:100%;width:50%;"></span>
+  </div>
+  <br/><br/>
+  <div class="entrance" onclick="location.href='/about'">About</div>
+  <div class="entrance" onclick="location.href='/gems'">Gems</div>
+  <div class="entrance" onclick="location.href='/notions'">Notions</div>
+</div>
+
+
+
+
+<div id="sidebar-r" class="sidebar-r">
+<div onclick="hiddenAll();" class="sb-tree-title">taxonomies</div>
+<div id="sb_tree" class="sb-tree">
+  
+  <div id="sb_tree_lv1" class="sb-tree-lv1">
+  <span onclick="">categories<sup>0</sup></span>
+    
+  </div>
+  
+  <div id="sb_tree_lv1" class="sb-tree-lv1">
+  <span onclick="">tags<sup>1</sup></span>
+    
+    <div id="sb_tree_lv2" class="sb-tree-lv2">
+    <span onclick="">hugo<sup>2</sup></span>
+      <div id="sb_tree_lv3" class="sb-tree-lv3">
+      
+       
+       <a href="/guide/hugo-start-guide/">Hugo Start Guide</a><br/>
+      
+       
+       <a href="/guide/hugo-style-test/">Hugo Style Test</a><br/>
+      
+      </div>
+    </div>
+    
+  </div>
+  
+</div>
+</div>
+
+<script>
+  for (let atree of sb_tree.querySelectorAll('div')) {
+    if ( atree.id == 'sb_tree_lv3' ) atree.hidden = 1;
+  }
+  function hiddenAll() {
+    for (let atree of sb_tree.querySelectorAll('div')) {
+      if ( atree.id == 'sb_tree_lv2' ) atree.hidden = 0;
+      if ( atree.id == 'sb_tree_lv3' ) atree.hidden = 1;
+    }
+  }
+  sb_tree.onclick = function toggleSubtree(){
+    let tag_name = event.target.tagName;
+    if ( tag_name == 'SPAN' ) {
+      let childrenContainer =
+        event.target.parentNode.querySelectorAll("div");
+      for (let i of childrenContainer) {
+        i.hidden = !i.hidden;
+      }
+    } else if ( tag_name == 'SUP' ) {
+      let childrenContainer =
+        event.target.parentNode.parentNode.querySelectorAll("div");
+      for (let i of childrenContainer) {
+        i.hidden = !i.hidden;
+      }
+    }
+  }
+</script>
+<div id="content">
+      
+<div class="article-cover">
+<div class="article-title">Hugo Style Test</div>
+
+2020-11-09 Mon 12:32
+- about 375 words
+( read in 1 min )
+
+<br/>[Last Modified] 2020-11-11 Wed 11:16
+
+
+<br/>[Expiry Time] 2099-11-09 Mon 00:00
+
+<br/>
+
+
+
+
+
+<a href="/tags/hugo/" >
+  <span class="tag-label">
+    #hugo
+  </span>
+</a>
+
+
+</div>
+
+
+<div id="article_toc" class="article-toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本-md-样式范例-basic-markdown-style-test">基本 MD 样式范例 (<em>basic markdown style test</em>)</a></li>
+    <li><a href="#title-1">title 1</a>
+      <ul>
+        <li><a href="#title-2">title 2</a>
+          <ul>
+            <li><a href="#title-3">title 3</a>
+              <ul>
+                <li><a href="#title-4">title 4</a>
+                  <ul>
+                    <li><a href="#title-5">title 5</a>
+                      <ul>
+                        <li><a href="#title-6">title 6</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#原始-html-样式">原始 html 样式</a></li>
+    <li><a href="#hugo-的-shortcode">hugo 的 shortcode</a></li>
+    <li><a href="#全局-emoji-支持">全局 emoji 支持</a></li>
+    <li><a href="#katex-测试">katex 测试</a></li>
+    <li><a href="#mermaid-测试">mermaid 测试</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+ 
+</script>
+
+
+<div id="page_content">
+<h1 id="基本-md-样式范例-basic-markdown-style-test">基本 MD 样式范例 (<em>basic markdown style test</em>)</h1>
+<h1 id="title-1">title 1</h1>
+<h2 id="title-2">title 2</h2>
+<h3 id="title-3">title 3</h3>
+<h4 id="title-4">title 4</h4>
+<h5 id="title-5">title 5</h5>
+<h6 id="title-6">title 6</h6>
+<p><em>italic</em> <strong>bold</strong>
+<em>italic</em> <strong>bold</strong></p>
+<p><del>strikethrough</del></p>
+<p><em><strong>bold&amp;italic</strong></em></p>
+<blockquote>
+<p>blockquote</p>
+</blockquote>
+<ul>
+<li>item1
+<ul>
+<li>item1-1</li>
+<li>item1-2</li>
+<li>item1-3</li>
+<li>item1-3-1
+<ul>
+<li>item1-3-2</li>
+<li>item1-3-3</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>item2</li>
+<li>item3</li>
+<li>item4</li>
+</ul>
+<ol>
+<li>item1</li>
+<li>item2</li>
+<li>item3</li>
+<li>item4</li>
+</ol>
+<p>tasklist (GFM: Github Flavored Markdown)</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> checked</li>
+<li><input disabled="" type="checkbox"> unchecked</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Fruit Table</th>
+<th style="text-align:center">Apple</th>
+<th style="text-align:right">Banana</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><em>price</em></td>
+<td style="text-align:center">12.0</td>
+<td style="text-align:right">34.0</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>count</em></td>
+<td style="text-align:center">13000</td>
+<td style="text-align:right">19000000000000000000</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>inline <code>code</code> inline</p>
+<p>sample of code block</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color:#f92672">html</span>&gt;
+&lt;<span style="color:#f92672">head</span>&gt;
+  &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+  &lt;<span style="color:#f92672">title</span>&gt;Document&lt;/<span style="color:#f92672">title</span>&gt;
+&lt;/<span style="color:#f92672">head</span>&gt;
+&lt;<span style="color:#f92672">body</span>&gt;
+    &lt;<span style="color:#f92672">p</span>&gt;html document skeleton&lt;/<span style="color:#f92672">p</span>&gt;
+&lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>code block with unknow language</p>
+<pre><code class="language-fakelang" data-lang="fakelang"># |__aAbBcCdDeEfFgGhHiIjJkKlLmMnN
+# oOpPQqrRsStTuUvVwWxXyYzZ
+main:
+  &lt;data&gt; arr=[1234567890,!@#$%^&amp;*&quot;'\.?/];
+  for i in arr { print(i); }
+</code></pre><p>code block with tab indent</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;html document skeleton&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><a href="/" title="go to site root">home</a></p>
+<p><img src="/img/brige.jpg" alt="" title="sample picture"></p>
+<p>footnote<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h1 id="原始-html-样式">原始 html 样式</h1>
+<p>🔔 开启 html 内容支持需要以下站点配置(hugo v0.76.5)</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-toml" data-lang="toml"><span style="color:#75715e"># 📁/config.toml</span>
+[<span style="color:#a6e22e">markup</span>.<span style="color:#a6e22e">goldmark</span>.<span style="color:#a6e22e">renderer</span>]
+    <span style="color:#a6e22e">unsafe</span> = <span style="color:#66d9ef">true</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><abbr title="Graphics Interchange Format">GIF</abbr>
+上标<sup>123</sup> 下标<sub>123</sub> <mark>mark</mark> <kbd>ctrl</kbd>键</p>
+<h1 id="hugo-的-shortcode">hugo 的 shortcode</h1>
+<p>shortcode<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> 可代替 raw HTML</p>
+<h1 id="全局-emoji-支持">全局 emoji 支持</h1>
+<p>🔔 开启 emoji 支持需要以下站点配置(hugo v0.76.5)</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-toml" data-lang="toml"><span style="color:#75715e"># 📁/config.toml</span>
+<span style="color:#a6e22e">enableEmoji</span> = <span style="color:#66d9ef">true</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>🙈 🙉 🙊
+❤️ ⭐ ⚠️ 🔗
+<a href="https://www.webfx.com/tools/emoji-cheat-sheet/">https://www.webfx.com/tools/emoji-cheat-sheet/</a></p>
+<h1 id="katex-测试">katex 测试</h1>
+<p>🔗 <a href="https://katex.org/">https://katex.org/</a></p>
+<p>🔔 数学公式支持需要文章的 FrontMatter 中 <code>math</code> 值为 <code>true</code></p>
+<p>inline math formulation $\sqrt{2}$</p>
+<p>$$
+f(x) = \int_{-\infty}^\infty
+f\hat\xi,e^{2 \pi i \xi x}
+,d\xi
+$$</p>
+<h1 id="mermaid-测试">mermaid 测试</h1>
+<p>🔗 <a href="https://mermaid-js.github.io/mermaid-live-editor/">https://mermaid-js.github.io/mermaid-live-editor/</a></p>
+<p>🔔 mermaid 支持需要文章的 FrontMatter 中 <code>merimaid</code> 值为 <code>true</code></p>
+<p>在文章中使用方法如下：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mermaid&#34;</span>&gt;
+pie title Pets adopted by volunteers
+    &#34;Dogs&#34; : 386
+    &#34;Cats&#34; : 85
+    &#34;Rats&#34; : 15
+&lt;/<span style="color:#f92672">div</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><div class="mermaid">
+pie title Pets adopted by volunteers
+    "Dogs" : 386
+    "Cats" : 85
+    "Rats" : 15
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>I am a footnote <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p><a href="https://gohugo.io/content-management/shortcodes/#readout">https://gohugo.io/content-management/shortcodes/#readout</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+</div>
+
+<br/>
+<div style="display:flex;">
+  
+  <div class="page-np">
+  NEXT: <a href="/guide/hugo-start-guide/">Hugo Start Guide</a>
+  </div>
+  
+  
+  <div class="page-np">
+  PREV: <a href="/about/">About</a>
+  </div>
+  
+</div>
+
+<script>
+function showCodeType() {
+  let pare = page_content.querySelectorAll('div.highlight');
+  for (let p=0;p<pare.length;p++) {
+    let code_elem = pare[p].querySelectorAll('pre>code');
+    for (let i=0;i<code_elem.length;i++) {
+      let lang = code_elem[i].getAttribute('data-lang');
+      if (lang != null) { 
+        pare[p].insertAdjacentHTML('beforebegin'
+          ,'<span class="code-type-tag">'+lang+'</span>');
+      }
+    }
+  }
+  let pa = page_content.querySelectorAll('pre>code');
+  for (let i=0;i<pa.length;i++) {
+    let lang = pa[i].getAttribute('data-lang');
+      if (lang != null && pa[i].parentNode.parentNode.id == "page_content") {
+        pa[i].parentNode.insertAdjacentHTML('beforebegin'
+          ,'<span class="code-type-tag">'+lang+'</span>');
+    }
+  }
+}
+showCodeType();
+</script><style>
+.warn-bar {
+  background-color:yellow;
+  width: 15px;
+  height: 15px;
+  margin:0 5px;
+  transform: skewX(-45deg);
+}
+@media screen and (max-width: 600px) {
+  .warn-bar {
+    background-color:yellow;
+    width: 10px;
+    height: 10px;
+    margin:0 2px;
+    transform: skewX(-45deg);
+  }
+}
+</style>
+
+<div style="margin:1rem;">
+<div style="background-color:black;display:flex;">
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+</div>
+
+<div style="background-color:#202020e0;color:white;padding:0.8rem;">
+<b>Copyright Notice:</b>
+All articles in this blog are licensed under <a href="https://freedomdefined.org/Licenses/CC-BY-SA-4.0" rel="nofollow noopener">CC BY-SA 4.0</a> unless stating additionally.
+<br/>
+本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> 。转载请注明出处！
+</div>
+
+<div style="background-color:black;display:flex;">
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+<div class="warn-bar"></div>
+
+</div>
+
+</div>
+
+    </div>
+    <div style="background-color:#3e3e3e70;padding:10px;">
+&copy; 2020 Powerd By <a href="https://gohugo.io">Hugo 0.76.5</a>
+
+
+
+<span style="margin-left:1rem;margin-right:1rem;float:right;color:green;">📜5</span>
+
+</div>
+
+  </body>
+</html>
+
+<script src="/js/script.js"></script>
