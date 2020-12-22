@@ -1,83 +1,73 @@
-'use strict';
-/* 
- * loc@ ../../layouts/partials/header.html
- */
-function sidebar_open(id) {
-  let sb = document.getElementById(id);
-  let sbn = sb.className
-  let drt = sbn.substr(-1); // left or right
-  let b_class = sbn.indexOf(' ')!=-1 ?
-    sbn.slice(0,sbn.indexOf(' ')-1) : sbn.slice(0,-1);
-  //pad.innerText = 1;
-  if (sbn.indexOf('pull',8) != -1 ) {
-    sb.className = b_class + drt + " ani-push-" + drt;
-  } else if (sbn.indexOf('push',8) != -1 ) {
-    sb.className = b_class + drt + " ani-pull-" + drt;
-  } else {
-    sb.className = b_class + drt + " ani-pull-" + drt;
-  }
+"use strict";
+function $(id){return document.getElementById(id);}
+const chgTheme = (ele)=> {
+  localStorage.setItem('themeVar', theme_var.href = ele.getAttribute('data-src'));
+  $('color_mod_btn').querySelectorAll("*").forEach(i=>i.classList.remove('th-btn-a'));
+  ele.classList.add('th-btn-a');
 }
-
-/* https://radu-matei.com/blog/dark-mode/
- * loc@ ../../layouts/partials/header.html
- * */
-let toggleTheme = document.getElementById("dark-mode-toggle");
-let darkTheme = document.getElementById("dark-mode-theme");
-toggleTheme.onclick = function () {
-    if (toggleTheme.className === "light-theme") {
-      setTheme("dark");
-    } else if (toggleTheme.className === "dark-theme")  {
-      setTheme("light");
+$('color_mod_btn').querySelectorAll("*").forEach(i=>i.addEventListener('click', function (){chgTheme(this);}));
+let navbot = $('nav_bottom');
+let navmenu = $('nav_menu');
+let navtoc = $('nav_toc') ?? navmenu;
+let prevScrollpos = window.pageYOffset;
+window.onscroll = ()=> {
+  let currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos) {
+    navbot.style.bottom = 0;
+  } else {
+    if (navmenu.style.bottom =="0px" || navtoc.style.bottom =="0px") return;
+    navbot.style.bottom = "-100%";
+  }
+  prevScrollpos = currentScrollPos;
+}
+const flipMove = (ev)=> {
+  let xa = ev.clientX;
+  let ya = ev.clientY;
+  let sh = window.innerHeight;
+  let sw = window.screen.availWidth;
+  let gap = 10;
+  let gap_ex = 50;
+  if (xa < gap || xa > sw-gap) {
+    if (ya<gap_ex) {
+      window.scroll(0,0);
+      return;
+    } else if (sh-ya<gap_ex) {
+      window.scroll(0,document.body.scrollHeight);
+      return;
+    }
+    if (ya<sh/2) {
+      window.scrollBy({top: -sh,behavior:'smooth'});
+    } else {
+      window.scrollBy({top:  sh,behavior:'smooth'});
     }
   }
-function setTheme(mode) {
-  if (mode === "dark") {
-    darkTheme.disabled = false;
-    toggleTheme.className = "dark-theme";
-    toggleTheme.innerText = "🔆";
-  } else if (mode === "light") {
-    darkTheme.disabled = true;
-    toggleTheme.className = "light-theme";
-    toggleTheme.innerText = "🌙";
+}
+$('nav_flip_r').onclick = flipMove;
+$('nav_flip_l').onclick = flipMove;
+const toggleSubNav = (ele,elem)=> {
+  let isHide = ele.style.bottom;
+  let navbotH = navbot.offsetHeight;
+  let toHide = elem.style.bottom;
+  if (toHide == "0px") {
+    elem.style.bottom = "-100%";
   }
-  localStorage.setItem("dark-mode-storage",mode);
+  if (isHide != "0px") {
+    ele.style.paddingBottom = navbotH+"px";
+    ele.style.bottom = "0px";
+  } else {
+    ele.style.bottom = "-100%";
+  }
 }
-if(window.localStorage){
-  // default dark mode
-  let savedTheme = localStorage.getItem("dark-mode-storage") || "dark";
-  setTheme(savedTheme);
+$('nav_menu_btn').onclick = ()=> {toggleSubNav(navmenu,navtoc)};
+$('nav_toc_btn').onclick = ()=> {toggleSubNav(navtoc,navmenu)};
+function previewbgImg(ele,src) {
+  let s = src;
+  if (!s) {
+    s = bg_img.getAttribute('data-bg');
+    if (!s) {
+       return;
+    }
+  }
+  ele.style.backgroundImage='url('+s+')';
+  ele.style.backgroundSize='cover';
 }
-
-/*
- * loc@ none
-<!-- <span id="sitetime" style="font-size:80%;font-weight:700;"></span> -->
- * */
-/*
-function siteTime() {
-  window.setTimeout("siteTime()", 1000);
-  var seconds = 1000;
-  var minutes = seconds * 60;
-  var hours = minutes * 60;
-  var days = hours * 24;
-  var years = days * 365;
-  var today = new Date();
-  var todayYear = today.getFullYear();
-  var todayMonth = today.getMonth() + 1;
-  var todayDate = today.getDate();
-  var todayHour = today.getHours();
-  var todayMinute = today.getMinutes();
-  var todaySecond = today.getSeconds();
-
-  var t1 = Date.UTC(2020, 07, 15, 00, 00, 00); 
-  var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-  var diff = t2 - t1;
-  var diffYears = Math.floor(diff / years);
-  var diffDays = Math.floor((diff / days) - diffYears * 365);
-  var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
-  var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
-  var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
-  document.getElementById("sitetime").innerHTML = " uptime: " +   diffDays + " d " + diffHours + " h " + diffMinutes + " m " + diffSeconds + " s";
-}
-siteTime();
-*/
-

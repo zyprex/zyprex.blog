@@ -1,22 +1,22 @@
 :root {
-  --main-fg: #b8b8b8;
-  --main-bg: #0f0f0f;
-  --main-link: #4682b4;
-  --main-link-v: #8a2be2;
+  --main-fg: #556b2f;
+  --main-bg: #ffdab9;
+  --main-link: #6495ed;
+  --main-link-v: #9370db;
   --mbox-bg: transparent;
   --mbox-ss: 0px 0px 5px #000000;
   --bbox-ss: 0px -2px 6px #000000;
   --bbox-fg: #ccc;
-  --bbox-bg: #1c1c1c;
+  --bbox-bg: #ff5555;
   --h-id: grey;
   --h-fg: default;
   --h-br: thin groove #34343490;
-  --qt-bg: #000;
-  --qt-br: 5px solid #909090;
-  --tb-br: 1px solid #b8b8b8;
+  --qt-bg: #cdaf9520;
+  --qt-br: 5px solid #cd5555;
+  --tb-br: 1px solid #cd5555;
   --pre-fg: #f8f8f8;
   --pre-bg: #272822;
-  --kb-bg: #343434;
+  --kb-bg: #eed5d2;
   --kb-br: 3px solid #aaaaaa60;
-  --line: 3px dashed #aaa;
+  --line: 3px dashed black;
 }

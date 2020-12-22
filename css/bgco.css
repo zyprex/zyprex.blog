@@ -1,0 +1,10 @@
+.mbox,.pbox,header,footer {
+  background-color: var(--main-bg);
+}
+body {
+  text-shadow: 2px 2px 3px #000000a0;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
