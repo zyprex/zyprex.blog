@@ -1,5 +1,5 @@
 let isLoaded = false;
-let pageReadyCallBack = function(){
+let pageReadyCallBack = ()=>{
   isLoaded = true; //console.log('ready '+Date.now());
   if(localStorage.getItem('viewMode')=='2') return;
   if (!$('bg_img').disabled){
