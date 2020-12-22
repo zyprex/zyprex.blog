@@ -45,6 +45,7 @@ const flipMove = (ev)=> {
 $('nav_flip_r').onclick = flipMove;
 $('nav_flip_l').onclick = flipMove;
 const toggleSubNav = (ele,elem)=> {
+  alert(1);
   let isHide = ele.style.bottom;
   let navbotH = navbot.offsetHeight;
   let toHide = elem.style.bottom;
@@ -58,8 +59,8 @@ const toggleSubNav = (ele,elem)=> {
     ele.style.bottom = "-100%";
   }
 }
-$('nav_menu_btn').onclick = ()=> {toggleSubNav(navmenu,navtoc)};
-$('nav_toc_btn').onclick = ()=> {toggleSubNav(navtoc,navmenu)};
+$('nav_menu_btn').onclick = ()=> {toggleSubNav(navmenu,nav_toc_btn)};
+$('nav_toc_btn').onclick = ()=> {toggleSubNav(nav_toc,nav_menu_btn)};
 function previewbgImg(ele,src) {
   let s = src;
   if (!s) {
