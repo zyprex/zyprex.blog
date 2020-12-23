@@ -8,7 +8,7 @@ function pageReadyCallBack() {
   }
 }
 document.addEventListener("DOMContentLoaded", pageReadyCallBack());
-document.addEventListener('readystatechange', (event) => {
+document.addEventListener('readystatechange', function(event){
   if (document.readyState === 'complete' && !isLoaded)
     pageReadyCallBack();
 });
