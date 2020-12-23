@@ -11,7 +11,9 @@ window.onscroll = function(){
   if (prevScrollpos > currentScrollPos) {
     nav_bottom.style.bottom = 0;
   } else {
-    //if (nav_menu.style.bottom =="0px" || nav_toc.style.bottom =="0px") return;
+    if (nav_menu.style.bottom =="0px" ||
+         document.getElementById('nav_toc') && nav_toc.style.bottom =="0px")
+      return;
     nav_bottom.style.bottom = "-100%";
   }
   prevScrollpos = currentScrollPos;
@@ -21,7 +23,7 @@ function flipMove(ev) {
   let ya = ev.clientY;
   let sh = window.innerHeight;
   let sw = window.screen.availWidth;
-  let gap = 20;
+  let gap = 15;
   let gap_ex = 50;
   if (xa < gap || xa > sw-gap) {
     if (ya<gap_ex) {
