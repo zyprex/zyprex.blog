@@ -1,26 +1,23 @@
 "use strict";
-function $(id){return document.getElementById(id);}
-const chgTheme = (ele)=> {
+//function $(id){return document.getElementById(id);}
+function chgTheme(ele){
   localStorage.setItem('themeVar', theme_var.href = ele.getAttribute('data-src'));
-  $('color_mod_btn').querySelectorAll("*").forEach(i=>i.classList.remove('th-btn-a'));
+  color_mod_btn.querySelectorAll("*").forEach(i=>i.classList.remove('th-btn-a'));
   ele.classList.add('th-btn-a');
 }
-$('color_mod_btn').querySelectorAll("*").forEach(i=>i.addEventListener('click', function (){chgTheme(this);}));
-let navbot = $('nav_bottom');
-let navmenu = $('nav_menu');
-let navtoc = $('nav_toc') ?? navmenu;
+color_mod_btn.querySelectorAll("*").forEach(i=>i.addEventListener('click', function (){chgTheme(this);}));
 let prevScrollpos = window.pageYOffset;
-window.onscroll = ()=> {
+window.onscroll = function(){
   let currentScrollPos = window.pageYOffset;
   if (prevScrollpos > currentScrollPos) {
-    navbot.style.bottom = 0;
+    nav_bottom.style.bottom = 0;
   } else {
-    if (navmenu.style.bottom =="0px" || navtoc.style.bottom =="0px") return;
-    navbot.style.bottom = "-100%";
+    if (nav_menu.style.bottom =="0px" || nav_toc.style.bottom =="0px") return;
+    nav_bottom.style.bottom = "-100%";
   }
   prevScrollpos = currentScrollPos;
 }
-const flipMove = (ev)=> {
+function flipMove(ev) {
   let xa = ev.clientX;
   let ya = ev.clientY;
   let sh = window.innerHeight;
@@ -44,7 +41,7 @@ const flipMove = (ev)=> {
 }
 $('nav_flip_r').onclick = flipMove;
 $('nav_flip_l').onclick = flipMove;
-const toggleSubNav = (ele,elem)=> {
+function toggleSubNav(ele,elem) {
   let isHide = ele.style.bottom;
   let navbotH = navbot.offsetHeight;
   let toHide = elem.style.bottom;
@@ -58,8 +55,8 @@ const toggleSubNav = (ele,elem)=> {
     ele.style.bottom = "-100%";
   }
 }
-$('nav_menu_btn').onclick = ()=> {toggleSubNav(navmenu,navtoc)};
-$('nav_toc_btn').onclick = ()=> {toggleSubNav(navtoc,navmenu)};
+nav_menu_btn.onclick = function(){toggleSubNav(nav_menu,nav_toc)};
+nav_toc_btn.onclick = function(){toggleSubNav(nav_toc,nav_menu)};
 function previewbgImg(ele,src) {
   let s = src;
   if (!s) {

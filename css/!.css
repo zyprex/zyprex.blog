@@ -194,8 +194,7 @@ ul,ol {margin: 0.2em 0 0.2em 1.3em;}
 }
 /*HEADER*/
 .f-head {font-weight:600;font-size:2rem;padding:.5em 1em;}
-.f-subhead {font-size:1.5rem;}
-#header {margin-bottom:2em;padding:10px;}
+#header {margin-bottom:2em;padding:10px;font-size:1.5rem;}
 /*FOOTER*/
 #footer {margin-top:5em;padding:2em 1em;}
 /*ENHANCE*/
