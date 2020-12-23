@@ -21,7 +21,7 @@ function flipMove(ev) {
   let ya = ev.clientY;
   let sh = window.innerHeight;
   let sw = window.screen.availWidth;
-  let gap = 10;
+  let gap = 20;
   let gap_ex = 50;
   if (xa < gap || xa > sw-gap) {
     if (ya<gap_ex) {
@@ -40,9 +40,6 @@ function flipMove(ev) {
 }
 nav_flip_r.onclick = flipMove;
 nav_flip_l.onclick = flipMove;
-
-// nav_menu.style.bottom = "-100%";
-// nav_toc.style.bottom = "-100%";
 function toggleSubNav(ele,elem){
   let isHide = ele.style.bottom;
   let toHide = elem.style.bottom;
@@ -57,7 +54,13 @@ function toggleSubNav(ele,elem){
     ele.style.bottom = "-100%";
   }
 }
-nav_menu_btn.onclick = function(){toggleSubNav(nav_menu,nav_toc);}
+nav_menu_btn.onclick = function(){
+  if (document.getElementById('nav_toc')) {
+    toggleSubNav(nav_menu,nav_toc);
+  } else {
+    toggleSubNav(nav_menu,nav_menu);
+  }
+}
 nav_toc_btn.onclick = function(){toggleSubNav(nav_toc,nav_menu);}
 function previewbgImg(ele,src) {
   let s = src;

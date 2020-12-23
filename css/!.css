@@ -146,7 +146,8 @@ ul,ol {margin: 0.2em 0 0.2em 1.3em;}
   color: var(--bbox-fg);
   background-color: var(--bbox-bg);
   box-shadow: var(--bbox-ss);
-  transition: bottom .3s;
+  -webkit-transition: bottom .2s;
+  transition: bottom .2s;
 }
 .nav-link{
   font-size: 1.5em;
@@ -194,7 +195,7 @@ ul,ol {margin: 0.2em 0 0.2em 1.3em;}
 }
 /*HEADER*/
 .f-head {font-weight:600;font-size:2rem;padding:.5em 1em;}
-#header {margin-bottom:2em;padding:10px;font-size:1.5rem;}
+#header {margin-bottom:2em;padding:10px;font-size:1em;}
 /*FOOTER*/
 #footer {margin-top:5em;padding:2em 1em;}
 /*ENHANCE*/
@@ -202,9 +203,9 @@ ul,ol {margin: 0.2em 0 0.2em 1.3em;}
   position:fixed;
   z-index:10;
   top:0px;
-  width:10px;
+  width:20px;
   height:100%;
-  //background-color:#00000034;
+  background-color:#00000034;
 }
 .mermaid {background-color: #ffffff24;}
 /*MD*/
