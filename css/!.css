@@ -96,7 +96,7 @@ h5:before{content:'Ⅴ. ';}
 h6:before{content:'Ⅵ. ';}
 p {width:100%;margin:0.2em 0;line-height:normal;}
 ul,ol {margin: 0.2em 0 0.2em 1.3em;}
-#TableOfContents {font-size: 110%;}
+#TableOfContents {font-size: 110%;padding-bottom:1.8em;}
 #TableOfContents ul,
 #TableOfContents>ul ul,
 #TableOfContents>ul ul ul {list-style-type: circle;}
