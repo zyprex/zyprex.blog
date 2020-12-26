@@ -70,10 +70,4 @@ my avatar
 2020-10-27 migrate from hexo to hugo
 2020-12-22 change my blog theme to engram
 until now my site has running
-setInterval("runTickTimer('timerTick-tick', '2020\/05\/22 14:21:16',' %y Year %d Day %h Hour %m Min %s Sec %e Milisec ')", "80");</description></item><item><title>About</title><link>/test/about/</link><pubDate>Tue, 27 Oct 2020 00:00:00 +0000</pubDate><guid>/test/about/</guid><description>
-my avatar
-2020-05-22 start my blog
-2020-10-27 migrate from hexo to hugo
-2020-12-22 change my blog theme to engram
-until now my site has running
-setInterval("runTickTimer('timerTick-tick', '2020\/05\/22 14:21:16',' %y Year %d Day %h Hour %m Min %s Sec %e Milisec ')", "80");</description></item><item><title>Gems</title><link>/gems/</link><pubDate>Fri, 28 Feb 2020 00:00:00 +0000</pubDate><guid>/gems/</guid><description>💡 Math is Fun ,Math Is Fun Forum 💎 消夏錄 - 吹灭读书灯，一身都是月 💎 AnnatarHe</description></item><item><title>Gems</title><link>/test/gems/</link><pubDate>Fri, 28 Feb 2020 00:00:00 +0000</pubDate><guid>/test/gems/</guid><description>💡 Math is Fun ,Math Is Fun Forum 💎 消夏錄 - 吹灭读书灯，一身都是月 💎 AnnatarHe</description></item><item><title>Notions</title><link>/notions/</link><pubDate>Fri, 28 Feb 2020 00:00:00 +0000</pubDate><guid>/notions/</guid><description>I wish to perish alongside the rising sun, sadness is the only thing that remains.</description></item><item><title>Notions</title><link>/test/notions/</link><pubDate>Fri, 28 Feb 2020 00:00:00 +0000</pubDate><guid>/test/notions/</guid><description>I wish to perish alongside the rising sun, sadness is the only thing that remains.</description></item></channel></rss>
+setInterval("runTickTimer('timerTick-tick', '2020\/05\/22 14:21:16',' %y Year %d Day %h Hour %m Min %s Sec %e Milisec ')", "80");</description></item><item><title>Gems</title><link>/gems/</link><pubDate>Fri, 28 Feb 2020 00:00:00 +0000</pubDate><guid>/gems/</guid><description>💡 Math is Fun ,Math Is Fun Forum 💎 消夏錄 - 吹灭读书灯，一身都是月 💎 AnnatarHe</description></item><item><title>Notions</title><link>/notions/</link><pubDate>Fri, 28 Feb 2020 00:00:00 +0000</pubDate><guid>/notions/</guid><description>I wish to perish alongside the rising sun, sadness is the only thing that remains.</description></item></channel></rss>
