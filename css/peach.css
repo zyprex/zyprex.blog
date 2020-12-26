@@ -1,13 +1,13 @@
 :root {
   --main-fg: #556b2f;
   --main-bg: #ffdab9;
-  --main-link: #6495ed;
-  --main-link-v: #9370db;
+  --main-link: #3a5fcd;
+  --main-link-v: #9400d3;
   --mbox-bg: transparent;
   --mbox-ss: 0px 0px 5px #000000;
   --bbox-ss: 0px -2px 6px #000000;
-  --bbox-fg: #ccc;
-  --bbox-bg: #ff5555;
+  --bbox-fg: #000;
+  --bbox-bg: #ff7f50;
   --h-id: grey;
   --h-fg: default;
   --h-br: thin groove #34343490;
