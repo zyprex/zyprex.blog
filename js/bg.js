@@ -1,6 +1,6 @@
 let isLoaded = false;
 function pageReadyCallBack() {
-  isLoaded = true; //console.log('ready '+Date.now());
+  isLoaded = true;
   if(localStorage.getItem('viewMode')=='2') return;
   if (!bg_img.disabled){
     let bgsrc = bg_img.getAttribute("data-bg");
