@@ -1,1 +1,368 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Categories on Zyprex's Blog</title><link>/categories/</link><description>Recent content in Categories on Zyprex's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 21 Dec 2020 12:26:48 +0800</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml"/><item><title>hugo</title><link>/categories/hugo/</link><pubDate>Mon, 21 Dec 2020 12:26:48 +0800</pubDate><guid>/categories/hugo/</guid><description/></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>/categories/</link><language>en</language><updated>Sun, 31 Jan 2021 13:00:50 CST</updated><item><title>Markdown Cheatsheet</title><link>/markdown-cheatsheet/</link><pubDate>Sun, 31 Jan 2021 13:00:50 CST</pubDate><guid>/markdown-cheatsheet/</guid><description/><article>&lt;h1 id="prelogue">Prelogue&lt;sup>&lt;a class="h__anchor" href="#prelogue">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>represent markdown syntax, and use it to see how the style looks like in hugo&amp;rsquo;s site&lt;/p>
+&lt;h1 id="header">Header&lt;sup>&lt;a class="h__anchor" href="#header">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;div class="sc--fdM">
+&lt;div style="background:#16150b;" class="sc--fdT">use n&amp;rsquo;th &amp;lsquo;#&amp;rsquo; prefix to present nth head&lt;/div>
+&lt;button class="sc--fdB" onclick="this.nextSibling.hidden = !this.nextSibling.hidden;this.innerHTML=this.innerHTML=='+'?'-':'+';">+&lt;/button>
+&lt;div class="sc--fdC" hidden>&lt;h1 id="head1">head1&lt;/h1>
+&lt;h2 id="head2">head2&lt;/h2>
+&lt;h3 id="head3">head3&lt;/h3>
+&lt;h4 id="head4">head4&lt;/h4>
+&lt;h5 id="head5">head5&lt;/h5>
+&lt;h6 id="head6">head6&lt;/h6>
+&lt;pre>&lt;code># head1
+## head2
+### head3
+#### head4
+##### head5
+###### head6
+&lt;/code>&lt;/pre>
+&lt;/div>
+&lt;/div>
+&lt;h1 id="text">Text&lt;sup>&lt;a class="h__anchor" href="#text">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>text emphasis can be &lt;em>italic&lt;/em> or &lt;strong>bold&lt;/strong> or &lt;em>&lt;strong>italic bold&lt;/strong>&lt;/em> or &lt;del>strikethrough&lt;/del>&lt;/p>
+&lt;pre>&lt;code> _italic_ or __bold__ or ___italic bold___ ~~strikethrough~~
+*italic* or **bold** or ***italic bold***
+&lt;/code>&lt;/pre>
+&lt;h1 id="lists">Lists&lt;sup>&lt;a class="h__anchor" href="#lists">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;h2 id="ordered">ordered&lt;sup>&lt;a class="h__anchor" href="#ordered">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>numbered lists:&lt;/p>
+&lt;ol>
+&lt;li>One&lt;/li>
+&lt;li>Two&lt;/li>
+&lt;li>Three&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code>1. One
+1. Two
+1. Three
+&lt;/code>&lt;/pre>&lt;h2 id="unordered">unordered&lt;sup>&lt;a class="h__anchor" href="#unordered">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>each lists item start with &amp;lsquo;*&amp;rsquo; or &amp;lsquo;-&amp;rsquo; or &amp;lsquo;+&amp;rsquo; and a space:&lt;/p>
+&lt;ul>
+&lt;li>One&lt;/li>
+&lt;li>Two&lt;/li>
+&lt;li>Three&lt;/li>
+&lt;/ul>
+&lt;pre>&lt;code>- One
+- Two
+- Three
+&lt;/code>&lt;/pre>&lt;h2 id="nested-list-in-context">nested list in context&lt;sup>&lt;a class="h__anchor" href="#nested-list-in-context">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>this is line before nested list, use two space indent to create sublist&lt;/p>
+&lt;ul>
+&lt;li>One
+&lt;ul>
+&lt;li>One One&lt;/li>
+&lt;li>One Two&lt;/li>
+&lt;li>One Three&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Two
+&lt;ol>
+&lt;li>Two One&lt;/li>
+&lt;li>Two Two&lt;/li>
+&lt;li>Two Three&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>Three
+&lt;ul>
+&lt;li>Three One
+&lt;ul>
+&lt;li>Three One One
+&lt;ul>
+&lt;li>Three One One One&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>this is line after nested list&lt;/p>
+&lt;h1 id="task-lists">Task Lists&lt;sup>&lt;a class="h__anchor" href="#task-lists">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;ul>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> checked&lt;/li>
+&lt;li>&lt;input disabled="" type="checkbox"> unchecked&lt;/li>
+&lt;/ul>
+&lt;pre>&lt;code>- [x] checked
+- [ ] unchecked
+&lt;/code>&lt;/pre>&lt;h1 id="blockquotes">Blockquotes&lt;sup>&lt;a class="h__anchor" href="#blockquotes">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>the blockquote use &amp;lsquo;&amp;gt; ' on each line&lt;/p>
+&lt;blockquote>
+&lt;p>blockquote&lt;br>
+another line&lt;/p>
+&lt;/blockquote>
+&lt;p>the blockquote can nested use &amp;lsquo;&amp;gt;&amp;gt;&amp;rsquo; or so on.&lt;/p>
+&lt;pre>&lt;code>&amp;gt; blockquote
+&amp;gt; another line
+&lt;/code>&lt;/pre>&lt;h1 id="code">Code&lt;sup>&lt;a class="h__anchor" href="#code">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;h2 id="inline">inline&lt;sup>&lt;a class="h__anchor" href="#inline">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>inline &lt;code>code&lt;/code> wrap by &amp;lsquo;`&amp;rsquo;&lt;/p>
+&lt;pre>&lt;code>inline `code` wrap by '`'
+&lt;/code>&lt;/pre>
+&lt;h2 id="indent">indent&lt;sup>&lt;a class="h__anchor" href="#indent">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>indent two tab width also make a code block&lt;/p>
+&lt;h2 id="fence">fence&lt;sup>&lt;a class="h__anchor" href="#fence">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>use three &amp;lsquo;`&amp;rsquo; fence highlight your code&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="cp">&amp;lt;!DOCTYPE html&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">meta&lt;/span> &lt;span class="na">charset&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;UTF-8&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Document&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>html document skeleton&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and code block with unknow language&lt;/p>
+&lt;pre>&lt;code class="language-fakelang" data-lang="fakelang"># |__aAbBcCdDeEfFgGhHiIjJkKlLmMnN
+# oOpPQqrRsStTuUvVwWxXyYzZ
+main:
+&amp;lt;data&amp;gt; arr=[1234567890,!@#$%^&amp;amp;*&amp;quot;'\.?/];
+for i in arr { print(i); }
+&lt;/code>&lt;/pre>&lt;h1 id="links">Links&lt;sup>&lt;a class="h__anchor" href="#links">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>link to this site&amp;rsquo;s &lt;a href="/"
+title="my home page"
+>
+home
+&lt;/a>
+or
+link to &lt;a href="https://github.com/"
+title="Github.com"
+target="_blank" rel="noopener"
+>
+github
+↗
+&lt;/a>
+website&lt;/p>
+&lt;pre>&lt;code>link to this site's [home](/ &amp;quot;my home page&amp;quot;) or
+link to [github](https://github.com/ &amp;quot;Github.com&amp;quot;) website
+&lt;/code>&lt;/pre>&lt;h1 id="images">Images&lt;sup>&lt;a class="h__anchor" href="#images">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>&lt;div class="md__image">&lt;label>Image:&lt;/label>&lt;a href="http://browser9.qhimg.com/bdm/800_600_100/t01bbd94b90e850d1d3.jpg" alt="sample" title="sample web picture"> http://browser9.qhimg.com/bdm/800_600_100/t01bbd94b90e850d1d3.jpg&lt;/a>&lt;/div>
+&lt;div class="md__image">&lt;label>Image:&lt;/label>&lt;a href="https://b.zol-img.com.cn/sjbizhi/images/12/208x312/1607322405927.jpg" alt="" title="1607322405927"> https://b.zol-img.com.cn/sjbizhi/images/12/208x312/1607322405927.jpg&lt;/a>&lt;/div>
+&lt;/p>
+&lt;pre>&lt;code>![sample](http://browser9.qhimg.com/bdm/800_600_100/t01bbd94b90e850d1d3.jpg &amp;quot;sample web picture&amp;quot;)
+![](https://b.zol-img.com.cn/sjbizhi/images/12/208x312/1607322405927.jpg &amp;quot;1607322405927&amp;quot;)
+&lt;/code>&lt;/pre>
+&lt;h1 id="tables">Tables&lt;sup>&lt;a class="h__anchor" href="#tables">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:left">Fruit Table&lt;/th>
+&lt;th style="text-align:center">Apple&lt;/th>
+&lt;th style="text-align:right">Banana&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:left">&lt;em>price&lt;/em>&lt;/td>
+&lt;td style="text-align:center">12.0&lt;/td>
+&lt;td style="text-align:right">34.0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">&lt;em>count&lt;/em>&lt;/td>
+&lt;td style="text-align:center">13000&lt;/td>
+&lt;td style="text-align:right">19000000000000000000&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;pre>&lt;code>Fruit Table | Apple | Banana
+:--- | :---: | ---:
+*price* | 12.0 | 34.0
+*count* | 13000 | 19000000000000000000
+&lt;/code>&lt;/pre>
+&lt;h1 id="horizontal-rule">Horizontal Rule&lt;sup>&lt;a class="h__anchor" href="#horizontal-rule">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>use &amp;lsquo;***&amp;rsquo;,'&amp;mdash;&amp;rsquo; to make a horizontal rule&lt;/p>
+&lt;hr>
+&lt;h1 id="line-break">Line Break&lt;sup>&lt;a class="h__anchor" href="#line-break">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>use two trailing space break a line&lt;/p>
+&lt;h1 id="footnote">Footnote&lt;sup>&lt;a class="h__anchor" href="#footnote">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>the footnote&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> and it&amp;rsquo;s gloss can write in together&lt;/p>
+&lt;pre>&lt;code>the footnote[^footnote example] and it's gloss can write in together
+[^footnote example]: I am a footnote
+&lt;/code>&lt;/pre>&lt;h1 id="email">Email&lt;sup>&lt;a class="h__anchor" href="#email">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>&lt;a href="mailto:xxx@mail.com">xxx@mail.com&lt;/a>&lt;/p>
+&lt;pre>&lt;code>&amp;lt;xxx@mail.com&amp;gt;
+&lt;/code>&lt;/pre>
+&lt;h1 id="special-char-escapes">Special Char Escapes&lt;sup>&lt;a class="h__anchor" href="#special-char-escapes">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>following characters need backslash escapes to generate literal characters.&lt;/p>
+&lt;pre>&lt;code>\ backslash
+` backtick
+* asterisk
+_ underscore
+{} curly braces
+[] square brackets
+() parentheses
+# hash mark
++ plus sign
+- minus sign (hyphen)
+. dot
+! exclamation mark
+&lt;/code>&lt;/pre>&lt;h1 id="unsafed-inline-html">Unsafed Inline HTML&lt;sup>&lt;a class="h__anchor" href="#unsafed-inline-html">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>the &lt;mark>mark&lt;/mark> span element,
+the kbd tag &lt;kbd>ctrl&lt;/kbd>+&lt;kbd>c&lt;/kbd>,
+&lt;abbr title="Graphics Interchange Format">GIF&lt;/abbr>,
+cat&lt;sup>123&lt;/sup>, dog&lt;sub>123&lt;/sub>&lt;/p>
+&lt;h1 id="ref">Ref.&lt;sup>&lt;a class="h__anchor" href="#ref">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>&lt;a href="https://www.markdownguide.org/"
+target="_blank" rel="noopener"
+>
+markdownguide.org
+↗
+&lt;/a>
+&lt;/p>
+&lt;p>&lt;a href="https://github.github.com/gfm/"
+target="_blank" rel="noopener"
+>
+Github Flavored Markdown
+↗
+&lt;/a>
+&lt;/p>
+&lt;section class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1" role="doc-endnote">
+&lt;p>I am a footnote &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/section></article></item><item><title>Banal Shortcodes Showcase</title><link>/banal-shortcodes-showcase/</link><pubDate>Sat, 30 Jan 2021 10:00:45 CST</pubDate><guid>/banal-shortcodes-showcase/</guid><description/><article>&lt;p>view or modified those shortcodes at &lt;code>[theme_name]/layouts/shortcodes/&lt;/code>&lt;/p>
+&lt;p>&lt;strong>important!:&lt;/strong> for representation need, I replace all &lt;code>{&amp;lt;&lt;/code> to &lt;code>{ &amp;lt;&lt;/code>.&lt;/p>
+&lt;h1 id="label">Label&lt;sup>&lt;a class="h__anchor" href="#label">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;h2 id="parameter">parameter&lt;sup>&lt;a class="h__anchor" href="#parameter">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;ul>
+&lt;li>color
+&lt;ol>
+&lt;li>
+&lt;label style='background:#cc0000' class="sc--lbM"> red &lt;/label>
+#cc0000&lt;/li>
+&lt;li>
+&lt;label style='background:#347800' class="sc--lbM"> green &lt;/label>
+#347800&lt;/li>
+&lt;li>
+&lt;label style='background:#238959' class="sc--lbM"> cyan &lt;/label>
+#238959&lt;/li>
+&lt;li>
+&lt;label style='background:#253496' class="sc--lbM"> blue &lt;/label>
+#253496&lt;/li>
+&lt;li>
+&lt;label style='background:#a28917' class="sc--lbM"> yellow &lt;/label>
+#a28917&lt;/li>
+&lt;li>
+&lt;label style='background:#7a3d00' class="sc--lbM"> brown &lt;/label>
+#7a3d00&lt;/li>
+&lt;li>
+&lt;label style='background:#c00666' class="sc--lbM"> pink &lt;/label>
+#c00666&lt;/li>
+&lt;li>
+&lt;label style='background:#785690' class="sc--lbM"> purple &lt;/label>
+#785690&lt;/li>
+&lt;li>
+&lt;label style='background:#3b3b3b' class="sc--lbM"> grey &lt;/label>
+#3b3b3b&lt;/li>
+&lt;li>
+&lt;label style='background:#FF00FF' class="sc--lbM"> #FF00FF&lt;/label>
+#FF00FF&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="usage">usage&lt;sup>&lt;a class="h__anchor" href="#usage">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;pre>&lt;code>{{ &amp;lt;label color=&amp;quot;red&amp;quot;&amp;gt;}} red {{ &amp;lt;/label&amp;gt;}}
+&lt;/code>&lt;/pre>
+&lt;h1 id="fold">Fold&lt;sup>&lt;a class="h__anchor" href="#fold">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;h2 id="parameter-1">parameter&lt;sup>&lt;a class="h__anchor" href="#parameter-1">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;ul>
+&lt;li>title (optional)&lt;/li>
+&lt;li>color (optional)
+&lt;ul>
+&lt;li>#16150b (default)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>open (optional)
+&lt;ul>
+&lt;li>false (default)&lt;/li>
+&lt;li>true&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;div class="sc--fdM">
+&lt;div style="background:#16150b;" class="sc--fdT">sample fold title&lt;/div>
+&lt;button class="sc--fdB" onclick="this.nextSibling.hidden = !this.nextSibling.hidden;this.innerHTML=this.innerHTML=='+'?'-':'+';">-&lt;/button>
+&lt;div class="sc--fdC" >sample &lt;strong>fold&lt;/strong> content&lt;/div>
+&lt;/div>
+&lt;h2 id="usage-1">usage&lt;sup>&lt;a class="h__anchor" href="#usage-1">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;pre>&lt;code>{{ &amp;lt;fold title=&amp;quot;sample fold title&amp;quot; open=&amp;quot;true&amp;quot;&amp;gt;}}
+sample __fold__ content
+{{ &amp;lt;/fold&amp;gt;}}
+&lt;/code>&lt;/pre>
+&lt;h1 id="tips">Tips&lt;sup>&lt;a class="h__anchor" href="#tips">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;h2 id="parameter-2">parameter&lt;sup>&lt;a class="h__anchor" href="#parameter-2">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>hover mouse on
+&lt;span class="sc--tpM" onmouseover="showTips(this, &amp;#34;this is a \u003cmark\u003etips\u003c/mark\u003e&amp;#34;)"> this &lt;/span>
+,
+you will see a tips&lt;/p>
+&lt;h2 id="usage-2">usage&lt;sup>&lt;a class="h__anchor" href="#usage-2">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;pre>&lt;code>hover mouse on
+{{ &amp;lt;tips &amp;quot;this is a &amp;lt;mark&amp;gt;tips&amp;lt;/mark&amp;gt;&amp;quot;&amp;gt;}} this {{ &amp;lt;/tips&amp;gt;}},
+you will see a tips
+&lt;/code>&lt;/pre>
+&lt;h1 id="timer">Timer&lt;sup>&lt;a class="h__anchor" href="#timer">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;h2 id="parameter-3">parameter&lt;sup>&lt;a class="h__anchor" href="#parameter-3">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;ul>
+&lt;li>id&lt;/li>
+&lt;li>time (optional) UTC time string, for example: &amp;ldquo;2020-01-01 12:12:12&amp;rdquo;&lt;/li>
+&lt;li>format (optional) %y=years, %d=days, %h=hours, %m=minutes, %s=seconds, %e=milliseconds&lt;/li>
+&lt;li>interval (optional) default 1ms&lt;/li>
+&lt;/ul>
+&lt;span id="timerTick-mytimer_test" title="2020-12-30 01:00:00">&lt;/span>
+&lt;script>
+setInterval("tickTimer('timerTick-mytimer_test', '2020-12-30 01:00:00','%y Year %d Day %h:%m:%s.%e')", "80");
+&lt;/script>
+&lt;h2 id="usage-3">usage&lt;sup>&lt;a class="h__anchor" href="#usage-3">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;pre>&lt;code>{{ &amp;lt; timer
+id=&amp;quot;mytimer_test&amp;quot;
+format=&amp;quot;%y Year %d Day %h:%m:%s.%e&amp;quot;
+interval=&amp;quot;80&amp;quot; &amp;gt;}}
+&lt;/code>&lt;/pre></article></item><item><title>About</title><link>/about/</link><pubDate>Wed, 27 Jan 2021 17:25:57 CST</pubDate><guid>/about/</guid><description/><article>&lt;h4 id="prologue">Prologue&lt;sup>&lt;a class="h__anchor" href="#prologue">¶&lt;/a>&lt;/sup>&lt;/h4>
+&lt;p>This site&amp;rsquo;s each page has three frontMatter parameter should be clarified, in case of
+there intention become confused in the future.&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>categories:&lt;/strong> organized page, those page should been well format.&lt;/li>
+&lt;li>&lt;strong>tags:&lt;/strong> trival page, short and unordered, maybe unsortable?&lt;/li>
+&lt;li>&lt;strong>keywords:&lt;/strong> provide keywords to search across site.&lt;/li>
+&lt;/ul>
+&lt;h4 id="purpose">Purpose&lt;sup>&lt;a class="h__anchor" href="#purpose">¶&lt;/a>&lt;/sup>&lt;/h4>
+&lt;p>This site mainly written down my every&lt;/p>
+&lt;ul>
+&lt;li>absurd notion&lt;/li>
+&lt;li>occasional spark&lt;/li>
+&lt;li>uneventful life&lt;/li>
+&lt;li>mediocre ego&lt;/li>
+&lt;li>handy reference&lt;/li>
+&lt;li>messy information&lt;/li>
+&lt;/ul>
+&lt;h4 id="epilogue">Epilogue&lt;sup>&lt;a class="h__anchor" href="#epilogue">¶&lt;/a>&lt;/sup>&lt;/h4>
+&lt;p>site update log&lt;br>
+2020-05-22 start my blog from hexo, theme fluid&lt;br>
+2020-10-27 migrate from hexo to hugo, theme maverick&lt;br>
+2020-12-22 change blog theme to engram&lt;br>
+2021-01-31 change blog theme to banal&lt;br>
+until now my site has running&lt;br>
+&lt;strong>&lt;span id="timerTick-tick-site-runtime" title="2020/05/22 14:21:16">&lt;/span>
+&lt;script>
+setInterval("tickTimer('timerTick-tick-site-runtime', '2020\/05\/22 14:21:16','%y year %d day %h hour %m min %s sec %e ms')", "80");
+&lt;/script>
+&lt;/strong>&lt;/p></article></item><item><title>Search</title><link>/search/</link><pubDate>Wed, 27 Jan 2021 13:56:14 CST</pubDate><guid>/search/</guid><description/><article/></item></channel></rss>
