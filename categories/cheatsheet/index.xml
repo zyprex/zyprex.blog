@@ -2,7 +2,7 @@
 &lt;p>represent markdown syntax, and use it to see how the style looks like in hugo&amp;rsquo;s site&lt;/p>
 &lt;h1 id="header">Header&lt;sup>&lt;a class="h__anchor" href="#header">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;div class="sc--fdM">
-&lt;div style="background:#16150b;" class="sc--fdT">use n&amp;rsquo;th &amp;lsquo;#&amp;rsquo; prefix to present nth head&lt;/div>
+&lt;div style="background:#282800;" class="sc--fdT">use n&amp;rsquo;th &amp;lsquo;#&amp;rsquo; prefix to present nth head&lt;/div>
 &lt;button class="sc--fdB" onclick="this.nextSibling.hidden = !this.nextSibling.hidden;this.innerHTML=this.innerHTML=='+'?'-':'+';">+&lt;/button>
 &lt;div class="sc--fdC" hidden>&lt;h1 id="head1">head1&lt;/h1>
 &lt;h2 id="head2">head2&lt;/h2>
@@ -10,12 +10,18 @@
 &lt;h4 id="head4">head4&lt;/h4>
 &lt;h5 id="head5">head5&lt;/h5>
 &lt;h6 id="head6">head6&lt;/h6>
+&lt;h1 id="head1-1">head1&lt;/h1>
+&lt;h2 id="head2-1">head2&lt;/h2>
 &lt;pre>&lt;code># head1
 ## head2
 ### head3
 #### head4
 ##### head5
 ###### head6
+head1
+=====
+head2
+-----
 &lt;/code>&lt;/pre>
 &lt;/div>
 &lt;/div>
@@ -85,7 +91,7 @@
 &lt;pre>&lt;code>- [x] checked
 - [ ] unchecked
 &lt;/code>&lt;/pre>&lt;h1 id="blockquotes">Blockquotes&lt;sup>&lt;a class="h__anchor" href="#blockquotes">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>the blockquote use &amp;lsquo;&amp;gt; ' on each line&lt;/p>
+&lt;p>add a (&amp;gt;) in front of a paragraph to create blockquote.&lt;/p>
 &lt;blockquote>
 &lt;p>blockquote&lt;br>
 another line&lt;/p>
@@ -95,13 +101,13 @@ another line&lt;/p>
 &amp;gt; another line
 &lt;/code>&lt;/pre>&lt;h1 id="code">Code&lt;sup>&lt;a class="h__anchor" href="#code">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;h2 id="inline">inline&lt;sup>&lt;a class="h__anchor" href="#inline">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>inline &lt;code>code&lt;/code> wrap by &amp;lsquo;`&amp;rsquo;&lt;/p>
-&lt;pre>&lt;code>inline `code` wrap by '`'
+&lt;p>inline &lt;code>code&lt;/code> wrap by (`)&lt;/p>
+&lt;pre>&lt;code>inline `code` wrap by (`)
 &lt;/code>&lt;/pre>
 &lt;h2 id="indent">indent&lt;sup>&lt;a class="h__anchor" href="#indent">¶&lt;/a>&lt;/sup>&lt;/h2>
 &lt;p>indent two tab width also make a code block&lt;/p>
 &lt;h2 id="fence">fence&lt;sup>&lt;a class="h__anchor" href="#fence">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>use three &amp;lsquo;`&amp;rsquo; fence highlight your code&lt;/p>
+&lt;p>use three (`) fence highlight your code&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -131,24 +137,25 @@ another line&lt;/p>
 &lt;/div>&lt;p>and code block with unknow language&lt;/p>
 &lt;pre>&lt;code class="language-fakelang" data-lang="fakelang"># |__aAbBcCdDeEfFgGhHiIjJkKlLmMnN
 # oOpPQqrRsStTuUvVwWxXyYzZ
-main:
+run:
 &amp;lt;data&amp;gt; arr=[1234567890,!@#$%^&amp;amp;*&amp;quot;'\.?/];
 for i in arr { print(i); }
 &lt;/code>&lt;/pre>&lt;h1 id="links">Links&lt;sup>&lt;a class="h__anchor" href="#links">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>link to this site&amp;rsquo;s &lt;a href="/"
+&lt;p>link to this site&amp;rsquo;s &lt;a class="md__link" href="/"
 title="my home page"
 >
 home
 &lt;/a>
 or
-link to &lt;a href="https://github.com/"
+link to &lt;a class="md__link" href="https://github.com/"
 title="Github.com"
 target="_blank" rel="noopener"
 >
 github
 ↗
 &lt;/a>
-website&lt;/p>
+website,
+don&amp;rsquo;t put spaces in the middle of a URL.&lt;/p>
 &lt;pre>&lt;code>link to this site's [home](/ &amp;quot;my home page&amp;quot;) or
 link to [github](https://github.com/ &amp;quot;Github.com&amp;quot;) website
 &lt;/code>&lt;/pre>&lt;h1 id="images">Images&lt;sup>&lt;a class="h__anchor" href="#images">¶&lt;/a>&lt;/sup>&lt;/h1>
@@ -186,14 +193,15 @@ link to [github](https://github.com/ &amp;quot;Github.com&amp;quot;) website
 *count* | 13000 | 19000000000000000000
 &lt;/code>&lt;/pre>
 &lt;h1 id="horizontal-rule">Horizontal Rule&lt;sup>&lt;a class="h__anchor" href="#horizontal-rule">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>use &amp;lsquo;***&amp;rsquo;,'&amp;mdash;&amp;rsquo; to make a horizontal rule&lt;/p>
+&lt;p>use three or more (*),(-) to make a horizontal rule, be sure
+put blank lines before and after horizontal rules.&lt;/p>
 &lt;hr>
 &lt;h1 id="line-break">Line Break&lt;sup>&lt;a class="h__anchor" href="#line-break">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>use two trailing space break a line&lt;/p>
+&lt;p>except for double line break, two or more trailing space also break a line&lt;/p>
 &lt;h1 id="footnote">Footnote&lt;sup>&lt;a class="h__anchor" href="#footnote">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>the footnote&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> and it&amp;rsquo;s gloss can write in together&lt;/p>
-&lt;pre>&lt;code>the footnote[^footnote example] and it's gloss can write in together
-[^footnote example]: I am a footnote
+&lt;p>the [footnote]&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> and it&amp;rsquo;s gloss can put in together&lt;/p>
+&lt;pre>&lt;code>the footnote[^footnote example] and it's gloss can put in together
+[^footnote example]: https://example.com &amp;quot;I am a footnote&amp;quot;
 &lt;/code>&lt;/pre>&lt;h1 id="email">Email&lt;sup>&lt;a class="h__anchor" href="#email">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>&lt;a href="mailto:xxx@mail.com">xxx@mail.com&lt;/a>&lt;/p>
 &lt;pre>&lt;code>&amp;lt;xxx@mail.com&amp;gt;
@@ -218,14 +226,14 @@ the kbd tag &lt;kbd>ctrl&lt;/kbd>+&lt;kbd>c&lt;/kbd>,
 &lt;abbr title="Graphics Interchange Format">GIF&lt;/abbr>,
 cat&lt;sup>123&lt;/sup>, dog&lt;sub>123&lt;/sub>&lt;/p>
 &lt;h1 id="ref">Ref.&lt;sup>&lt;a class="h__anchor" href="#ref">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>&lt;a href="https://www.markdownguide.org/"
+&lt;p>&lt;a class="md__link" href="https://www.markdownguide.org/"
 target="_blank" rel="noopener"
 >
 markdownguide.org
 ↗
 &lt;/a>
 &lt;/p>
-&lt;p>&lt;a href="https://github.github.com/gfm/"
+&lt;p>&lt;a class="md__link" href="https://github.github.com/gfm/"
 target="_blank" rel="noopener"
 >
 Github Flavored Markdown
@@ -288,7 +296,7 @@ Github Flavored Markdown
 &lt;li>title (optional)&lt;/li>
 &lt;li>color (optional)
 &lt;ul>
-&lt;li>#16150b (default)&lt;/li>
+&lt;li>#282800 (default)&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>open (optional)
@@ -299,7 +307,7 @@ Github Flavored Markdown
 &lt;/li>
 &lt;/ul>
 &lt;div class="sc--fdM">
-&lt;div style="background:#16150b;" class="sc--fdT">sample fold title&lt;/div>
+&lt;div style="background:#282800;" class="sc--fdT">sample fold title&lt;/div>
 &lt;button class="sc--fdB" onclick="this.nextSibling.hidden = !this.nextSibling.hidden;this.innerHTML=this.innerHTML=='+'?'-':'+';">-&lt;/button>
 &lt;div class="sc--fdC" >sample &lt;strong>fold&lt;/strong> content&lt;/div>
 &lt;/div>
