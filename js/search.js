@@ -7,14 +7,18 @@ let gColor = {
   "1":"#3F51B5"
 };
 fetch('/index.json')
-.then(function(res){return res.json();})
+.then(function(res) {
+  return res.json();
+})
 .then(function(j) {
   gIndx = j;
   let tlen = 0;
   for (let i in gIndx)
-    tlen+=gIndx[i].length;
-  console.log(j);
+    tlen += gIndx[i].length;
   load_indx.innerHTML = "<big>[ "+tlen+" data ready ]</big>";
+  searcher.disabled = false;
+}).catch(function (err) {
+  load_indx.innerHTML = "Request Failed <big>[ "+err+" ]</big>";
 });
 function fillResult(rx) {
   let ar = [];
