@@ -23,8 +23,8 @@ function lazyLoadImg() {
     let imgNode = document.createElement('img');
     let a = i.querySelector('a');
     imgNode.src = a.href;
-    imgNode.alt = a.alt??'';
-    imgNode.title = a.title??a.href;
+    imgNode.title = a.title===undefined ? a.href : a.title;
+    imgNode.alt = a.alt===undefined ? "" : a.alt;
     if (a.title) a.innerText = a.title;
     i.insertBefore(imgNode,i.querySelector('label'));
   });
@@ -167,7 +167,7 @@ function wrapElem(q,cls,paren) {
   lazyLoadImg();
   window.addEventListener('scroll', debounce(lazyLoadImg, 1000));
   if (navigator.userAgent.includes('Mobile')) {
-    if (document.documentElement.offsetHeight > document.documentElement.clientHeight) {
+    if (document.documentElement.offsetHeight>document.documentElement.clientHeight) {
       window.addEventListener('touchstart',touchAct);
       window.addEventListener('touchmove',throttle(swipeAct,400));
       window.addEventListener('touchend',detachAct);

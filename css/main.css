@@ -166,38 +166,25 @@ blockquote {
 /*markupRender*/
 .h__anchor{ color:transparent; }
 .h__anchor:hover{ color:inherit; }
-.md__image{
-  margin:.7rem auto;
-  text-align:center;
-}
-.md__link,p>a{
-  color:#1c86ee;
-  text-decoration:none;
-}
-.md__link:visited,p>a:visited{
-  color:#b82bf5;
-}
-img{
-  display:block;
-  width:100%;
-  max-width:400px;
-  margin:0 auto;
-}
+.md__image{ margin:.7rem auto; text-align:center; }
+.md__link,p>a{ color:#1c86ee; text-decoration:none; }
+.md__link:visited,p>a:visited{ color:#b82bf5; }
+img { display:block; width:100%; max-width:400px; margin:0 auto; }
 @media all and (max-width:800px){
-.fence-list { max-width:90%; }
-.fence { width:90%; }
-.highlight,.table-wrap,.code-wrap,.md__image,hr{ width:110%; margin:.5rem -5%; }
-.jmpball {
-  font-family:Sans-Serif;
-  position:fixed;
-  text-align:center;
-  font-size:20px;
-  line-height:45px;
-  padding:2px;
-  width:50px;
-  height:50px;
-  border-radius:100%;
-  background:#3F25AF;
+.fence-list{ max-width:90%; }
+.fence{ width:90%; }
+.highlight,.table-wrap,.code-wrap,.md__image,hr{width:110%; margin:.5rem -5%;}
+.jmpball{
+font-family:Sans-Serif;
+position:fixed;
+text-align:center;
+font-size:20px;
+line-height:45px;
+padding:2px;
+width:50px;
+height:50px;
+border-radius:100%;
+background:#3F25AF;
 }
 }
 #searcher{
@@ -209,25 +196,9 @@ img{
   border-bottom:1px solid #242424;
   width:100%;
 }
-#searcher:focus {
-  border-color:#878787;
-  outline:none;
-}
-#search_result{
-  font-size:110%;
-  position:absolute;
-  background:#000;
-}
-#search_result>dl{
-  margin:.3em 0;
-  max-height:200px;
-  border-left:3px solid;
-  overflow-y:auto;
-}
-#search_result a,#search_result dt{
-  padding:0 .4em;
-  display:block;
-}
-#search_result a:hover {
-  background:#78787850;
-}
+#searcher:focus { border-color:#878787; outline:none; }
+#search_result{ font-size:110%; position:absolute; background:#000; }
+#search_result>dl{ margin:.3em 0; max-height:200px; border-left:3px solid; overflow-y:auto; }
+#search_result a,
+#search_result dt{ padding:0 .4em; display:block; }
+#search_result a:hover { background:#78787850; }

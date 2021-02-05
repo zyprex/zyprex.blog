@@ -1,0 +1,127 @@
+<!doctype html><html><meta charset=utf-8><meta name=generator content="Hugo 0.76.5"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel=icon type=image/png href=/img/git_face.png><link rel=stylesheet type=text/css href=/css/main.css><link rel=stylesheet type=text/css href=/css/syntax.css><title>Git and Github Notes@Zyprex's Blog</title><body><div class=fence><nav><a href=/>HOME&nbsp;</a><a href=/tags/>TAGS&nbsp;</a><a href=/categories/>CATEGORIES&nbsp;</a><a href=/index.xml>RSS&nbsp;</a><a href=/search/>SEARCH&nbsp;</a></nav><div class=Hp><em class=T>Git and Github Notes</em><br><em>2021/02/04 Thu 14:09</em></div><nav class=toc><b onclick="nav_toc.hidden=!nav_toc.hidden;this.innerText=this.innerText=='+ catalogue'?'- catalogue':'+ catalogue'">+ catalogue</b><div id=nav_toc hidden><nav id=TableOfContents><ul><li><a href=#git>Git</a><ul><li><a href=#know-terms>know terms</a></li><li><a href=#help-your-self>help your self</a></li><li><a href=#set-up-personal-information>set up personal information</a></li><li><a href=#save-your-password>save your password</a></li><li><a href=#first-commit>first commit</a></li><li><a href=#file-ops>file ops</a></li><li><a href=#see-what-is-changed>see what is changed</a></li><li><a href=#undo-and-redo>undo and redo</a></li><li><a href=#branch>branch</a><ul><li><a href=#new-branch>new branch</a></li><li><a href=#switch-to-branch>switch to branch</a></li><li><a href=#sort-branch>sort branch</a></li><li><a href=#delete-branch>delete branch</a></li><li><a href=#temp-branch>temp branch</a></li></ul></li></ul></li><li><a href=#github>Github</a><ul><li><a href=#link-to-remote-repo>link to remote repo</a></li><li><a href=#get-new-update-from-remote-repo>get new update from remote repo</a></li><li><a href=#regret-after-push>regret after push</a></li><li><a href=#tag>tag</a></li></ul></li><li><a href=#problem>Problem</a><ul><li><a href=#git-add>git add</a></li><li><a href=#git-rm>git rm</a></li><li><a href=#git-remote-add>git remote add</a></li><li><a href=#git-pull>git pull</a></li><li><a href=#git-push>git push</a></li><li><a href=#git-rebase--i>git rebase -i</a></li></ul></li><li><a href=#about-gitingore>About .gitingore</a></li><li><a href=#git-message-template-private-use>Git Message Template (private-use)</a></li><li><a href=#open-source-license>Open Source License</a></li><li><a href=#search-on-github>Search On Github</a></li><li><a href=#further-reading>Further Reading</a></li><li><a href=#and-more->And More &mldr;</a></li></ul></nav></div></nav><div id=C><h1 id=git>Git<sup><a class=h__anchor href=#git>¶</a></sup></h1><p>install <a class=md__link href=https://git-scm.com/ target=_blank rel=noopener>git
+↗</a></p><h2 id=know-terms>know terms<sup><a class=h__anchor href=#know-terms>¶</a></sup></h2><table><thead><tr><th style=text-align:left>Name</th><th style=text-align:left>Desc.</th></tr></thead><tbody><tr><td style=text-align:left>working directory (tree)</td><td style=text-align:left>your files entity</td></tr><tr><td style=text-align:left>stash</td><td style=text-align:left>store latest changes which may leads to conflict</td></tr><tr><td style=text-align:left>staging area (stage or index)</td><td style=text-align:left>diff record</td></tr><tr><td style=text-align:left>repository (repo)</td><td style=text-align:left>contains all working fruits for you</td></tr><tr><td style=text-align:left>SHA (commit id)</td><td style=text-align:left>unique hash commit id</td></tr></tbody></table><h2 id=help-your-self>help your self<sup><a class=h__anchor href=#help-your-self>¶</a></sup></h2><p><code>git &lt;cmd> --help</code> view command&rsquo;s detail.</p><h2 id=set-up-personal-information>set up personal information<sup><a class=h__anchor href=#set-up-personal-information>¶</a></sup></h2><pre><code>git config --global user.name &quot;your name&quot;
+git config --global user.email &quot;your email&quot;
+git config --global core.editor &quot;vim&quot;
+git config --global color.ui true
+</code></pre><h2 id=save-your-password>save your password<sup><a class=h__anchor href=#save-your-password>¶</a></sup></h2><pre><code>git config --global credential.helper store
+git config --global credential.helper 'cache --timeout=3600'
+</code></pre><h2 id=first-commit>first commit<sup><a class=h__anchor href=#first-commit>¶</a></sup></h2><pre><code>git init
+# create [file], edit it
+git add [file]
+git commit -m &quot;first commit&quot;
+git commit -v
+</code></pre><h2 id=file-ops>file ops<sup><a class=h__anchor href=#file-ops>¶</a></sup></h2><pre><code>git add .
+git rm [file] # remove from tree
+git rm --cached [file] # remove from stage
+git rm -f [file] # remove from stage and tree
+git mv [old] [new]
+git commit -m &quot;message&quot;
+</code></pre><h2 id=see-what-is-changed>see what is changed<sup><a class=h__anchor href=#see-what-is-changed>¶</a></sup></h2><pre><code>git status
+git diff [file] # diff from stage
+git diff [--cached|--staged][HEAD|SHA]
+git diff [SHA1|SHA2]
+git log --pretty=oneline
+git blame &lt;file&gt; [-L line1,+len]
+</code></pre><h2 id=undo-and-redo>undo and redo<sup><a class=h__anchor href=#undo-and-redo>¶</a></sup></h2><pre><code>git checkout -- [file] # check out from stage
+git commit -ammend -m 'Fixxes bug #43'
+git reflog # show SHA
+git reset --soft  [SHA] # repo -&gt; SHA
+git reset --mixed [SHA] # stage &amp; repo -&gt; SHA
+git reset --hard  [SHA] # tree &amp; stage &amp; repo -&gt; SHA
+</code></pre><h2 id=branch>branch<sup><a class=h__anchor href=#branch>¶</a></sup></h2><h3 id=new-branch>new branch<sup><a class=h__anchor href=#new-branch>¶</a></sup></h3><pre><code>git branch [new] [SHA|tag]
+git checkout -b [new] [SHA|tag]
+</code></pre><h3 id=switch-to-branch>switch to branch<sup><a class=h__anchor href=#switch-to-branch>¶</a></sup></h3><pre><code>git branch [-a]
+git checkout [branch]
+git switch [branch]
+</code></pre><h3 id=sort-branch>sort branch<sup><a class=h__anchor href=#sort-branch>¶</a></sup></h3><pre><code>git branch -m [new_name]
+git merge [other_newer]
+git rebase [branch]
+git rebase [branch] [to_branch]
+git cherry-pick [SHA1] [SHA2] [SHA3]
+git rebase -i [SHA]
+</code></pre><h3 id=delete-branch>delete branch<sup><a class=h__anchor href=#delete-branch>¶</a></sup></h3><pre><code>git branch -d [which]
+git push -d origin [remote_branch]
+</code></pre><h3 id=temp-branch>temp branch<sup><a class=h__anchor href=#temp-branch>¶</a></sup></h3><pre><code>git stash
+git switch [branch_B]
+# ... do sth.
+git switch [branch_A]
+git stash pop
+git stash list
+git stash clear
+git stash pop stash@{2}
+</code></pre><h1 id=github>Github<sup><a class=h__anchor href=#github>¶</a></sup></h1><p>register in <a class=md__link href=https://github.com/ target=_blank rel=noopener>github
+↗</a></p><h2 id=link-to-remote-repo>link to remote repo<sup><a class=h__anchor href=#link-to-remote-repo>¶</a></sup></h2><ol><li>create new repo on github.</li><li>add one commit in your local repo.</li></ol><pre><code>git remote add origin main
+git push -u origin main
+</code></pre><p>Then, next time use <code>git push origin main</code></p><h2 id=get-new-update-from-remote-repo>get new update from remote repo<sup><a class=h__anchor href=#get-new-update-from-remote-repo>¶</a></sup></h2><pre><code>git fetch       # Update 'origin master' from remote
+git pull        # = git fetch + git merge
+git pull --all  # Fetch all remotes
+</code></pre><h2 id=regret-after-push>regret after push<sup><a class=h__anchor href=#regret-after-push>¶</a></sup></h2><pre><code>git revert [SHA]
+git push [-all]
+</code></pre><h2 id=tag>tag<sup><a class=h__anchor href=#tag>¶</a></sup></h2><pre><code>git log --pretty=oneline --abbrev-commit
+git tag                            # local tags
+git ls-remote --tag                # remote tags
+git tag &lt;tagname&gt; [-m&quot;&lt;msg&gt;&quot;][SHA] # create tag
+git tag -d &lt;del_tagname&gt;           # del tag
+git push origin &lt;tagname&gt;          # push tag
+git push origin --tags             # push all tag
+git push -d origin &lt;remote_tag&gt;    # del tags
+</code></pre><h1 id=problem>Problem<sup><a class=h__anchor href=#problem>¶</a></sup></h1><h2 id=git-add>git add<sup><a class=h__anchor href=#git-add>¶</a></sup></h2><p><strong>Error:</strong></p><blockquote><p>LF will be replaced by CRLF
+<strong>Causes:</strong>
+use unix format file on windows.
+<strong>Solution:</strong>
+use tool &ldquo;unix2dos&rdquo;, convert LF to CRLF.
+or change autocrlf settings:</p></blockquote><pre><code>git config --global core.autocrlf false # default is true
+</code></pre><h2 id=git-rm>git rm<sup><a class=h__anchor href=#git-rm>¶</a></sup></h2><p><strong>Error:</strong></p><blockquote><p>git rm - fatal: pathspec did not match any files<br><strong>Causes:</strong>
+unknow.<br><strong>Solution:</strong></p></blockquote><pre><code>git add .
+git rm -f [files]
+</code></pre><h2 id=git-remote-add>git remote add<sup><a class=h__anchor href=#git-remote-add>¶</a></sup></h2><p><strong>Error:</strong></p><blockquote><p>git remote add origin &lt;your_git:account>
+fatal: remote origin already exists.
+<strong>Causes:</strong>
+unknow
+<strong>Solution:</strong></p></blockquote><pre><code>git remote rm origin
+</code></pre><h2 id=git-pull>git pull<sup><a class=h__anchor href=#git-pull>¶</a></sup></h2><p><strong>Error:</strong></p><blockquote><p>commit your changes or stash them before you can merge.
+<strong>Causes:</strong>
+local file contains unpushed changes.
+<strong>Solution:</strong></p></blockquote><ol><li>stash them</li></ol><pre><code>git stash
+git pull
+git stash pop
+git diff
+</code></pre><ol start=2><li>discard local changes</li></ol><pre><code>git reset --hard
+git pull
+</code></pre><h2 id=git-push>git push<sup><a class=h__anchor href=#git-push>¶</a></sup></h2><p><strong>Error:</strong></p><blockquote><p>git push origin master
+error: failed to push some refs to
+<strong>Causes:</strong>
+forgot to synchronized remote repo before push.
+<strong>Solution:</strong></p></blockquote><ol><li>use <code>git push -f</code>.</li><li>merge from remote repo</li></ol><pre><code>git pull --rebase origin main
+git push -u main
+</code></pre><p><strong>Error:</strong></p><blockquote><p>fatal: could not read Username for &lsquo;<a href=https://github.com>https://github.com</a>&rsquo;: No such file or directory
+<strong>Causes:</strong>
+credential expired!
+<strong>Solution:</strong>
+reinstall credential or upgrade git or use ssh.</p></blockquote><p><strong>Error:</strong></p><blockquote><p>fatal: unable to access &lsquo;<a href="https://github.com/NNN/XXXX.git/':">https://github.com/NNN/XXXX.git/':</a>
+Failed to connect to 172.0.0.7 port YYYY: Timed out
+<strong>Causes:</strong>
+may thanks to GFW :)
+<strong>Solution:</strong>
+time is the key. <code>git clone</code> then <code>git push</code>.</p></blockquote><p><strong>Error:</strong></p><blockquote><p>Failed to connect to github.com port 443: Timed out
+<strong>Causes:</strong>
+also thanks to GFW :)
+<strong>Solution:</strong>
+do it later.</p></blockquote><h2 id=git-rebase--i>git rebase -i<sup><a class=h__anchor href=#git-rebase--i>¶</a></sup></h2><p><strong>Error:</strong></p><blockquote><p>main|rebase (1|1)
+<strong>Causes:</strong>
+your rebase action is on the way.
+<strong>Solution:</strong></p></blockquote><pre><code>git add .
+git rebase --continue
+</code></pre><p>or use <code>rebase --abort</code> exit rebase</p><h1 id=about-gitingore>About .gitingore<sup><a class=h__anchor href=#about-gitingore>¶</a></sup></h1><h1 id=git-message-template-private-use>Git Message Template (private-use)<sup><a class=h__anchor href=#git-message-template-private-use>¶</a></sup></h1><ul><li>F: feat</li><li>N: new</li><li>B: fix</li><li>M: change</li><li>D: docs</li><li>R: refactor</li><li>S: style</li><li>:: chore</li></ul><p>defined your own git message template file
+, write below lines to <code>~/.gitconfig</code>:</p><pre><code>[commit]
+template = ~/.gitmessage
+</code></pre><p>see my <code>.gitmessage</code> <a class=md__link href=https://github.com/zyprex/gitfiles target=_blank rel=noopener>here
+↗</a></p><h1 id=open-source-license>Open Source License<sup><a class=h__anchor href=#open-source-license>¶</a></sup></h1><p>you can choose your OSL in <a class=md__link href=http://choosealicense.online/ target=_blank rel=noopener>http://choosealicense.online/
+↗</a></p><h1 id=search-on-github>Search On Github<sup><a class=h__anchor href=#search-on-github>¶</a></sup></h1><ul><li>in:name [repository name]</li><li>in:readme [some keyword]</li><li>in:descrition [some keyword]</li><li>stars:>100</li><li>forks:>10</li><li>topic:c</li><li>language:c</li><li>pushed: > YYYY-MM-DD</li></ul><h1 id=further-reading>Further Reading<sup><a class=h__anchor href=#further-reading>¶</a></sup></h1><ul><li><a class=md__link href=http://rogerdudler.github.io/git-guide/files/git_cheat_sheet.pdf target=_blank rel=noopener>git cheat sheet
+↗</a></li><li><a class=md__link href=https://github.com/tiimgreen/github-cheat-sheet/blob/master/README.zh-cn.md target=_blank rel=noopener>GitHub 秘籍
+↗</a></li><li><a class=md__link href=https://gitmoji.carloscuesta.me/ target=_blank rel=noopener>gitmoji
+↗</a></li><li><a class=md__link href=https://www.liaoxuefeng.com/wiki/896043488029600 target=_blank rel=noopener>Git 教程
+↗</a></li><li><a class=md__link href=https://help.github.com/en/github/using-git target=_blank rel=noopener>Using Git
+↗</a></li><li><a class=md__link href=https://shields.io/ target=_blank rel=noopener>Git 徽标
+↗</a></li><li><a class=md__link href=https://learngitbranching.js.org/ target=_blank rel=noopener>git branch
+↗</a></li></ul><h1 id=and-more->And More &mldr;<sup><a class=h__anchor href=#and-more->¶</a></sup></h1><ul><li><input disabled type=checkbox> git pull request</li><li><input disabled type=checkbox> git submodules</li><li><input disabled type=checkbox> gitingore</li><li><input disabled type=checkbox> git grep</li><li><input disabled type=checkbox> patch &lt; diff</li></ul></div><div class=pager><br>▲ <a href=/chartjs-notes/>ChartJs Notes</a><br>▼ <a href=/katex-notes/>Katex Notes</a></div><footer style="text-align:right;margin:5rem .2rem .2rem"><div><section><a class=taxo href=/tags/git/>#git</a><a class=taxo href=/tags/github/>#github</a></section></div><div>&copy; 2020 - 2021</div><small>page page</small></footer></div><script defer type=application/javascript src=/js/norm.js></script></body></html>
