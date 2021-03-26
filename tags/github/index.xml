@@ -1,4 +1,135 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>/tags/github/</link><language>en</language><updated>Thu, 04 Feb 2021 14:09:43 CST</updated><item><title>ChartJs Notes</title><link>/chartjs-notes/</link><pubDate>Fri, 05 Feb 2021 09:25:31 CST</pubDate><guid>/chartjs-notes/</guid><description/><article>&lt;p>Draw chart use javascript canvas, official site &lt;a href="https://www.chartjs.org/">https://www.chartjs.org/&lt;/a>&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>/tags/github/</link><language>en</language><updated>Thu, 04 Feb 2021 14:09:43 CST</updated><item><title>Clang Compile Error</title><link>/2021/clang-compile-error/</link><pubDate>Fri, 26 Mar 2021 14:36:26 CST</pubDate><guid>/2021/clang-compile-error/</guid><description/><article>&lt;h1 id="errors-about-missing-include-files">Errors About Missing Include Files&lt;sup>&lt;a class="h__anchor" href="#errors-about-missing-include-files">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>When I try to use &lt;code>clang&lt;/code> compile c code on windows with &lt;code>mingw32-w64&lt;/code>, The error information is:&lt;/p>
+&lt;pre>&lt;code>clang: warning: unable to find a Visual Studio installation;
+try running Clang from a developer command prompt [-Wmsvc-not-found]
+test.c:1:10: fatal error: 'stdio.h' file not found
+#include &amp;lt;stdio.h&amp;gt;
+^~~~~~~~~
+1 error generated.
+&lt;/code>&lt;/pre>&lt;p>Use &lt;code>clang -v&lt;/code> you can see &lt;code>Target: x86_64-pc-windows-msvc&lt;/code> and use &lt;code>gcc -v&lt;/code>, print the target is &lt;code>x86_64-w64-mingw32&lt;/code>.&lt;/p>
+&lt;h1 id="use-correct-compile-flags">Use Correct Compile Flags&lt;sup>&lt;a class="h__anchor" href="#use-correct-compile-flags">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>On Windows, there are two toolchains worth mentioning: the Visual C++ toolchain, and the MinGw toolchain.&lt;/p>
+&lt;p>Actually, clang doesn&amp;rsquo;t ship with its own complete toolchain. It always integrates with whatever standard C/C++ libs and headers the native platform uses.&lt;/p>
+&lt;p>&lt;strong>Solution&lt;/strong>: To compile successfully, you need to know your compiler target (for me it is &lt;code>x86_64-w64-mingw32&lt;/code>), then use target flag as
+&lt;code>clang --target=x86_64-w64-mingw32 test.c&lt;/code>&lt;/p>
+&lt;h1 id="persistent-compile-flags">Persistent Compile Flags&lt;sup>&lt;a class="h__anchor" href="#persistent-compile-flags">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Create a file called &lt;code>compile_flags.txt&lt;/code>. This should contain one argument per line. The same flags will be used to compile any file.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;pre>&lt;code>--target=x86_64-w64-mingw32
+&lt;/code>&lt;/pre>&lt;p>Also see &lt;a class="md__link" href="https://clang.llvm.org/docs/JSONCompilationDatabase.html"
+target="_blank" rel="noopener"
+>
+the compile_commands.json specification
+↗
+&lt;/a>
+.&lt;/p>
+&lt;h1 id="some-target-architectures">Some Target Architectures&lt;sup>&lt;a class="h__anchor" href="#some-target-architectures">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;pre>&lt;code>arm-none-eabi
+armv7a-none-eabi
+arm-linux-gnueabihf
+arm-none-linux-gnueabi
+i386-pc-linux-gnu
+x86_64-apple-darwin10
+i686-w64-windows-gnu # same as i686-w64-mingw32
+x86_64-pc-linux-gnu # from ubuntu 64 bit
+x86_64-unknown-windows-cygnus # cygwin 64-bit
+x86_64-w64-windows-gnu # same as x86_64-w64-mingw32
+i686-pc-windows-gnu # MSVC
+x86_64-pc-windows-gnu # MSVC 64-BIT
+&lt;/code>&lt;/pre>
+&lt;p>see &lt;a class="md__link" href="https://clang.llvm.org/docs/CrossCompilation.html"
+target="_blank" rel="noopener"
+>
+cross compiilation
+↗
+&lt;/a>
+&lt;/p>
+&lt;p>see &lt;a class="md__link" href="https://clangd.llvm.org/config.html"
+target="_blank" rel="noopener"
+>
+clangd config
+↗
+&lt;/a>
+&lt;/p></article></item><item><title>Bullet Journal</title><link>/2021/bullet-journal/</link><pubDate>Sun, 07 Feb 2021 09:06:31 CST</pubDate><guid>/2021/bullet-journal/</guid><description/><article>&lt;p>BuJo aka. &amp;ldquo;&lt;a class="md__link" href="https://bulletjournal.com/"
+target="_blank" rel="noopener"
+>
+Bullet Journal
+↗
+&lt;/a>
+&amp;rdquo;, is a rapid logging technique.&lt;/p>
+&lt;h1 id="notations">Notations&lt;sup>&lt;a class="h__anchor" href="#notations">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">symbol&lt;/th>
+&lt;th style="text-align:left">denotation&lt;/th>
+&lt;th style="text-align:left">explain&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">●&lt;/td>
+&lt;td style="text-align:left">Tasks&lt;/td>
+&lt;td style="text-align:left">Task incomplete&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">×&lt;/td>
+&lt;td style="text-align:left">Tasks&lt;/td>
+&lt;td style="text-align:left">Task complete&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">&amp;gt;&lt;/td>
+&lt;td style="text-align:left">Tasks&lt;/td>
+&lt;td style="text-align:left">Task Migrated into collection&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">&amp;lt;&lt;/td>
+&lt;td style="text-align:left">Tasks&lt;/td>
+&lt;td style="text-align:left">Task scheduled into Future Log&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">-&lt;/td>
+&lt;td style="text-align:left">Notes&lt;/td>
+&lt;td style="text-align:left">Things you don&amp;rsquo;t want to forget&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">○&lt;/td>
+&lt;td style="text-align:left">Events&lt;/td>
+&lt;td style="text-align:left">Noteworth moments in time&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">*&lt;/td>
+&lt;td style="text-align:left">Signifier&lt;/td>
+&lt;td style="text-align:left">High priority&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">!&lt;/td>
+&lt;td style="text-align:left">Signifier&lt;/td>
+&lt;td style="text-align:left">Great ideas, Inspiration&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h1 id="start-bujo">Start BuJo&lt;sup>&lt;a class="h__anchor" href="#start-bujo">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>I love to keep all things simplicity, i.e. KISS principle. So I only to choose part of core preception on BuJo rather than to use complete one.&lt;br>
+I use five notations, &amp;ldquo;●&amp;rdquo;, &amp;ldquo;×&amp;rdquo;, &amp;ldquo;&amp;gt;&amp;rdquo;, &amp;ldquo;-&amp;rdquo;, &amp;ldquo;○&amp;rdquo;. Here are some reason why I turn down others.&lt;br>
+The &amp;ldquo;&amp;lt;&amp;rdquo; may be forget after I complete the note, because each note should be ephemeral for my daily routines.&lt;br>
+The &amp;ldquo;*&amp;rdquo; will aggravated my procarstination because it require extra energy (limited and precious willpower).&lt;br>
+The &amp;ldquo;!&amp;rdquo;, not standout enough for a genius insight.&lt;br>
+Some important rule:&lt;/p>
+&lt;ul>
+&lt;li>only keep yesterday&amp;rsquo;s note.&lt;/li>
+&lt;li>before start today&amp;rsquo;s note, review yesterday&amp;rsquo;s note.&lt;/li>
+&lt;li>each note should be casually, it can&amp;rsquo;t do heavy tasks, just do micro tasks.&lt;/li>
+&lt;li>do not sad to your squiggle.&lt;/li>
+&lt;/ul>
+&lt;section class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1" role="doc-endnote">
+&lt;p>&amp;ldquo;Use it sparingly. If everything is a priority, nothing is.&amp;rdquo; &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/section></article></item><item><title>ChartJs Notes</title><link>/2021/chartjs-notes/</link><pubDate>Fri, 05 Feb 2021 09:25:31 CST</pubDate><guid>/2021/chartjs-notes/</guid><description/><article>&lt;p>Draw chart use javascript canvas, official site &lt;a href="https://www.chartjs.org/">https://www.chartjs.org/&lt;/a>&lt;/p>
 &lt;h1 id="line">Line&lt;sup>&lt;a class="h__anchor" href="#line">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;canvas id="b394ed42cffe8973512d83d48ca57ade">&lt;/canvas>&lt;script type="text/javascript">new Chart("b394ed42cffe8973512d83d48ca57ade",
 {
@@ -180,7 +311,7 @@ type: 'line'
 }]
 }
 }
-);&lt;/script></article></item><item><title>Git and Github Notes</title><link>/git-and-github-notes/</link><pubDate>Thu, 04 Feb 2021 14:09:43 CST</pubDate><guid>/git-and-github-notes/</guid><description/><article>&lt;h1 id="git">Git&lt;sup>&lt;a class="h__anchor" href="#git">¶&lt;/a>&lt;/sup>&lt;/h1>
+);&lt;/script></article></item><item><title>Git and Github Notes</title><link>/2021/git-and-github-notes/</link><pubDate>Thu, 04 Feb 2021 14:09:43 CST</pubDate><guid>/2021/git-and-github-notes/</guid><description/><article>&lt;h1 id="git">Git&lt;sup>&lt;a class="h__anchor" href="#git">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>install &lt;a class="md__link" href="https://git-scm.com/"
 target="_blank" rel="noopener"
 >
@@ -519,7 +650,7 @@ git branch
 &lt;li>&lt;input disabled="" type="checkbox"> gitingore&lt;/li>
 &lt;li>&lt;input disabled="" type="checkbox"> git grep&lt;/li>
 &lt;li>&lt;input disabled="" type="checkbox"> patch &amp;lt; diff&lt;/li>
-&lt;/ul></article></item><item><title>Katex Notes</title><link>/katex-notes/</link><pubDate>Wed, 03 Feb 2021 12:41:04 CST</pubDate><guid>/katex-notes/</guid><description/><article>&lt;p>&lt;a href="https://katex.org/docs/supported.html">https://katex.org/docs/supported.html&lt;/a>&lt;/p>
+&lt;/ul></article></item><item><title>Katex Notes</title><link>/2021/katex-notes/</link><pubDate>Wed, 03 Feb 2021 12:41:04 CST</pubDate><guid>/2021/katex-notes/</guid><description/><article>&lt;p>&lt;a href="https://katex.org/docs/supported.html">https://katex.org/docs/supported.html&lt;/a>&lt;/p>
 &lt;p>分数 $\frac{1}{3}$ $1 \over 3$&lt;/p>
 &lt;pre>&lt;code>$\frac{1}{3}$ $1 \over 3$
 &lt;/code>&lt;/pre>
@@ -652,7 +783,7 @@ quad空格 a \quad b a \quad b 一个m的宽度
 没有空格 ab ab\,
 紧贴 a\!b a\!b 缩进1/6m宽度
 &lt;/code>&lt;/pre>&lt;p>&lt;code>\quad、1em、em、m&lt;/code> 代表当前字体下接近字符‘M’的宽度（approximately the width of an &amp;ldquo;M&amp;rdquo; in the current font）&lt;/p>
-&lt;p>数学公式中写入非数学变量的字符（non-mathematical elements），使用 Roman 字体，而不是数学变量的斜体（italics），例如 “if ”， 使用&lt;code>\mbox{ if }&lt;/code>&lt;/p></article></item><item><title>MermaidJs Notes</title><link>/mermaidjs-notes/</link><pubDate>Wed, 03 Feb 2021 11:00:34 CST</pubDate><guid>/mermaidjs-notes/</guid><description/><article>&lt;p>&lt;a class="md__link" href="https://github.com/mermaid-js/mermaid"
+&lt;p>数学公式中写入非数学变量的字符（non-mathematical elements），使用 Roman 字体，而不是数学变量的斜体（italics），例如 “if ”， 使用&lt;code>\mbox{ if }&lt;/code>&lt;/p></article></item><item><title>MermaidJs Notes</title><link>/2021/mermaidjs-notes/</link><pubDate>Wed, 03 Feb 2021 11:00:34 CST</pubDate><guid>/2021/mermaidjs-notes/</guid><description/><article>&lt;p>&lt;a class="md__link" href="https://github.com/mermaid-js/mermaid"
 target="_blank" rel="noopener"
 >
 mermaid-js
@@ -742,7 +873,7 @@ title Key elements in Product X
 "Potassium" : 50.05
 "Magnesium" : 10.01
 "Iron" : 5
-&lt;/div></article></item><item><title>Hugo Notes</title><link>/hugo-notes/</link><pubDate>Mon, 01 Feb 2021 12:20:34 CST</pubDate><guid>/hugo-notes/</guid><description/><article>&lt;p>Hugo maybe the world’s fastest static website generate engine, stand out for it&amp;rsquo;s speed.&lt;/p>
+&lt;/div></article></item><item><title>Hugo Notes</title><link>/2021/hugo-notes/</link><pubDate>Mon, 01 Feb 2021 12:20:34 CST</pubDate><guid>/2021/hugo-notes/</guid><description/><article>&lt;p>Hugo maybe the world’s fastest static website generate engine, stand out for it&amp;rsquo;s speed.&lt;/p>
 &lt;p>Before you go, make sure:&lt;/p>
 &lt;ul>
 &lt;li>install git&lt;/li>
@@ -1149,7 +1280,7 @@ hugo community
 &lt;p>store meta data for each page. &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></article></item><item><title>Markdown Cheatsheet</title><link>/markdown-cheatsheet/</link><pubDate>Sun, 31 Jan 2021 13:00:50 CST</pubDate><guid>/markdown-cheatsheet/</guid><description/><article>&lt;h1 id="prelogue">Prelogue&lt;sup>&lt;a class="h__anchor" href="#prelogue">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;/section></article></item><item><title>Markdown Cheatsheet</title><link>/2021/markdown-cheatsheet/</link><pubDate>Sun, 31 Jan 2021 13:00:50 CST</pubDate><guid>/2021/markdown-cheatsheet/</guid><description/><article>&lt;h1 id="prelogue">Prelogue&lt;sup>&lt;a class="h__anchor" href="#prelogue">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>represent markdown syntax, and use it to see how the style looks like in hugo&amp;rsquo;s site&lt;/p>
 &lt;h1 id="header">Header&lt;sup>&lt;a class="h__anchor" href="#header">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;div class="sc--fdM">
@@ -1398,7 +1529,7 @@ Github Flavored Markdown
 &lt;p>I am a footnote &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></article></item><item><title>Banal Shortcodes Showcase</title><link>/banal-shortcodes-showcase/</link><pubDate>Sat, 30 Jan 2021 10:00:45 CST</pubDate><guid>/banal-shortcodes-showcase/</guid><description/><article>&lt;p>view or modified those shortcodes at &lt;code>[theme_name]/layouts/shortcodes/&lt;/code>&lt;/p>
+&lt;/section></article></item><item><title>Banal Shortcodes Showcase</title><link>/2021/banal-shortcodes-showcase/</link><pubDate>Sat, 30 Jan 2021 10:00:45 CST</pubDate><guid>/2021/banal-shortcodes-showcase/</guid><description/><article>&lt;p>view or modified those shortcodes at &lt;code>[theme_name]/layouts/shortcodes/&lt;/code>&lt;/p>
 &lt;p>&lt;strong>important!:&lt;/strong> for representation need, I replace all &lt;code>{&amp;lt;&lt;/code> to &lt;code>{ &amp;lt;&lt;/code>.&lt;/p>
 &lt;h1 id="label">Label&lt;sup>&lt;a class="h__anchor" href="#label">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;h2 id="parameter">parameter&lt;sup>&lt;a class="h__anchor" href="#parameter">¶&lt;/a>&lt;/sup>&lt;/h2>
@@ -1553,4 +1684,4 @@ until now my site has running&lt;br>
 &lt;script>
 setInterval("tickTimer('timerTick-tick-site-runtime', '2020\/05\/22 14:21:16','%y year %d day %h hour %m min %s sec %e ms')", "80");
 &lt;/script>
-&lt;/strong>&lt;/p></article></item><item><title>Search</title><link>/search/</link><pubDate>Wed, 27 Jan 2021 13:56:14 CST</pubDate><guid>/search/</guid><description/><article/></item></channel></rss>
+&lt;/strong>&lt;/p></article></item></channel></rss>

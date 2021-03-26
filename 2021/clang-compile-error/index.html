@@ -1,0 +1,25 @@
+<!doctype html><html><meta charset=utf-8><meta name=generator content="Hugo 0.76.5"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel=icon type=image/png href=/img/git_face.png><link rel=stylesheet type=text/css href=/css/main.css><link rel=stylesheet type=text/css href=/css/syntax.css><title>Clang Compile Error@Zyprex's Blog</title><body><div class=fence><nav><a href=/>HOME&nbsp;</a><a href=/tags/>TAGS&nbsp;</a><a href=/categories/>CATEGORIES&nbsp;</a><a href=/index.xml>RSS&nbsp;</a><a href=/search/>SEARCH&nbsp;</a></nav><div class=Hp><em class=T>Clang Compile Error</em><br><em>2021/03/26 Fri 14:36</em></div><div id=C><h1 id=errors-about-missing-include-files>Errors About Missing Include Files<sup><a class=h__anchor href=#errors-about-missing-include-files>¶</a></sup></h1><p>When I try to use <code>clang</code> compile c code on windows with <code>mingw32-w64</code>, The error information is:</p><pre><code>clang: warning: unable to find a Visual Studio installation;
+try running Clang from a developer command prompt [-Wmsvc-not-found]
+test.c:1:10: fatal error: 'stdio.h' file not found
+#include &lt;stdio.h&gt;
+         ^~~~~~~~~
+1 error generated.
+</code></pre><p>Use <code>clang -v</code> you can see <code>Target: x86_64-pc-windows-msvc</code> and use <code>gcc -v</code>, print the target is <code>x86_64-w64-mingw32</code>.</p><h1 id=use-correct-compile-flags>Use Correct Compile Flags<sup><a class=h__anchor href=#use-correct-compile-flags>¶</a></sup></h1><p>On Windows, there are two toolchains worth mentioning: the Visual C++ toolchain, and the MinGw toolchain.</p><p>Actually, clang doesn&rsquo;t ship with its own complete toolchain. It always integrates with whatever standard C/C++ libs and headers the native platform uses.</p><p><strong>Solution</strong>: To compile successfully, you need to know your compiler target (for me it is <code>x86_64-w64-mingw32</code>), then use target flag as
+<code>clang --target=x86_64-w64-mingw32 test.c</code></p><h1 id=persistent-compile-flags>Persistent Compile Flags<sup><a class=h__anchor href=#persistent-compile-flags>¶</a></sup></h1><p>Create a file called <code>compile_flags.txt</code>. This should contain one argument per line. The same flags will be used to compile any file.</p><p>Example:</p><pre><code>--target=x86_64-w64-mingw32
+</code></pre><p>Also see <a class=md__link href=https://clang.llvm.org/docs/JSONCompilationDatabase.html target=_blank rel=noopener>the compile_commands.json specification
+↗</a>
+.</p><h1 id=some-target-architectures>Some Target Architectures<sup><a class=h__anchor href=#some-target-architectures>¶</a></sup></h1><pre><code>arm-none-eabi
+armv7a-none-eabi
+arm-linux-gnueabihf 
+arm-none-linux-gnueabi
+i386-pc-linux-gnu 
+x86_64-apple-darwin10
+i686-w64-windows-gnu # same as i686-w64-mingw32
+x86_64-pc-linux-gnu # from ubuntu 64 bit
+x86_64-unknown-windows-cygnus # cygwin 64-bit
+x86_64-w64-windows-gnu # same as x86_64-w64-mingw32
+i686-pc-windows-gnu # MSVC
+x86_64-pc-windows-gnu # MSVC 64-BIT
+</code></pre><p>see <a class=md__link href=https://clang.llvm.org/docs/CrossCompilation.html target=_blank rel=noopener>cross compiilation
+↗</a></p><p>see <a class=md__link href=https://clangd.llvm.org/config.html target=_blank rel=noopener>clangd config
+↗</a></p></div><div class=pager><br>▼ <a href=/2021/bullet-journal/>Bullet Journal</a></div><footer style="text-align:right;margin:5rem .2rem .2rem"><div><section><a class=taxo href=/tags/debug/>#debug</a><a class=taxo href=/tags/c/>#c</a></section></div><div>&copy; 2020 - 2021</div><small>page 2021</small></footer></div><script defer type=application/javascript src=/js/norm.js></script></body></html>

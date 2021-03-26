@@ -1,0 +1,186 @@
+<!doctype html><html><meta charset=utf-8><meta name=generator content="Hugo 0.76.5"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel=icon type=image/png href=/img/git_face.png><link rel=stylesheet type=text/css href=/css/main.css><link rel=stylesheet type=text/css href=/css/syntax.css><title>Hugo Notes@Zyprex's Blog</title><body><div class=fence><nav><a href=/>HOME&nbsp;</a><a href=/tags/>TAGS&nbsp;</a><a href=/categories/>CATEGORIES&nbsp;</a><a href=/index.xml>RSS&nbsp;</a><a href=/search/>SEARCH&nbsp;</a></nav><div class=Hp><em class=T>Hugo Notes</em><br><em>2021/02/01 Mon 12:20</em></div><nav class=toc><b onclick="nav_toc.hidden=!nav_toc.hidden;this.innerText=this.innerText=='+ catalogue'?'- catalogue':'+ catalogue'">+ catalogue</b><div id=nav_toc hidden><nav id=TableOfContents><ul><li><a href=#tldr>TL;DR</a></li><li><a href=#overview-of-sites-architecture>Overview of Site&rsquo;s Architecture</a><ul><li><a href=#layouts>Layouts</a></li><li><a href=#archetypes>Archetypes</a><ul><li><a href=#frontmatter-example>frontMatter example</a></li></ul></li><li><a href=#content>Content</a></li></ul></li><li><a href=#configtoml>Config.toml</a></li><li><a href=#themes>Themes</a><ul><li><a href=#themes-structure>Themes Structure</a></li><li><a href=#focus-on-essence-files>Focus on Essence Files</a></li><li><a href=#tips-for-write-theme>Tips For Write Theme</a><ul><li><a href=#enable-tableofcontents>Enable TableofContents</a></li><li><a href=#easy-menu>Easy Menu</a></li><li><a href=#use-partials>Use Partials</a></li><li><a href=#use-template>Use Template</a></li><li><a href=#preview-site-on-smart-phone>Preview Site On Smart Phone</a></li></ul></li></ul></li><li><a href=#compare-_indexmd--indexmd>Compare _index.md & index.md</a></li><li><a href=#user-defined-highlight-css>User Defined Highlight CSS</a></li><li><a href=#shortcodes>Shortcodes</a></li><li><a href=#ref>Ref.</a></li></ul></nav></div></nav><div id=C><p>Hugo maybe the world’s fastest static website generate engine, stand out for it&rsquo;s speed.</p><p>Before you go, make sure:</p><ul><li>install git</li><li>go env (optional)</li><li>install hugo</li><li>add hugo in your path</li></ul><h1 id=tldr>TL;DR<sup><a class=h__anchor href=#tldr>¶</a></sup></h1><p>Hugo&rsquo;s concentrated quick start.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-shell data-lang=shell><span class=c1># start of your site in a folder &#39;quickstart/&#39;</span>
+hugo new site quickstart
+<span class=c1># apply theme</span>
+<span class=nb>cd</span> quickstart
+git init
+git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke
+<span class=c1># create first post</span>
+hugo new posts/my-first-post.md
+hugo server -D
+<span class=c1># enter http://localhost:1313/ in address bar</span>
+<span class=c1># preview site in browser</span>
+<span class=c1># host site ... (have plenty of choose)</span>
+</code></pre></td></tr></table></div></div><h1 id=overview-of-sites-architecture>Overview of Site&rsquo;s Architecture<sup><a class=h__anchor href=#overview-of-sites-architecture>¶</a></sup></h1><pre><code>|- archetypes/
+|   |
+|   `- default.md
+|- config.toml
+|- content/
+|- data/
+|- public/ &lt;---(run 'hugo' to generate)
+|- layouts/
+|- static/
+`- themes/
+</code></pre><h2 id=layouts>Layouts<sup><a class=h__anchor href=#layouts>¶</a></sup></h2><p>In front matter<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup> if you defined <code>layout: "about"</code>, then hugo will find <code>/layouts/default/about.html</code> as a template for your page, otherwise it is <code>single.html</code>. BTW: if you also defined <code>type: posts</code>, hugo will give the highest priority of template look order to <code>/layouts/posts/about.html</code>.</p><h2 id=archetypes>Archetypes<sup><a class=h__anchor href=#archetypes>¶</a></sup></h2><p>The file <code>archetypes/default.md</code> show below.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown>---
+title: &#34;{{ replace .Name &#34;-&#34; &#34; &#34; | title }}&#34;
+date: {{ .Date }}
+draft: true
+---
+</code></pre></td></tr></table></div></div><p>This is the default &ldquo;front matter&rdquo; template for new page. For publish, set <code>draft: false</code> or delete this line.</p><h3 id=frontmatter-example>frontMatter example<sup><a class=h__anchor href=#frontmatter-example>¶</a></sup></h3><p>hugo&rsquo;s front matter can be written in yaml json or toml format.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yaml data-lang=yaml><span class=nn>---</span><span class=w>
+</span><span class=w></span><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ replace .Name &#34;</span>-<span class=s2>&#34; &#34;</span><span class=w> </span><span class=s2>&#34; | title }}&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>date</span><span class=p>:</span><span class=w> </span>{{<span class=w> </span><span class=l>.Date }}</span><span class=w>
+</span><span class=w></span><span class=nt>lastmod</span><span class=p>:</span><span class=w> </span>{{<span class=w> </span><span class=l>.Date }}</span><span class=w>
+</span><span class=w></span><span class=nt>description</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;...&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>publishDate</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=nt>expiryDate</span><span class=p>:</span><span class=w> </span><span class=ld>2099-01-01</span><span class=w>
+</span><span class=w></span><span class=nt>draft</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w></span><span class=nt>tags</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=s2>&#34;t1&#34;</span><span class=p>,</span><span class=w> </span><span class=s2>&#34;t2&#34;</span><span class=p>,</span><span class=w> </span><span class=s2>&#34;t3&#34;</span><span class=w> </span><span class=p>]</span><span class=w>
+</span><span class=w></span><span class=nt>categories</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;c1&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>keywords</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=s2>&#34;k1&#34;</span><span class=p>,</span><span class=w> </span><span class=s2>&#34;k2&#34;</span><span class=w> </span><span class=p>]</span><span class=w>
+</span><span class=w></span><span class=nt>isCJKLanguage</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w></span><span class=nt>weight</span><span class=p>:</span><span class=w> </span><span class=m>40</span><span class=w>
+</span><span class=w></span><span class=nt>aliases</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=nt>type</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=nt>layout</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=nt>toc</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w></span><span class=nn>---</span><span class=w>
+</span></code></pre></td></tr></table></div></div><p>see more at <a class=md__link href=https://gohugo.io/content-management/front-matter/ target=_blank rel=noopener>hugo front-matter
+↗</a></p><h2 id=content>Content<sup><a class=h__anchor href=#content>¶</a></sup></h2><p>This folder store site content markdown file, each md file has:</p><ul><li>layout (default template is <code>layouts/_default/single.html</code>)</li><li>type (top level folder name, aka reserved section)</li><li>kind (kind of each page)<ul><li>home (most top level index.html)</li><li>page (each of markdown file)</li><li>section (each accessible folder name, if it not rectified by <code>_index.md</code>)</li><li>taxonomy (taxonomies refers to all terms, including &lsquo;tags&rsquo; and &lsquo;categories&rsquo;)</li><li>term (the &lsquo;tags&rsquo; is a term)</li></ul></li></ul><p>See <a class=md__link href=https://gohugo.io/getting-started/directory-structure/ target=_blank rel=noopener>hugo - directory structure
+↗</a>
+for more detail.</p><h1 id=configtoml>Config.toml<sup><a class=h__anchor href=#configtoml>¶</a></sup></h1><p>Origin conifg.toml looks like:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-toml data-lang=toml><span class=nx>baseURL</span> <span class=p>=</span> <span class=s2>&#34;http://example.org/&#34;</span>
+<span class=nx>languageCode</span> <span class=p>=</span> <span class=s2>&#34;en-us&#34;</span>
+<span class=nx>title</span> <span class=p>=</span> <span class=s2>&#34;My New Hugo Site&#34;</span>
+</code></pre></td></tr></table></div></div><p>Some useful configure are here:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-toml data-lang=toml><span class=nx>newContentEditor</span> <span class=p>=</span> <span class=s2>&#34;vim&#34;</span>
+<span class=nx>paginate</span> <span class=p>=</span> <span class=mi>10</span>
+<span class=nx>summaryLength</span> <span class=p>=</span> <span class=mi>100</span>
+<span class=nx>hasCJKLanguage</span> <span class=p>=</span> <span class=kc>true</span>
+<span class=nx>enableEmoji</span> <span class=p>=</span> <span class=kc>true</span>
+<span class=nx>enableRobotsTXT</span> <span class=p>=</span> <span class=kc>true</span>
+<span class=nx>minify</span> <span class=p>=</span> <span class=kc>true</span>
+<span class=p>[</span><span class=nx>markup</span><span class=p>.</span><span class=nx>goldmark</span><span class=p>.</span><span class=nx>renderer</span><span class=p>]</span>
+  <span class=nx>unsafe</span><span class=p>=</span> <span class=kc>true</span> <span class=c># write inline HTML</span>
+</code></pre></td></tr></table></div></div><h1 id=themes>Themes<sup><a class=h__anchor href=#themes>¶</a></sup></h1><p>Run <code>hugo new theme blank</code> will generate a new theme skeleton for you, it located in themes folder.</p><h2 id=themes-structure>Themes Structure<sup><a class=h__anchor href=#themes-structure>¶</a></sup></h2><pre><code>|- LICENSE
+|- archetypes/
+|   |
+|   `- default.md
+|- layouts/
+|   |- 404.html
+|   |- index.html
+|   |- _default/
+|   |   |- baseof.html
+|   |   |- list.html
+|   |   `- single.html
+|   `- partials/
+|       |- head.html
+|       |- header.html
+|       `- footer.html
+|- static/
+|   |- css/
+|   `- js/
+`- theme.toml
+</code></pre><h2 id=focus-on-essence-files>Focus on Essence Files<sup><a class=h__anchor href=#focus-on-essence-files>¶</a></sup></h2><table><thead><tr><th style=text-align:left>File name</th><th style=text-align:left>Role</th></tr></thead><tbody><tr><td style=text-align:left>theme.toml</td><td style=text-align:left>your theme information</td></tr><tr><td style=text-align:left>index.html</td><td style=text-align:left>render home</td></tr><tr><td style=text-align:left>baseof.html</td><td style=text-align:left>main frame</td></tr><tr><td style=text-align:left>list.html</td><td style=text-align:left>render section</td></tr><tr><td style=text-align:left>single.html</td><td style=text-align:left>render page</td></tr><tr><td style=text-align:left>head.html</td><td style=text-align:left>same as <code>&lt;head></code> tag</td></tr><tr><td style=text-align:left>header.html</td><td style=text-align:left>site&rsquo;s header</td></tr><tr><td style=text-align:left>footer.html</td><td style=text-align:left>site&rsquo;s footer</td></tr></tbody></table><h2 id=tips-for-write-theme>Tips For Write Theme<sup><a class=h__anchor href=#tips-for-write-theme>¶</a></sup></h2><h3 id=enable-tableofcontents>Enable TableofContents<sup><a class=h__anchor href=#enable-tableofcontents>¶</a></sup></h3><p>In your content page&rsquo;s front matter define <code>toc: true</code>, then in <code>layouts/_default/single.html</code> put three line:</p><pre><code>{{  if .Params.toc }}
+  {{ .TableofContents }}
+{{ end }}
+</code></pre><h3 id=easy-menu>Easy Menu<sup><a class=h__anchor href=#easy-menu>¶</a></sup></h3><p>Paste below line in your <code>config.toml</code>.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-toml data-lang=toml><span class=p>[</span><span class=nx>menu</span><span class=p>]</span>
+  <span class=p>[[</span><span class=nx>menu</span><span class=p>.</span><span class=nx>main</span><span class=p>]]</span>
+    <span class=nx>identifier</span> <span class=p>=</span> <span class=s2>&#34;home&#34;</span>
+    <span class=nx>name</span> <span class=p>=</span> <span class=s2>&#34;HOME&#34;</span>
+    <span class=nx>url</span> <span class=p>=</span> <span class=s2>&#34;/&#34;</span>
+    <span class=nx>weight</span> <span class=p>=</span> <span class=mi>-199</span>
+  <span class=p>[[</span><span class=nx>menu</span><span class=p>.</span><span class=nx>main</span><span class=p>]]</span>
+    <span class=nx>identifier</span> <span class=p>=</span> <span class=s2>&#34;tags&#34;</span>
+    <span class=nx>name</span> <span class=p>=</span> <span class=s2>&#34;TAGS&#34;</span>
+    <span class=nx>url</span> <span class=p>=</span> <span class=s2>&#34;/tags/&#34;</span>
+    <span class=nx>weight</span> <span class=p>=</span> <span class=mi>-199</span>
+  <span class=p>[[</span><span class=nx>menu</span><span class=p>.</span><span class=nx>main</span><span class=p>]]</span>
+    <span class=nx>identifier</span> <span class=p>=</span> <span class=s2>&#34;categories&#34;</span>
+    <span class=nx>name</span> <span class=p>=</span> <span class=s2>&#34;CATEGORIES&#34;</span>
+    <span class=nx>url</span> <span class=p>=</span> <span class=s2>&#34;/categories/&#34;</span>
+    <span class=nx>weight</span> <span class=p>=</span> <span class=mi>-198</span>
+</code></pre></td></tr></table></div></div><p>go to directory <code>layouts/partials/</code>, create new file <code>menu.html</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-html data-lang=html>{{- range .Site.Menus.main -}}
+<span class=p>&lt;</span><span class=nt>a</span> <span class=na>href</span><span class=o>=</span><span class=s>&#34;{{ .URL }}&#34;</span><span class=p>&gt;</span>{{ .Name }}<span class=ni>&amp;nbsp;</span><span class=p>&lt;/</span><span class=nt>a</span><span class=p>&gt;</span>
+{{- end -}}
+</code></pre></td></tr></table></div></div><h3 id=use-partials>Use Partials<sup><a class=h__anchor href=#use-partials>¶</a></sup></h3><p>assume there had <code>layouts/partials/menu.html</code>
+, include in <code>index.md</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-html data-lang=html>{{- partial &#34;menu.html&#34; . -}}
+</code></pre></td></tr></table></div></div><p>start server to see the change!</p><h3 id=use-template>Use Template<sup><a class=h__anchor href=#use-template>¶</a></sup></h3><p>the template function is old fashion of partials, now it used to call hugo&rsquo;s <a class=md__link href=https://github.com/gohugoio/hugo/tree/master/tpl/tplimpl/embedded/templates target=_blank rel=noopener>internal partial
+↗</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-html data-lang=html>{{- template &#34;_internal/opengraph.html&#34; . -}}
+</code></pre></td></tr></table></div></div><h3 id=preview-site-on-smart-phone>Preview Site On Smart Phone<sup><a class=h__anchor href=#preview-site-on-smart-phone>¶</a></sup></h3><p>Assume your computer&rsquo;s ipv4 is <code>192.168.X.XXX</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-shell data-lang=shell>hugo server -D --bind 192.168.X.XXX --baseURL http://192.168.X.XXX/
+</code></pre></td></tr></table></div></div><p>If you find static files not refresh, press <kbd>Ctrl</kbd>+<kbd>F5</kbd>, or go to settings and clear browser caches.</p><h1 id=compare-_indexmd--indexmd>Compare _index.md & index.md<sup><a class=h__anchor href=#compare-_indexmd--indexmd>¶</a></sup></h1><p>in a short , <code>_index.md</code> create a branch, <code>index.md</code> create a leaf page end.
+see more at <a class=md__link href=https://gohugo.io/content-management/page-bundles/ target=_blank rel=noopener>page bundles
+↗</a>
+.</p><h1 id=user-defined-highlight-css>User Defined Highlight CSS<sup><a class=h__anchor href=#user-defined-highlight-css>¶</a></sup></h1><p>first on your <code>config.toml</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-toml data-lang=toml><span class=nx>pygmentsUseClasses</span> <span class=p>=</span> <span class=kc>true</span>
+</code></pre></td></tr></table></div></div><p>then:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-shell data-lang=shell>hugo gen chromastyles --style<span class=o>=</span>native &gt; syntax.css
+</code></pre></td></tr></table></div></div><p>include <code>syntax.css</code> file in <code>single.html</code>.</p><h1 id=shortcodes>Shortcodes<sup><a class=h__anchor href=#shortcodes>¶</a></sup></h1><p>See <a class=md__link href=https://gohugo.io/content-management/shortcodes/#readout target=_blank rel=noopener>hugo shortcodes
+↗</a></p><h1 id=ref>Ref.<sup><a class=h__anchor href=#ref>¶</a></sup></h1><p><a class=md__link href=https://gohugo.io/documentation/ target=_blank rel=noopener>hugo doc
+↗</a></p><p><a class=md__link href=https://discourse.gohugo.io/ target=_blank rel=noopener>hugo community
+↗</a></p><section class=footnotes role=doc-endnotes><hr><ol><li id=fn:1 role=doc-endnote><p>store meta data for each page. <a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></section></div><div class=pager><br>▲ <a href=/2021/mermaidjs-notes/>MermaidJs Notes</a><br>▼ <a href=/2021/markdown-cheatsheet/>Markdown Cheatsheet</a></div><footer style="text-align:right;margin:5rem .2rem .2rem"><div><section><a class=taxo href=/categories/hugo/>@hugo</a></section></div><div>&copy; 2020 - 2021</div><small>page 2021</small></footer></div><script defer type=application/javascript src=/js/norm.js></script></body></html>
