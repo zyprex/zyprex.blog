@@ -1,4 +1,48 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>/tags/katex/</link><language>en</language><updated>Wed, 03 Feb 2021 12:41:04 CST</updated><item><title>Clang Compile Error</title><link>/2021/clang-compile-error/</link><pubDate>Fri, 26 Mar 2021 14:36:26 CST</pubDate><guid>/2021/clang-compile-error/</guid><description/><article>&lt;h1 id="errors-about-missing-include-files">Errors About Missing Include Files&lt;sup>&lt;a class="h__anchor" href="#errors-about-missing-include-files">¶&lt;/a>&lt;/sup>&lt;/h1>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>/tags/katex/</link><language>en</language><updated>Wed, 03 Feb 2021 12:41:04 CST</updated><item><title>Keep Away From Social Media</title><link>/2021/keep-away-from-social-media/</link><pubDate>Tue, 11 May 2021 12:36:49 CST</pubDate><guid>/2021/keep-away-from-social-media/</guid><description/><article>&lt;h1 id="keep-away-from-social-media">Keep Away From Social Media&lt;sup>&lt;a class="h__anchor" href="#keep-away-from-social-media">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>As an anti-social(the people not on social media), I strongly advised
+you to keep away from social media.&lt;/p>
+&lt;p>The first point about social media is the addictiveness.&lt;/p>
+&lt;p>Nobody really wants to spend hours and hours every day,
+updating their status and seeing what other people think about them.
+Nobody consciously wants to do that.&lt;/p>
+&lt;p>But those behaviors are themselves-addictive behaviors, what you&amp;rsquo;re
+trapped in that loop. It&amp;rsquo;s very hard to break out.&lt;/p>
+&lt;p>It&amp;rsquo;s not that we want to go back to some interlink past and Eden before
+the machines existed.
+It&amp;rsquo;s that we need to take control of these machines and use them for
+their proper end.&lt;/p>
+&lt;h1 id="the-fact-20-people-not-active-on-social-media">The Fact: 20% People Not Active on Social Media&lt;sup>&lt;a class="h__anchor" href="#the-fact-20-people-not-active-on-social-media">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>The bad thing is that you think people&amp;rsquo;s lives is much more fun than your own life.
+When I&amp;rsquo;m on the bus or walk through the street, I just see people like zombies.&lt;/p>
+&lt;h1 id="advantages-of-present-face-to-face">Advantages of Present Face to Face&lt;sup>&lt;a class="h__anchor" href="#advantages-of-present-face-to-face">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;ol>
+&lt;li>you can get the feedback, know either stop right there or tell them more&lt;/li>
+&lt;li>you might withhold a certain opinion rather than being kind of rapid-fire&lt;/li>
+&lt;li>you can read the nuance more accurately in the air&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>The best thing is not to just shoot your mouth off online&lt;/strong>, if you want save
+you a touch of elegance.&lt;/p>
+&lt;p>The thing is the world is real whether we want to believe it or not and it&amp;rsquo;s really
+important for us to have a sense of where we are in that world.&lt;/p>
+&lt;h1 id="deficiency-of-social-media">Deficiency of Social Media&lt;sup>&lt;a class="h__anchor" href="#deficiency-of-social-media">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>I don&amp;rsquo;t like to use the term &amp;ldquo;social media&amp;rdquo; at the end of the day because it implies
+that it&amp;rsquo;s designed to promote social behaviors when usually it&amp;rsquo;s designed to
+promote the amount of attention that we&amp;rsquo;re giving it.&lt;/p>
+&lt;p>In order to grab our attention because there&amp;rsquo;s so much competition design has to
+appeal to the lower parts of us to the kind of non-rational, automatic, impulsive
+parts of us, and so this is why we get things like clickbait, like sensationalism
+, things that appeal to our outrage.&lt;/p>
+&lt;p>There&amp;rsquo;s a whole industry of consultants, psychologists who are are helping
+designers really punch the right buttons in our brains, so that we do keep
+coming back for more and we do stay hooked on the products.&lt;/p>
+&lt;p>&lt;strong>Be aware, their advertising system is not really social platforms&lt;/strong>.&lt;/p>
+&lt;h1 id="conclusion">Conclusion&lt;sup>&lt;a class="h__anchor" href="#conclusion">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Since 63% of the global population (4.8 billion people) is not active
+on social media, it&amp;rsquo;s high time to stop overusing your smartphone.&lt;/p>
+&lt;p>The things that are the most worthwhile and most fulfilling, is the things
+that you take the most work and spend a lot of time on. Those are their
+pleasures that are self-actualizing that help you realize a part of yourself
+you didn&amp;rsquo;t have.&lt;/p></article></item><item><title>Clang Compile Error</title><link>/2021/clang-compile-error/</link><pubDate>Fri, 26 Mar 2021 14:36:26 CST</pubDate><guid>/2021/clang-compile-error/</guid><description/><article>&lt;h1 id="errors-about-missing-include-files">Errors About Missing Include Files&lt;sup>&lt;a class="h__anchor" href="#errors-about-missing-include-files">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>When I try to use &lt;code>clang&lt;/code> compile c code on windows with &lt;code>mingw32-w64&lt;/code>, The error information is:&lt;/p>
 &lt;pre>&lt;code>clang: warning: unable to find a Visual Studio installation;
 try running Clang from a developer command prompt [-Wmsvc-not-found]
@@ -1655,33 +1699,4 @@ interval=&amp;quot;80&amp;quot; &amp;gt;}}
 &lt;pre>&lt;code>{{ &amp;lt;chart &amp;quot;mychart1&amp;quot;&amp;gt;}}
 ...
 {{ &amp;lt;/chart&amp;gt;}}
-&lt;/code>&lt;/pre></article></item><item><title>About</title><link>/about/</link><pubDate>Wed, 27 Jan 2021 17:25:57 CST</pubDate><guid>/about/</guid><description/><article>&lt;h4 id="prologue">Prologue&lt;sup>&lt;a class="h__anchor" href="#prologue">¶&lt;/a>&lt;/sup>&lt;/h4>
-&lt;p>This site&amp;rsquo;s each page has three frontMatter parameter should be clarified, in case of
-there intention become confused in the future.&lt;/p>
-&lt;ul>
-&lt;li>&lt;strong>categories:&lt;/strong> organized page, those page should been well format.&lt;/li>
-&lt;li>&lt;strong>tags:&lt;/strong> trival page, short and unordered, maybe unsortable?&lt;/li>
-&lt;li>&lt;strong>keywords:&lt;/strong> provide keywords to search across site.&lt;/li>
-&lt;/ul>
-&lt;h4 id="purpose">Purpose&lt;sup>&lt;a class="h__anchor" href="#purpose">¶&lt;/a>&lt;/sup>&lt;/h4>
-&lt;p>This site mainly written down my every&lt;/p>
-&lt;ul>
-&lt;li>absurd notion&lt;/li>
-&lt;li>occasional spark&lt;/li>
-&lt;li>uneventful life&lt;/li>
-&lt;li>mediocre ego&lt;/li>
-&lt;li>handy reference&lt;/li>
-&lt;li>messy information&lt;/li>
-&lt;/ul>
-&lt;h4 id="epilogue">Epilogue&lt;sup>&lt;a class="h__anchor" href="#epilogue">¶&lt;/a>&lt;/sup>&lt;/h4>
-&lt;p>site update log&lt;br>
-2020-05-22 start my blog from hexo, theme fluid&lt;br>
-2020-10-27 migrate from hexo to hugo, theme maverick&lt;br>
-2020-12-22 change blog theme to engram&lt;br>
-2021-01-31 change blog theme to banal&lt;br>
-until now my site has running&lt;br>
-&lt;strong>&lt;span id="timerTick-tick-site-runtime" title="2020/05/22 14:21:16">&lt;/span>
-&lt;script>
-setInterval("tickTimer('timerTick-tick-site-runtime', '2020\/05\/22 14:21:16','%y year %d day %h hour %m min %s sec %e ms')", "80");
-&lt;/script>
-&lt;/strong>&lt;/p></article></item></channel></rss>
+&lt;/code>&lt;/pre></article></item></channel></rss>
