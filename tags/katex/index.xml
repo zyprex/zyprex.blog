@@ -494,42 +494,42 @@ git push -d origin &amp;lt;remote_tag&amp;gt; # del tags
 &lt;h2 id="git-add">git add&lt;sup>&lt;a class="h__anchor" href="#git-add">¶&lt;/a>&lt;/sup>&lt;/h2>
 &lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
 &lt;blockquote>
-&lt;p>LF will be replaced by CRLF
-&lt;strong>Causes:&lt;/strong>
-use unix format file on windows.
-&lt;strong>Solution:&lt;/strong>
-use tool &amp;ldquo;unix2dos&amp;rdquo;, convert LF to CRLF.
-or change autocrlf settings:&lt;/p>
+&lt;p>LF will be replaced by CRLF&lt;/p>
 &lt;/blockquote>
+&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
+&lt;p>use unix format file on windows.&lt;/p>
+&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
+&lt;p>use tool &amp;ldquo;unix2dos&amp;rdquo;, convert LF to CRLF.
+or change autocrlf settings:&lt;/p>
 &lt;pre>&lt;code>git config --global core.autocrlf false # default is true
 &lt;/code>&lt;/pre>&lt;h2 id="git-rm">git rm&lt;sup>&lt;a class="h__anchor" href="#git-rm">¶&lt;/a>&lt;/sup>&lt;/h2>
 &lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
 &lt;blockquote>
-&lt;p>git rm - fatal: pathspec did not match any files&lt;br>
-&lt;strong>Causes:&lt;/strong>
-unknow.&lt;br>
-&lt;strong>Solution:&lt;/strong>&lt;/p>
+&lt;p>git rm - fatal: pathspec did not match any files&lt;/p>
 &lt;/blockquote>
+&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
+&lt;p>unknow.&lt;/p>
+&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
 &lt;pre>&lt;code>git add .
 git rm -f [files]
 &lt;/code>&lt;/pre>&lt;h2 id="git-remote-add">git remote add&lt;sup>&lt;a class="h__anchor" href="#git-remote-add">¶&lt;/a>&lt;/sup>&lt;/h2>
 &lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
 &lt;blockquote>
 &lt;p>git remote add origin &amp;lt;your_git:account&amp;gt;
-fatal: remote origin already exists.
-&lt;strong>Causes:&lt;/strong>
-unknow
-&lt;strong>Solution:&lt;/strong>&lt;/p>
+fatal: remote origin already exists.&lt;/p>
 &lt;/blockquote>
+&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
+&lt;p>unknow&lt;/p>
+&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
 &lt;pre>&lt;code>git remote rm origin
 &lt;/code>&lt;/pre>&lt;h2 id="git-pull">git pull&lt;sup>&lt;a class="h__anchor" href="#git-pull">¶&lt;/a>&lt;/sup>&lt;/h2>
 &lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
 &lt;blockquote>
-&lt;p>commit your changes or stash them before you can merge.
-&lt;strong>Causes:&lt;/strong>
-local file contains unpushed changes.
-&lt;strong>Solution:&lt;/strong>&lt;/p>
+&lt;p>commit your changes or stash them before you can merge.&lt;/p>
 &lt;/blockquote>
+&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
+&lt;p>local file contains unpushed changes.&lt;/p>
+&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
 &lt;ol>
 &lt;li>stash them&lt;/li>
 &lt;/ol>
@@ -546,11 +546,11 @@ git pull
 &lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
 &lt;blockquote>
 &lt;p>git push origin master
-error: failed to push some refs to
-&lt;strong>Causes:&lt;/strong>
-forgot to synchronized remote repo before push.
-&lt;strong>Solution:&lt;/strong>&lt;/p>
+error: failed to push some refs to&lt;/p>
 &lt;/blockquote>
+&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
+&lt;p>forgot to synchronized remote repo before push.&lt;/p>
+&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
 &lt;ol>
 &lt;li>use &lt;code>git push -f&lt;/code>.&lt;/li>
 &lt;li>merge from remote repo&lt;/li>
@@ -559,37 +559,46 @@ forgot to synchronized remote repo before push.
 git push -u main
 &lt;/code>&lt;/pre>&lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
 &lt;blockquote>
-&lt;p>fatal: could not read Username for &amp;lsquo;&lt;a href="https://github.com">https://github.com&lt;/a>&amp;rsquo;: No such file or directory
-&lt;strong>Causes:&lt;/strong>
-credential expired!
-&lt;strong>Solution:&lt;/strong>
-reinstall credential or upgrade git or use ssh.&lt;/p>
+&lt;p>fatal: could not read Username for &amp;lsquo;&lt;a href="https://github.com">https://github.com&lt;/a>&amp;rsquo;: No such file or directory&lt;/p>
 &lt;/blockquote>
+&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
+&lt;p>credential expired!&lt;/p>
+&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
+&lt;p>reinstall credential or upgrade git or use ssh.&lt;/p>
 &lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
 &lt;blockquote>
 &lt;p>fatal: unable to access &amp;lsquo;&lt;a href="https://github.com/NNN/XXXX.git/':">https://github.com/NNN/XXXX.git/':&lt;/a>
-Failed to connect to 172.0.0.7 port YYYY: Timed out
-&lt;strong>Causes:&lt;/strong>
-may thanks to GFW :)
-&lt;strong>Solution:&lt;/strong>
-time is the key. &lt;code>git clone&lt;/code> then &lt;code>git push&lt;/code>.&lt;/p>
+Failed to connect to 172.0.0.7 port YYYY: Timed out&lt;/p>
 &lt;/blockquote>
+&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
+&lt;p>may thanks to GFW :)&lt;/p>
+&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
+&lt;p>time is the key. &lt;code>git clone&lt;/code> then &lt;code>git push&lt;/code>.&lt;/p>
 &lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
 &lt;blockquote>
-&lt;p>Failed to connect to github.com port 443: Timed out
-&lt;strong>Causes:&lt;/strong>
-also thanks to GFW :)
-&lt;strong>Solution:&lt;/strong>
-do it later.&lt;/p>
+&lt;p>Failed to connect to github.com port 443: Timed out&lt;/p>
 &lt;/blockquote>
+&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
+&lt;p>also thanks to GFW :)&lt;/p>
+&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
+&lt;p>do it later.&lt;/p>
+&lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>fatal: unable to access &amp;lsquo;&lt;a href="https://github.com/NNN/XXXX.git/':">https://github.com/NNN/XXXX.git/':&lt;/a>
+OpenSSL SSL_read: Connection was reset, errno 10054&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
+&lt;p>I don&amp;rsquo;t Know&lt;/p>
+&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
+&lt;p>push again.&lt;/p>
 &lt;h2 id="git-rebase--i">git rebase -i&lt;sup>&lt;a class="h__anchor" href="#git-rebase--i">¶&lt;/a>&lt;/sup>&lt;/h2>
 &lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
 &lt;blockquote>
-&lt;p>main|rebase (1|1)
-&lt;strong>Causes:&lt;/strong>
-your rebase action is on the way.
-&lt;strong>Solution:&lt;/strong>&lt;/p>
+&lt;p>main|rebase (1|1)&lt;/p>
 &lt;/blockquote>
+&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
+&lt;p>your rebase action is on the way.&lt;/p>
+&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
 &lt;pre>&lt;code>git add .
 git rebase --continue
 &lt;/code>&lt;/pre>&lt;p>or use &lt;code>rebase --abort&lt;/code> exit rebase&lt;/p>

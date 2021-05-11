@@ -65,52 +65,24 @@ git tag -d &lt;del_tagname&gt;           # del tag
 git push origin &lt;tagname&gt;          # push tag
 git push origin --tags             # push all tag
 git push -d origin &lt;remote_tag&gt;    # del tags
-</code></pre><h1 id=problem>Problem<sup><a class=h__anchor href=#problem>¶</a></sup></h1><h2 id=git-add>git add<sup><a class=h__anchor href=#git-add>¶</a></sup></h2><p><strong>Error:</strong></p><blockquote><p>LF will be replaced by CRLF
-<strong>Causes:</strong>
-use unix format file on windows.
-<strong>Solution:</strong>
-use tool &ldquo;unix2dos&rdquo;, convert LF to CRLF.
-or change autocrlf settings:</p></blockquote><pre><code>git config --global core.autocrlf false # default is true
-</code></pre><h2 id=git-rm>git rm<sup><a class=h__anchor href=#git-rm>¶</a></sup></h2><p><strong>Error:</strong></p><blockquote><p>git rm - fatal: pathspec did not match any files<br><strong>Causes:</strong>
-unknow.<br><strong>Solution:</strong></p></blockquote><pre><code>git add .
+</code></pre><h1 id=problem>Problem<sup><a class=h__anchor href=#problem>¶</a></sup></h1><h2 id=git-add>git add<sup><a class=h__anchor href=#git-add>¶</a></sup></h2><p><strong>Error:</strong></p><blockquote><p>LF will be replaced by CRLF</p></blockquote><p><strong>Causes:</strong></p><p>use unix format file on windows.</p><p><strong>Solution:</strong></p><p>use tool &ldquo;unix2dos&rdquo;, convert LF to CRLF.
+or change autocrlf settings:</p><pre><code>git config --global core.autocrlf false # default is true
+</code></pre><h2 id=git-rm>git rm<sup><a class=h__anchor href=#git-rm>¶</a></sup></h2><p><strong>Error:</strong></p><blockquote><p>git rm - fatal: pathspec did not match any files</p></blockquote><p><strong>Causes:</strong></p><p>unknow.</p><p><strong>Solution:</strong></p><pre><code>git add .
 git rm -f [files]
 </code></pre><h2 id=git-remote-add>git remote add<sup><a class=h__anchor href=#git-remote-add>¶</a></sup></h2><p><strong>Error:</strong></p><blockquote><p>git remote add origin &lt;your_git:account>
-fatal: remote origin already exists.
-<strong>Causes:</strong>
-unknow
-<strong>Solution:</strong></p></blockquote><pre><code>git remote rm origin
-</code></pre><h2 id=git-pull>git pull<sup><a class=h__anchor href=#git-pull>¶</a></sup></h2><p><strong>Error:</strong></p><blockquote><p>commit your changes or stash them before you can merge.
-<strong>Causes:</strong>
-local file contains unpushed changes.
-<strong>Solution:</strong></p></blockquote><ol><li>stash them</li></ol><pre><code>git stash
+fatal: remote origin already exists.</p></blockquote><p><strong>Causes:</strong></p><p>unknow</p><p><strong>Solution:</strong></p><pre><code>git remote rm origin
+</code></pre><h2 id=git-pull>git pull<sup><a class=h__anchor href=#git-pull>¶</a></sup></h2><p><strong>Error:</strong></p><blockquote><p>commit your changes or stash them before you can merge.</p></blockquote><p><strong>Causes:</strong></p><p>local file contains unpushed changes.</p><p><strong>Solution:</strong></p><ol><li>stash them</li></ol><pre><code>git stash
 git pull
 git stash pop
 git diff
 </code></pre><ol start=2><li>discard local changes</li></ol><pre><code>git reset --hard
 git pull
 </code></pre><h2 id=git-push>git push<sup><a class=h__anchor href=#git-push>¶</a></sup></h2><p><strong>Error:</strong></p><blockquote><p>git push origin master
-error: failed to push some refs to
-<strong>Causes:</strong>
-forgot to synchronized remote repo before push.
-<strong>Solution:</strong></p></blockquote><ol><li>use <code>git push -f</code>.</li><li>merge from remote repo</li></ol><pre><code>git pull --rebase origin main
+error: failed to push some refs to</p></blockquote><p><strong>Causes:</strong></p><p>forgot to synchronized remote repo before push.</p><p><strong>Solution:</strong></p><ol><li>use <code>git push -f</code>.</li><li>merge from remote repo</li></ol><pre><code>git pull --rebase origin main
 git push -u main
-</code></pre><p><strong>Error:</strong></p><blockquote><p>fatal: could not read Username for &lsquo;<a href=https://github.com>https://github.com</a>&rsquo;: No such file or directory
-<strong>Causes:</strong>
-credential expired!
-<strong>Solution:</strong>
-reinstall credential or upgrade git or use ssh.</p></blockquote><p><strong>Error:</strong></p><blockquote><p>fatal: unable to access &lsquo;<a href="https://github.com/NNN/XXXX.git/':">https://github.com/NNN/XXXX.git/':</a>
-Failed to connect to 172.0.0.7 port YYYY: Timed out
-<strong>Causes:</strong>
-may thanks to GFW :)
-<strong>Solution:</strong>
-time is the key. <code>git clone</code> then <code>git push</code>.</p></blockquote><p><strong>Error:</strong></p><blockquote><p>Failed to connect to github.com port 443: Timed out
-<strong>Causes:</strong>
-also thanks to GFW :)
-<strong>Solution:</strong>
-do it later.</p></blockquote><h2 id=git-rebase--i>git rebase -i<sup><a class=h__anchor href=#git-rebase--i>¶</a></sup></h2><p><strong>Error:</strong></p><blockquote><p>main|rebase (1|1)
-<strong>Causes:</strong>
-your rebase action is on the way.
-<strong>Solution:</strong></p></blockquote><pre><code>git add .
+</code></pre><p><strong>Error:</strong></p><blockquote><p>fatal: could not read Username for &lsquo;<a href=https://github.com>https://github.com</a>&rsquo;: No such file or directory</p></blockquote><p><strong>Causes:</strong></p><p>credential expired!</p><p><strong>Solution:</strong></p><p>reinstall credential or upgrade git or use ssh.</p><p><strong>Error:</strong></p><blockquote><p>fatal: unable to access &lsquo;<a href="https://github.com/NNN/XXXX.git/':">https://github.com/NNN/XXXX.git/':</a>
+Failed to connect to 172.0.0.7 port YYYY: Timed out</p></blockquote><p><strong>Causes:</strong></p><p>may thanks to GFW :)</p><p><strong>Solution:</strong></p><p>time is the key. <code>git clone</code> then <code>git push</code>.</p><p><strong>Error:</strong></p><blockquote><p>Failed to connect to github.com port 443: Timed out</p></blockquote><p><strong>Causes:</strong></p><p>also thanks to GFW :)</p><p><strong>Solution:</strong></p><p>do it later.</p><p><strong>Error:</strong></p><blockquote><p>fatal: unable to access &lsquo;<a href="https://github.com/NNN/XXXX.git/':">https://github.com/NNN/XXXX.git/':</a>
+OpenSSL SSL_read: Connection was reset, errno 10054</p></blockquote><p><strong>Causes:</strong></p><p>I don&rsquo;t Know</p><p><strong>Solution:</strong></p><p>push again.</p><h2 id=git-rebase--i>git rebase -i<sup><a class=h__anchor href=#git-rebase--i>¶</a></sup></h2><p><strong>Error:</strong></p><blockquote><p>main|rebase (1|1)</p></blockquote><p><strong>Causes:</strong></p><p>your rebase action is on the way.</p><p><strong>Solution:</strong></p><pre><code>git add .
 git rebase --continue
 </code></pre><p>or use <code>rebase --abort</code> exit rebase</p><h1 id=about-gitingore>About .gitingore<sup><a class=h__anchor href=#about-gitingore>¶</a></sup></h1><h1 id=git-message-template-private-use>Git Message Template (private-use)<sup><a class=h__anchor href=#git-message-template-private-use>¶</a></sup></h1><ul><li>F: feat</li><li>N: new</li><li>B: fix</li><li>M: change</li><li>D: docs</li><li>R: refactor</li><li>S: style</li><li>:: chore</li></ul><p>defined your own git message template file
 , write below lines to <code>~/.gitconfig</code>:</p><pre><code>[commit]
