@@ -1,9 +1,21 @@
-<!doctype html><html><meta charset=utf-8><meta name=generator content="Hugo 0.76.5"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel=icon type=image/png href=/img/git_face.png><link rel=stylesheet type=text/css href=/css/main.css><title>Zyprex's Blog</title><body><div class=fence><nav><a href=/>HOME&nbsp;</a><a href=/tags/>TAGS&nbsp;</a><a href=/categories/>CATEGORIES&nbsp;</a><a href=/index.xml>RSS&nbsp;</a><a href=/search/>SEARCH&nbsp;</a></nav><div class=T>2021</div><section><header class=H>05-11<a class=T href=/2021/keep-away-from-social-media/>Keep Away From Social Media</a><div class=excerpt></div><div style=margin-left:auto><section><a class=taxo href=/categories/introspection/>@introspection</a></section></div></header><div class=summary>Keep Away From Social Media¶
+<!doctype html><html><meta charset=utf-8><meta name=generator content="Hugo 0.76.5"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel=icon type=image/png href=/img/git_face.png><link rel=stylesheet type=text/css href=/css/main.css><title>Zyprex's Blog</title><body><div class=fence><nav><a href=/>HOME&nbsp;</a><a href=/tags/>TAGS&nbsp;</a><a href=/categories/>CATEGORIES&nbsp;</a><a href=/index.xml>RSS&nbsp;</a><a href=/search/>SEARCH&nbsp;</a></nav><div class=T>2021</div><section><header class=H>06-14<a class=T href=/2021/git-security-change/>Git Security Change</a><div class=excerpt></div><div style=margin-left:auto><section><a class=taxo href=/tags/git/>#git</a><a class=taxo href=/tags/github/>#github</a></section></div></header><div class=summary>Reason¶
+token-authentication-requirements-for-git-operations
+↗
+Take Action¶
+Use SSH¶
+Generate Public Key ssh-keygen -t rsa "mypersonal@email.com" Note: email is optional.
+Login in Github Settings -> SSH and GPG keys -> New SSH key
+Copy content in ~/.ssh/id_rsa.pub.
+Verify ssh -T git@github.com If corrent verified, will see:
+Hi xxx! You’ve successfully authenticated, but GitHub does not # provide shell access. Change Remote URL¶
+First verify current remote URL.
+git remote -v Then Change remote&rsquo;s URL from HTTPS to SSH.
+git remote set-url origin git@github.com:user/repository.git</div></section><section><header class=H>05-11<a class=T href=/2021/keep-away-from-social-media/>Keep Away From Social Media</a><div class=excerpt></div><div style=margin-left:auto><section><a class=taxo href=/categories/introspection/>@introspection</a></section></div></header><div class=summary>Keep Away From Social Media¶
 As an anti-social(the people not on social media), I strongly advised you to keep away from social media.
 The first point about social media is the addictiveness.
 Nobody really wants to spend hours and hours every day, updating their status and seeing what other people think about them. Nobody consciously wants to do that.
 But those behaviors are themselves-addictive behaviors, what you&rsquo;re trapped in that loop. It&rsquo;s very hard to break out.
-It&rsquo;s not that we want to go back to some interlink past and Eden before the machines existed. It&rsquo;s that we need to take control of these machines and use them for their proper end.<a href=/2021/keep-away-from-social-media/> (Read more ... 457 words)</a></div></section><section><header class=H>03-26<a class=T href=/2021/clang-compile-error/>Clang Compile Error</a><div class=excerpt></div><div style=margin-left:auto><section><a class=taxo href=/tags/debug/>#debug</a><a class=taxo href=/tags/c/>#c</a></section></div></header><div class=summary>Errors About Missing Include Files¶
+It&rsquo;s not that we want to go back to some interlink past and Eden before the machines existed. It&rsquo;s that we need to take control of these machines and use them for their proper end.<a href=/2021/keep-away-from-social-media/> (Read more ... 473 words)</a></div></section><section><header class=H>03-26<a class=T href=/2021/clang-compile-error/>Clang Compile Error</a><div class=excerpt></div><div style=margin-left:auto><section><a class=taxo href=/tags/debug/>#debug</a><a class=taxo href=/tags/c/>#c</a></section></div></header><div class=summary>Errors About Missing Include Files¶
 When I try to use clang compile c code on windows with mingw32-w64, The error information is:
 clang: warning: unable to find a Visual Studio installation;
 try running Clang from a developer command prompt [-Wmsvc-not-found]
@@ -61,39 +73,5 @@ One Two Three 1. One
 1. Two
 1. Three
 unordered¶
-each lists item start with &lsquo;*&rsquo; or &lsquo;-&rsquo; or &lsquo;+&rsquo; and a space:<a href=/2021/markdown-cheatsheet/> (Read more ... 487 words)</a></div></section><section><header class=H>01-30<a class=T href=/2021/banal-shortcodes-showcase/>Banal Shortcodes Showcase</a><div class=excerpt></div><div style=margin-left:auto><section><a class=taxo href=/categories/hugo/>@hugo</a></section></div></header><div class=summary>view or modified those shortcodes at [theme_name]/layouts/shortcodes/
-important!: for representation need, I replace all {&lt; to { &lt;.
-Label¶
-parameter¶
-color
-red
-#cc0000
-green
-#347800
-cyan
-#238959
-blue
-#253496
-yellow
-#a28917
-brown
-#7a3d00
-pink
-#c00666
-purple
-#785690
-grey
-#3b3b3b
-#FF00FF
-#FF00FF usage¶
-{{ &lt;label color="red">}} red {{ &lt;/label>}} Fold¶
-parameter¶
-title (optional) color (optional) #282800 (default) open (optional) false (default) true sample fold title
--
-sample fold content
-usage¶
-{{ &lt;fold title="sample fold title" open="true">}} sample __fold__ content {{ &lt;/fold>}} Tips¶
-parameter¶
-hover mouse on this
-, you will see a tips<a href=/2021/banal-shortcodes-showcase/> (Read more ... 202 words)</a></div></section><section class=pager><a style=float:right href=/page/2/>Next ▶</a></section><footer style="text-align:right;margin:5rem .2rem .2rem"><div><section></section></div><div>&copy; 2020 - 2021</div>1/2
+each lists item start with &lsquo;*&rsquo; or &lsquo;-&rsquo; or &lsquo;+&rsquo; and a space:<a href=/2021/markdown-cheatsheet/> (Read more ... 487 words)</a></div></section><section class=pager><a style=float:right href=/page/2/>Next ▶</a></section><footer style="text-align:right;margin:5rem .2rem .2rem"><div><section></section></div><div>&copy; 2020 - 2021</div>1/2
 <small>home page</small></footer></div></body></html>

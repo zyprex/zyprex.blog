@@ -1,4 +1,35 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>/tags/bujo/</link><language>en</language><updated>Sun, 07 Feb 2021 09:06:31 CST</updated><item><title>Keep Away From Social Media</title><link>/2021/keep-away-from-social-media/</link><pubDate>Tue, 11 May 2021 12:36:49 CST</pubDate><guid>/2021/keep-away-from-social-media/</guid><description/><article>&lt;h1 id="keep-away-from-social-media">Keep Away From Social Media&lt;sup>&lt;a class="h__anchor" href="#keep-away-from-social-media">¶&lt;/a>&lt;/sup>&lt;/h1>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>/tags/bujo/</link><language>en</language><updated>Sun, 07 Feb 2021 09:06:31 CST</updated><item><title>Git Security Change</title><link>/2021/git-security-change/</link><pubDate>Mon, 14 Jun 2021 13:11:05 CST</pubDate><guid>/2021/git-security-change/</guid><description/><article>&lt;h1 id="reason">Reason&lt;sup>&lt;a class="h__anchor" href="#reason">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>&lt;a class="md__link" href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/"
+target="_blank" rel="noopener"
+>
+token-authentication-requirements-for-git-operations
+↗
+&lt;/a>
+&lt;/p>
+&lt;h1 id="take-action">Take Action&lt;sup>&lt;a class="h__anchor" href="#take-action">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;h2 id="use-ssh">Use SSH&lt;sup>&lt;a class="h__anchor" href="#use-ssh">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;ol>
+&lt;li>Generate Public Key&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code>ssh-keygen -t rsa &amp;quot;mypersonal@email.com&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>Note: email is optional.&lt;/p>
+&lt;ol start="2">
+&lt;li>Login in Github&lt;/li>
+&lt;/ol>
+&lt;p>Settings -&amp;gt; SSH and GPG keys -&amp;gt; New SSH key&lt;/p>
+&lt;p>Copy content in &lt;code>~/.ssh/id_rsa.pub&lt;/code>.&lt;/p>
+&lt;ol start="3">
+&lt;li>Verify&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code>ssh -T git@github.com
+&lt;/code>&lt;/pre>&lt;p>If corrent verified, will see:&lt;/p>
+&lt;pre>&lt;code>Hi xxx! You’ve successfully authenticated, but GitHub does not # provide shell access.
+&lt;/code>&lt;/pre>&lt;h2 id="change-remote-url">Change Remote URL&lt;sup>&lt;a class="h__anchor" href="#change-remote-url">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>First verify current remote URL.&lt;/p>
+&lt;pre>&lt;code>git remote -v
+&lt;/code>&lt;/pre>&lt;p>Then Change remote&amp;rsquo;s URL from HTTPS to SSH.&lt;/p>
+&lt;pre>&lt;code>git remote set-url origin git@github.com:user/repository.git
+&lt;/code>&lt;/pre></article></item><item><title>Keep Away From Social Media</title><link>/2021/keep-away-from-social-media/</link><pubDate>Tue, 11 May 2021 12:36:49 CST</pubDate><guid>/2021/keep-away-from-social-media/</guid><description/><article>&lt;h1 id="keep-away-from-social-media">Keep Away From Social Media&lt;sup>&lt;a class="h__anchor" href="#keep-away-from-social-media">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>As an anti-social(the people not on social media), I strongly advised
 you to keep away from social media.&lt;/p>
 &lt;p>The first point about social media is the addictiveness.&lt;/p>
@@ -38,7 +69,8 @@ coming back for more and we do stay hooked on the products.&lt;/p>
 &lt;p>&lt;strong>Be aware, their advertising system is not really social platforms&lt;/strong>.&lt;/p>
 &lt;h1 id="conclusion">Conclusion&lt;sup>&lt;a class="h__anchor" href="#conclusion">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>Since 63% of the global population (4.8 billion people) is not active
-on social media, it&amp;rsquo;s high time to stop overusing your smartphone.&lt;/p>
+on social media, it&amp;rsquo;s high time to stop the clever capitalism to kept you
+on your leash, to stop their robbing your time, physical and mental health.&lt;/p>
 &lt;p>The things that are the most worthwhile and most fulfilling, is the things
 that you take the most work and spend a lot of time on. Those are their
 pleasures that are self-actualizing that help you realize a part of yourself
@@ -1582,130 +1614,4 @@ Github Flavored Markdown
 &lt;p>I am a footnote &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></article></item><item><title>Banal Shortcodes Showcase</title><link>/2021/banal-shortcodes-showcase/</link><pubDate>Sat, 30 Jan 2021 10:00:45 CST</pubDate><guid>/2021/banal-shortcodes-showcase/</guid><description/><article>&lt;p>view or modified those shortcodes at &lt;code>[theme_name]/layouts/shortcodes/&lt;/code>&lt;/p>
-&lt;p>&lt;strong>important!:&lt;/strong> for representation need, I replace all &lt;code>{&amp;lt;&lt;/code> to &lt;code>{ &amp;lt;&lt;/code>.&lt;/p>
-&lt;h1 id="label">Label&lt;sup>&lt;a class="h__anchor" href="#label">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;h2 id="parameter">parameter&lt;sup>&lt;a class="h__anchor" href="#parameter">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;ul>
-&lt;li>color
-&lt;ol>
-&lt;li>
-&lt;label style='background:#cc0000' class="sc--lbM"> red &lt;/label>
-#cc0000&lt;/li>
-&lt;li>
-&lt;label style='background:#347800' class="sc--lbM"> green &lt;/label>
-#347800&lt;/li>
-&lt;li>
-&lt;label style='background:#238959' class="sc--lbM"> cyan &lt;/label>
-#238959&lt;/li>
-&lt;li>
-&lt;label style='background:#253496' class="sc--lbM"> blue &lt;/label>
-#253496&lt;/li>
-&lt;li>
-&lt;label style='background:#a28917' class="sc--lbM"> yellow &lt;/label>
-#a28917&lt;/li>
-&lt;li>
-&lt;label style='background:#7a3d00' class="sc--lbM"> brown &lt;/label>
-#7a3d00&lt;/li>
-&lt;li>
-&lt;label style='background:#c00666' class="sc--lbM"> pink &lt;/label>
-#c00666&lt;/li>
-&lt;li>
-&lt;label style='background:#785690' class="sc--lbM"> purple &lt;/label>
-#785690&lt;/li>
-&lt;li>
-&lt;label style='background:#3b3b3b' class="sc--lbM"> grey &lt;/label>
-#3b3b3b&lt;/li>
-&lt;li>
-&lt;label style='background:#FF00FF' class="sc--lbM"> #FF00FF&lt;/label>
-#FF00FF&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="usage">usage&lt;sup>&lt;a class="h__anchor" href="#usage">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;pre>&lt;code>{{ &amp;lt;label color=&amp;quot;red&amp;quot;&amp;gt;}} red {{ &amp;lt;/label&amp;gt;}}
-&lt;/code>&lt;/pre>
-&lt;h1 id="fold">Fold&lt;sup>&lt;a class="h__anchor" href="#fold">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;h2 id="parameter-1">parameter&lt;sup>&lt;a class="h__anchor" href="#parameter-1">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;ul>
-&lt;li>title (optional)&lt;/li>
-&lt;li>color (optional)
-&lt;ul>
-&lt;li>#282800 (default)&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>open (optional)
-&lt;ul>
-&lt;li>false (default)&lt;/li>
-&lt;li>true&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;div class="sc--fdM">
-&lt;div style="background:#282800;" class="sc--fdT">sample fold title&lt;/div>
-&lt;button class="sc--fdB" onclick="this.nextSibling.hidden = !this.nextSibling.hidden;this.innerHTML=this.innerHTML=='+'?'-':'+';">-&lt;/button>
-&lt;div class="sc--fdC" >sample &lt;strong>fold&lt;/strong> content&lt;/div>
-&lt;/div>
-&lt;h2 id="usage-1">usage&lt;sup>&lt;a class="h__anchor" href="#usage-1">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;pre>&lt;code>{{ &amp;lt;fold title=&amp;quot;sample fold title&amp;quot; open=&amp;quot;true&amp;quot;&amp;gt;}}
-sample __fold__ content
-{{ &amp;lt;/fold&amp;gt;}}
-&lt;/code>&lt;/pre>
-&lt;h1 id="tips">Tips&lt;sup>&lt;a class="h__anchor" href="#tips">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;h2 id="parameter-2">parameter&lt;sup>&lt;a class="h__anchor" href="#parameter-2">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>hover mouse on
-&lt;span class="sc--tpM" onmouseover="showTips(this, &amp;#34;this is a \u003cmark\u003etips\u003c/mark\u003e&amp;#34;)"> this &lt;/span>
-,
-you will see a tips&lt;/p>
-&lt;h2 id="usage-2">usage&lt;sup>&lt;a class="h__anchor" href="#usage-2">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;pre>&lt;code>hover mouse on
-{{ &amp;lt;tips &amp;quot;this is a &amp;lt;mark&amp;gt;tips&amp;lt;/mark&amp;gt;&amp;quot;&amp;gt;}} this {{ &amp;lt;/tips&amp;gt;}},
-you will see a tips
-&lt;/code>&lt;/pre>
-&lt;h1 id="timer">Timer&lt;sup>&lt;a class="h__anchor" href="#timer">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;h2 id="parameter-3">parameter&lt;sup>&lt;a class="h__anchor" href="#parameter-3">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;ul>
-&lt;li>id&lt;/li>
-&lt;li>time (optional) UTC time string, for example: &amp;ldquo;2020-01-01 12:12:12&amp;rdquo;&lt;/li>
-&lt;li>format (optional) %y=years, %d=days, %h=hours, %m=minutes, %s=seconds, %e=milliseconds&lt;/li>
-&lt;li>interval (optional) default 1ms&lt;/li>
-&lt;/ul>
-&lt;span id="timerTick-mytimer_test" title="2020-12-30 01:00:00">&lt;/span>
-&lt;script>
-setInterval("tickTimer('timerTick-mytimer_test', '2020-12-30 01:00:00','%y Year %d Day %h:%m:%s.%e')", "80");
-&lt;/script>
-&lt;h2 id="usage-3">usage&lt;sup>&lt;a class="h__anchor" href="#usage-3">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;pre>&lt;code>{{ &amp;lt; timer
-id=&amp;quot;mytimer_test&amp;quot;
-format=&amp;quot;%y Year %d Day %h:%m:%s.%e&amp;quot;
-interval=&amp;quot;80&amp;quot; &amp;gt;}}
-&lt;/code>&lt;/pre>
-&lt;h1 id="raw">raw&lt;sup>&lt;a class="h__anchor" href="#raw">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;h2 id="parameter-4">parameter&lt;sup>&lt;a class="h__anchor" href="#parameter-4">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>none&lt;/p>
-&lt;h2 id="usage-4">usage&lt;sup>&lt;a class="h__anchor" href="#usage-4">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;kbd>Ctrl&lt;/kbd> &lt;b>bold&lt;/b>
-&lt;pre>&lt;code>{{ &amp;lt;raw&amp;gt;}}
-&amp;lt;kbd&amp;gt;Ctrl&amp;lt;/kbd&amp;gt; &amp;lt;b&amp;gt;bold&amp;lt;/b&amp;gt;
-{{ &amp;lt;/raw&amp;gt;}}
-&lt;/code>&lt;/pre>
-&lt;h1 id="mermaid">mermaid&lt;sup>&lt;a class="h__anchor" href="#mermaid">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;h2 id="parameter-5">parameter&lt;sup>&lt;a class="h__anchor" href="#parameter-5">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>none&lt;/p>
-&lt;h2 id="usage-5">usage&lt;sup>&lt;a class="h__anchor" href="#usage-5">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>in front matter set &lt;code>mermaid: true&lt;/code>.&lt;/p>
-&lt;pre>&lt;code>{{ &amp;lt;mermaid&amp;gt;}}
-...
-{{ &amp;lt;/mermaid&amp;gt;}}
-&lt;/code>&lt;/pre>
-&lt;h1 id="chart">chart&lt;sup>&lt;a class="h__anchor" href="#chart">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;h2 id="parameter-6">parameter&lt;sup>&lt;a class="h__anchor" href="#parameter-6">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;ul>
-&lt;li>id: unique id for every chart&lt;/li>
-&lt;/ul>
-&lt;h2 id="usage-6">usage&lt;sup>&lt;a class="h__anchor" href="#usage-6">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>in front matter set &lt;code>chart: true&lt;/code>.&lt;/p>
-&lt;pre>&lt;code>{{ &amp;lt;chart &amp;quot;mychart1&amp;quot;&amp;gt;}}
-...
-{{ &amp;lt;/chart&amp;gt;}}
-&lt;/code>&lt;/pre></article></item></channel></rss>
+&lt;/section></article></item></channel></rss>
