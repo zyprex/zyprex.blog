@@ -1,0 +1,71 @@
+<!doctype html><html><meta charset=utf-8><meta name=generator content="Hugo 0.76.5"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel=icon type=image/png href=/img/git_face.png><link rel=stylesheet type=text/css href=/css/main.css><link rel=stylesheet type=text/css href=/css/syntax.css><title>Use Macros in C@Zyprex's Blog</title><body><div class=fence><nav><a href=/>HOME&nbsp;</a><a href=/tags/>TAGS&nbsp;</a><a href=/categories/>CATEGORIES&nbsp;</a><a href=/index.xml>RSS&nbsp;</a><a href=/search/>SEARCH&nbsp;</a></nav><div class=Hp><em class=T>Use Macros in C</em><br><em>2021/07/17 Sat 11:48</em></div><nav class=toc><b onclick="nav_toc.hidden=!nav_toc.hidden;this.innerText=this.innerText=='+ catalogue'?'- catalogue':'+ catalogue'">+ catalogue</b><div id=nav_toc hidden><nav id=TableOfContents><ul><li><a href=#use-macros-in-c>Use Macros in C</a><ul><li><a href=#feature-of-macros>Feature of Macros</a></li><li><a href=#expansion-of-macros>Expansion of Macros</a></li><li><a href=#comparison-of-macros-pros-and-cons>Comparison of Macros Pros and Cons</a></li><li><a href=#true-constant-variable-in-c>True Constant variable in C</a></li><li><a href=#example-of-macro-usage>Example of Macro Usage</a><ul><li><a href=#defined-new-macro>Defined New Macro</a></li><li><a href=#brackets-protected>Brackets Protected</a></li><li><a href=#increment--decrement-operation>Increment / Decrement Operation</a></li><li><a href=#duplicated-function-call>Duplicated Function Call</a></li><li><a href=#multiple-line-macros>Multiple Line Macros</a></li><li><a href=#passing-default-arguments>Passing Default Arguments</a></li><li><a href=#variadic-macros>Variadic Macros</a></li><li><a href=#stringizing-and-concatenation>Stringizing and Concatenation</a></li></ul></li></ul></li><li><a href=#ref>Ref.</a></li></ul></nav></div></nav><div id=C><h1 id=use-macros-in-c>Use Macros in C<sup><a class=h__anchor href=#use-macros-in-c>¶</a></sup></h1><p>Macros in C programming language, are notorious for it&rsquo;s extremely unsafe,
+esoterically hard to debug.</p><p>Thus, we should strived to understand its pros and cons.</p><h2 id=feature-of-macros>Feature of Macros<sup><a class=h__anchor href=#feature-of-macros>¶</a></sup></h2><p>In C, macro&rsquo;s main duty is <em>text precessing</em> &ndash; e.g. replace a piece of text
+with another text, in many other case, they&rsquo;re used to encapsulated function,
+and in minor case, they can minic some other language&rsquo;s feature, or syntactic
+sugar.</p><h2 id=expansion-of-macros>Expansion of Macros<sup><a class=h__anchor href=#expansion-of-macros>¶</a></sup></h2><p>Do expansion of macros use <code>gcc</code> with <code>-E [file]</code> option.</p><h2 id=comparison-of-macros-pros-and-cons>Comparison of Macros Pros and Cons<sup><a class=h__anchor href=#comparison-of-macros-pros-and-cons>¶</a></sup></h2><p><strong>CONS</strong></p><ul><li>The variable defined in macro share same scope near to its used place.</li><li>No type checking with macros parameters as functions parameters.</li><li>Macros can&rsquo;t be debugged by debugger.</li></ul><p><strong>PROS</strong></p><ul><li>Efficiency &ndash; faster than same function call.<ul><li>TIPS: prefer to use C99&rsquo;s <code>inline</code> , <code>always_inline</code> keywords</li></ul></li><li>Passing default arguments</li><li>Debug strings<ul><li><code>__FILE__, __LINE__, __func__, __TIME__, __DATE__, __STDC__, __STDC_VERSION__</code></li></ul></li></ul><h2 id=true-constant-variable-in-c>True Constant variable in C<sup><a class=h__anchor href=#true-constant-variable-in-c>¶</a></sup></h2><p>In C, the <code>const</code> variables are not true constants, so can&rsquo;t use in switch-case
+or use them for defined an array&rsquo;s size (C++ can). Enumerations are real consts,
+but their type is only integer. So, in dired need to define true constants, just
+use macro.</p><h2 id=example-of-macro-usage>Example of Macro Usage<sup><a class=h__anchor href=#example-of-macro-usage>¶</a></sup></h2><h3 id=defined-new-macro>Defined New Macro<sup><a class=h__anchor href=#defined-new-macro>¶</a></sup></h3><p>Sometimes test macro existence before define is a good idea.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-c data-lang=c><span class=cp>#ifndef M1
+</span><span class=cp>#define M1 100
+</span><span class=cp>#endif
+</span></code></pre></td></tr></table></div></div><h3 id=brackets-protected>Brackets Protected<sup><a class=h__anchor href=#brackets-protected>¶</a></sup></h3><p>Directly substituted in code will cause some pretty nasty side effects,
+because of operator precedence.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-c data-lang=c><span class=cp>#define MUX(x) (x*x)
+</span><span class=cp></span><span class=c1>// ...
+</span><span class=c1></span><span class=n>MUX</span><span class=p>(</span><span class=n>x</span> <span class=o>+</span> <span class=mi>1</span><span class=p>);</span> <span class=c1>// incorrect!
+</span></code></pre></td></tr></table></div></div><h3 id=increment--decrement-operation>Increment / Decrement Operation<sup><a class=h__anchor href=#increment--decrement-operation>¶</a></sup></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-c data-lang=c><span class=cp>#define ABS(x) ((x)&gt;0?(x):-(x))
+</span><span class=cp></span><span class=c1>// ...
+</span><span class=c1></span><span class=n>ABS</span><span class=p>(</span><span class=n>x</span><span class=o>++</span><span class=p>);</span> <span class=c1>// incorrect!
+</span></code></pre></td></tr></table></div></div><h3 id=duplicated-function-call>Duplicated Function Call<sup><a class=h__anchor href=#duplicated-function-call>¶</a></sup></h3><p>If pass functions as macro&rsquo;s parameter, may cause duplicated function call.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-c data-lang=c><span class=cp>#define MIN(x, y) ((x) &lt; (y) ? (x) : (y))
+</span><span class=cp></span><span class=c1>// ...
+</span><span class=c1></span><span class=n>MIN</span><span class=p>(</span><span class=n>x</span> <span class=o>+</span> <span class=n>y</span><span class=p>,</span> <span class=n>foo</span><span class=p>(</span><span class=n>z</span><span class=p>));</span> <span class=c1>// incorrect!
+</span></code></pre></td></tr></table></div></div><h3 id=multiple-line-macros>Multiple Line Macros<sup><a class=h__anchor href=#multiple-line-macros>¶</a></sup></h3><p>Be careful in define multiple line macros. Wrap them in <code>do{}while(0)</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-c data-lang=c><span class=cp>#define MIN(x, y) \
+</span><span class=cp>{                 \
+</span><span class=cp>  if((x) &lt; (y))   \
+</span><span class=cp>    return x;     \
+</span><span class=cp>  else            \
+</span><span class=cp>    return y;     \
+</span><span class=cp>} </span><span class=c1>// &lt;= can&#39;t add semicolon, here.
+</span><span class=c1>// ...
+</span><span class=c1></span><span class=n>MIN</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>);</span> <span class=c1>// incorrect!
+</span></code></pre></td></tr></table></div></div><h3 id=passing-default-arguments>Passing Default Arguments<sup><a class=h__anchor href=#passing-default-arguments>¶</a></sup></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-c data-lang=c><span class=kt>void</span> <span class=nf>fun</span><span class=p>(</span><span class=n>a1</span><span class=p>,</span> <span class=n>a2</span><span class=p>);</span>
+<span class=cp>#define m_fun_a1(x) fun(x, 2)
+</span><span class=cp>#define m_fun_a2(x) fun(1, x)
+</span></code></pre></td></tr></table></div></div><h3 id=variadic-macros>Variadic Macros<sup><a class=h__anchor href=#variadic-macros>¶</a></sup></h3><p>Note this type of macros are GCC standard, and may not supported by other
+compiler.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-c data-lang=c><span class=cp>#define eprintf(format, ...) fprintf(stderr, __VAR_ARGS__)
+</span></code></pre></td></tr></table></div></div><h3 id=stringizing-and-concatenation>Stringizing and Concatenation<sup><a class=h__anchor href=#stringizing-and-concatenation>¶</a></sup></h3><p>Use <code>#</code> to stringizing, use <code>##</code> concatenation, but do not relay on those
+tricks too much.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-c data-lang=c><span class=kr>inline</span> <span class=kt>int</span> <span class=nf>calc_0</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>){</span> <span class=k>return</span> <span class=n>a</span><span class=o>*</span><span class=n>b</span><span class=p>;</span> <span class=p>}</span>
+<span class=kr>inline</span> <span class=kt>int</span> <span class=nf>calc_1</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>){</span> <span class=k>return</span> <span class=n>a</span><span class=o>/</span><span class=n>b</span><span class=p>;</span> <span class=p>}</span>
+<span class=cp>#define calc_x(x, a, b) calc_##x(a, b)
+</span><span class=cp></span><span class=c1>// ...
+</span><span class=c1></span><span class=n>calc_x</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>);</span>
+</code></pre></td></tr></table></div></div><h1 id=ref>Ref.<sup><a class=h__anchor href=#ref>¶</a></sup></h1><ul><li><a href=https://pmihaylov.com/macros-in-c/>https://pmihaylov.com/macros-in-c/</a></li><li><a href=http://gnu.org/onlinedocs/cpp/Macro-Arguments.html>http://gnu.org/onlinedocs/cpp/Macro-Arguments.html</a></li><li><a href=http://gnu.org/onlinedocs/cpp/Macro-Pitfalls.html>http://gnu.org/onlinedocs/cpp/Macro-Pitfalls.html</a></li><li><a href=http://gnu.org/onlinedocs/cpp/Variadic-Macros.html>http://gnu.org/onlinedocs/cpp/Variadic-Macros.html</a></li></ul></div><div class=pager><br>▼ <a href=/2021/git-security-change/>Git Security Change</a></div><footer style="text-align:right;margin:5rem .2rem .2rem"><div><section></section></div><div>&copy; 2020 - 2021</div><small>page 2021</small></footer></div><script defer type=application/javascript src=/js/norm.js></script></body></html>

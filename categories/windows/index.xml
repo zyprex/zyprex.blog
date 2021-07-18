@@ -1,4 +1,173 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>/categories/windows/</link><language>en</language><updated>Sun, 15 Nov 2020 08:59:55 CST</updated><item><title>Git Security Change</title><link>/2021/git-security-change/</link><pubDate>Mon, 14 Jun 2021 13:11:05 CST</pubDate><guid>/2021/git-security-change/</guid><description/><article>&lt;h1 id="reason">Reason&lt;sup>&lt;a class="h__anchor" href="#reason">¶&lt;/a>&lt;/sup>&lt;/h1>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>/categories/windows/</link><language>en</language><updated>Sun, 15 Nov 2020 08:59:55 CST</updated><item><title>Use Macros in C</title><link>/2021/use-macros-in-c/</link><pubDate>Sat, 17 Jul 2021 11:48:59 CST</pubDate><guid>/2021/use-macros-in-c/</guid><description/><article>&lt;h1 id="use-macros-in-c">Use Macros in C&lt;sup>&lt;a class="h__anchor" href="#use-macros-in-c">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Macros in C programming language, are notorious for it&amp;rsquo;s extremely unsafe,
+esoterically hard to debug.&lt;/p>
+&lt;p>Thus, we should strived to understand its pros and cons.&lt;/p>
+&lt;h2 id="feature-of-macros">Feature of Macros&lt;sup>&lt;a class="h__anchor" href="#feature-of-macros">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>In C, macro&amp;rsquo;s main duty is &lt;em>text precessing&lt;/em> &amp;ndash; e.g. replace a piece of text
+with another text, in many other case, they&amp;rsquo;re used to encapsulated function,
+and in minor case, they can minic some other language&amp;rsquo;s feature, or syntactic
+sugar.&lt;/p>
+&lt;h2 id="expansion-of-macros">Expansion of Macros&lt;sup>&lt;a class="h__anchor" href="#expansion-of-macros">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>Do expansion of macros use &lt;code>gcc&lt;/code> with &lt;code>-E [file]&lt;/code> option.&lt;/p>
+&lt;h2 id="comparison-of-macros-pros-and-cons">Comparison of Macros Pros and Cons&lt;sup>&lt;a class="h__anchor" href="#comparison-of-macros-pros-and-cons">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>&lt;strong>CONS&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>The variable defined in macro share same scope near to its used place.&lt;/li>
+&lt;li>No type checking with macros parameters as functions parameters.&lt;/li>
+&lt;li>Macros can&amp;rsquo;t be debugged by debugger.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>PROS&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Efficiency &amp;ndash; faster than same function call.
+&lt;ul>
+&lt;li>TIPS: prefer to use C99&amp;rsquo;s &lt;code>inline&lt;/code> , &lt;code>always_inline&lt;/code> keywords&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Passing default arguments&lt;/li>
+&lt;li>Debug strings
+&lt;ul>
+&lt;li>&lt;code>__FILE__, __LINE__, __func__, __TIME__, __DATE__, __STDC__, __STDC_VERSION__&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="true-constant-variable-in-c">True Constant variable in C&lt;sup>&lt;a class="h__anchor" href="#true-constant-variable-in-c">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>In C, the &lt;code>const&lt;/code> variables are not true constants, so can&amp;rsquo;t use in switch-case
+or use them for defined an array&amp;rsquo;s size (C++ can). Enumerations are real consts,
+but their type is only integer. So, in dired need to define true constants, just
+use macro.&lt;/p>
+&lt;h2 id="example-of-macro-usage">Example of Macro Usage&lt;sup>&lt;a class="h__anchor" href="#example-of-macro-usage">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;h3 id="defined-new-macro">Defined New Macro&lt;sup>&lt;a class="h__anchor" href="#defined-new-macro">¶&lt;/a>&lt;/sup>&lt;/h3>
+&lt;p>Sometimes test macro existence before define is a good idea.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#ifndef M1
+&lt;/span>&lt;span class="cp">#define M1 100
+&lt;/span>&lt;span class="cp">#endif
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="brackets-protected">Brackets Protected&lt;sup>&lt;a class="h__anchor" href="#brackets-protected">¶&lt;/a>&lt;/sup>&lt;/h3>
+&lt;p>Directly substituted in code will cause some pretty nasty side effects,
+because of operator precedence.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#define MUX(x) (x*x)
+&lt;/span>&lt;span class="cp">&lt;/span>&lt;span class="c1">// ...
+&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="n">MUX&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// incorrect!
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="increment--decrement-operation">Increment / Decrement Operation&lt;sup>&lt;a class="h__anchor" href="#increment--decrement-operation">¶&lt;/a>&lt;/sup>&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#define ABS(x) ((x)&amp;gt;0?(x):-(x))
+&lt;/span>&lt;span class="cp">&lt;/span>&lt;span class="c1">// ...
+&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="n">ABS&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// incorrect!
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="duplicated-function-call">Duplicated Function Call&lt;sup>&lt;a class="h__anchor" href="#duplicated-function-call">¶&lt;/a>&lt;/sup>&lt;/h3>
+&lt;p>If pass functions as macro&amp;rsquo;s parameter, may cause duplicated function call.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#define MIN(x, y) ((x) &amp;lt; (y) ? (x) : (y))
+&lt;/span>&lt;span class="cp">&lt;/span>&lt;span class="c1">// ...
+&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="n">MIN&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">foo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">z&lt;/span>&lt;span class="p">));&lt;/span> &lt;span class="c1">// incorrect!
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="multiple-line-macros">Multiple Line Macros&lt;sup>&lt;a class="h__anchor" href="#multiple-line-macros">¶&lt;/a>&lt;/sup>&lt;/h3>
+&lt;p>Be careful in define multiple line macros. Wrap them in &lt;code>do{}while(0)&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#define MIN(x, y) \
+&lt;/span>&lt;span class="cp">{ \
+&lt;/span>&lt;span class="cp"> if((x) &amp;lt; (y)) \
+&lt;/span>&lt;span class="cp"> return x; \
+&lt;/span>&lt;span class="cp"> else \
+&lt;/span>&lt;span class="cp"> return y; \
+&lt;/span>&lt;span class="cp">} &lt;/span>&lt;span class="c1">// &amp;lt;= can&amp;#39;t add semicolon, here.
+&lt;/span>&lt;span class="c1">// ...
+&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="n">MIN&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// incorrect!
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="passing-default-arguments">Passing Default Arguments&lt;sup>&lt;a class="h__anchor" href="#passing-default-arguments">¶&lt;/a>&lt;/sup>&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="kt">void&lt;/span> &lt;span class="nf">fun&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">a2&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="cp">#define m_fun_a1(x) fun(x, 2)
+&lt;/span>&lt;span class="cp">#define m_fun_a2(x) fun(1, x)
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="variadic-macros">Variadic Macros&lt;sup>&lt;a class="h__anchor" href="#variadic-macros">¶&lt;/a>&lt;/sup>&lt;/h3>
+&lt;p>Note this type of macros are GCC standard, and may not supported by other
+compiler.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#define eprintf(format, ...) fprintf(stderr, __VAR_ARGS__)
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="stringizing-and-concatenation">Stringizing and Concatenation&lt;sup>&lt;a class="h__anchor" href="#stringizing-and-concatenation">¶&lt;/a>&lt;/sup>&lt;/h3>
+&lt;p>Use &lt;code>#&lt;/code> to stringizing, use &lt;code>##&lt;/code> concatenation, but do not relay on those
+tricks too much.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="kr">inline&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="nf">calc_0&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">){&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;span class="kr">inline&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="nf">calc_1&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">){&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;span class="cp">#define calc_x(x, a, b) calc_##x(a, b)
+&lt;/span>&lt;span class="cp">&lt;/span>&lt;span class="c1">// ...
+&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="n">calc_x&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="ref">Ref.&lt;sup>&lt;a class="h__anchor" href="#ref">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;ul>
+&lt;li>&lt;a href="https://pmihaylov.com/macros-in-c/">https://pmihaylov.com/macros-in-c/&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://gnu.org/onlinedocs/cpp/Macro-Arguments.html">http://gnu.org/onlinedocs/cpp/Macro-Arguments.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://gnu.org/onlinedocs/cpp/Macro-Pitfalls.html">http://gnu.org/onlinedocs/cpp/Macro-Pitfalls.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://gnu.org/onlinedocs/cpp/Variadic-Macros.html">http://gnu.org/onlinedocs/cpp/Variadic-Macros.html&lt;/a>&lt;/li>
+&lt;/ul></article></item><item><title>Git Security Change</title><link>/2021/git-security-change/</link><pubDate>Mon, 14 Jun 2021 13:11:05 CST</pubDate><guid>/2021/git-security-change/</guid><description/><article>&lt;h1 id="reason">Reason&lt;sup>&lt;a class="h__anchor" href="#reason">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>&lt;a class="md__link" href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/"
 target="_blank" rel="noopener"
 >
@@ -1363,255 +1532,6 @@ hugo community
 &lt;ol>
 &lt;li id="fn:1" role="doc-endnote">
 &lt;p>store meta data for each page. &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;/section></article></item><item><title>Markdown Cheatsheet</title><link>/2021/markdown-cheatsheet/</link><pubDate>Sun, 31 Jan 2021 13:00:50 CST</pubDate><guid>/2021/markdown-cheatsheet/</guid><description/><article>&lt;h1 id="prelogue">Prelogue&lt;sup>&lt;a class="h__anchor" href="#prelogue">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>represent markdown syntax, and use it to see how the style looks like in hugo&amp;rsquo;s site&lt;/p>
-&lt;h1 id="header">Header&lt;sup>&lt;a class="h__anchor" href="#header">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;div class="sc--fdM">
-&lt;div style="background:#282800;" class="sc--fdT">use n&amp;rsquo;th &amp;lsquo;#&amp;rsquo; prefix to present nth head&lt;/div>
-&lt;button class="sc--fdB" onclick="this.nextSibling.hidden = !this.nextSibling.hidden;this.innerHTML=this.innerHTML=='+'?'-':'+';">+&lt;/button>
-&lt;div class="sc--fdC" hidden>&lt;h1 id="head1">head1&lt;/h1>
-&lt;h2 id="head2">head2&lt;/h2>
-&lt;h3 id="head3">head3&lt;/h3>
-&lt;h4 id="head4">head4&lt;/h4>
-&lt;h5 id="head5">head5&lt;/h5>
-&lt;h6 id="head6">head6&lt;/h6>
-&lt;h1 id="head1-1">head1&lt;/h1>
-&lt;h2 id="head2-1">head2&lt;/h2>
-&lt;pre>&lt;code># head1
-## head2
-### head3
-#### head4
-##### head5
-###### head6
-head1
-=====
-head2
------
-&lt;/code>&lt;/pre>
-&lt;/div>
-&lt;/div>
-&lt;h1 id="text">Text&lt;sup>&lt;a class="h__anchor" href="#text">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>text emphasis can be &lt;em>italic&lt;/em> or &lt;strong>bold&lt;/strong> or &lt;em>&lt;strong>italic bold&lt;/strong>&lt;/em> or &lt;del>strikethrough&lt;/del>&lt;/p>
-&lt;pre>&lt;code> _italic_ or __bold__ or ___italic bold___ ~~strikethrough~~
-*italic* or **bold** or ***italic bold***
-&lt;/code>&lt;/pre>
-&lt;h1 id="lists">Lists&lt;sup>&lt;a class="h__anchor" href="#lists">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;h2 id="ordered">ordered&lt;sup>&lt;a class="h__anchor" href="#ordered">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>numbered lists:&lt;/p>
-&lt;ol>
-&lt;li>One&lt;/li>
-&lt;li>Two&lt;/li>
-&lt;li>Three&lt;/li>
-&lt;/ol>
-&lt;pre>&lt;code>1. One
-1. Two
-1. Three
-&lt;/code>&lt;/pre>&lt;h2 id="unordered">unordered&lt;sup>&lt;a class="h__anchor" href="#unordered">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>each lists item start with &amp;lsquo;*&amp;rsquo; or &amp;lsquo;-&amp;rsquo; or &amp;lsquo;+&amp;rsquo; and a space:&lt;/p>
-&lt;ul>
-&lt;li>One&lt;/li>
-&lt;li>Two&lt;/li>
-&lt;li>Three&lt;/li>
-&lt;/ul>
-&lt;pre>&lt;code>- One
-- Two
-- Three
-&lt;/code>&lt;/pre>&lt;h2 id="nested-list-in-context">nested list in context&lt;sup>&lt;a class="h__anchor" href="#nested-list-in-context">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>this is line before nested list, use two space indent to create sublist&lt;/p>
-&lt;ul>
-&lt;li>One
-&lt;ul>
-&lt;li>One One&lt;/li>
-&lt;li>One Two&lt;/li>
-&lt;li>One Three&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Two
-&lt;ol>
-&lt;li>Two One&lt;/li>
-&lt;li>Two Two&lt;/li>
-&lt;li>Two Three&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>Three
-&lt;ul>
-&lt;li>Three One
-&lt;ul>
-&lt;li>Three One One
-&lt;ul>
-&lt;li>Three One One One&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;p>this is line after nested list&lt;/p>
-&lt;h1 id="task-lists">Task Lists&lt;sup>&lt;a class="h__anchor" href="#task-lists">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;ul>
-&lt;li>&lt;input checked="" disabled="" type="checkbox"> checked&lt;/li>
-&lt;li>&lt;input disabled="" type="checkbox"> unchecked&lt;/li>
-&lt;/ul>
-&lt;pre>&lt;code>- [x] checked
-- [ ] unchecked
-&lt;/code>&lt;/pre>&lt;h1 id="blockquotes">Blockquotes&lt;sup>&lt;a class="h__anchor" href="#blockquotes">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>add a (&amp;gt;) in front of a paragraph to create blockquote.&lt;/p>
-&lt;blockquote>
-&lt;p>blockquote&lt;br>
-another line&lt;/p>
-&lt;/blockquote>
-&lt;p>the blockquote can nested use &amp;lsquo;&amp;gt;&amp;gt;&amp;rsquo; or so on.&lt;/p>
-&lt;pre>&lt;code>&amp;gt; blockquote
-&amp;gt; another line
-&lt;/code>&lt;/pre>&lt;h1 id="code">Code&lt;sup>&lt;a class="h__anchor" href="#code">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;h2 id="inline">inline&lt;sup>&lt;a class="h__anchor" href="#inline">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>inline &lt;code>code&lt;/code> wrap by (`)&lt;/p>
-&lt;pre>&lt;code>inline `code` wrap by (`)
-&lt;/code>&lt;/pre>
-&lt;h2 id="indent">indent&lt;sup>&lt;a class="h__anchor" href="#indent">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>indent two tab width also make a code block&lt;/p>
-&lt;h2 id="fence">fence&lt;sup>&lt;a class="h__anchor" href="#fence">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>use three (`) fence highlight your code&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="cp">&amp;lt;!DOCTYPE html&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">meta&lt;/span> &lt;span class="na">charset&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;UTF-8&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Document&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>html document skeleton&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>and code block with unknow language&lt;/p>
-&lt;pre>&lt;code class="language-fakelang" data-lang="fakelang"># |__aAbBcCdDeEfFgGhHiIjJkKlLmMnN
-# oOpPQqrRsStTuUvVwWxXyYzZ
-run:
-&amp;lt;data&amp;gt; arr=[1234567890,!@#$%^&amp;amp;*&amp;quot;'\.?/];
-for i in arr { print(i); }
-&lt;/code>&lt;/pre>&lt;h1 id="links">Links&lt;sup>&lt;a class="h__anchor" href="#links">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>link to this site&amp;rsquo;s &lt;a class="md__link" href="/"
-title="my home page"
->
-home
-&lt;/a>
-or
-link to &lt;a class="md__link" href="https://github.com/"
-title="Github.com"
-target="_blank" rel="noopener"
->
-github
-↗
-&lt;/a>
-website,
-don&amp;rsquo;t put spaces in the middle of a URL.&lt;/p>
-&lt;pre>&lt;code>link to this site's [home](/ &amp;quot;my home page&amp;quot;) or
-link to [github](https://github.com/ &amp;quot;Github.com&amp;quot;) website
-&lt;/code>&lt;/pre>&lt;h1 id="images">Images&lt;sup>&lt;a class="h__anchor" href="#images">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>&lt;div class="md__image">&lt;label>Image:&lt;/label>&lt;a href="http://browser9.qhimg.com/bdm/800_600_100/t01bbd94b90e850d1d3.jpg" alt="sample" title="sample web picture"> http://browser9.qhimg.com/bdm/800_600_100/t01bbd94b90e850d1d3.jpg&lt;/a>&lt;/div>
-&lt;div class="md__image">&lt;label>Image:&lt;/label>&lt;a href="https://b.zol-img.com.cn/sjbizhi/images/12/208x312/1607322405927.jpg" alt="" title="1607322405927"> https://b.zol-img.com.cn/sjbizhi/images/12/208x312/1607322405927.jpg&lt;/a>&lt;/div>
-&lt;/p>
-&lt;pre>&lt;code>![sample](http://browser9.qhimg.com/bdm/800_600_100/t01bbd94b90e850d1d3.jpg &amp;quot;sample web picture&amp;quot;)
-![](https://b.zol-img.com.cn/sjbizhi/images/12/208x312/1607322405927.jpg &amp;quot;1607322405927&amp;quot;)
-&lt;/code>&lt;/pre>
-&lt;h1 id="tables">Tables&lt;sup>&lt;a class="h__anchor" href="#tables">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th style="text-align:left">Fruit Table&lt;/th>
-&lt;th style="text-align:center">Apple&lt;/th>
-&lt;th style="text-align:right">Banana&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td style="text-align:left">&lt;em>price&lt;/em>&lt;/td>
-&lt;td style="text-align:center">12.0&lt;/td>
-&lt;td style="text-align:right">34.0&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align:left">&lt;em>count&lt;/em>&lt;/td>
-&lt;td style="text-align:center">13000&lt;/td>
-&lt;td style="text-align:right">19000000000000000000&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;pre>&lt;code>Fruit Table | Apple | Banana
-:--- | :---: | ---:
-*price* | 12.0 | 34.0
-*count* | 13000 | 19000000000000000000
-&lt;/code>&lt;/pre>
-&lt;h1 id="horizontal-rule">Horizontal Rule&lt;sup>&lt;a class="h__anchor" href="#horizontal-rule">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>use three or more (*),(-) to make a horizontal rule, be sure
-put blank lines before and after horizontal rules.&lt;/p>
-&lt;hr>
-&lt;h1 id="line-break">Line Break&lt;sup>&lt;a class="h__anchor" href="#line-break">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>except for double line break, two or more trailing space also break a line&lt;/p>
-&lt;h1 id="footnote">Footnote&lt;sup>&lt;a class="h__anchor" href="#footnote">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>the [footnote]&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> and it&amp;rsquo;s gloss can put in together&lt;/p>
-&lt;pre>&lt;code>the footnote[^footnote example] and it's gloss can put in together
-[^footnote example]: https://example.com &amp;quot;I am a footnote&amp;quot;
-&lt;/code>&lt;/pre>&lt;h1 id="email">Email&lt;sup>&lt;a class="h__anchor" href="#email">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>&lt;a href="mailto:xxx@mail.com">xxx@mail.com&lt;/a>&lt;/p>
-&lt;pre>&lt;code>&amp;lt;xxx@mail.com&amp;gt;
-&lt;/code>&lt;/pre>
-&lt;h1 id="special-char-escapes">Special Char Escapes&lt;sup>&lt;a class="h__anchor" href="#special-char-escapes">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>following characters need backslash escapes to generate literal characters.&lt;/p>
-&lt;pre>&lt;code>\ backslash
-` backtick
-* asterisk
-_ underscore
-{} curly braces
-[] square brackets
-() parentheses
-# hash mark
-+ plus sign
-- minus sign (hyphen)
-. dot
-! exclamation mark
-&lt;/code>&lt;/pre>&lt;h1 id="unsafed-inline-html">Unsafed Inline HTML&lt;sup>&lt;a class="h__anchor" href="#unsafed-inline-html">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>the &lt;mark>mark&lt;/mark> span element,
-the kbd tag &lt;kbd>ctrl&lt;/kbd>+&lt;kbd>c&lt;/kbd>,
-&lt;abbr title="Graphics Interchange Format">GIF&lt;/abbr>,
-cat&lt;sup>123&lt;/sup>, dog&lt;sub>123&lt;/sub>&lt;/p>
-&lt;h1 id="ref">Ref.&lt;sup>&lt;a class="h__anchor" href="#ref">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>&lt;a class="md__link" href="https://www.markdownguide.org/"
-target="_blank" rel="noopener"
->
-markdownguide.org
-↗
-&lt;/a>
-&lt;/p>
-&lt;p>&lt;a class="md__link" href="https://github.github.com/gfm/"
-target="_blank" rel="noopener"
->
-Github Flavored Markdown
-↗
-&lt;/a>
-&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
-&lt;hr>
-&lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
-&lt;p>I am a footnote &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/section></article></item></channel></rss>
