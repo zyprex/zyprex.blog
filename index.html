@@ -1,4 +1,15 @@
-<!doctype html><html><meta charset=utf-8><meta name=generator content="Hugo 0.76.5"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel=icon type=image/png href=/img/git_face.png><link rel=stylesheet type=text/css href=/css/main.css><title>Zyprex's Blog</title><body><div class=fence><nav><a href=/>HOME&nbsp;</a><a href=/tags/>TAGS&nbsp;</a><a href=/categories/>CATEGORIES&nbsp;</a><a href=/index.xml>RSS&nbsp;</a><a href=/search/>SEARCH&nbsp;</a></nav><div class=T>2021</div><section><header class=H>07-17<a class=T href=/2021/use-macros-in-c/>Use Macros in C</a><div class=excerpt></div><div style=margin-left:auto><section></section></div></header><div class=summary>Use Macros in C¶
+<!doctype html><html><meta charset=utf-8><meta name=generator content="Hugo 0.76.5"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel=icon type=image/png href=/img/git_face.png><link rel=stylesheet type=text/css href=/css/main.css><title>Zyprex's Blog</title><body><div class=fence><nav><a href=/>HOME&nbsp;</a><a href=/tags/>TAGS&nbsp;</a><a href=/categories/>CATEGORIES&nbsp;</a><a href=/index.xml>RSS&nbsp;</a><a href=/search/>SEARCH&nbsp;</a></nav><div class=T>2021</div><section><header class=H>08-24<a class=T href=/2021/connect-internet-from-command-line/>Connect Internet From Command Line</a><div class=excerpt></div><div style=margin-left:auto><section><a class=taxo href=/tags/command/>#command</a></section></div></header><div class=summary>Connect Internet From Command Line¶
+The &lt;SSID> is your wifi name.
+On Windows¶
+Connect to WIFI: netsh wlan connect name=&lt;SSID>
+Disconnect to WIFI: netsh wlan disconnect
+On Linux¶
+Check WIFI status: nmcli radio wifi, it should output enabled, or else you will need run nmcli radio wifi on.
+Check Network status: nmcli d status, nmcli c show
+List WIFI SSID: mncli d wifi list , mncli d wifi rescan
+Delete a WIFI: nmcli c delete &lt;SSID>, nmcli c delete &lt;UUID>
+Connect to new WIFI: nmcli d wifi connect "&lt;SSID>" --ask
+Connect to hidden WIFI: nmcli d wifi connect "&lt;SSID>" hidden yes --ask<a href=/2021/connect-internet-from-command-line/> (Read more ... 124 words)</a></div></section><section><header class=H>07-17<a class=T href=/2021/use-macros-in-c/>Use Macros in C</a><div class=excerpt></div><div style=margin-left:auto><section><a class=taxo href=/tags/c/>#c</a><a class=taxo href=/tags/macro/>#macro</a></section></div></header><div class=summary>Use Macros in C¶
 Macros in C programming language, are notorious for it&rsquo;s extremely unsafe, esoterically hard to debug.
 Thus, we should strived to understand its pros and cons.
 Feature of Macros¶
@@ -52,9 +63,5 @@ https://mermaid-js.github.io/mermaid/#/flowchart
 graph LR A(Round) --|normal arrow| B{Decision} B --- |open link| C[normal] B -.-|dotted a| D([stadium]) B ==|thick link| E([subroutine]) B --|four| F[(cylindrical database)] B --|five| G((circle)) B --|six| H{{hexagon}} B --|eight| I[/parallelogram/] B --|nine| J[\parallelogram alt\] B --|ten| k[\parallelogram alt\] B --|ten| L[/trapezoid\] B --|ten| M[\trapezoid alt/]
 graph TB A & B -- C & D -- E Sequence diagrams¶
 https://mermaid-js.github.io/mermaid/#/sequenceDiagram
-sequenceDiagram participant A as Alice participant J as John A-J: Hello John, how are you?<a href=/2021/mermaidjs-notes/> (Read more ... 323 words)</a></div></section><section><header class=H>02-01<a class=T href=/2021/hugo-notes/>Hugo Notes</a><div class=excerpt></div><div style=margin-left:auto><section><a class=taxo href=/categories/hugo/>@hugo</a></section></div></header><div class=summary>Hugo maybe the world’s fastest static website generate engine, stand out for it&rsquo;s speed.
-Before you go, make sure:
-install git go env (optional) install hugo add hugo in your path TL;DR¶
-Hugo&rsquo;s concentrated quick start.
-1 2 3 4 5 6 7 8 9 10 11 12 # start of your site in a folder 'quickstart/' hugo new site quickstart # apply theme cd quickstart git init git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke # create first post hugo new posts/my-first-post.md hugo server -D # enter http://localhost:1313/ in address bar # preview site in browser # host site .<a href=/2021/hugo-notes/> (Read more ... 788 words)</a></div></section><section class=pager><a style=float:right href=/page/2/>Next ▶</a></section><footer style="text-align:right;margin:5rem .2rem .2rem"><div><section></section></div><div>&copy; 2020 - 2021</div>1/2
+sequenceDiagram participant A as Alice participant J as John A-J: Hello John, how are you?<a href=/2021/mermaidjs-notes/> (Read more ... 323 words)</a></div></section><section class=pager><a style=float:right href=/page/2/>Next ▶</a></section><footer style="text-align:right;margin:5rem .2rem .2rem"><div><section></section></div><div>&copy; 2020 - 2021</div>1/2
 <small>home page</small></footer></div></body></html>
