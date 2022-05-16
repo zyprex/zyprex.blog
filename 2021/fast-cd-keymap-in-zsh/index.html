@@ -1,0 +1,35 @@
+<!doctype html><html><meta charset=utf-8><meta name=generator content="Hugo 0.81.0"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel=icon type=image/png href=/img/git_face.png><link rel=stylesheet type=text/css href=/css/main.css><link rel=stylesheet type=text/css href=/css/syntax.css><title>Fast Cd Keymap in Zsh@Zyprex's Blog</title><body><div class=fence><nav><a href=/>HOME&nbsp;</a><a href=/tags/>TAGS&nbsp;</a><a href=/categories/>CATEGORIES&nbsp;</a><a href=/index.xml>RSS&nbsp;</a><a href=/search/>SEARCH&nbsp;</a></nav><div class=Hp><em class=T>Fast Cd Keymap in Zsh</em><br><em>2021/05/16 Sun 11:06</em></div><div id=C><h1 id=fast-cd-keymap-in-zsh>Fast <code>cd</code> Keymap in Zsh<sup><a class=h__anchor href=#fast-cd-keymap-in-zsh>¶</a></sup></h1><p><strong>TL;DR</strong>:</p><ol><li>paste below code to your <code>.zshrc</code></li><li>run <code>source ~/.zshrc</code></li><li>now you have two keys</li></ol><ul><li><kbd>Alt</kbd> + <kbd>k</kbd>: go upper directory.</li><li><kbd>Alt</kbd> + <kbd>j</kbd>: undo above action.</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-zsh data-lang=zsh>dir-stack-push<span class=o>(){</span>
+   <span class=nb>export</span> <span class=nv>DIR_STACKS</span><span class=o>=</span><span class=nv>$DIR_STACKS</span>:<span class=nv>$PWD</span> <span class=c1># push current path to CD_STACKS</span>
+   <span class=nb>cd</span> ..
+   zle reset-prompt                   <span class=c1># redraw prompt</span>
+<span class=o>}</span>
+dir-stack-pop<span class=o>(){</span>
+   <span class=k>if</span> <span class=o>[[</span> -z <span class=si>${</span><span class=nv>DIR_STACKS</span><span class=p>##*:</span><span class=si>}</span> <span class=o>]]</span><span class=p>;</span> <span class=k>then</span>
+     <span class=k>return</span>                           <span class=c1># don&#39;t cd to home path</span>
+   <span class=k>fi</span>
+   <span class=nb>cd</span> <span class=si>${</span><span class=nv>DIR_STACKS</span><span class=p>##*:</span><span class=si>}</span>               <span class=c1># cd last path</span>
+   zle reset-prompt                   <span class=c1># redraw prompt</span>
+   <span class=nb>export</span> <span class=nv>DIR_STACKS</span><span class=o>=</span><span class=si>${</span><span class=nv>DIR_STACKS</span><span class=p>%:*</span><span class=si>}</span> <span class=c1># remove last path</span>
+<span class=o>}</span>
+zle -N dir-stack-push
+zle -N dir-stack-pop
+bindkey <span class=s1>&#39;^[k&#39;</span> dir-stack-push          <span class=c1># [Alt + k]</span>
+bindkey <span class=s1>&#39;^[j&#39;</span> dir-stack-pop           <span class=c1># [Alt + j]</span>
+</code></pre></td></tr></table></div></div><h1 id=ref>Ref<sup><a class=h__anchor href=#ref>¶</a></sup></h1><ul><li><a href=https://devhints.io/bash>https://devhints.io/bash</a></li><li><a href=https://unix.stackexchange.com/questions/79897/how-can-i-use-bindkey-to-run-a-script>https://unix.stackexchange.com/questions/79897/how-can-i-use-bindkey-to-run-a-script</a></li><li><a href=https://stackoverflow.com/questions/52325626/zsh-refresh-prompt-after-running-zle-widget>https://stackoverflow.com/questions/52325626/zsh-refresh-prompt-after-running-zle-widget</a></li></ul></div><div class=pager><br>▲ <a href=/2021/about-nagging/>About Nagging</a><br>▼ <a href=/2021/keep-away-from-social-media/>Keep Away From Social Media</a></div><footer style="text-align:right;margin:5rem .2rem .2rem"><div><section><a class=taxo href=/tags/zsh/>#zsh</a></section></div><div>&copy; 2020 - 2022</div><small>page 2021</small></footer></div><script defer type=application/javascript src=/js/norm.js></script></body></html>

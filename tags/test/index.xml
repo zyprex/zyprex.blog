@@ -1,4 +1,838 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>/tags/test/</link><language>en</language><updated>Fri, 05 Feb 2021 09:25:31 CST</updated><item><title>Connect Internet From Command Line</title><link>/2021/connect-internet-from-command-line/</link><pubDate>Tue, 24 Aug 2021 11:38:54 CST</pubDate><guid>/2021/connect-internet-from-command-line/</guid><description/><article>&lt;h1 id="connect-internet-from-command-line">Connect Internet From Command Line&lt;sup>&lt;a class="h__anchor" href="#connect-internet-from-command-line">¶&lt;/a>&lt;/sup>&lt;/h1>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>/tags/test/</link><language>en</language><updated>Fri, 05 Feb 2021 09:25:31 CST</updated><item><title>Prove Kaprekar Constant With C Program</title><link>/2022/prove-kaprekar-constant-with-c-program/</link><pubDate>Mon, 16 May 2022 14:39:04 CST</pubDate><guid>/2022/prove-kaprekar-constant-with-c-program/</guid><description/><article>&lt;h1 id="prove-kaprekar-constant-with-c-program">Prove Kaprekar Constant with C Program&lt;sup>&lt;a class="h__anchor" href="#prove-kaprekar-constant-with-c-program">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;h2 id="know-the-kaprekar-constant">Know the kaprekar constant&lt;sup>&lt;a class="h__anchor" href="#know-the-kaprekar-constant">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>What is a kaprekar constant ?&lt;/p>
+&lt;ol>
+&lt;li>Given by a 4 digit integer number, for example 1000.&lt;/li>
+&lt;li>Form the largest and the smallest number from it&amp;rsquo;s digits.&lt;/li>
+&lt;li>Substract these two numbers and get the new integer.&lt;/li>
+&lt;li>Continue with the process, until stop by number 6174.&lt;/li>
+&lt;/ol>
+&lt;p>The 6174 is kaprekar constant. Because use 6174 to calculate will get 6174.&lt;/p>
+&lt;p>A manual calculate example:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-text" data-lang="text">1000 - 0001 = 0999
+9990 - 0999 = 8991
+9981 - 1899 = 8082
+8820 - 0288 = 8532
+8532 - 2358 = 6174
+7641 - 1467 = 6174
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>All 4 digit integer numbers have the same pitfall loop end.&lt;/p>
+&lt;p>Let&amp;rsquo;s use c program to prove it.&lt;/p>
+&lt;h2 id="draw-sketch">Draw Sketch&lt;sup>&lt;a class="h__anchor" href="#draw-sketch">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;ol>
+&lt;li>Decide how to pass parameter&lt;/li>
+&lt;/ol>
+&lt;p>Pass integer is intuitive, but in this case I use string , because reform digit
+generated a char array, and with string parameter, test in terminal with bash
+script more convient.&lt;/p>
+&lt;ol start="2">
+&lt;li>Overview of plan&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>convert strings to a char array.&lt;/li>
+&lt;li>sort char array descend.&lt;/li>
+&lt;li>calculate loop until 6174.&lt;/li>
+&lt;/ul>
+&lt;h2 id="jump-into-detail">Jump into Detail&lt;sup>&lt;a class="h__anchor" href="#jump-into-detail">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;ol>
+&lt;li>convert strings to a char array.&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="kt">unsigned&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="n">num_len&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">strlen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">arr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">malloc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num_len&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="k">sizeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">num&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="sc">&amp;#39;0&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="2">
+&lt;li>sort char array descend&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="kt">void&lt;/span> &lt;span class="nf">sort_char_array_descend&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">len&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">j&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">idx&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">len&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">idx&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">j&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">j&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">len&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">j&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">idx&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">j&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">idx&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">j&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">idx&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">char&lt;/span> &lt;span class="n">temp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">idx&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">idx&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">temp&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="3">
+&lt;li>calculate loop to end&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="kt">void&lt;/span> &lt;span class="nf">calc_kaprekar_constant&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span> &lt;span class="n">num&lt;/span>&lt;span class="p">[])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">ret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">j&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">idx&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kt">unsigned&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="n">num_len&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">strlen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">arr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">malloc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num_len&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="k">sizeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">num&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="sc">&amp;#39;0&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">times&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">origin_num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next_num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">num_len&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">*=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">origin_num&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">times&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">step_count&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">do&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">sort_char_array_descend&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="cm">/* max digital */&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">num_len&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">*=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">n1&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">times&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="cm">/* min digital */&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">*=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">n2&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">times&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="n">next_num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">n1&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">n2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">DEBUG&lt;/span>&lt;span class="err">$&lt;/span> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d-%d=%d&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next_num&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">next_num&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">origin_num&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="n">next_num&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">DEBUG&lt;/span>&lt;span class="err">$&lt;/span> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d (jump into black hole after step %d)&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next_num&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">step_count&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">ret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="n">origin_num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">next_num&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">step_count&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">int_to_char_arr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">next_num&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span> &lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">free&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">arr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="n">ret&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="small-tips-for-debug-print">Small Tips for Debug Print&lt;sup>&lt;a class="h__anchor" href="#small-tips-for-debug-print">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#define DEBUG &lt;/span>&lt;span class="cm">/* comment this line to remove all debug code sentence */&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;span class="cp">#ifdef DEBUG
+&lt;/span>&lt;span class="cp">#define DEBUG$
+&lt;/span>&lt;span class="cp">#else
+&lt;/span>&lt;span class="cp">#define DEBUG$ for (;0;)
+&lt;/span>&lt;span class="cp">#endif
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="handle-other-case">Handle Other Case&lt;sup>&lt;a class="h__anchor" href="#handle-other-case">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>Prove other than 4-digits integer may cause infinite loop, so use a link
+list avoid those case. The link list save each steps result, when a calculate
+done, check whether it is in previous&amp;rsquo;s results list.&lt;/p>
+&lt;h2 id="complete-program">Complete Program&lt;sup>&lt;a class="h__anchor" href="#complete-program">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>In this program, you can define different macro to run differnt test case.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt"> 10
+&lt;/span>&lt;span class="lnt"> 11
+&lt;/span>&lt;span class="lnt"> 12
+&lt;/span>&lt;span class="lnt"> 13
+&lt;/span>&lt;span class="lnt"> 14
+&lt;/span>&lt;span class="lnt"> 15
+&lt;/span>&lt;span class="lnt"> 16
+&lt;/span>&lt;span class="lnt"> 17
+&lt;/span>&lt;span class="lnt"> 18
+&lt;/span>&lt;span class="lnt"> 19
+&lt;/span>&lt;span class="lnt"> 20
+&lt;/span>&lt;span class="lnt"> 21
+&lt;/span>&lt;span class="lnt"> 22
+&lt;/span>&lt;span class="lnt"> 23
+&lt;/span>&lt;span class="lnt"> 24
+&lt;/span>&lt;span class="lnt"> 25
+&lt;/span>&lt;span class="lnt"> 26
+&lt;/span>&lt;span class="lnt"> 27
+&lt;/span>&lt;span class="lnt"> 28
+&lt;/span>&lt;span class="lnt"> 29
+&lt;/span>&lt;span class="lnt"> 30
+&lt;/span>&lt;span class="lnt"> 31
+&lt;/span>&lt;span class="lnt"> 32
+&lt;/span>&lt;span class="lnt"> 33
+&lt;/span>&lt;span class="lnt"> 34
+&lt;/span>&lt;span class="lnt"> 35
+&lt;/span>&lt;span class="lnt"> 36
+&lt;/span>&lt;span class="lnt"> 37
+&lt;/span>&lt;span class="lnt"> 38
+&lt;/span>&lt;span class="lnt"> 39
+&lt;/span>&lt;span class="lnt"> 40
+&lt;/span>&lt;span class="lnt"> 41
+&lt;/span>&lt;span class="lnt"> 42
+&lt;/span>&lt;span class="lnt"> 43
+&lt;/span>&lt;span class="lnt"> 44
+&lt;/span>&lt;span class="lnt"> 45
+&lt;/span>&lt;span class="lnt"> 46
+&lt;/span>&lt;span class="lnt"> 47
+&lt;/span>&lt;span class="lnt"> 48
+&lt;/span>&lt;span class="lnt"> 49
+&lt;/span>&lt;span class="lnt"> 50
+&lt;/span>&lt;span class="lnt"> 51
+&lt;/span>&lt;span class="lnt"> 52
+&lt;/span>&lt;span class="lnt"> 53
+&lt;/span>&lt;span class="lnt"> 54
+&lt;/span>&lt;span class="lnt"> 55
+&lt;/span>&lt;span class="lnt"> 56
+&lt;/span>&lt;span class="lnt"> 57
+&lt;/span>&lt;span class="lnt"> 58
+&lt;/span>&lt;span class="lnt"> 59
+&lt;/span>&lt;span class="lnt"> 60
+&lt;/span>&lt;span class="lnt"> 61
+&lt;/span>&lt;span class="lnt"> 62
+&lt;/span>&lt;span class="lnt"> 63
+&lt;/span>&lt;span class="lnt"> 64
+&lt;/span>&lt;span class="lnt"> 65
+&lt;/span>&lt;span class="lnt"> 66
+&lt;/span>&lt;span class="lnt"> 67
+&lt;/span>&lt;span class="lnt"> 68
+&lt;/span>&lt;span class="lnt"> 69
+&lt;/span>&lt;span class="lnt"> 70
+&lt;/span>&lt;span class="lnt"> 71
+&lt;/span>&lt;span class="lnt"> 72
+&lt;/span>&lt;span class="lnt"> 73
+&lt;/span>&lt;span class="lnt"> 74
+&lt;/span>&lt;span class="lnt"> 75
+&lt;/span>&lt;span class="lnt"> 76
+&lt;/span>&lt;span class="lnt"> 77
+&lt;/span>&lt;span class="lnt"> 78
+&lt;/span>&lt;span class="lnt"> 79
+&lt;/span>&lt;span class="lnt"> 80
+&lt;/span>&lt;span class="lnt"> 81
+&lt;/span>&lt;span class="lnt"> 82
+&lt;/span>&lt;span class="lnt"> 83
+&lt;/span>&lt;span class="lnt"> 84
+&lt;/span>&lt;span class="lnt"> 85
+&lt;/span>&lt;span class="lnt"> 86
+&lt;/span>&lt;span class="lnt"> 87
+&lt;/span>&lt;span class="lnt"> 88
+&lt;/span>&lt;span class="lnt"> 89
+&lt;/span>&lt;span class="lnt"> 90
+&lt;/span>&lt;span class="lnt"> 91
+&lt;/span>&lt;span class="lnt"> 92
+&lt;/span>&lt;span class="lnt"> 93
+&lt;/span>&lt;span class="lnt"> 94
+&lt;/span>&lt;span class="lnt"> 95
+&lt;/span>&lt;span class="lnt"> 96
+&lt;/span>&lt;span class="lnt"> 97
+&lt;/span>&lt;span class="lnt"> 98
+&lt;/span>&lt;span class="lnt"> 99
+&lt;/span>&lt;span class="lnt">100
+&lt;/span>&lt;span class="lnt">101
+&lt;/span>&lt;span class="lnt">102
+&lt;/span>&lt;span class="lnt">103
+&lt;/span>&lt;span class="lnt">104
+&lt;/span>&lt;span class="lnt">105
+&lt;/span>&lt;span class="lnt">106
+&lt;/span>&lt;span class="lnt">107
+&lt;/span>&lt;span class="lnt">108
+&lt;/span>&lt;span class="lnt">109
+&lt;/span>&lt;span class="lnt">110
+&lt;/span>&lt;span class="lnt">111
+&lt;/span>&lt;span class="lnt">112
+&lt;/span>&lt;span class="lnt">113
+&lt;/span>&lt;span class="lnt">114
+&lt;/span>&lt;span class="lnt">115
+&lt;/span>&lt;span class="lnt">116
+&lt;/span>&lt;span class="lnt">117
+&lt;/span>&lt;span class="lnt">118
+&lt;/span>&lt;span class="lnt">119
+&lt;/span>&lt;span class="lnt">120
+&lt;/span>&lt;span class="lnt">121
+&lt;/span>&lt;span class="lnt">122
+&lt;/span>&lt;span class="lnt">123
+&lt;/span>&lt;span class="lnt">124
+&lt;/span>&lt;span class="lnt">125
+&lt;/span>&lt;span class="lnt">126
+&lt;/span>&lt;span class="lnt">127
+&lt;/span>&lt;span class="lnt">128
+&lt;/span>&lt;span class="lnt">129
+&lt;/span>&lt;span class="lnt">130
+&lt;/span>&lt;span class="lnt">131
+&lt;/span>&lt;span class="lnt">132
+&lt;/span>&lt;span class="lnt">133
+&lt;/span>&lt;span class="lnt">134
+&lt;/span>&lt;span class="lnt">135
+&lt;/span>&lt;span class="lnt">136
+&lt;/span>&lt;span class="lnt">137
+&lt;/span>&lt;span class="lnt">138
+&lt;/span>&lt;span class="lnt">139
+&lt;/span>&lt;span class="lnt">140
+&lt;/span>&lt;span class="lnt">141
+&lt;/span>&lt;span class="lnt">142
+&lt;/span>&lt;span class="lnt">143
+&lt;/span>&lt;span class="lnt">144
+&lt;/span>&lt;span class="lnt">145
+&lt;/span>&lt;span class="lnt">146
+&lt;/span>&lt;span class="lnt">147
+&lt;/span>&lt;span class="lnt">148
+&lt;/span>&lt;span class="lnt">149
+&lt;/span>&lt;span class="lnt">150
+&lt;/span>&lt;span class="lnt">151
+&lt;/span>&lt;span class="lnt">152
+&lt;/span>&lt;span class="lnt">153
+&lt;/span>&lt;span class="lnt">154
+&lt;/span>&lt;span class="lnt">155
+&lt;/span>&lt;span class="lnt">156
+&lt;/span>&lt;span class="lnt">157
+&lt;/span>&lt;span class="lnt">158
+&lt;/span>&lt;span class="lnt">159
+&lt;/span>&lt;span class="lnt">160
+&lt;/span>&lt;span class="lnt">161
+&lt;/span>&lt;span class="lnt">162
+&lt;/span>&lt;span class="lnt">163
+&lt;/span>&lt;span class="lnt">164
+&lt;/span>&lt;span class="lnt">165
+&lt;/span>&lt;span class="lnt">166
+&lt;/span>&lt;span class="lnt">167
+&lt;/span>&lt;span class="lnt">168
+&lt;/span>&lt;span class="lnt">169
+&lt;/span>&lt;span class="lnt">170
+&lt;/span>&lt;span class="lnt">171
+&lt;/span>&lt;span class="lnt">172
+&lt;/span>&lt;span class="lnt">173
+&lt;/span>&lt;span class="lnt">174
+&lt;/span>&lt;span class="lnt">175
+&lt;/span>&lt;span class="lnt">176
+&lt;/span>&lt;span class="lnt">177
+&lt;/span>&lt;span class="lnt">178
+&lt;/span>&lt;span class="lnt">179
+&lt;/span>&lt;span class="lnt">180
+&lt;/span>&lt;span class="lnt">181
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;stdio.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;stdlib.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;string.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;strings.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;span class="cp">#define DEBUG &lt;/span>&lt;span class="cm">/* comment this line to remove all debug code sentence */&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;span class="cp">#ifdef DEBUG
+&lt;/span>&lt;span class="cp">#define DEBUG$
+&lt;/span>&lt;span class="cp">#else
+&lt;/span>&lt;span class="cp">#define DEBUG$ for (; 0;)
+&lt;/span>&lt;span class="cp">#endif
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">};&lt;/span>
+&lt;span class="kt">void&lt;/span> &lt;span class="nf">init_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">**&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">malloc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">sizeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;span class="p">(&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">(&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">void&lt;/span> &lt;span class="nf">insert_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;insert failed&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">new_node&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">malloc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">sizeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;span class="n">new_node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">new_node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new_node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">void&lt;/span> &lt;span class="nf">print_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;print failed&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">cur&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d &amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">cur&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d &amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="nf">search_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">cur&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">pos&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">data&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="n">pos&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="n">cur&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">pos&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">void&lt;/span> &lt;span class="nf">clean_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">**&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;del failed.&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">cur&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">temp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">temp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">free&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cur&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">cur&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">temp&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">temp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">void&lt;/span> &lt;span class="nf">sort_char_array_descend&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">len&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">j&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">idx&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">len&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">idx&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">j&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">j&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">len&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">j&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">idx&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">j&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">idx&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">j&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">idx&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">char&lt;/span> &lt;span class="n">temp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">idx&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">idx&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">temp&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">void&lt;/span> &lt;span class="nf">int_to_char_arr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">char&lt;/span> &lt;span class="n">num&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">len&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">bzero&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">len&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">len&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">char&lt;/span> &lt;span class="n">digit&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">n&lt;/span> &lt;span class="o">%&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">num&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">len&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">digit&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">n&lt;/span> &lt;span class="o">/=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="nf">calc_kaprekar_constant&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span> &lt;span class="n">num&lt;/span>&lt;span class="p">[])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">ret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">j&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">idx&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kt">unsigned&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="n">num_len&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">strlen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">arr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">malloc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num_len&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="k">sizeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">num&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="sc">&amp;#39;0&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">times&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">origin_num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next_num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">num_len&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">*=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">origin_num&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">times&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">step_count&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">init_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">do&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">sort_char_array_descend&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="cm">/* max digital */&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">num_len&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">*=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">n1&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">times&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="cm">/* min digital */&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">*=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">n2&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">times&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="n">next_num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">n1&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">n2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">DEBUG&lt;/span>&lt;span class="err">$&lt;/span> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d-%d=%d&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next_num&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">next_num&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">origin_num&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="n">next_num&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">DEBUG&lt;/span>&lt;span class="err">$&lt;/span> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d (jump into black hole after step %d)&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next_num&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">step_count&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">clean_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">ret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">search_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next_num&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">DEBUG&lt;/span>&lt;span class="err">$&lt;/span> &lt;span class="n">print_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">DEBUG&lt;/span>&lt;span class="err">$&lt;/span> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d (infinit loop after %d step)&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next_num&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">step_count&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">clean_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">ret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="n">origin_num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">next_num&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">insert_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">origin_num&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">step_count&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">int_to_char_arr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">next_num&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span> &lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">free&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">arr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="n">ret&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">argc&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">argv&lt;/span>&lt;span class="p">[])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="cm">/* #define TEST_NODE */&lt;/span>
+&lt;span class="cm">/* #define TEST_PRE */&lt;/span>
+&lt;span class="cp">#ifdef TEST_NODE
+&lt;/span>&lt;span class="cp">&lt;/span> &lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">init_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">insert_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">insert_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">insert_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">print_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">clean_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="cp">#elif defined(TEST_PRE)
+&lt;/span>&lt;span class="cp">&lt;/span> &lt;span class="n">calc_kaprekar_constant&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;13&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="cm">/* 31-13=18 */&lt;/span>
+&lt;span class="cm">/* 81-18=63 */&lt;/span>
+&lt;span class="cm">/* 63-36=27 */&lt;/span>
+&lt;span class="cm">/* 72-27=45 */&lt;/span>
+&lt;span class="cm">/* 54-45=9 */&lt;/span>
+&lt;span class="cm">/* 90-9=81 */&lt;/span>
+&lt;span class="cm">/* 81-18=63 */&lt;/span> &lt;span class="cm">/* &amp;lt;- went to 63 again */&lt;/span>
+&lt;span class="cp">#else
+&lt;/span>&lt;span class="cp">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">argc&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="n">calc_kaprekar_constant&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">argv&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="cp">#endif
+&lt;/span>&lt;span class="cp">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="test-with-a-bash-script">Test with a Bash Script&lt;sup>&lt;a class="h__anchor" href="#test-with-a-bash-script">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="k">for&lt;/span> num in &lt;span class="k">$(&lt;/span>seq &lt;span class="nv">$1&lt;/span> &lt;span class="nv">$2&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
+./kaprekar_constant &lt;span class="nv">$num&lt;/span> &amp;gt;/dev/null
+&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="nv">$?&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="m">2&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;some number went to infinite loop&amp;#34;&lt;/span>
+&lt;span class="nb">exit&lt;/span>
+&lt;span class="k">fi&lt;/span>
+&lt;span class="k">done&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Usage: execute &lt;code>./kaprekar_constant_test.sh 1000 9999&lt;/code>, if successful, will output nothing.&lt;/p>
+&lt;h1 id="ref">Ref.&lt;sup>&lt;a class="h__anchor" href="#ref">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>&lt;a class="md__link" href="https://newbedev.com/define-macro-for-debug-printing-in-c"
+target="_blank" rel="noopener"
+>
+debug-pringing-in-c
+↗
+&lt;/a>
+&lt;/p></article></item><item><title>Dont Conform to the Norm</title><link>/2022/dont-conform-to-the-norm/</link><pubDate>Sun, 15 May 2022 18:29:01 CST</pubDate><guid>/2022/dont-conform-to-the-norm/</guid><description/><article>&lt;h1 id="dont-conform-to-the-norm">Don&amp;rsquo;t Conform To The Norm&lt;sup>&lt;a class="h__anchor" href="#dont-conform-to-the-norm">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Three concepts that lead you to conform to the norm.&lt;/p>
+&lt;ol>
+&lt;li>the individuation.&lt;/li>
+&lt;li>the inaction of others.&lt;/li>
+&lt;li>the scarcity principle.&lt;/li>
+&lt;/ol>
+&lt;h2 id="the-individuation">The Individuation&lt;sup>&lt;a class="h__anchor" href="#the-individuation">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>A person seeing themselves as a part of the bigger society or culture can
+increase their levels, but this can obscure moral elements.&lt;/p>
+&lt;h2 id="the-inaction-of-others">The Inaction of Others&lt;sup>&lt;a class="h__anchor" href="#the-inaction-of-others">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>If other&amp;rsquo;s don&amp;rsquo;t judged your immoral behavior, then it&amp;rsquo;s more likely to occur.&lt;/p>
+&lt;h2 id="the-scarcity-principle">The Scarcity Principle&lt;sup>&lt;a class="h__anchor" href="#the-scarcity-principle">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>People tend to place less value on objects or opportunities that are in
+abundance rather than those that are rare. But does those rare fitter more ?&lt;/p></article></item><item><title>Android Misc Debug</title><link>/2022/android-misc-debug/</link><pubDate>Mon, 18 Apr 2022 20:18:24 CST</pubDate><guid>/2022/android-misc-debug/</guid><description/><article>&lt;h1 id="app-crashed-when-use-androidthemeandroidstylethemedialog">App Crashed When use &lt;code>android:theme=&amp;quot;@android:style/Theme.Dialog&amp;quot;&lt;/code>&lt;sup>&lt;a class="h__anchor" href="#app-crashed-when-use-androidthemeandroidstylethemedialog">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>For Android Studio set android theme, in AndroidManifest.xml, correct the
+&lt;code>android:theme&lt;/code> value:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="nt">&amp;lt;activity&lt;/span>
+&lt;span class="na">android:name=&lt;/span>&lt;span class="s">&amp;#34;.DialogActivity&amp;#34;&lt;/span>
+&lt;span class="na">android:theme=&lt;/span>&lt;span class="s">&amp;#34;@style/Theme.AppCompat.Dialog&amp;#34;&lt;/span>
+&lt;span class="na">android:exported=&lt;/span>&lt;span class="s">&amp;#34;false&amp;#34;&lt;/span>&lt;span class="nt">/&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="comandroidsupportpercent-with-androidx">&amp;lsquo;com.android.support.percent&amp;rsquo; with AndroidX&lt;sup>&lt;a class="h__anchor" href="#comandroidsupportpercent-with-androidx">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>The new &lt;code>androidx&lt;/code> standard didn&amp;rsquo;t compatible with old &lt;code>support&lt;/code> packcage.&lt;/p>
+&lt;p>&lt;a class="md__link" href="https://blog.csdn.net/qq_21331159/article/details/114024546"
+target="_blank" rel="noopener"
+>
+无法导入‘com.android.support.percent‘(百分比布局依赖库)的解决方法
+↗
+&lt;/a>
+&lt;/p>
+&lt;h1 id="getadapterposition-always-return--1">&amp;lsquo;getAdapterPosition&amp;rsquo; always return -1&lt;sup>&lt;a class="h__anchor" href="#getadapterposition-always-return--1">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Move it into &lt;code>onBindViewHolder&lt;/code> function.&lt;/p>
+&lt;h1 id="add-local-dependencies">Add Local Dependencies&lt;sup>&lt;a class="h__anchor" href="#add-local-dependencies">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;pre>&lt;code>dependencies {
+implementation fileTree(dir: 'libs', includes: ['*.jar'])
+}
+&lt;/code>&lt;/pre>&lt;p>File-&amp;gt;Invalidate Caches-&amp;gt;Invalidate and Restart&lt;/p>
+&lt;h1 id="on-building-apk">On building APK&lt;sup>&lt;a class="h__anchor" href="#on-building-apk">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;blockquote>
+&lt;p>Generate Signed APK: Errors while building APK. You can find the errors in the &amp;lsquo;Messages&amp;rsquo; view.&lt;/p>
+&lt;/blockquote>
+&lt;p>Enlarge jvm max heap to 256m (I origin set it to 128m)&lt;/p>
+&lt;blockquote>
+&lt;p>org.gradle.jvmargs=-Xmx256m -Dfile.encoding=UTF-8&lt;/p>
+&lt;/blockquote></article></item><item><title>Install Android Studio</title><link>/2022/install-android-studio/</link><pubDate>Thu, 10 Mar 2022 17:35:43 CST</pubDate><guid>/2022/install-android-studio/</guid><description/><article>&lt;h1 id="take-care-of-my-low-memory-machine">Take Care of My Low Memory Machine&lt;sup>&lt;a class="h__anchor" href="#take-care-of-my-low-memory-machine">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;ul>
+&lt;li>Enable Power Save Mode&lt;/li>
+&lt;li>Reduce maximum heap size to 512m&lt;/li>
+&lt;li>Disable parallel compilation&lt;/li>
+&lt;li>Disable unnecessary lint checks (File&amp;gt;Settings&amp;gt;Editor)&lt;/li>
+&lt;li>Reduce maximum heap size available for Gradle. (the &lt;code>org.gradle.jvmargs&lt;/code> in
+&lt;code>gradle.properites&lt;/code> is located at project root folder, set it to 128m)&lt;/li>
+&lt;li>Debug on a physical device&lt;/li>
+&lt;/ul>
+&lt;h1 id="fix-up-avd-related-problem">Fix up AVD related problem&lt;sup>&lt;a class="h__anchor" href="#fix-up-avd-related-problem">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>(1) Add system path&lt;/p>
+&lt;blockquote>
+&lt;p>PANIC: Cannot find AVD system path. Please define &lt;code>ANDROID_SDK_ROOT&lt;/code>.&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="c1"># ~/.profile or ~/.zshenv&lt;/span>
+&lt;span class="nb">export&lt;/span> &lt;span class="nv">ANDROID_SDK_ROOT&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$HOME&lt;/span>/Android/Sdk
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>(2) Configure BIOS&lt;/p>
+&lt;blockquote>
+&lt;p>VT-x is disabled in BIOS.&lt;/p>
+&lt;/blockquote>
+&lt;p>Enable &lt;code>Intel Virtual Technology&lt;/code> in BIOS.&lt;/p>
+&lt;p>&lt;strong>Sadly to say&lt;/strong>: although AVD successful launched, it&amp;rsquo;s performance is
+really bad in low memory machine :(.&lt;/p></article></item><item><title>Try SDCC on Linux</title><link>/2022/try-sdcc-on-linux/</link><pubDate>Thu, 03 Mar 2022 11:57:17 CST</pubDate><guid>/2022/try-sdcc-on-linux/</guid><description/><article>&lt;h1 id="why-try-sdcc-on-linux">Why try SDCC on linux&lt;sup>&lt;a class="h__anchor" href="#why-try-sdcc-on-linux">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>I try sdcc on linux because I think I could spark off my interst in mcu programming again. The facts are just the opposite, I found all intersting lost to somewhere unconsciously. So I end it by collect old material thoungh I don&amp;rsquo;t think it can help for anybody. Just a record.&lt;/p>
+&lt;h1 id="getting-start">Getting Start&lt;sup>&lt;a class="h__anchor" href="#getting-start">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>mcu: STC90C52RC&lt;/p>
+&lt;p>compiler: SDCC&lt;/p>
+&lt;p>platform: linux&lt;/p>
+&lt;h1 id="prerequisites">Prerequisites&lt;sup>&lt;a class="h__anchor" href="#prerequisites">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;ul>
+&lt;li>&lt;a class="md__link" href="http://sdcc.sourceforge.net/index.php#Download"
+target="_blank" rel="noopener"
+>
+sdcc
+↗
+&lt;/a>
+&lt;/li>
+&lt;li>&lt;a class="md__link" href="https://github.com/grigorig/stcgal"
+target="_blank" rel="noopener"
+>
+stcgal
+↗
+&lt;/a>
+&lt;ul>
+&lt;li>pip3 install stcgal&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h1 id="step-by-step">Step By Step&lt;sup>&lt;a class="h__anchor" href="#step-by-step">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Compile sdcc from source:&lt;/p>
+&lt;pre>&lt;code>cd sdcc
+./configure
+&lt;/code>&lt;/pre>&lt;p>configure: error: boost library not found (boost/graph/adjacency_list.hpp).&lt;/p>
+&lt;pre>&lt;code>sudo pacman -S boost
+&lt;/code>&lt;/pre>&lt;p>configure: error: gputils (gpasm, gplink, and gplib) are required but not found.
+Either install gputils or reconfigure with &amp;ndash;disable-pic14-port and &amp;ndash;disable-pic16-port.
+configure: error: ./configure failed for device/lib/pic14&lt;/p>
+&lt;pre>&lt;code>sudo pacman -S gputils
+&lt;/code>&lt;/pre>&lt;pre>&lt;code>./configure
+make
+&lt;/code>&lt;/pre>&lt;p>wait at least 45 minutes&lt;/p>
+&lt;pre>&lt;code>sudo make install
+&lt;/code>&lt;/pre>&lt;!-- According to `sdccman.pdf` 2.2 install path -->
+&lt;p>Test sdcc compiler with &lt;code>sdcc --version&lt;/code>
+You may see:&lt;/p>
+&lt;pre>&lt;code>SDCC : mcs51/z80/z180/r2k/r2ka/r3ka/gbz80/tlcs90/ez80_z80/z80n/ds390/pic16/pic14/TININative/ds400/hc08/s08/stm8/pdk13/pdk14/pdk15 4.1.0 #12072 (Linux)
+published under GNU General Public License (GPL)
+&lt;/code>&lt;/pre>&lt;h1 id="generate-binary-file">Generate Binary File&lt;sup>&lt;a class="h__anchor" href="#generate-binary-file">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;pre>&lt;code>sdcc main.c
+packihx main.ihx
+xxd -r -p main.hex main.bin
+&lt;/code>&lt;/pre>&lt;h1 id="download-binary-file-to-flash">Download Binary File to Flash&lt;sup>&lt;a class="h__anchor" href="#download-binary-file-to-flash">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>If occur &amp;ldquo;ModuleNotFoundError: No module named &amp;lsquo;stcgal&amp;rsquo;&amp;rdquo;, try, (another way is install &amp;lsquo;stcgal&amp;rsquo; for root user):&lt;/p>
+&lt;pre>&lt;code>chown &amp;lt;username&amp;gt; /dev/ttyUSB0
+&lt;/code>&lt;/pre>&lt;p>When stuck on &amp;lsquo;Waiting for MCU, please cycle power:&amp;rsquo;, maybe you are use chip does not support by stcgal.&lt;/p>
+&lt;pre>&lt;code>stcgal -P stc89 -p /dev/ttyUSB0 main.bin
+&lt;/code>&lt;/pre>&lt;h1 id="test-code">Test code&lt;sup>&lt;a class="h__anchor" href="#test-code">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;h2 id="mainc">main.c&lt;sup>&lt;a class="h__anchor" href="#mainc">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;mcs51/8051.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;span class="cp">&lt;/span>&lt;span class="kt">void&lt;/span> &lt;span class="nf">delay&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">100&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">j&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">j&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="n">j&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">void&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">P1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mh">0xAF&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(;;)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">delay&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="n">P1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">~&lt;/span>&lt;span class="n">P1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="makefile">makefile&lt;sup>&lt;a class="h__anchor" href="#makefile">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-make" data-lang="make">&lt;span class="c"># LAST MODIFIED : March 23, 2021
+&lt;/span>&lt;span class="c"># MAKE PROGRAM : make
+&lt;/span>&lt;span class="c"># PLATFORM : unix
+&lt;/span>&lt;span class="c"># DESCRIPTION : this makefile is used to compile mcs51 program
+&lt;/span>&lt;span class="c"># -I/usr/local/share/sdcc/include/
+&lt;/span>&lt;span class="c">&lt;/span>&lt;span class="nv">CC&lt;/span> &lt;span class="o">:=&lt;/span> sdcc
+&lt;span class="nv">FLAGS&lt;/span> &lt;span class="o">:=&lt;/span>
+&lt;span class="nv">RM&lt;/span> &lt;span class="o">:=&lt;/span> rm
+&lt;span class="nv">MAIN&lt;/span> &lt;span class="o">:=&lt;/span> main
+&lt;span class="nv">REL&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="k">$(&lt;/span>patsubst %.c, %.rel, &lt;span class="k">$(&lt;/span>filter-out &lt;span class="k">$(&lt;/span>MAIN&lt;span class="k">)&lt;/span>.c, &lt;span class="k">$(&lt;/span>wildcard *.c&lt;span class="k">)))&lt;/span>
+&lt;span class="nv">DUMP&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="k">$(&lt;/span>wildcard *.asm *.lst *.rst *.sym *.map *.mem *.lk *.hex *.ihx *.rel&lt;span class="k">)&lt;/span>
+&lt;span class="nf">all&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="k">$(&lt;/span>&lt;span class="nv">REL&lt;/span>&lt;span class="k">)&lt;/span>
+&lt;span class="k">$(&lt;/span>CC&lt;span class="k">)&lt;/span> &lt;span class="k">$(&lt;/span>MAIN&lt;span class="k">)&lt;/span>.c $^
+packihx &lt;span class="k">$(&lt;/span>MAIN&lt;span class="k">)&lt;/span>.ihx &amp;gt; &lt;span class="k">$(&lt;/span>MAIN&lt;span class="k">)&lt;/span>.hex
+xxd -r -p &lt;span class="k">$(&lt;/span>MAIN&lt;span class="k">)&lt;/span>.hex &lt;span class="k">$(&lt;/span>MAIN&lt;span class="k">)&lt;/span>.bin
+&lt;span class="nf">%.rel&lt;/span>&lt;span class="o">:&lt;/span> %.&lt;span class="n">c&lt;/span>
+&lt;span class="k">$(&lt;/span>CC&lt;span class="k">)&lt;/span> -c $&amp;lt;
+&lt;span class="nf">.PHONY&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">clean&lt;/span>
+&lt;span class="nf">clean&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;span class="k">$(&lt;/span>RM&lt;span class="k">)&lt;/span> &lt;span class="k">$(&lt;/span>DUMP&lt;span class="k">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></article></item><item><title>Connect Internet From Command Line</title><link>/2021/connect-internet-from-command-line/</link><pubDate>Tue, 24 Aug 2021 11:38:54 CST</pubDate><guid>/2021/connect-internet-from-command-line/</guid><description/><article>&lt;h1 id="connect-internet-from-command-line">Connect Internet From Command Line&lt;sup>&lt;a class="h__anchor" href="#connect-internet-from-command-line">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>The &lt;code>&amp;lt;SSID&amp;gt;&lt;/code> is your wifi name.&lt;/p>
 &lt;h2 id="on-windows">On Windows&lt;sup>&lt;a class="h__anchor" href="#on-windows">¶&lt;/a>&lt;/sup>&lt;/h2>
 &lt;p>Connect to WIFI: &lt;code>netsh wlan connect name=&amp;lt;SSID&amp;gt;&lt;/code>&lt;/p>
@@ -212,933 +1046,124 @@ token-authentication-requirements-for-git-operations
 &lt;pre>&lt;code>git remote -v
 &lt;/code>&lt;/pre>&lt;p>Then Change remote&amp;rsquo;s URL from HTTPS to SSH.&lt;/p>
 &lt;pre>&lt;code>git remote set-url origin git@github.com:user/repository.git
-&lt;/code>&lt;/pre></article></item><item><title>Keep Away From Social Media</title><link>/2021/keep-away-from-social-media/</link><pubDate>Tue, 11 May 2021 12:36:49 CST</pubDate><guid>/2021/keep-away-from-social-media/</guid><description/><article>&lt;h1 id="keep-away-from-social-media">Keep Away From Social Media&lt;sup>&lt;a class="h__anchor" href="#keep-away-from-social-media">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>As an anti-social(the people not on social media), I strongly advised
-you to keep away from social media.&lt;/p>
-&lt;p>The first point about social media is the addictiveness.&lt;/p>
-&lt;p>Nobody really wants to spend hours and hours every day,
-updating their status and seeing what other people think about them.
-Nobody consciously wants to do that.&lt;/p>
-&lt;p>But those behaviors are themselves-addictive behaviors, what you&amp;rsquo;re
-trapped in that loop. It&amp;rsquo;s very hard to break out.&lt;/p>
-&lt;p>It&amp;rsquo;s not that we want to go back to some interlink past and Eden before
-the machines existed.
-It&amp;rsquo;s that we need to take control of these machines and use them for
-their proper end.&lt;/p>
-&lt;h1 id="the-fact-20-people-not-active-on-social-media">The Fact: 20% People Not Active on Social Media&lt;sup>&lt;a class="h__anchor" href="#the-fact-20-people-not-active-on-social-media">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>The bad thing is that you think people&amp;rsquo;s lives is much more fun than your own life.
-When I&amp;rsquo;m on the bus or walk through the street, I just see people like zombies.&lt;/p>
-&lt;h1 id="advantages-of-present-face-to-face">Advantages of Present Face to Face&lt;sup>&lt;a class="h__anchor" href="#advantages-of-present-face-to-face">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;/code>&lt;/pre></article></item><item><title>About Nagging</title><link>/2021/about-nagging/</link><pubDate>Fri, 21 May 2021 12:36:29 CST</pubDate><guid>/2021/about-nagging/</guid><description/><article>&lt;p>&lt;em>Anonymous reprinting this article due to unknown source.&lt;/em>&lt;/p>
+&lt;p>Nagging is the dispiriting, unpleasant, counter-productive but wholly
+understandable and poignant version of a hugely noble ambition the desire to
+change other people.&lt;/p>
+&lt;p>There is so much we might fairly want to change about them.&lt;/p>
+&lt;p>We&amp;rsquo;re an entirely imperfect lot and therefore we want other people to be more
+self-aware, punctual, generous, reliable, introspective, resilient,
+communicative, profound.&lt;/p>
+&lt;p>At home, we want them to focus more on the sink, the children, the bins, the
+money and the need to put the phone down and look up.&lt;/p>
+&lt;p>At a macro-dimension, we want people to think more about the suffering of
+encaged animals the destruction of our habitat and the iniquities of
+international capitalism.&lt;/p>
+&lt;p>&lt;strong>Most of us, very far from our ideal selves.&lt;/strong>&lt;/p>
+&lt;p>And at the level of the species, we come close to an evolutionary error.&lt;/p>
+&lt;p>The desire to change people is therefore no pathology.&lt;/p>
+&lt;p>It&amp;rsquo;s a clear-sighted recognition of the scale of human wickedness.&lt;/p>
+&lt;p>Nagging is, in its essence, an attempt at teaching, at getting an idea for
+improvement from one mind into another.&lt;/p>
+&lt;p>But it&amp;rsquo;s also a version of teaching that has given up hope.&lt;/p>
+&lt;p>It has descended into an attempt to insist rather than invite to coerce rather
+than charm.&lt;/p>
+&lt;p>One is too panicked by the thought of the unteachable student is ruining one&amp;rsquo;s
+life to find the inner resources to see it a little more from their point of
+view.&lt;/p>
+&lt;p>It&amp;rsquo;s one&amp;rsquo;s own suffering that dominates all the available imaginative capacity.&lt;/p>
+&lt;p>And so one gets straight to the point, gets rid of garlands, omits the honey
+and says it in plain terms.&lt;/p>
+&lt;p>&amp;ldquo;The bins nee attention now.&amp;rdquo;&lt;/p>
+&lt;p>&amp;ldquo;Get to the table immediately&amp;rdquo;&lt;/p>
+&lt;p>&amp;ldquo;You&amp;rsquo;re a selfish layabout.&amp;rdquo;&lt;/p>
+&lt;p>&amp;ldquo;Not there, here &amp;hellip;&amp;rdquo;&lt;/p>
+&lt;p>One isn&amp;rsquo;t wrong. One is really very right, but also very tired and deep down,
+quite sad.&lt;/p>
+&lt;p>Lamentably, also, it just doesn&amp;rsquo;t work.&lt;/p>
+&lt;p>By the time one start to humiliating the student, the lesson is over.&lt;/p>
+&lt;p>Nagging breeds its evil twin, shirking.&lt;/p>
+&lt;p>The other pretends to read the paper, goes upstairs and feels righteous.&lt;/p>
+&lt;p>The shrillness of one&amp;rsquo;s tone gives them all the excuse they need to trust that
+we have nothing kind or true to tell them.&lt;/p>
+&lt;p>One changes other people only when the desire that they change has not reached
+an insistent pitch, when we can still bear that they remain as they are.&lt;/p>
+&lt;p>All of us improve only when we have not been badgered or made to feel guilty,
+only when we have a sense that we are loved and deeply understood for the many
+reasons why change is so hard for us.&lt;/p>
+&lt;p>We know, of course, the bins need our attention, that we should strive to get
+to bed earlier and that we have been a disappointment in the couple.&lt;/p>
+&lt;p>But we can&amp;rsquo;t to hear these lessons in an unsympathetic tone.&lt;/p>
+&lt;p>We want tricky children that we are to be indulged for our ambivalence about
+becoming better people.&lt;/p>
+&lt;p>The same obtuse dynamic is a play at the political level.&lt;/p>
+&lt;p>We know we shouldn&amp;rsquo;t abuse the planet, bend rules or close our hearts to the
+unfortunate.&lt;/p>
+&lt;p>But we won&amp;rsquo;t do any of the good things if a dour figure wags his finger and
+delivers stern lectures.&lt;/p>
+&lt;p>We want to be charmed not dragged into goodness.&lt;/p>
+&lt;p>The tragedy of nagging is that its causes are usually so noble and yet that it
+doesn&amp;rsquo;t work.&lt;/p>
+&lt;p>We nag because we feel that our possession of the truth lets us off having to
+convey it elegantly.&lt;/p>
+&lt;p>It never does.&lt;/p>
+&lt;p>The solution to nagging isn&amp;rsquo;t to give up trying to get others to do what we
+want.&lt;/p>
+&lt;p>Rather, it&amp;rsquo;s to recognise that persuasion always needs to occur in terms that
+make sense to those who so badly need to be altered.&lt;/p></article></item><item><title>Fast Cd Keymap in Zsh</title><link>/2021/fast-cd-keymap-in-zsh/</link><pubDate>Sun, 16 May 2021 11:06:47 CST</pubDate><guid>/2021/fast-cd-keymap-in-zsh/</guid><description/><article>&lt;h1 id="fast-cd-keymap-in-zsh">Fast &lt;code>cd&lt;/code> Keymap in Zsh&lt;sup>&lt;a class="h__anchor" href="#fast-cd-keymap-in-zsh">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>&lt;strong>TL;DR&lt;/strong>:&lt;/p>
 &lt;ol>
-&lt;li>you can get the feedback, know either stop right there or tell them more&lt;/li>
-&lt;li>you might withhold a certain opinion rather than being kind of rapid-fire&lt;/li>
-&lt;li>you can read the nuance more accurately in the air&lt;/li>
+&lt;li>paste below code to your &lt;code>.zshrc&lt;/code>&lt;/li>
+&lt;li>run &lt;code>source ~/.zshrc&lt;/code>&lt;/li>
+&lt;li>now you have two keys&lt;/li>
 &lt;/ol>
-&lt;p>&lt;strong>The best thing is not to just shoot your mouth off online&lt;/strong>, if you want save
-you a touch of elegance.&lt;/p>
-&lt;p>The thing is the world is real whether we want to believe it or not and it&amp;rsquo;s really
-important for us to have a sense of where we are in that world.&lt;/p>
-&lt;h1 id="deficiency-of-social-media">Deficiency of Social Media&lt;sup>&lt;a class="h__anchor" href="#deficiency-of-social-media">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>I don&amp;rsquo;t like to use the term &amp;ldquo;social media&amp;rdquo; at the end of the day because it implies
-that it&amp;rsquo;s designed to promote social behaviors when usually it&amp;rsquo;s designed to
-promote the amount of attention that we&amp;rsquo;re giving it.&lt;/p>
-&lt;p>In order to grab our attention because there&amp;rsquo;s so much competition design has to
-appeal to the lower parts of us to the kind of non-rational, automatic, impulsive
-parts of us, and so this is why we get things like clickbait, like sensationalism
-, things that appeal to our outrage.&lt;/p>
-&lt;p>There&amp;rsquo;s a whole industry of consultants, psychologists who are are helping
-designers really punch the right buttons in our brains, so that we do keep
-coming back for more and we do stay hooked on the products.&lt;/p>
-&lt;p>&lt;strong>Be aware, their advertising system is not really social platforms&lt;/strong>.&lt;/p>
-&lt;h1 id="conclusion">Conclusion&lt;sup>&lt;a class="h__anchor" href="#conclusion">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>Since 63% of the global population (4.8 billion people) is not active
-on social media, it&amp;rsquo;s high time to stop the clever capitalism to kept you
-on your leash, to stop their robbing your time, physical and mental health.&lt;/p>
-&lt;p>The things that are the most worthwhile and most fulfilling, is the things
-that you take the most work and spend a lot of time on. Those are their
-pleasures that are self-actualizing that help you realize a part of yourself
-you didn&amp;rsquo;t have.&lt;/p></article></item><item><title>Clang Compile Error</title><link>/2021/clang-compile-error/</link><pubDate>Fri, 26 Mar 2021 14:36:26 CST</pubDate><guid>/2021/clang-compile-error/</guid><description/><article>&lt;h1 id="errors-about-missing-include-files">Errors About Missing Include Files&lt;sup>&lt;a class="h__anchor" href="#errors-about-missing-include-files">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>When I try to use &lt;code>clang&lt;/code> compile c code on windows with &lt;code>mingw32-w64&lt;/code>, The error information is:&lt;/p>
-&lt;pre>&lt;code>clang: warning: unable to find a Visual Studio installation;
-try running Clang from a developer command prompt [-Wmsvc-not-found]
-test.c:1:10: fatal error: 'stdio.h' file not found
-#include &amp;lt;stdio.h&amp;gt;
-^~~~~~~~~
-1 error generated.
-&lt;/code>&lt;/pre>&lt;p>Use &lt;code>clang -v&lt;/code> you can see &lt;code>Target: x86_64-pc-windows-msvc&lt;/code> and use &lt;code>gcc -v&lt;/code>, print the target is &lt;code>x86_64-w64-mingw32&lt;/code>.&lt;/p>
-&lt;h1 id="use-correct-compile-flags">Use Correct Compile Flags&lt;sup>&lt;a class="h__anchor" href="#use-correct-compile-flags">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>On Windows, there are two toolchains worth mentioning: the Visual C++ toolchain, and the MinGw toolchain.&lt;/p>
-&lt;p>Actually, clang doesn&amp;rsquo;t ship with its own complete toolchain. It always integrates with whatever standard C/C++ libs and headers the native platform uses.&lt;/p>
-&lt;p>&lt;strong>Solution&lt;/strong>: To compile successfully, you need to know your compiler target (for me it is &lt;code>x86_64-w64-mingw32&lt;/code>), then use target flag as
-&lt;code>clang --target=x86_64-w64-mingw32 test.c&lt;/code>&lt;/p>
-&lt;h1 id="persistent-compile-flags">Persistent Compile Flags&lt;sup>&lt;a class="h__anchor" href="#persistent-compile-flags">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>Create a file called &lt;code>compile_flags.txt&lt;/code>. This should contain one argument per line. The same flags will be used to compile any file.&lt;/p>
-&lt;p>Example:&lt;/p>
-&lt;pre>&lt;code>--target=x86_64-w64-mingw32
-&lt;/code>&lt;/pre>&lt;p>Also see &lt;a class="md__link" href="https://clang.llvm.org/docs/JSONCompilationDatabase.html"
-target="_blank" rel="noopener"
->
-the compile_commands.json specification
-↗
-&lt;/a>
-.&lt;/p>
-&lt;h1 id="some-target-architectures">Some Target Architectures&lt;sup>&lt;a class="h__anchor" href="#some-target-architectures">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;pre>&lt;code>arm-none-eabi
-armv7a-none-eabi
-arm-linux-gnueabihf
-arm-none-linux-gnueabi
-i386-pc-linux-gnu
-x86_64-apple-darwin10
-i686-w64-windows-gnu # same as i686-w64-mingw32
-x86_64-pc-linux-gnu # from ubuntu 64 bit
-x86_64-unknown-windows-cygnus # cygwin 64-bit
-x86_64-w64-windows-gnu # same as x86_64-w64-mingw32
-i686-pc-windows-gnu # MSVC
-x86_64-pc-windows-gnu # MSVC 64-BIT
-&lt;/code>&lt;/pre>
-&lt;p>see &lt;a class="md__link" href="https://clang.llvm.org/docs/CrossCompilation.html"
-target="_blank" rel="noopener"
->
-cross compiilation
-↗
-&lt;/a>
-&lt;/p>
-&lt;p>see &lt;a class="md__link" href="https://clangd.llvm.org/config.html"
-target="_blank" rel="noopener"
->
-clangd config
-↗
-&lt;/a>
-&lt;/p></article></item><item><title>Bullet Journal</title><link>/2021/bullet-journal/</link><pubDate>Sun, 07 Feb 2021 09:06:31 CST</pubDate><guid>/2021/bullet-journal/</guid><description/><article>&lt;p>BuJo aka. &amp;ldquo;&lt;a class="md__link" href="https://bulletjournal.com/"
-target="_blank" rel="noopener"
->
-Bullet Journal
-↗
-&lt;/a>
-&amp;rdquo;, is a rapid logging technique.&lt;/p>
-&lt;h1 id="notations">Notations&lt;sup>&lt;a class="h__anchor" href="#notations">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th style="text-align:center">symbol&lt;/th>
-&lt;th style="text-align:left">denotation&lt;/th>
-&lt;th style="text-align:left">explain&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td style="text-align:center">●&lt;/td>
-&lt;td style="text-align:left">Tasks&lt;/td>
-&lt;td style="text-align:left">Task incomplete&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align:center">×&lt;/td>
-&lt;td style="text-align:left">Tasks&lt;/td>
-&lt;td style="text-align:left">Task complete&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align:center">&amp;gt;&lt;/td>
-&lt;td style="text-align:left">Tasks&lt;/td>
-&lt;td style="text-align:left">Task Migrated into collection&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align:center">&amp;lt;&lt;/td>
-&lt;td style="text-align:left">Tasks&lt;/td>
-&lt;td style="text-align:left">Task scheduled into Future Log&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align:center">-&lt;/td>
-&lt;td style="text-align:left">Notes&lt;/td>
-&lt;td style="text-align:left">Things you don&amp;rsquo;t want to forget&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align:center">○&lt;/td>
-&lt;td style="text-align:left">Events&lt;/td>
-&lt;td style="text-align:left">Noteworth moments in time&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align:center">*&lt;/td>
-&lt;td style="text-align:left">Signifier&lt;/td>
-&lt;td style="text-align:left">High priority&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align:center">!&lt;/td>
-&lt;td style="text-align:left">Signifier&lt;/td>
-&lt;td style="text-align:left">Great ideas, Inspiration&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h1 id="start-bujo">Start BuJo&lt;sup>&lt;a class="h__anchor" href="#start-bujo">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>I love to keep all things simplicity, i.e. KISS principle. So I only to choose part of core preception on BuJo rather than to use complete one.&lt;br>
-I use five notations, &amp;ldquo;●&amp;rdquo;, &amp;ldquo;×&amp;rdquo;, &amp;ldquo;&amp;gt;&amp;rdquo;, &amp;ldquo;-&amp;rdquo;, &amp;ldquo;○&amp;rdquo;. Here are some reason why I turn down others.&lt;br>
-The &amp;ldquo;&amp;lt;&amp;rdquo; may be forget after I complete the note, because each note should be ephemeral for my daily routines.&lt;br>
-The &amp;ldquo;*&amp;rdquo; will aggravated my procarstination because it require extra energy (limited and precious willpower).&lt;br>
-The &amp;ldquo;!&amp;rdquo;, not standout enough for a genius insight.&lt;br>
-Some important rule:&lt;/p>
 &lt;ul>
-&lt;li>only keep yesterday&amp;rsquo;s note.&lt;/li>
-&lt;li>before start today&amp;rsquo;s note, review yesterday&amp;rsquo;s note.&lt;/li>
-&lt;li>each note should be casually, it can&amp;rsquo;t do heavy tasks, just do micro tasks.&lt;/li>
-&lt;li>do not sad to your squiggle.&lt;/li>
+&lt;li>&lt;kbd>Alt&lt;/kbd> + &lt;kbd>k&lt;/kbd>: go upper directory.&lt;/li>
+&lt;li>&lt;kbd>Alt&lt;/kbd> + &lt;kbd>j&lt;/kbd>: undo above action.&lt;/li>
 &lt;/ul>
-&lt;section class="footnotes" role="doc-endnotes">
-&lt;hr>
-&lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
-&lt;p>&amp;ldquo;Use it sparingly. If everything is a priority, nothing is.&amp;rdquo; &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;/section></article></item><item><title>ChartJs Notes</title><link>/2021/chartjs-notes/</link><pubDate>Fri, 05 Feb 2021 09:25:31 CST</pubDate><guid>/2021/chartjs-notes/</guid><description/><article>&lt;p>Draw chart use javascript canvas, official site &lt;a href="https://www.chartjs.org/">https://www.chartjs.org/&lt;/a>&lt;/p>
-&lt;h1 id="line">Line&lt;sup>&lt;a class="h__anchor" href="#line">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;canvas id="b394ed42cffe8973512d83d48ca57ade">&lt;/canvas>&lt;script type="text/javascript">new Chart("b394ed42cffe8973512d83d48ca57ade",
-{
-type: 'line',
-data: {
-labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-datasets: [{
-label: 'My First dataset',
-backgroundColor: '#ff00ff',
-borderColor: '#cc0000',
-fill: false,
-data: [0, 10, 5, 2, 20, 30, 45]
-},
-{
-label: 'My Second dataset',
-backgroundColor: '#ff00ff',
-borderColor: '#0000cc',
-fill: false,
-data: [0, 9, 5, 3, 30, 20, 55]
-}]
-},
-options: {
-title: {
-display: true,
-text: 'Custom Chart Title'
-},
-scales: {
-xAxes: [{
-display: true,
-scaleLabel: {
-display: true,
-labelString: 'Month'
-}
-}],
-yAxes: [{
-display: true,
-scaleLabel: {
-display: true,
-labelString: 'Value'
-}
-}]
-}
-}
-}
-);&lt;/script>
-&lt;h1 id="bar">Bar&lt;sup>&lt;a class="h__anchor" href="#bar">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;canvas id="85c79a68a3ab98afbebc6ad73755fbc2">&lt;/canvas>&lt;script type="text/javascript">new Chart("85c79a68a3ab98afbebc6ad73755fbc2",
-{
-type: 'bar',
-data: {
-labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-datasets: [{
-label: 'My First dataset',
-backgroundColor: '#ffffff00',
-borderColor: '#cc0000',
-borderWidth: 2,
-data: [26,1,15,12,20,30,45],
-}]
-}
-}
-);&lt;/script>
-&lt;h1 id="radar">Radar&lt;sup>&lt;a class="h__anchor" href="#radar">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;canvas id="fcc4d7c537a78f60170d8bfd5e9e60bb">&lt;/canvas>&lt;script type="text/javascript">new Chart("fcc4d7c537a78f60170d8bfd5e9e60bb",
-{
-type: 'radar',
-data: {
-labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-datasets: [{
-label: 'My First dataset',
-backgroundColor: '#ff000040',
-borderColor: '#cc0000',
-borderWidth: 2,
-data: [26,1,15,12,20,30,45],
-}]
-}
-}
-);&lt;/script>
-&lt;h1 id="doughnut">Doughnut&lt;sup>&lt;a class="h__anchor" href="#doughnut">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;canvas id="dd2d33ce9ccdaadbbb771d6d68adddae">&lt;/canvas>&lt;script type="text/javascript">new Chart("dd2d33ce9ccdaadbbb771d6d68adddae",
-{
-type: 'doughnut',
-data: {
-labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-datasets: [{
-label: 'My First dataset',
-backgroundColor: ['#ff000040','#0000ff40','#00ff0040','#ffff0040','#ff00ff40','#00ffff40','#f0f0f040'],
-borderColor: '#cccccc',
-borderWidth: 1,
-data: [26,1,15,12,20,30,45],
-}]
-}
-}
-);&lt;/script>
-&lt;h1 id="pie">Pie&lt;sup>&lt;a class="h__anchor" href="#pie">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;canvas id="766be1b0915fd89a7630bd1d53e78eba">&lt;/canvas>&lt;script type="text/javascript">new Chart("766be1b0915fd89a7630bd1d53e78eba",
-{
-type: 'pie',
-data: {
-labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-datasets: [{
-label: 'My First dataset',
-backgroundColor: ['#ff000040','#0000ff40','#00ff0040','#ffff0040','#ff00ff40','#00ffff40','#f0f0f040'],
-borderColor: '#cccccc',
-borderWidth: 1,
-data: [26,1,15,12,20,30,45],
-}]
-}
-}
-);&lt;/script>
-&lt;h1 id="polar-area">Polar Area&lt;sup>&lt;a class="h__anchor" href="#polar-area">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;canvas id="e8de3659b292f6b7dd60a94ef2908905">&lt;/canvas>&lt;script type="text/javascript">new Chart("e8de3659b292f6b7dd60a94ef2908905",
-{
-type: 'polarArea',
-data: {
-labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-datasets: [{
-label: 'My First dataset',
-backgroundColor: ['#ff000040','#0000ff40','#00ff0040','#ffff0040','#ff00ff40','#00ffff40','#f0f0f040'],
-borderColor: '#cccccc',
-borderWidth: 1,
-data: [26,1,15,12,20,30,45],
-}]
-}
-}
-);&lt;/script>
-&lt;h1 id="bubble">Bubble&lt;sup>&lt;a class="h__anchor" href="#bubble">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;canvas id="213d5ac84a8fc49f1fa45fce5cfb41e8">&lt;/canvas>&lt;script type="text/javascript">new Chart("213d5ac84a8fc49f1fa45fce5cfb41e8",
-{
-type: 'bubble',
-data: {
-labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-datasets: [{
-label: 'My First dataset',
-backgroundColor: '#ff000040',
-borderColor: '#cccccc',
-borderWidth: 1,
-data: [{"x":20,"y":30,"r":15},{"x":40,"y":10,"r":10}],
-}]
-}
-}
-);&lt;/script>
-&lt;h1 id="scatter">Scatter&lt;sup>&lt;a class="h__anchor" href="#scatter">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;canvas id="b98348f216cb778a88d4fcc9efb17df6">&lt;/canvas>&lt;script type="text/javascript">new Chart("b98348f216cb778a88d4fcc9efb17df6",
-{
-type: 'bubble',
-data: {
-labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-datasets: [{
-label: 'My First dataset',
-backgroundColor: '#ff000040',
-borderColor: '#cccccc',
-borderWidth: 1,
-data: [
-{"x":-10,"y":0},
-{"x":0,"y":10},
-{"x":10,"y":50}
-],
-}]
-}
-}
-);&lt;/script>
-&lt;h1 id="mixed-chart">Mixed Chart&lt;sup>&lt;a class="h__anchor" href="#mixed-chart">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;canvas id="65fab51f1a7403437beb05fb03e96534">&lt;/canvas>&lt;script type="text/javascript">new Chart("65fab51f1a7403437beb05fb03e96534",
-{
-type: 'bar',
-data: {
-labels: ['January', 'February', 'March', 'April'],
-datasets: [{
-label: 'Bar Dataset',
-backgroundColor: '#ff000040',
-data: [10, 20, 30, 40]
-}, {
-label: 'Line Dataset',
-backgroundColor: '#ff000040',
-borderColor: '#00ff0040',
-fill: false,
-data: [50, 40, 50, 50],
-type: 'line'
-}]
-}
-}
-);&lt;/script></article></item><item><title>Git and Github Notes</title><link>/2021/git-and-github-notes/</link><pubDate>Thu, 04 Feb 2021 14:09:43 CST</pubDate><guid>/2021/git-and-github-notes/</guid><description/><article>&lt;h1 id="git">Git&lt;sup>&lt;a class="h__anchor" href="#git">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>install &lt;a class="md__link" href="https://git-scm.com/"
-target="_blank" rel="noopener"
->
-git
-↗
-&lt;/a>
-&lt;/p>
-&lt;h2 id="know-terms">know terms&lt;sup>&lt;a class="h__anchor" href="#know-terms">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th style="text-align:left">Name&lt;/th>
-&lt;th style="text-align:left">Desc.&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td style="text-align:left">working directory (tree)&lt;/td>
-&lt;td style="text-align:left">your files entity&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align:left">stash&lt;/td>
-&lt;td style="text-align:left">store latest changes which may leads to conflict&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align:left">staging area (stage or index)&lt;/td>
-&lt;td style="text-align:left">diff record&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align:left">repository (repo)&lt;/td>
-&lt;td style="text-align:left">contains all working fruits for you&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align:left">SHA (commit id)&lt;/td>
-&lt;td style="text-align:left">unique hash commit id&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h2 id="help-your-self">help your self&lt;sup>&lt;a class="h__anchor" href="#help-your-self">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>&lt;code>git &amp;lt;cmd&amp;gt; --help&lt;/code> view command&amp;rsquo;s detail.&lt;/p>
-&lt;h2 id="set-up-personal-information">set up personal information&lt;sup>&lt;a class="h__anchor" href="#set-up-personal-information">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;pre>&lt;code>git config --global user.name &amp;quot;your name&amp;quot;
-git config --global user.email &amp;quot;your email&amp;quot;
-git config --global core.editor &amp;quot;vim&amp;quot;
-git config --global color.ui true
-&lt;/code>&lt;/pre>&lt;h2 id="save-your-password">save your password&lt;sup>&lt;a class="h__anchor" href="#save-your-password">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;pre>&lt;code>git config --global credential.helper store
-git config --global credential.helper 'cache --timeout=3600'
-&lt;/code>&lt;/pre>&lt;h2 id="first-commit">first commit&lt;sup>&lt;a class="h__anchor" href="#first-commit">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;pre>&lt;code>git init
-# create [file], edit it
-git add [file]
-git commit -m &amp;quot;first commit&amp;quot;
-git commit -v
-&lt;/code>&lt;/pre>&lt;h2 id="file-ops">file ops&lt;sup>&lt;a class="h__anchor" href="#file-ops">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;pre>&lt;code>git add .
-git rm [file] # remove from tree
-git rm --cached [file] # remove from stage
-git rm -f [file] # remove from stage and tree
-git mv [old] [new]
-git commit -m &amp;quot;message&amp;quot;
-&lt;/code>&lt;/pre>&lt;h2 id="see-what-is-changed">see what is changed&lt;sup>&lt;a class="h__anchor" href="#see-what-is-changed">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;pre>&lt;code>git status
-git diff [file] # diff from stage
-git diff [--cached|--staged][HEAD|SHA]
-git diff [SHA1|SHA2]
-git log --pretty=oneline
-git blame &amp;lt;file&amp;gt; [-L line1,+len]
-&lt;/code>&lt;/pre>&lt;h2 id="undo-and-redo">undo and redo&lt;sup>&lt;a class="h__anchor" href="#undo-and-redo">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;pre>&lt;code>git checkout -- [file] # check out from stage
-git commit -ammend -m 'Fixxes bug #43'
-git reflog # show SHA
-git reset --soft [SHA] # repo -&amp;gt; SHA
-git reset --mixed [SHA] # stage &amp;amp; repo -&amp;gt; SHA
-git reset --hard [SHA] # tree &amp;amp; stage &amp;amp; repo -&amp;gt; SHA
-&lt;/code>&lt;/pre>&lt;h2 id="branch">branch&lt;sup>&lt;a class="h__anchor" href="#branch">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;h3 id="new-branch">new branch&lt;sup>&lt;a class="h__anchor" href="#new-branch">¶&lt;/a>&lt;/sup>&lt;/h3>
-&lt;pre>&lt;code>git branch [new] [SHA|tag]
-git checkout -b [new] [SHA|tag]
-&lt;/code>&lt;/pre>&lt;h3 id="switch-to-branch">switch to branch&lt;sup>&lt;a class="h__anchor" href="#switch-to-branch">¶&lt;/a>&lt;/sup>&lt;/h3>
-&lt;pre>&lt;code>git branch [-a]
-git checkout [branch]
-git switch [branch]
-&lt;/code>&lt;/pre>&lt;h3 id="sort-branch">sort branch&lt;sup>&lt;a class="h__anchor" href="#sort-branch">¶&lt;/a>&lt;/sup>&lt;/h3>
-&lt;pre>&lt;code>git branch -m [new_name]
-git merge [other_newer]
-git rebase [branch]
-git rebase [branch] [to_branch]
-git cherry-pick [SHA1] [SHA2] [SHA3]
-git rebase -i [SHA]
-&lt;/code>&lt;/pre>&lt;h3 id="delete-branch">delete branch&lt;sup>&lt;a class="h__anchor" href="#delete-branch">¶&lt;/a>&lt;/sup>&lt;/h3>
-&lt;pre>&lt;code>git branch -d [which]
-git push -d origin [remote_branch]
-&lt;/code>&lt;/pre>&lt;h3 id="temp-branch">temp branch&lt;sup>&lt;a class="h__anchor" href="#temp-branch">¶&lt;/a>&lt;/sup>&lt;/h3>
-&lt;pre>&lt;code>git stash
-git switch [branch_B]
-# ... do sth.
-git switch [branch_A]
-git stash pop
-git stash list
-git stash clear
-git stash pop stash@{2}
-&lt;/code>&lt;/pre>&lt;h1 id="github">Github&lt;sup>&lt;a class="h__anchor" href="#github">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>register in &lt;a class="md__link" href="https://github.com/"
-target="_blank" rel="noopener"
->
-github
-↗
-&lt;/a>
-&lt;/p>
-&lt;h2 id="link-to-remote-repo">link to remote repo&lt;sup>&lt;a class="h__anchor" href="#link-to-remote-repo">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;ol>
-&lt;li>create new repo on github.&lt;/li>
-&lt;li>add one commit in your local repo.&lt;/li>
-&lt;/ol>
-&lt;pre>&lt;code>git remote add origin main
-git push -u origin main
-&lt;/code>&lt;/pre>&lt;p>Then, next time use &lt;code>git push origin main&lt;/code>&lt;/p>
-&lt;h2 id="get-new-update-from-remote-repo">get new update from remote repo&lt;sup>&lt;a class="h__anchor" href="#get-new-update-from-remote-repo">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;pre>&lt;code>git fetch # Update 'origin master' from remote
-git pull # = git fetch + git merge
-git pull --all # Fetch all remotes
-&lt;/code>&lt;/pre>&lt;h2 id="regret-after-push">regret after push&lt;sup>&lt;a class="h__anchor" href="#regret-after-push">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;pre>&lt;code>git revert [SHA]
-git push [-all]
-&lt;/code>&lt;/pre>&lt;h2 id="tag">tag&lt;sup>&lt;a class="h__anchor" href="#tag">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;pre>&lt;code>git log --pretty=oneline --abbrev-commit
-git tag # local tags
-git ls-remote --tag # remote tags
-git tag &amp;lt;tagname&amp;gt; [-m&amp;quot;&amp;lt;msg&amp;gt;&amp;quot;][SHA] # create tag
-git tag -d &amp;lt;del_tagname&amp;gt; # del tag
-git push origin &amp;lt;tagname&amp;gt; # push tag
-git push origin --tags # push all tag
-git push -d origin &amp;lt;remote_tag&amp;gt; # del tags
-&lt;/code>&lt;/pre>&lt;h1 id="problem">Problem&lt;sup>&lt;a class="h__anchor" href="#problem">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;h2 id="git-add">git add&lt;sup>&lt;a class="h__anchor" href="#git-add">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
-&lt;blockquote>
-&lt;p>LF will be replaced by CRLF&lt;/p>
-&lt;/blockquote>
-&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
-&lt;p>use unix format file on windows.&lt;/p>
-&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
-&lt;p>use tool &amp;ldquo;unix2dos&amp;rdquo;, convert LF to CRLF.
-or change autocrlf settings:&lt;/p>
-&lt;pre>&lt;code>git config --global core.autocrlf false # default is true
-&lt;/code>&lt;/pre>&lt;h2 id="git-rm">git rm&lt;sup>&lt;a class="h__anchor" href="#git-rm">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
-&lt;blockquote>
-&lt;p>git rm - fatal: pathspec did not match any files&lt;/p>
-&lt;/blockquote>
-&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
-&lt;p>unknow.&lt;/p>
-&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
-&lt;pre>&lt;code>git add .
-git rm -f [files]
-&lt;/code>&lt;/pre>&lt;h2 id="git-remote-add">git remote add&lt;sup>&lt;a class="h__anchor" href="#git-remote-add">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
-&lt;blockquote>
-&lt;p>git remote add origin &amp;lt;your_git:account&amp;gt;
-fatal: remote origin already exists.&lt;/p>
-&lt;/blockquote>
-&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
-&lt;p>unknow&lt;/p>
-&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
-&lt;pre>&lt;code>git remote rm origin
-&lt;/code>&lt;/pre>&lt;h2 id="git-pull">git pull&lt;sup>&lt;a class="h__anchor" href="#git-pull">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
-&lt;blockquote>
-&lt;p>commit your changes or stash them before you can merge.&lt;/p>
-&lt;/blockquote>
-&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
-&lt;p>local file contains unpushed changes.&lt;/p>
-&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
-&lt;ol>
-&lt;li>stash them&lt;/li>
-&lt;/ol>
-&lt;pre>&lt;code>git stash
-git pull
-git stash pop
-git diff
-&lt;/code>&lt;/pre>&lt;ol start="2">
-&lt;li>discard local changes&lt;/li>
-&lt;/ol>
-&lt;pre>&lt;code>git reset --hard
-git pull
-&lt;/code>&lt;/pre>&lt;h2 id="git-push">git push&lt;sup>&lt;a class="h__anchor" href="#git-push">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
-&lt;blockquote>
-&lt;p>git push origin master
-error: failed to push some refs to&lt;/p>
-&lt;/blockquote>
-&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
-&lt;p>forgot to synchronized remote repo before push.&lt;/p>
-&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
-&lt;ol>
-&lt;li>use &lt;code>git push -f&lt;/code>.&lt;/li>
-&lt;li>merge from remote repo&lt;/li>
-&lt;/ol>
-&lt;pre>&lt;code>git pull --rebase origin main
-git push -u main
-&lt;/code>&lt;/pre>&lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
-&lt;blockquote>
-&lt;p>fatal: could not read Username for &amp;lsquo;&lt;a href="https://github.com">https://github.com&lt;/a>&amp;rsquo;: No such file or directory&lt;/p>
-&lt;/blockquote>
-&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
-&lt;p>credential expired!&lt;/p>
-&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
-&lt;p>reinstall credential or upgrade git or use ssh.&lt;/p>
-&lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
-&lt;blockquote>
-&lt;p>fatal: unable to access &amp;lsquo;&lt;a href="https://github.com/NNN/XXXX.git/':">https://github.com/NNN/XXXX.git/':&lt;/a>
-Failed to connect to 172.0.0.7 port YYYY: Timed out&lt;/p>
-&lt;/blockquote>
-&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
-&lt;p>may thanks to GFW :)&lt;/p>
-&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
-&lt;p>time is the key. &lt;code>git clone&lt;/code> then &lt;code>git push&lt;/code>.&lt;/p>
-&lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
-&lt;blockquote>
-&lt;p>Failed to connect to github.com port 443: Timed out&lt;/p>
-&lt;/blockquote>
-&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
-&lt;p>also thanks to GFW :)&lt;/p>
-&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
-&lt;p>do it later.&lt;/p>
-&lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
-&lt;blockquote>
-&lt;p>fatal: unable to access &amp;lsquo;&lt;a href="https://github.com/NNN/XXXX.git/':">https://github.com/NNN/XXXX.git/':&lt;/a>
-OpenSSL SSL_read: Connection was reset, errno 10054&lt;/p>
-&lt;/blockquote>
-&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
-&lt;p>I don&amp;rsquo;t Know&lt;/p>
-&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
-&lt;p>push again.&lt;/p>
-&lt;h2 id="git-rebase--i">git rebase -i&lt;sup>&lt;a class="h__anchor" href="#git-rebase--i">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>&lt;strong>Error:&lt;/strong>&lt;/p>
-&lt;blockquote>
-&lt;p>main|rebase (1|1)&lt;/p>
-&lt;/blockquote>
-&lt;p>&lt;strong>Causes:&lt;/strong>&lt;/p>
-&lt;p>your rebase action is on the way.&lt;/p>
-&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
-&lt;pre>&lt;code>git add .
-git rebase --continue
-&lt;/code>&lt;/pre>&lt;p>or use &lt;code>rebase --abort&lt;/code> exit rebase&lt;/p>
-&lt;h1 id="about-gitingore">About .gitingore&lt;sup>&lt;a class="h__anchor" href="#about-gitingore">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;h1 id="git-message-template-private-use">Git Message Template (private-use)&lt;sup>&lt;a class="h__anchor" href="#git-message-template-private-use">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;ul>
-&lt;li>F: feat&lt;/li>
-&lt;li>N: new&lt;/li>
-&lt;li>B: fix&lt;/li>
-&lt;li>M: change&lt;/li>
-&lt;li>D: docs&lt;/li>
-&lt;li>R: refactor&lt;/li>
-&lt;li>S: style&lt;/li>
-&lt;li>:: chore&lt;/li>
-&lt;/ul>
-&lt;p>defined your own git message template file
-, write below lines to &lt;code>~/.gitconfig&lt;/code>:&lt;/p>
-&lt;pre>&lt;code>[commit]
-template = ~/.gitmessage
-&lt;/code>&lt;/pre>&lt;p>see my &lt;code>.gitmessage&lt;/code> &lt;a class="md__link" href="https://github.com/zyprex/gitfiles"
-target="_blank" rel="noopener"
->
-here
-↗
-&lt;/a>
-&lt;/p>
-&lt;h1 id="open-source-license">Open Source License&lt;sup>&lt;a class="h__anchor" href="#open-source-license">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>you can choose your OSL in &lt;a class="md__link" href="http://choosealicense.online/"
-target="_blank" rel="noopener"
->
-http://choosealicense.online/
-↗
-&lt;/a>
-&lt;/p>
-&lt;h1 id="search-on-github">Search On Github&lt;sup>&lt;a class="h__anchor" href="#search-on-github">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;ul>
-&lt;li>in:name [repository name]&lt;/li>
-&lt;li>in:readme [some keyword]&lt;/li>
-&lt;li>in:descrition [some keyword]&lt;/li>
-&lt;li>stars:&amp;gt;100&lt;/li>
-&lt;li>forks:&amp;gt;10&lt;/li>
-&lt;li>topic:c&lt;/li>
-&lt;li>language:c&lt;/li>
-&lt;li>pushed: &amp;gt; YYYY-MM-DD&lt;/li>
-&lt;/ul>
-&lt;h1 id="further-reading">Further Reading&lt;sup>&lt;a class="h__anchor" href="#further-reading">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;ul>
-&lt;li>&lt;a class="md__link" href="http://rogerdudler.github.io/git-guide/files/git_cheat_sheet.pdf"
-target="_blank" rel="noopener"
->
-git cheat sheet
-↗
-&lt;/a>
-&lt;/li>
-&lt;li>&lt;a class="md__link" href="https://github.com/tiimgreen/github-cheat-sheet/blob/master/README.zh-cn.md"
-target="_blank" rel="noopener"
->
-GitHub 秘籍
-↗
-&lt;/a>
-&lt;/li>
-&lt;li>&lt;a class="md__link" href="https://gitmoji.carloscuesta.me/"
-target="_blank" rel="noopener"
->
-gitmoji
-↗
-&lt;/a>
-&lt;/li>
-&lt;li>&lt;a class="md__link" href="https://www.liaoxuefeng.com/wiki/896043488029600"
-target="_blank" rel="noopener"
->
-Git 教程
-↗
-&lt;/a>
-&lt;/li>
-&lt;li>&lt;a class="md__link" href="https://help.github.com/en/github/using-git"
-target="_blank" rel="noopener"
->
-Using Git
-↗
-&lt;/a>
-&lt;/li>
-&lt;li>&lt;a class="md__link" href="https://shields.io/"
-target="_blank" rel="noopener"
->
-Git 徽标
-↗
-&lt;/a>
-&lt;/li>
-&lt;li>&lt;a class="md__link" href="https://learngitbranching.js.org/"
-target="_blank" rel="noopener"
->
-git branch
-↗
-&lt;/a>
-&lt;/li>
-&lt;/ul>
-&lt;h1 id="and-more-">And More &amp;hellip;&lt;sup>&lt;a class="h__anchor" href="#and-more-">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;ul>
-&lt;li>&lt;input disabled="" type="checkbox"> git pull request&lt;/li>
-&lt;li>&lt;input disabled="" type="checkbox"> git submodules&lt;/li>
-&lt;li>&lt;input disabled="" type="checkbox"> gitingore&lt;/li>
-&lt;li>&lt;input disabled="" type="checkbox"> git grep&lt;/li>
-&lt;li>&lt;input disabled="" type="checkbox"> patch &amp;lt; diff&lt;/li>
-&lt;/ul></article></item><item><title>Katex Notes</title><link>/2021/katex-notes/</link><pubDate>Wed, 03 Feb 2021 12:41:04 CST</pubDate><guid>/2021/katex-notes/</guid><description/><article>&lt;p>&lt;a href="https://katex.org/docs/supported.html">https://katex.org/docs/supported.html&lt;/a>&lt;/p>
-&lt;p>分数 $\frac{1}{3}$ $1 \over 3$&lt;/p>
-&lt;pre>&lt;code>$\frac{1}{3}$ $1 \over 3$
-&lt;/code>&lt;/pre>
-&lt;p>开方 $\sqrt{2} \sqrt[n]{3}$&lt;/p>
-&lt;pre>&lt;code>$\sqrt{2} \sqrt[n]{3}$
-&lt;/code>&lt;/pre>
-&lt;p>对数运算符 $\log \ln \lg$&lt;/p>
-&lt;pre>&lt;code>$\log \ln \lg$
-&lt;/code>&lt;/pre>
-&lt;p>省略号 $f(x_1,x_2,\ldots,x_n) = x_1^2 + x_2^2 + \cdots + x_n^2$&lt;/p>
-&lt;pre>&lt;code>$f(x_1,x_2,\ldots,x_n) = x_1^2 + x_2^2 + \cdots + x_n^2$
-&lt;/code>&lt;/pre>
-&lt;p>矢量 $\vec{a} \cdot \vec{b} = 0$&lt;/p>
-&lt;pre>&lt;code>$\vec{a} \cdot \vec{b} = 0$
-&lt;/code>&lt;/pre>
-&lt;p>关系运算符
-$ \pm \times \div \mid \nmid \cdot \circ \ast \bigodot \bigotimes
-\bigoplus \leq \geq \neq \approx \equiv \sum \prod \coprod $&lt;/p>
-&lt;pre>&lt;code>$ \pm \times \div \mid \nmid \cdot \circ \ast \bigodot \bigotimes
-\bigoplus \leq \geq \neq \approx \equiv \sum \prod \coprod $
-&lt;/code>&lt;/pre>
-&lt;p>集合运算符
-$ \emptyset \in \notin \subset \supset \subseteq \supseteq \bigcap \bigcup \bigvee
-\bigwedge \biguplus \bigsqcup $&lt;/p>
-&lt;pre>&lt;code>$ \emptyset \in \notin \subset \supset \subseteq \supseteq \bigcap \bigcup \bigvee
-\bigwedge \biguplus \bigsqcup $
-&lt;/code>&lt;/pre>
-&lt;p>逻辑运算符
-$ \because \therefore \forall \exists \not= \not&amp;gt; \not\subset \neg $&lt;/p>
-&lt;pre>&lt;code>$ \because \therefore \forall \exists \not= \not&amp;gt; \not\subset \neg $
-&lt;/code>&lt;/pre>
-&lt;p>三角运算符
-$ \bot \angle 30^\circ \sin \cos \tan \cot \sec \csc $&lt;/p>
-&lt;pre>&lt;code>$ \bot \angle 30^\circ \sin \cos \tan \cot \sec \csc $
-&lt;/code>&lt;/pre>
-&lt;p>矩阵 &lt;code>vmatrix ||、Bmatrix{}、pmatrix()、bmatrix[]&lt;/code>&lt;/p>
-&lt;p>$$
-\begin{bmatrix}
-1 &amp;amp; x &amp;amp; x^2
-\\ 1 &amp;amp; y &amp;amp; y^2
-\\ 1 &amp;amp; z &amp;amp; z^2
-\end{bmatrix}
-$$&lt;/p>
-&lt;pre>&lt;code>$$
-\begin{bmatrix}
-1 &amp;amp; x &amp;amp; x^2
-\\\\ 1 &amp;amp; y &amp;amp; y^2
-\\\\ 1 &amp;amp; z &amp;amp; z^2
-\end{bmatrix}
-$$
-&lt;/code>&lt;/pre>
-&lt;p>分段函数
-$$
-f(x) = \begin{cases}
-0 &amp;amp; \text{x=0}
-\\ 1 &amp;amp; \text{x!=0}
-\end{cases}
-$$&lt;/p>
-&lt;pre>&lt;code>$$
-f(x) = \begin{cases}
-0 &amp;amp; \text{x=0}
-\\\\ 1 &amp;amp; \text{x!=0}
-\end{cases}
-$$
-&lt;/code>&lt;/pre>
-&lt;p>微积分运算符 $\int_0^1 x^2 {\rm d}x\ \ \ \lim_{n \rightarrow +\infty} \frac{1}{n(n+1)}$
-$ \int \iint \iiint \oint \lim \infty \nabla $&lt;/p>
-&lt;pre>&lt;code>$\int_0^1 x^2 {\rm d}x\ \ \ \lim_{n \rightarrow +\infty} \frac{1}{n(n+1)}$
-$ \int \iint \iiint \oint \lim \infty \nabla $
-&lt;/code>&lt;/pre>
-&lt;p>戴帽符号 $ \hat{y} \check{y} \breve{y} $&lt;/p>
-&lt;pre>&lt;code>$ \hat{y} \check{y} \breve{y} $
-&lt;/code>&lt;/pre>
-&lt;p>连线符号
-$\overline{a+b+c+d}$
-$\underline{a+b+c+d}$
-$\overbrace{a+\underbrace{b+c}_{1.0}+d}^{2.0}$&lt;/p>
-&lt;pre>&lt;code>$\overline{a+b+c+d}$
-$\underline{a+b+c+d}$
-$\overbrace{a+\underbrace{b+c}_{1.0}+d}^{2.0}$
-&lt;/code>&lt;/pre>
-&lt;p>箭头符号
-$ \uparrow \downarrow
-\Uparrow \Downarrow
-\rightarrow \leftarrow
-\Rightarrow \Leftarrow
-\longrightarrow \longleftarrow
-\Longrightarrow \Longleftarrow $&lt;/p>
-&lt;pre>&lt;code>$ \uparrow \downarrow
-\Uparrow \Downarrow
-\rightarrow \leftarrow
-\Rightarrow \Leftarrow
-\longrightarrow \longleftarrow
-\Longrightarrow \Longleftarrow $
-&lt;/code>&lt;/pre>
-&lt;p>显示大号的括号或分隔符时，用 &lt;code>\left&lt;/code> 和 &lt;code>\right&lt;/code> 命令，
-$f(x,y,z) = 3y^2z \left( 3+\frac{7x+5}{1+y^2} \right)$&lt;/p>
-&lt;pre>&lt;code>$f(x,y,z) = 3y^2z \left( 3+\frac{7x+5}{1+y^2} \right)$
-&lt;/code>&lt;/pre>
-&lt;p>转义字符 &lt;code> \空格 \# \$ \% \&amp;amp; \_ \{ \}&lt;/code>&lt;/p>
-&lt;p>字体转换
-要对公式的某一部分字符进行字体转换，可以用 &lt;code>{\rm 需转换的部分字符}&lt;/code> 命令，其中 &lt;code>\rm&lt;/code> 可以参照下表选择合适的字体。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-tex" data-lang="tex">&lt;span class="k">\rm&lt;/span> 罗马体 &lt;span class="k">\it&lt;/span>意大利体
-&lt;span class="k">\bf&lt;/span> 黑体 &lt;span class="k">\cal&lt;/span>花体
-&lt;span class="k">\sl&lt;/span> 倾斜体 &lt;span class="k">\sf&lt;/span>等线体
-&lt;span class="k">\mit&lt;/span> 数学斜体 &lt;span class="k">\tt&lt;/span>打字机字体
-&lt;span class="k">\sc&lt;/span> 小体大写字母
+&lt;pre class="chroma">&lt;code class="language-zsh" data-lang="zsh">dir-stack-push&lt;span class="o">(){&lt;/span>
+&lt;span class="nb">export&lt;/span> &lt;span class="nv">DIR_STACKS&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$DIR_STACKS&lt;/span>:&lt;span class="nv">$PWD&lt;/span> &lt;span class="c1"># push current path to CD_STACKS&lt;/span>
+&lt;span class="nb">cd&lt;/span> ..
+zle reset-prompt &lt;span class="c1"># redraw prompt&lt;/span>
+&lt;span class="o">}&lt;/span>
+dir-stack-pop&lt;span class="o">(){&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> -z &lt;span class="si">${&lt;/span>&lt;span class="nv">DIR_STACKS&lt;/span>&lt;span class="p">##*:&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="o">]]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="c1"># don&amp;#39;t cd to home path&lt;/span>
+&lt;span class="k">fi&lt;/span>
+&lt;span class="nb">cd&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">DIR_STACKS&lt;/span>&lt;span class="p">##*:&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="c1"># cd last path&lt;/span>
+zle reset-prompt &lt;span class="c1"># redraw prompt&lt;/span>
+&lt;span class="nb">export&lt;/span> &lt;span class="nv">DIR_STACKS&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">DIR_STACKS&lt;/span>&lt;span class="p">%:*&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="c1"># remove last path&lt;/span>
+&lt;span class="o">}&lt;/span>
+zle -N dir-stack-push
+zle -N dir-stack-pop
+bindkey &lt;span class="s1">&amp;#39;^[k&amp;#39;&lt;/span> dir-stack-push &lt;span class="c1"># [Alt + k]&lt;/span>
+bindkey &lt;span class="s1">&amp;#39;^[j&amp;#39;&lt;/span> dir-stack-pop &lt;span class="c1"># [Alt + j]&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>取模
-取模 有两个命令：&lt;code>\bmod&lt;/code> 用于二元运算&amp;quot;a mod b&amp;quot;; 而&lt;code>\pmod&lt;/code> 则用于模的方程。
-$a \bmod b$，$ x \equiv a \pmod {b}$&lt;/p>
-&lt;pre>&lt;code>$a \bmod b$，$ x \equiv a \pmod {b}$
-&lt;/code>&lt;/pre>
-&lt;p>空格&lt;/p>
-&lt;pre>&lt;code>两个quad空格 a \qquad b a \qquad b 两个m的宽度
-quad空格 a \quad b a \quad b 一个m的宽度
-大空格 a\ b a\ b 1/3m宽度
-中等空格 a\;b a\;b 2/7m宽度
-小空格 a\,b a\,b 1/6m宽度
-没有空格 ab ab\,
-紧贴 a\!b a\!b 缩进1/6m宽度
-&lt;/code>&lt;/pre>&lt;p>&lt;code>\quad、1em、em、m&lt;/code> 代表当前字体下接近字符‘M’的宽度（approximately the width of an &amp;ldquo;M&amp;rdquo; in the current font）&lt;/p>
-&lt;p>数学公式中写入非数学变量的字符（non-mathematical elements），使用 Roman 字体，而不是数学变量的斜体（italics），例如 “if ”， 使用&lt;code>\mbox{ if }&lt;/code>&lt;/p></article></item><item><title>MermaidJs Notes</title><link>/2021/mermaidjs-notes/</link><pubDate>Wed, 03 Feb 2021 11:00:34 CST</pubDate><guid>/2021/mermaidjs-notes/</guid><description/><article>&lt;p>&lt;a class="md__link" href="https://github.com/mermaid-js/mermaid"
-target="_blank" rel="noopener"
->
-mermaid-js
-↗
-&lt;/a>
-is a js library which can generation of diagram and flowchart from text in a similar manner as markdown.&lt;/p>
-&lt;h1 id="flowcharts">Flowcharts&lt;sup>&lt;a class="h__anchor" href="#flowcharts">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>&lt;a href="https://mermaid-js.github.io/mermaid/#/flowchart">https://mermaid-js.github.io/mermaid/#/flowchart&lt;/a>&lt;/p>
-&lt;div class="mermaid">
-graph LR
-A(Round) -->|normal arrow| B{Decision}
-B --- |open link| C[normal]
-B -.->|dotted a| D([stadium])
-B ==>|thick link| E([subroutine])
-B -->|four| F[(cylindrical database)]
-B -->|five| G((circle))
-B -->|six| H{{hexagon}}
-B -->|eight| I[/parallelogram/]
-B -->|nine| J[\parallelogram alt\]
-B -->|ten| k[\parallelogram alt\]
-B -->|ten| L[/trapezoid\]
-B -->|ten| M[\trapezoid alt/]
-&lt;/div>
-&lt;div class="mermaid">
-graph TB
-A &amp; B --> C &amp; D --> E
-&lt;/div>
-&lt;h1 id="sequence-diagrams">Sequence diagrams&lt;sup>&lt;a class="h__anchor" href="#sequence-diagrams">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>&lt;a href="https://mermaid-js.github.io/mermaid/#/sequenceDiagram">https://mermaid-js.github.io/mermaid/#/sequenceDiagram&lt;/a>&lt;/p>
-&lt;div class="mermaid">
-sequenceDiagram
-participant A as Alice
-participant J as John
-A->>J: Hello John, how are you?
-J-->>A: Great!
-A-)J: See you later!
-&lt;/div>
-&lt;h1 id="user-journey">User journey&lt;sup>&lt;a class="h__anchor" href="#user-journey">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>&lt;a href="https://mermaid-js.github.io/mermaid/#/user-journey">https://mermaid-js.github.io/mermaid/#/user-journey&lt;/a>
-&lt;div class="mermaid">
-journey
-title My working day
-section Go to work
-Make tea: 5: Me
-Go upstairs: 3: Me
-Do work: 1: Me, Cat
-section Go home
-Go downstairs: 5: Me
-Sit down: 5: Me
-&lt;/div>
-&lt;/p>
-&lt;h1 id="gantt">Gantt&lt;sup>&lt;a class="h__anchor" href="#gantt">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>&lt;a href="https://mermaid-js.github.io/mermaid/#/gantt">https://mermaid-js.github.io/mermaid/#/gantt&lt;/a>&lt;/p>
-&lt;div class="mermaid">
-gantt
-dateFormat YYYY-MM-DD
-title Adding GANTT diagram functionality to mermaid
-excludes weekends
-%% (`excludes` accepts specific dates in YYYY-MM-DD format, days of the week ("sunday") or "weekends", but not the word "weekdays".)
-section A section
-Completed task :done, des1, 2014-01-06,2014-01-08
-Active task :active, des2, 2014-01-09, 3d
-Future task : des3, after des2, 5d
-Future task2 : des4, after des3, 5d
-section Critical tasks
-Completed task in the critical line :crit, done, 2014-01-06,24h
-Implement parser and jison :crit, done, after des1, 2d
-Create tests for parser :crit, active, 3d
-Future task in critical line :crit, 5d
-Create tests for renderer :2d
-Add to mermaid :1d
-section Documentation
-Describe gantt syntax :active, a1, after des1, 3d
-Add gantt diagram to demo page :after a1 , 20h
-Add another diagram to demo page :doc1, after a1 , 48h
-section Last section
-Describe gantt syntax :after doc1, 3d
-Add gantt diagram to demo page :20h
-Add another diagram to demo page :48h
-&lt;/div>
-&lt;h1 id="pie-chart">Pie chart&lt;sup>&lt;a class="h__anchor" href="#pie-chart">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>&lt;a href="https://mermaid-js.github.io/mermaid/#/pie">https://mermaid-js.github.io/mermaid/#/pie&lt;/a>&lt;/p>
-&lt;div class="mermaid">
-pie
-title Key elements in Product X
-"Calcium" : 42.96
-"Potassium" : 50.05
-"Magnesium" : 10.01
-"Iron" : 5
-&lt;/div></article></item></channel></rss>
+&lt;/div>&lt;h1 id="ref">Ref&lt;sup>&lt;a class="h__anchor" href="#ref">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;ul>
+&lt;li>&lt;a href="https://devhints.io/bash">https://devhints.io/bash&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://unix.stackexchange.com/questions/79897/how-can-i-use-bindkey-to-run-a-script">https://unix.stackexchange.com/questions/79897/how-can-i-use-bindkey-to-run-a-script&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://stackoverflow.com/questions/52325626/zsh-refresh-prompt-after-running-zle-widget">https://stackoverflow.com/questions/52325626/zsh-refresh-prompt-after-running-zle-widget&lt;/a>&lt;/li>
+&lt;/ul></article></item></channel></rss>

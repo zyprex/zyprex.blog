@@ -1,0 +1,96 @@
+<!doctype html><html><meta charset=utf-8><meta name=generator content="Hugo 0.81.0"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel=icon type=image/png href=/img/git_face.png><link rel=stylesheet type=text/css href=/css/main.css><link rel=stylesheet type=text/css href=/css/syntax.css><title>Try SDCC on Linux@Zyprex's Blog</title><body><div class=fence><nav><a href=/>HOME&nbsp;</a><a href=/tags/>TAGS&nbsp;</a><a href=/categories/>CATEGORIES&nbsp;</a><a href=/index.xml>RSS&nbsp;</a><a href=/search/>SEARCH&nbsp;</a></nav><div class=Hp><em class=T>Try SDCC on Linux</em><br><em>2022/03/03 Thu 11:57</em></div><div id=C><h1 id=why-try-sdcc-on-linux>Why try SDCC on linux<sup><a class=h__anchor href=#why-try-sdcc-on-linux>¶</a></sup></h1><p>I try sdcc on linux because I think I could spark off my interst in mcu programming again. The facts are just the opposite, I found all intersting lost to somewhere unconsciously. So I end it by collect old material thoungh I don&rsquo;t think it can help for anybody. Just a record.</p><h1 id=getting-start>Getting Start<sup><a class=h__anchor href=#getting-start>¶</a></sup></h1><p>mcu: STC90C52RC</p><p>compiler: SDCC</p><p>platform: linux</p><h1 id=prerequisites>Prerequisites<sup><a class=h__anchor href=#prerequisites>¶</a></sup></h1><ul><li><a class=md__link href=http://sdcc.sourceforge.net/index.php#Download target=_blank rel=noopener>sdcc
+↗</a></li><li><a class=md__link href=https://github.com/grigorig/stcgal target=_blank rel=noopener>stcgal
+↗</a><ul><li>pip3 install stcgal</li></ul></li></ul><h1 id=step-by-step>Step By Step<sup><a class=h__anchor href=#step-by-step>¶</a></sup></h1><p>Compile sdcc from source:</p><pre><code>cd sdcc
+./configure
+</code></pre><p>configure: error: boost library not found (boost/graph/adjacency_list.hpp).</p><pre><code>sudo pacman -S boost
+</code></pre><p>configure: error: gputils (gpasm, gplink, and gplib) are required but not found.
+Either install gputils or reconfigure with &ndash;disable-pic14-port and &ndash;disable-pic16-port.
+configure: error: ./configure failed for device/lib/pic14</p><pre><code>sudo pacman -S gputils
+</code></pre><pre><code>./configure
+make
+</code></pre><p>wait at least 45 minutes</p><pre><code>sudo make install
+</code></pre><p>Test sdcc compiler with <code>sdcc --version</code>
+You may see:</p><pre><code>SDCC : mcs51/z80/z180/r2k/r2ka/r3ka/gbz80/tlcs90/ez80_z80/z80n/ds390/pic16/pic14/TININative/ds400/hc08/s08/stm8/pdk13/pdk14/pdk15 4.1.0 #12072 (Linux)
+published under GNU General Public License (GPL)
+</code></pre><h1 id=generate-binary-file>Generate Binary File<sup><a class=h__anchor href=#generate-binary-file>¶</a></sup></h1><pre><code>sdcc main.c
+packihx main.ihx
+xxd -r -p main.hex main.bin
+</code></pre><h1 id=download-binary-file-to-flash>Download Binary File to Flash<sup><a class=h__anchor href=#download-binary-file-to-flash>¶</a></sup></h1><p>If occur &ldquo;ModuleNotFoundError: No module named &lsquo;stcgal&rsquo;&rdquo;, try, (another way is install &lsquo;stcgal&rsquo; for root user):</p><pre><code>chown &lt;username&gt; /dev/ttyUSB0
+</code></pre><p>When stuck on &lsquo;Waiting for MCU, please cycle power:&rsquo;, maybe you are use chip does not support by stcgal.</p><pre><code>stcgal -P stc89 -p /dev/ttyUSB0 main.bin
+</code></pre><h1 id=test-code>Test code<sup><a class=h__anchor href=#test-code>¶</a></sup></h1><h2 id=mainc>main.c<sup><a class=h__anchor href=#mainc>¶</a></sup></h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-c data-lang=c><span class=cp>#include</span> <span class=cpf>&lt;mcs51/8051.h&gt;</span><span class=cp>
+</span><span class=cp></span><span class=kt>void</span> <span class=nf>delay</span><span class=p>()</span> <span class=p>{</span>
+  <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=mi>100</span><span class=p>;</span> <span class=o>++</span><span class=n>i</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>j</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>j</span> <span class=o>&lt;</span> <span class=mi>1000</span><span class=p>;</span> <span class=o>++</span><span class=n>j</span><span class=p>)</span> <span class=p>{</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+<span class=kt>int</span> <span class=nf>main</span><span class=p>(</span><span class=kt>void</span><span class=p>)</span> <span class=p>{</span>
+  <span class=n>P1</span> <span class=o>=</span> <span class=mh>0xAF</span><span class=p>;</span>
+  <span class=k>for</span> <span class=p>(;;)</span> <span class=p>{</span>
+    <span class=n>delay</span><span class=p>();</span>
+    <span class=n>P1</span> <span class=o>=</span> <span class=o>~</span><span class=n>P1</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><h2 id=makefile>makefile<sup><a class=h__anchor href=#makefile>¶</a></sup></h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-make data-lang=make><span class=c># LAST MODIFIED : March 23, 2021
+</span><span class=c># MAKE PROGRAM  : make
+</span><span class=c># PLATFORM      : unix
+</span><span class=c># DESCRIPTION   : this makefile is used to compile mcs51 program
+</span><span class=c># -I/usr/local/share/sdcc/include/
+</span><span class=c></span><span class=nv>CC</span>    <span class=o>:=</span> sdcc
+<span class=nv>FLAGS</span> <span class=o>:=</span> 
+<span class=nv>RM</span>    <span class=o>:=</span> rm
+<span class=nv>MAIN</span>  <span class=o>:=</span> main
+<span class=nv>REL</span>   <span class=o>:=</span> <span class=k>$(</span>patsubst %.c, %.rel, <span class=k>$(</span>filter-out <span class=k>$(</span>MAIN<span class=k>)</span>.c, <span class=k>$(</span>wildcard *.c<span class=k>)))</span>
+<span class=nv>DUMP</span>  <span class=o>:=</span> <span class=k>$(</span>wildcard *.asm *.lst *.rst *.sym  *.map *.mem *.lk  *.hex *.ihx *.rel<span class=k>)</span>
+
+<span class=nf>all</span><span class=o>:</span> <span class=k>$(</span><span class=nv>REL</span><span class=k>)</span>
+	<span class=k>$(</span>CC<span class=k>)</span> <span class=k>$(</span>MAIN<span class=k>)</span>.c $^
+	packihx <span class=k>$(</span>MAIN<span class=k>)</span>.ihx &gt; <span class=k>$(</span>MAIN<span class=k>)</span>.hex
+	xxd -r -p <span class=k>$(</span>MAIN<span class=k>)</span>.hex <span class=k>$(</span>MAIN<span class=k>)</span>.bin    
+
+<span class=nf>%.rel</span><span class=o>:</span> %.<span class=n>c</span>
+	<span class=k>$(</span>CC<span class=k>)</span> -c $&lt;
+
+<span class=nf>.PHONY</span><span class=o>:</span> <span class=n>clean</span>
+<span class=nf>clean</span><span class=o>:</span>
+	<span class=k>$(</span>RM<span class=k>)</span> <span class=k>$(</span>DUMP<span class=k>)</span>
+</code></pre></td></tr></table></div></div></div><div class=pager><br>▲ <a href=/2022/install-android-studio/>Install Android Studio</a><br>▼ <a href=/2021/connect-internet-from-command-line/>Connect Internet From Command Line</a></div><footer style="text-align:right;margin:5rem .2rem .2rem"><div><section><a class=taxo href=/tags/sdcc/>#sdcc</a></section></div><div>&copy; 2020 - 2022</div><small>page 2022</small></footer></div><script defer type=application/javascript src=/js/norm.js></script></body></html>
