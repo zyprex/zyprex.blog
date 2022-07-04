@@ -1,0 +1,72 @@
+<!doctype html><html><meta charset=utf-8><meta name=generator content="Hugo 0.76.5"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel=icon type=image/png href=/img/git_face.png><link rel=stylesheet type=text/css href=/css/main.css><link rel=stylesheet type=text/css href=/css/syntax.css><title>Use Batch Scripts Monitor Register Values@Zyprex's Blog</title><body><div class=fence><nav><a href=/>HOME&nbsp;</a><a href=/tags/>TAGS&nbsp;</a><a href=/categories/>CATEGORIES&nbsp;</a><a href=/index.xml>RSS&nbsp;</a><a href=/search/>SEARCH&nbsp;</a></nav><div class=Hp><em class=T>Use Batch Scripts Monitor Register Values</em><br><em>2022/07/04 Mon 17:30</em></div><div id=C><h1 id=use-batch-scripts-monitor-register-values>Use Batch Scripts Monitor Register Values<sup><a class=h__anchor href=#use-batch-scripts-monitor-register-values>¶</a></sup></h1><p>Recently I noticed that some software, even after they&rsquo;re uninstalled, didn&rsquo;t
+clear their register values. It&rsquo;s drive me mad. So I decide to monitor
+reigister values to find who in charge of abused register write action.</p><p>At first glance, it could use <code>RegOpenKeyEx()</code> and <code>RegCloseKey()</code> to read
+latest register values, but use a c program to achieve all of this, may seems
+too overhead, and I don&rsquo;t want for another software do this for me. All in all,
+I finally figure out the pure and simple batch script is just perfect for me.</p><p>How I did it?</p><ol><li>read the register values</li><li>save the values to file</li><li>wait for a register values change</li><li>read the register values again</li><li>compare previous saved values with current</li><li>if anything changed, report this changed, keep a log for what have changed</li></ol><p>For the waitting of register values change, run scripts in backgrounds is waste
+of computer resources, it could replace by check every times when computer boot
+up, or use schedule task check every X hours if you like.</p><p>Times to show you code, feel free to change it to suit your particular needs:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-batch data-lang=batch><span class=p>:</span><span class=c1>: This batch script attempt to compare register key change before and after</span>
+<span class=p>:</span><span class=c1>: the script run, if any diff exist, it paused.</span>
+
+<span class=p>@</span><span class=k>ECHO</span> OFF
+
+<span class=k>SET</span> <span class=nv>from_reg_keyname</span><span class=p>=</span>HKCU\Software
+<span class=k>SET</span> <span class=nv>latest_reg</span><span class=p>=</span>latest.txt
+<span class=k>SET</span> <span class=nv>origin_reg</span><span class=p>=</span>origin.txt
+<span class=k>SET</span> <span class=nv>log_file</span><span class=p>=</span>diffReg.log
+
+<span class=k>IF</span> <span class=k>EXIST</span> <span class=nv>%latest_reg%</span> <span class=p>(</span>
+  <span class=k>GOTO</span> <span class=nl>label_diff</span>
+<span class=p>)</span> <span class=k>ELSE</span> <span class=p>(</span>
+  REG QUERY <span class=nv>%from_reg_keyname%</span> <span class=p>&gt;</span> <span class=nv>%latest_reg%</span>
+  <span class=k>EXIT</span>
+<span class=p>)</span>
+
+<span class=p>:</span><span class=nl>label_diff</span>
+<span class=k>MOVE</span> <span class=nv>%latest_reg%</span> <span class=nv>%origin_reg%</span> <span class=p>&gt;</span>NUL
+REG QUERY <span class=nv>%from_reg_keyname%</span> <span class=p>&gt;</span> <span class=nv>%latest_reg%</span>
+FC <span class=nv>%latest_reg%</span> <span class=nv>%origin_reg%</span>
+<span class=p>:</span><span class=c1>: IF has diff print diff and pause ELSE delete origin_reg</span>
+<span class=k>IF</span> <span class=nv>%ERRORLEVEL%</span> <span class=ow>GEQ</span> 1 <span class=p>(</span>
+  <span class=k>ECHO</span> ----------------        <span class=p>&gt;&gt;</span><span class=nv>%log_file%</span>
+  <span class=k>date</span> /T                      <span class=p>&gt;&gt;</span><span class=nv>%log_file%</span>
+  <span class=k>ECHO</span> ----------------        <span class=p>&gt;&gt;</span><span class=nv>%log_file%</span>
+  FC <span class=nv>%latest_reg%</span> <span class=nv>%origin_reg%</span> <span class=p>&gt;&gt;</span><span class=nv>%log_file%</span>
+  <span class=k>ECHO</span>.                        <span class=p>&gt;&gt;</span><span class=nv>%log_file%</span>
+  <span class=k>PAUSE</span>
+<span class=p>)</span> <span class=k>ELSE</span> <span class=p>(</span>
+  <span class=k>DEL</span> <span class=nv>%origin_reg%</span>
+<span class=p>)</span>
+</code></pre></td></tr></table></div></div></div><div class=pager><br>▼ <a href=/2022/prove-kaprekar-constant-with-c-program/>Prove Kaprekar Constant With C Program</a></div><footer style="text-align:right;margin:5rem .2rem .2rem"><div><section><a class=taxo href=/tags/batch/>#batch</a><a class=taxo href=/categories/windows/>@windows</a></section></div><div>&copy; 2020 - 2022</div><small>page 2022</small></footer></div><script defer type=application/javascript src=/js/norm.js></script></body></html>

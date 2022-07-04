@@ -1,4 +1,91 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>/categories/windows/</link><language>en</language><updated>Sun, 15 Nov 2020 08:59:55 CST</updated><item><title>Prove Kaprekar Constant With C Program</title><link>/2022/prove-kaprekar-constant-with-c-program/</link><pubDate>Mon, 16 May 2022 14:39:04 CST</pubDate><guid>/2022/prove-kaprekar-constant-with-c-program/</guid><description/><article>&lt;h1 id="prove-kaprekar-constant-with-c-program">Prove Kaprekar Constant with C Program&lt;sup>&lt;a class="h__anchor" href="#prove-kaprekar-constant-with-c-program">¶&lt;/a>&lt;/sup>&lt;/h1>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>/categories/windows/</link><language>en</language><updated>Mon, 04 Jul 2022 17:30:12 CST</updated><item><title>Use Batch Scripts Monitor Register Values</title><link>/2022/use-batch-scripts-monitor-register-values/</link><pubDate>Mon, 04 Jul 2022 17:30:12 CST</pubDate><guid>/2022/use-batch-scripts-monitor-register-values/</guid><description/><article>&lt;h1 id="use-batch-scripts-monitor-register-values">Use Batch Scripts Monitor Register Values&lt;sup>&lt;a class="h__anchor" href="#use-batch-scripts-monitor-register-values">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Recently I noticed that some software, even after they&amp;rsquo;re uninstalled, didn&amp;rsquo;t
+clear their register values. It&amp;rsquo;s drive me mad. So I decide to monitor
+reigister values to find who in charge of abused register write action.&lt;/p>
+&lt;p>At first glance, it could use &lt;code>RegOpenKeyEx()&lt;/code> and &lt;code>RegCloseKey()&lt;/code> to read
+latest register values, but use a c program to achieve all of this, may seems
+too overhead, and I don&amp;rsquo;t want for another software do this for me. All in all,
+I finally figure out the pure and simple batch script is just perfect for me.&lt;/p>
+&lt;p>How I did it?&lt;/p>
+&lt;ol>
+&lt;li>read the register values&lt;/li>
+&lt;li>save the values to file&lt;/li>
+&lt;li>wait for a register values change&lt;/li>
+&lt;li>read the register values again&lt;/li>
+&lt;li>compare previous saved values with current&lt;/li>
+&lt;li>if anything changed, report this changed, keep a log for what have changed&lt;/li>
+&lt;/ol>
+&lt;p>For the waitting of register values change, run scripts in backgrounds is waste
+of computer resources, it could replace by check every times when computer boot
+up, or use schedule task check every X hours if you like.&lt;/p>
+&lt;p>Times to show you code, feel free to change it to suit your particular needs:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-batch" data-lang="batch">&lt;span class="p">:&lt;/span>&lt;span class="c1">: This batch script attempt to compare register key change before and after&lt;/span>
+&lt;span class="p">:&lt;/span>&lt;span class="c1">: the script run, if any diff exist, it paused.&lt;/span>
+&lt;span class="p">@&lt;/span>&lt;span class="k">ECHO&lt;/span> OFF
+&lt;span class="k">SET&lt;/span> &lt;span class="nv">from_reg_keyname&lt;/span>&lt;span class="p">=&lt;/span>HKCU\Software
+&lt;span class="k">SET&lt;/span> &lt;span class="nv">latest_reg&lt;/span>&lt;span class="p">=&lt;/span>latest.txt
+&lt;span class="k">SET&lt;/span> &lt;span class="nv">origin_reg&lt;/span>&lt;span class="p">=&lt;/span>origin.txt
+&lt;span class="k">SET&lt;/span> &lt;span class="nv">log_file&lt;/span>&lt;span class="p">=&lt;/span>diffReg.log
+&lt;span class="k">IF&lt;/span> &lt;span class="k">EXIST&lt;/span> &lt;span class="nv">%latest_reg%&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;span class="k">GOTO&lt;/span> &lt;span class="nl">label_diff&lt;/span>
+&lt;span class="p">)&lt;/span> &lt;span class="k">ELSE&lt;/span> &lt;span class="p">(&lt;/span>
+REG QUERY &lt;span class="nv">%from_reg_keyname%&lt;/span> &lt;span class="p">&amp;gt;&lt;/span> &lt;span class="nv">%latest_reg%&lt;/span>
+&lt;span class="k">EXIT&lt;/span>
+&lt;span class="p">)&lt;/span>
+&lt;span class="p">:&lt;/span>&lt;span class="nl">label_diff&lt;/span>
+&lt;span class="k">MOVE&lt;/span> &lt;span class="nv">%latest_reg%&lt;/span> &lt;span class="nv">%origin_reg%&lt;/span> &lt;span class="p">&amp;gt;&lt;/span>NUL
+REG QUERY &lt;span class="nv">%from_reg_keyname%&lt;/span> &lt;span class="p">&amp;gt;&lt;/span> &lt;span class="nv">%latest_reg%&lt;/span>
+FC &lt;span class="nv">%latest_reg%&lt;/span> &lt;span class="nv">%origin_reg%&lt;/span>
+&lt;span class="p">:&lt;/span>&lt;span class="c1">: IF has diff print diff and pause ELSE delete origin_reg&lt;/span>
+&lt;span class="k">IF&lt;/span> &lt;span class="nv">%ERRORLEVEL%&lt;/span> &lt;span class="ow">GEQ&lt;/span> 1 &lt;span class="p">(&lt;/span>
+&lt;span class="k">ECHO&lt;/span> ---------------- &lt;span class="p">&amp;gt;&amp;gt;&lt;/span>&lt;span class="nv">%log_file%&lt;/span>
+&lt;span class="k">date&lt;/span> /T &lt;span class="p">&amp;gt;&amp;gt;&lt;/span>&lt;span class="nv">%log_file%&lt;/span>
+&lt;span class="k">ECHO&lt;/span> ---------------- &lt;span class="p">&amp;gt;&amp;gt;&lt;/span>&lt;span class="nv">%log_file%&lt;/span>
+FC &lt;span class="nv">%latest_reg%&lt;/span> &lt;span class="nv">%origin_reg%&lt;/span> &lt;span class="p">&amp;gt;&amp;gt;&lt;/span>&lt;span class="nv">%log_file%&lt;/span>
+&lt;span class="k">ECHO&lt;/span>. &lt;span class="p">&amp;gt;&amp;gt;&lt;/span>&lt;span class="nv">%log_file%&lt;/span>
+&lt;span class="k">PAUSE&lt;/span>
+&lt;span class="p">)&lt;/span> &lt;span class="k">ELSE&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;span class="k">DEL&lt;/span> &lt;span class="nv">%origin_reg%&lt;/span>
+&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></article></item><item><title>Prove Kaprekar Constant With C Program</title><link>/2022/prove-kaprekar-constant-with-c-program/</link><pubDate>Mon, 16 May 2022 14:39:04 CST</pubDate><guid>/2022/prove-kaprekar-constant-with-c-program/</guid><description/><article>&lt;h1 id="prove-kaprekar-constant-with-c-program">Prove Kaprekar Constant with C Program&lt;sup>&lt;a class="h__anchor" href="#prove-kaprekar-constant-with-c-program">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;h2 id="know-the-kaprekar-constant">Know the kaprekar constant&lt;sup>&lt;a class="h__anchor" href="#know-the-kaprekar-constant">¶&lt;/a>&lt;/sup>&lt;/h2>
 &lt;p>What is a kaprekar constant ?&lt;/p>
 &lt;ol>
@@ -1110,60 +1197,4 @@ convey it elegantly.&lt;/p>
 &lt;p>The solution to nagging isn&amp;rsquo;t to give up trying to get others to do what we
 want.&lt;/p>
 &lt;p>Rather, it&amp;rsquo;s to recognise that persuasion always needs to occur in terms that
-make sense to those who so badly need to be altered.&lt;/p></article></item><item><title>Fast Cd Keymap in Zsh</title><link>/2021/fast-cd-keymap-in-zsh/</link><pubDate>Sun, 16 May 2021 11:06:47 CST</pubDate><guid>/2021/fast-cd-keymap-in-zsh/</guid><description/><article>&lt;h1 id="fast-cd-keymap-in-zsh">Fast &lt;code>cd&lt;/code> Keymap in Zsh&lt;sup>&lt;a class="h__anchor" href="#fast-cd-keymap-in-zsh">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>&lt;strong>TL;DR&lt;/strong>:&lt;/p>
-&lt;ol>
-&lt;li>paste below code to your &lt;code>.zshrc&lt;/code>&lt;/li>
-&lt;li>run &lt;code>source ~/.zshrc&lt;/code>&lt;/li>
-&lt;li>now you have two keys&lt;/li>
-&lt;/ol>
-&lt;ul>
-&lt;li>&lt;kbd>Alt&lt;/kbd> + &lt;kbd>k&lt;/kbd>: go upper directory.&lt;/li>
-&lt;li>&lt;kbd>Alt&lt;/kbd> + &lt;kbd>j&lt;/kbd>: undo above action.&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-zsh" data-lang="zsh">dir-stack-push&lt;span class="o">(){&lt;/span>
-&lt;span class="nb">export&lt;/span> &lt;span class="nv">DIR_STACKS&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$DIR_STACKS&lt;/span>:&lt;span class="nv">$PWD&lt;/span> &lt;span class="c1"># push current path to CD_STACKS&lt;/span>
-&lt;span class="nb">cd&lt;/span> ..
-zle reset-prompt &lt;span class="c1"># redraw prompt&lt;/span>
-&lt;span class="o">}&lt;/span>
-dir-stack-pop&lt;span class="o">(){&lt;/span>
-&lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> -z &lt;span class="si">${&lt;/span>&lt;span class="nv">DIR_STACKS&lt;/span>&lt;span class="p">##*:&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="o">]]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;span class="k">return&lt;/span> &lt;span class="c1"># don&amp;#39;t cd to home path&lt;/span>
-&lt;span class="k">fi&lt;/span>
-&lt;span class="nb">cd&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">DIR_STACKS&lt;/span>&lt;span class="p">##*:&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="c1"># cd last path&lt;/span>
-zle reset-prompt &lt;span class="c1"># redraw prompt&lt;/span>
-&lt;span class="nb">export&lt;/span> &lt;span class="nv">DIR_STACKS&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">DIR_STACKS&lt;/span>&lt;span class="p">%:*&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="c1"># remove last path&lt;/span>
-&lt;span class="o">}&lt;/span>
-zle -N dir-stack-push
-zle -N dir-stack-pop
-bindkey &lt;span class="s1">&amp;#39;^[k&amp;#39;&lt;/span> dir-stack-push &lt;span class="c1"># [Alt + k]&lt;/span>
-bindkey &lt;span class="s1">&amp;#39;^[j&amp;#39;&lt;/span> dir-stack-pop &lt;span class="c1"># [Alt + j]&lt;/span>
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h1 id="ref">Ref&lt;sup>&lt;a class="h__anchor" href="#ref">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;ul>
-&lt;li>&lt;a href="https://devhints.io/bash">https://devhints.io/bash&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://unix.stackexchange.com/questions/79897/how-can-i-use-bindkey-to-run-a-script">https://unix.stackexchange.com/questions/79897/how-can-i-use-bindkey-to-run-a-script&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://stackoverflow.com/questions/52325626/zsh-refresh-prompt-after-running-zle-widget">https://stackoverflow.com/questions/52325626/zsh-refresh-prompt-after-running-zle-widget&lt;/a>&lt;/li>
-&lt;/ul></article></item></channel></rss>
+make sense to those who so badly need to be altered.&lt;/p></article></item></channel></rss>
