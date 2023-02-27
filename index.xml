@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>/</link><language>en</language><updated>Mon, 04 Jul 2022 17:30:12 CST</updated><item><title>Use Batch Scripts Monitor Register Values</title><link>/2022/use-batch-scripts-monitor-register-values/</link><pubDate>Mon, 04 Jul 2022 17:30:12 CST</pubDate><guid>/2022/use-batch-scripts-monitor-register-values/</guid><description/><article>&lt;h1 id="use-batch-scripts-monitor-register-values">Use Batch Scripts Monitor Register Values&lt;sup>&lt;a class="h__anchor" href="#use-batch-scripts-monitor-register-values">¶&lt;/a>&lt;/sup>&lt;/h1>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>https://zyprex.github.io/zyprex.blog/</link><language>en</language><updated>Mon, 04 Jul 2022 17:30:12 CST</updated><item><title>Use Batch Scripts Monitor Register Values</title><link>https://zyprex.github.io/zyprex.blog/2022/use-batch-scripts-monitor-register-values/</link><pubDate>Mon, 04 Jul 2022 17:30:12 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/use-batch-scripts-monitor-register-values/</guid><description/><article>&lt;h1 id="use-batch-scripts-monitor-register-values">Use Batch Scripts Monitor Register Values&lt;sup>&lt;a class="h__anchor" href="#use-batch-scripts-monitor-register-values">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>Recently I noticed that some software, even after they&amp;rsquo;re uninstalled, didn&amp;rsquo;t
 clear their register values. It&amp;rsquo;s drive me mad. So I decide to monitor
 reigister values to find who in charge of abused register write action.&lt;/p>
@@ -85,7 +85,7 @@ FC &lt;span class="nv">%latest_reg%&lt;/span> &lt;span class="nv">%origin_reg%&l
 &lt;span class="p">)&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div></article></item><item><title>Prove Kaprekar Constant With C Program</title><link>/2022/prove-kaprekar-constant-with-c-program/</link><pubDate>Mon, 16 May 2022 14:39:04 CST</pubDate><guid>/2022/prove-kaprekar-constant-with-c-program/</guid><description/><article>&lt;h1 id="prove-kaprekar-constant-with-c-program">Prove Kaprekar Constant with C Program&lt;sup>&lt;a class="h__anchor" href="#prove-kaprekar-constant-with-c-program">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;/div></article></item><item><title>Prove Kaprekar Constant With C Program</title><link>https://zyprex.github.io/zyprex.blog/2022/prove-kaprekar-constant-with-c-program/</link><pubDate>Mon, 16 May 2022 14:39:04 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/prove-kaprekar-constant-with-c-program/</guid><description/><article>&lt;h1 id="prove-kaprekar-constant-with-c-program">Prove Kaprekar Constant with C Program&lt;sup>&lt;a class="h__anchor" href="#prove-kaprekar-constant-with-c-program">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;h2 id="know-the-kaprekar-constant">Know the kaprekar constant&lt;sup>&lt;a class="h__anchor" href="#know-the-kaprekar-constant">¶&lt;/a>&lt;/sup>&lt;/h2>
 &lt;p>What is a kaprekar constant ?&lt;/p>
 &lt;ol>
@@ -692,7 +692,7 @@ target="_blank" rel="noopener"
 debug-pringing-in-c
 ↗
 &lt;/a>
-&lt;/p></article></item><item><title>Dont Conform to the Norm</title><link>/2022/dont-conform-to-the-norm/</link><pubDate>Sun, 15 May 2022 18:29:01 CST</pubDate><guid>/2022/dont-conform-to-the-norm/</guid><description/><article>&lt;h1 id="dont-conform-to-the-norm">Don&amp;rsquo;t Conform To The Norm&lt;sup>&lt;a class="h__anchor" href="#dont-conform-to-the-norm">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;/p></article></item><item><title>Dont Conform to the Norm</title><link>https://zyprex.github.io/zyprex.blog/2022/dont-conform-to-the-norm/</link><pubDate>Sun, 15 May 2022 18:29:01 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/dont-conform-to-the-norm/</guid><description/><article>&lt;h1 id="dont-conform-to-the-norm">Don&amp;rsquo;t Conform To The Norm&lt;sup>&lt;a class="h__anchor" href="#dont-conform-to-the-norm">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>Three concepts that lead you to conform to the norm.&lt;/p>
 &lt;ol>
 &lt;li>the individuation.&lt;/li>
@@ -706,7 +706,7 @@ increase their levels, but this can obscure moral elements.&lt;/p>
 &lt;p>If other&amp;rsquo;s don&amp;rsquo;t judged your immoral behavior, then it&amp;rsquo;s more likely to occur.&lt;/p>
 &lt;h2 id="the-scarcity-principle">The Scarcity Principle&lt;sup>&lt;a class="h__anchor" href="#the-scarcity-principle">¶&lt;/a>&lt;/sup>&lt;/h2>
 &lt;p>People tend to place less value on objects or opportunities that are in
-abundance rather than those that are rare. But does those rare fitter more ?&lt;/p></article></item><item><title>Android Misc Debug</title><link>/2022/android-misc-debug/</link><pubDate>Mon, 18 Apr 2022 20:18:24 CST</pubDate><guid>/2022/android-misc-debug/</guid><description/><article>&lt;h1 id="app-crashed-when-use-androidthemeandroidstylethemedialog">App Crashed When use &lt;code>android:theme=&amp;quot;@android:style/Theme.Dialog&amp;quot;&lt;/code>&lt;sup>&lt;a class="h__anchor" href="#app-crashed-when-use-androidthemeandroidstylethemedialog">¶&lt;/a>&lt;/sup>&lt;/h1>
+abundance rather than those that are rare. But does those rare fitter more ?&lt;/p></article></item><item><title>Android Misc Debug</title><link>https://zyprex.github.io/zyprex.blog/2022/android-misc-debug/</link><pubDate>Mon, 18 Apr 2022 20:18:24 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/android-misc-debug/</guid><description/><article>&lt;h1 id="app-crashed-when-use-androidthemeandroidstylethemedialog">App Crashed When use &lt;code>android:theme=&amp;quot;@android:style/Theme.Dialog&amp;quot;&lt;/code>&lt;sup>&lt;a class="h__anchor" href="#app-crashed-when-use-androidthemeandroidstylethemedialog">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>For Android Studio set android theme, in AndroidManifest.xml, correct the
 &lt;code>android:theme&lt;/code> value:&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -746,7 +746,7 @@ implementation fileTree(dir: 'libs', includes: ['*.jar'])
 &lt;p>Enlarge jvm max heap to 256m (I origin set it to 128m)&lt;/p>
 &lt;blockquote>
 &lt;p>org.gradle.jvmargs=-Xmx256m -Dfile.encoding=UTF-8&lt;/p>
-&lt;/blockquote></article></item><item><title>Install Android Studio</title><link>/2022/install-android-studio/</link><pubDate>Thu, 10 Mar 2022 17:35:43 CST</pubDate><guid>/2022/install-android-studio/</guid><description/><article>&lt;h1 id="take-care-of-my-low-memory-machine">Take Care of My Low Memory Machine&lt;sup>&lt;a class="h__anchor" href="#take-care-of-my-low-memory-machine">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;/blockquote></article></item><item><title>Install Android Studio</title><link>https://zyprex.github.io/zyprex.blog/2022/install-android-studio/</link><pubDate>Thu, 10 Mar 2022 17:35:43 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/install-android-studio/</guid><description/><article>&lt;h1 id="take-care-of-my-low-memory-machine">Take Care of My Low Memory Machine&lt;sup>&lt;a class="h__anchor" href="#take-care-of-my-low-memory-machine">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;ul>
 &lt;li>Enable Power Save Mode&lt;/li>
 &lt;li>Reduce maximum heap size to 512m&lt;/li>
@@ -777,7 +777,7 @@ implementation fileTree(dir: 'libs', includes: ['*.jar'])
 &lt;/blockquote>
 &lt;p>Enable &lt;code>Intel Virtual Technology&lt;/code> in BIOS.&lt;/p>
 &lt;p>&lt;strong>Sadly to say&lt;/strong>: although AVD successful launched, it&amp;rsquo;s performance is
-really bad in low memory machine :(.&lt;/p></article></item><item><title>Try SDCC on Linux</title><link>/2022/try-sdcc-on-linux/</link><pubDate>Thu, 03 Mar 2022 11:57:17 CST</pubDate><guid>/2022/try-sdcc-on-linux/</guid><description/><article>&lt;h1 id="why-try-sdcc-on-linux">Why try SDCC on linux&lt;sup>&lt;a class="h__anchor" href="#why-try-sdcc-on-linux">¶&lt;/a>&lt;/sup>&lt;/h1>
+really bad in low memory machine :(.&lt;/p></article></item><item><title>Try SDCC on Linux</title><link>https://zyprex.github.io/zyprex.blog/2022/try-sdcc-on-linux/</link><pubDate>Thu, 03 Mar 2022 11:57:17 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/try-sdcc-on-linux/</guid><description/><article>&lt;h1 id="why-try-sdcc-on-linux">Why try SDCC on linux&lt;sup>&lt;a class="h__anchor" href="#why-try-sdcc-on-linux">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>I try sdcc on linux because I think I could spark off my interst in mcu programming again. The facts are just the opposite, I found all intersting lost to somewhere unconsciously. So I end it by collect old material thoungh I don&amp;rsquo;t think it can help for anybody. Just a record.&lt;/p>
 &lt;h1 id="getting-start">Getting Start&lt;sup>&lt;a class="h__anchor" href="#getting-start">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>mcu: STC90C52RC&lt;/p>
@@ -919,7 +919,7 @@ xxd -r -p &lt;span class="k">$(&lt;/span>MAIN&lt;span class="k">)&lt;/span>.hex 
 &lt;span class="k">$(&lt;/span>RM&lt;span class="k">)&lt;/span> &lt;span class="k">$(&lt;/span>DUMP&lt;span class="k">)&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div></article></item><item><title>Connect Internet From Command Line</title><link>/2021/connect-internet-from-command-line/</link><pubDate>Tue, 24 Aug 2021 11:38:54 CST</pubDate><guid>/2021/connect-internet-from-command-line/</guid><description/><article>&lt;h1 id="connect-internet-from-command-line">Connect Internet From Command Line&lt;sup>&lt;a class="h__anchor" href="#connect-internet-from-command-line">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;/div></article></item><item><title>Connect Internet From Command Line</title><link>https://zyprex.github.io/zyprex.blog/2021/connect-internet-from-command-line/</link><pubDate>Tue, 24 Aug 2021 11:38:54 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2021/connect-internet-from-command-line/</guid><description/><article>&lt;h1 id="connect-internet-from-command-line">Connect Internet From Command Line&lt;sup>&lt;a class="h__anchor" href="#connect-internet-from-command-line">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>The &lt;code>&amp;lt;SSID&amp;gt;&lt;/code> is your wifi name.&lt;/p>
 &lt;h2 id="on-windows">On Windows&lt;sup>&lt;a class="h__anchor" href="#on-windows">¶&lt;/a>&lt;/sup>&lt;/h2>
 &lt;p>Connect to WIFI: &lt;code>netsh wlan connect name=&amp;lt;SSID&amp;gt;&lt;/code>&lt;/p>
@@ -933,7 +933,7 @@ or else you will need run &lt;code>nmcli radio wifi on&lt;/code>.&lt;/p>
 &lt;p>Connect to new WIFI: &lt;code>nmcli d wifi connect &amp;quot;&amp;lt;SSID&amp;gt;&amp;quot; --ask&lt;/code>&lt;/p>
 &lt;p>Connect to hidden WIFI: &lt;code>nmcli d wifi connect &amp;quot;&amp;lt;SSID&amp;gt;&amp;quot; hidden yes --ask&lt;/code>&lt;/p>
 &lt;p>Connect to WIFI: &lt;code>nmcli c up &amp;lt;SSID&amp;gt;&lt;/code>, or &lt;code>nmcli c up&lt;/code>&lt;/p>
-&lt;p>Disconnect to WIFI: &lt;code>nmcli c down &amp;lt;SSID&amp;gt;&lt;/code>, or &lt;code>nmcli c down&lt;/code>&lt;/p></article></item><item><title>Use Macros in C</title><link>/2021/use-macros-in-c/</link><pubDate>Sat, 17 Jul 2021 11:48:59 CST</pubDate><guid>/2021/use-macros-in-c/</guid><description/><article>&lt;h1 id="use-macros-in-c">Use Macros in C&lt;sup>&lt;a class="h__anchor" href="#use-macros-in-c">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Disconnect to WIFI: &lt;code>nmcli c down &amp;lt;SSID&amp;gt;&lt;/code>, or &lt;code>nmcli c down&lt;/code>&lt;/p></article></item><item><title>Use Macros in C</title><link>https://zyprex.github.io/zyprex.blog/2021/use-macros-in-c/</link><pubDate>Sat, 17 Jul 2021 11:48:59 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2021/use-macros-in-c/</guid><description/><article>&lt;h1 id="use-macros-in-c">Use Macros in C&lt;sup>&lt;a class="h__anchor" href="#use-macros-in-c">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>Macros in C programming language, are notorious for it&amp;rsquo;s extremely unsafe,
 esoterically hard to debug.&lt;/p>
 &lt;p>Thus, we should strived to understand its pros and cons.&lt;/p>
@@ -1102,7 +1102,7 @@ tricks too much.&lt;/p>
 &lt;li>&lt;a href="http://gnu.org/onlinedocs/cpp/Macro-Arguments.html">http://gnu.org/onlinedocs/cpp/Macro-Arguments.html&lt;/a>&lt;/li>
 &lt;li>&lt;a href="http://gnu.org/onlinedocs/cpp/Macro-Pitfalls.html">http://gnu.org/onlinedocs/cpp/Macro-Pitfalls.html&lt;/a>&lt;/li>
 &lt;li>&lt;a href="http://gnu.org/onlinedocs/cpp/Variadic-Macros.html">http://gnu.org/onlinedocs/cpp/Variadic-Macros.html&lt;/a>&lt;/li>
-&lt;/ul></article></item><item><title>Git Security Change</title><link>/2021/git-security-change/</link><pubDate>Mon, 14 Jun 2021 13:11:05 CST</pubDate><guid>/2021/git-security-change/</guid><description/><article>&lt;h1 id="reason">Reason&lt;sup>&lt;a class="h__anchor" href="#reason">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;/ul></article></item><item><title>Git Security Change</title><link>https://zyprex.github.io/zyprex.blog/2021/git-security-change/</link><pubDate>Mon, 14 Jun 2021 13:11:05 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2021/git-security-change/</guid><description/><article>&lt;h1 id="reason">Reason&lt;sup>&lt;a class="h__anchor" href="#reason">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>&lt;a class="md__link" href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/"
 target="_blank" rel="noopener"
 >
@@ -1133,7 +1133,7 @@ token-authentication-requirements-for-git-operations
 &lt;pre>&lt;code>git remote -v
 &lt;/code>&lt;/pre>&lt;p>Then Change remote&amp;rsquo;s URL from HTTPS to SSH.&lt;/p>
 &lt;pre>&lt;code>git remote set-url origin git@github.com:user/repository.git
-&lt;/code>&lt;/pre></article></item><item><title>About Nagging</title><link>/2021/about-nagging/</link><pubDate>Fri, 21 May 2021 12:36:29 CST</pubDate><guid>/2021/about-nagging/</guid><description/><article>&lt;p>&lt;em>Anonymous reprinting this article due to unknown source.&lt;/em>&lt;/p>
+&lt;/code>&lt;/pre></article></item><item><title>About Nagging</title><link>https://zyprex.github.io/zyprex.blog/2021/about-nagging/</link><pubDate>Fri, 21 May 2021 12:36:29 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2021/about-nagging/</guid><description/><article>&lt;p>&lt;em>Anonymous reprinting this article due to unknown source.&lt;/em>&lt;/p>
 &lt;p>Nagging is the dispiriting, unpleasant, counter-productive but wholly
 understandable and poignant version of a hugely noble ambition the desire to
 change other people.&lt;/p>
