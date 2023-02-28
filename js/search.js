@@ -6,7 +6,7 @@ let gColor = {
   "tags":"#FFCF3E",
   "1":"#3F51B5"
 };
-fetch('/index.json')
+fetch('../index.json')
 .then(function(res) {
   return res.json();
 })
