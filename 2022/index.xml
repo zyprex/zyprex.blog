@@ -933,7 +933,14 @@ or else you will need run &lt;code>nmcli radio wifi on&lt;/code>.&lt;/p>
 &lt;p>Connect to new WIFI: &lt;code>nmcli d wifi connect &amp;quot;&amp;lt;SSID&amp;gt;&amp;quot; --ask&lt;/code>&lt;/p>
 &lt;p>Connect to hidden WIFI: &lt;code>nmcli d wifi connect &amp;quot;&amp;lt;SSID&amp;gt;&amp;quot; hidden yes --ask&lt;/code>&lt;/p>
 &lt;p>Connect to WIFI: &lt;code>nmcli c up &amp;lt;SSID&amp;gt;&lt;/code>, or &lt;code>nmcli c up&lt;/code>&lt;/p>
-&lt;p>Disconnect to WIFI: &lt;code>nmcli c down &amp;lt;SSID&amp;gt;&lt;/code>, or &lt;code>nmcli c down&lt;/code>&lt;/p></article></item><item><title>Use Macros in C</title><link>https://zyprex.github.io/zyprex.blog/2021/use-macros-in-c/</link><pubDate>Sat, 17 Jul 2021 11:48:59 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2021/use-macros-in-c/</guid><description/><article>&lt;h1 id="use-macros-in-c">Use Macros in C&lt;sup>&lt;a class="h__anchor" href="#use-macros-in-c">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Disconnect to WIFI: &lt;code>nmcli c down &amp;lt;SSID&amp;gt;&lt;/code>, or &lt;code>nmcli c down&lt;/code>&lt;/p>
+&lt;p>&lt;a class="md__link" href="https://developer-old.gnome.org/NetworkManager/stable/nmcli.html"
+target="_blank" rel="noopener"
+>
+nmcli — command-line tool for controlling NetworkManager
+↗
+&lt;/a>
+&lt;/p></article></item><item><title>Use Macros in C</title><link>https://zyprex.github.io/zyprex.blog/2021/use-macros-in-c/</link><pubDate>Sat, 17 Jul 2021 11:48:59 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2021/use-macros-in-c/</guid><description/><article>&lt;h1 id="use-macros-in-c">Use Macros in C&lt;sup>&lt;a class="h__anchor" href="#use-macros-in-c">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>Macros in C programming language, are notorious for it&amp;rsquo;s extremely unsafe,
 esoterically hard to debug.&lt;/p>
 &lt;p>Thus, we should strived to understand its pros and cons.&lt;/p>
