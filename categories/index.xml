@@ -1,4 +1,27 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>https://zyprex.github.io/zyprex.blog/categories/</link><language>en</language><updated>Mon, 04 Jul 2022 17:30:12 CST</updated><item><title>Use Batch Scripts Monitor Register Values</title><link>https://zyprex.github.io/zyprex.blog/2022/use-batch-scripts-monitor-register-values/</link><pubDate>Mon, 04 Jul 2022 17:30:12 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/use-batch-scripts-monitor-register-values/</guid><description/><article>&lt;h1 id="use-batch-scripts-monitor-register-values">Use Batch Scripts Monitor Register Values&lt;sup>&lt;a class="h__anchor" href="#use-batch-scripts-monitor-register-values">¶&lt;/a>&lt;/sup>&lt;/h1>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>https://zyprex.github.io/zyprex.blog/categories/</link><language>en</language><updated>Fri, 31 Mar 2023 12:23:21 CST</updated><item><title>Create WLAN Hotspot on Linux</title><link>https://zyprex.github.io/zyprex.blog/2023/create-wlan-hotspot-on-linux/</link><pubDate>Fri, 31 Mar 2023 12:23:21 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2023/create-wlan-hotspot-on-linux/</guid><description/><article>&lt;p>When I try to start a Hotspot, I finally found that
+my computer doesn&amp;rsquo;t support AP mode.&lt;/p>
+&lt;p>Here is a link for where I stopped.&lt;/p>
+&lt;p>&lt;a class="md__link" href="https://wiki.archlinux.org/title/Software_access_point"
+target="_blank" rel="noopener"
+>
+software access point
+↗
+&lt;/a>
+&lt;/p></article></item><item><title>Useful Chrome Flags</title><link>https://zyprex.github.io/zyprex.blog/2023/useful-chrome-flags/</link><pubDate>Sat, 25 Mar 2023 11:44:28 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2023/useful-chrome-flags/</guid><description/><article>&lt;h1 id="useful-chrome-flags">Useful Chrome Flags&lt;sup>&lt;a class="h__anchor" href="#useful-chrome-flags">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>To Access the flags, type &lt;code>chrome://flags&lt;/code> in browser address bar (omnibox),
+then search those word and enable them.&lt;/p>
+&lt;ul>
+&lt;li>forced color&lt;/li>
+&lt;li>reader mode&lt;/li>
+&lt;li>smooth scrolling&lt;/li>
+&lt;li>GPU rasterization&lt;/li>
+&lt;li>zero-copy rasterization&lt;/li>
+&lt;li>turn off caching of streaming media to disk&lt;/li>
+&lt;li>back-forward caching&lt;/li>
+&lt;li>QUIC protocol&lt;/li>
+&lt;li>parallel downloading&lt;/li>
+&lt;li>download range support&lt;/li>
+&lt;/ul></article></item><item><title>Use Batch Scripts Monitor Register Values</title><link>https://zyprex.github.io/zyprex.blog/2022/use-batch-scripts-monitor-register-values/</link><pubDate>Mon, 04 Jul 2022 17:30:12 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/use-batch-scripts-monitor-register-values/</guid><description/><article>&lt;h1 id="use-batch-scripts-monitor-register-values">Use Batch Scripts Monitor Register Values&lt;sup>&lt;a class="h__anchor" href="#use-batch-scripts-monitor-register-values">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>Recently I noticed that some software, even after they&amp;rsquo;re uninstalled, didn&amp;rsquo;t
 clear their register values. It&amp;rsquo;s drive me mad. So I decide to monitor
 reigister values to find who in charge of abused register write action.&lt;/p>
@@ -706,7 +729,183 @@ increase their levels, but this can obscure moral elements.&lt;/p>
 &lt;p>If other&amp;rsquo;s don&amp;rsquo;t judged your immoral behavior, then it&amp;rsquo;s more likely to occur.&lt;/p>
 &lt;h2 id="the-scarcity-principle">The Scarcity Principle&lt;sup>&lt;a class="h__anchor" href="#the-scarcity-principle">¶&lt;/a>&lt;/sup>&lt;/h2>
 &lt;p>People tend to place less value on objects or opportunities that are in
-abundance rather than those that are rare. But does those rare fitter more ?&lt;/p></article></item><item><title>Android Misc Debug</title><link>https://zyprex.github.io/zyprex.blog/2022/android-misc-debug/</link><pubDate>Mon, 18 Apr 2022 20:18:24 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/android-misc-debug/</guid><description/><article>&lt;h1 id="app-crashed-when-use-androidthemeandroidstylethemedialog">App Crashed When use &lt;code>android:theme=&amp;quot;@android:style/Theme.Dialog&amp;quot;&lt;/code>&lt;sup>&lt;a class="h__anchor" href="#app-crashed-when-use-androidthemeandroidstylethemedialog">¶&lt;/a>&lt;/sup>&lt;/h1>
+abundance rather than those that are rare. But does those rare fitter more ?&lt;/p></article></item><item><title>Stop Nail Biting</title><link>https://zyprex.github.io/zyprex.blog/2022/stop-nail-biting/</link><pubDate>Tue, 10 May 2022 21:18:47 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/stop-nail-biting/</guid><description/><article>&lt;h1 id="stop-nail-biting">Stop Nail Biting&lt;sup>&lt;a class="h__anchor" href="#stop-nail-biting">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Nail biting is a compulsive behaviors that can cause a lot of
+problems. I try to overcome this bad habit, but failed every time.&lt;/p>
+&lt;p>Here are some concepts. I hope with the apply of those concepts I
+could finally get rid of this bad habit.&lt;/p>
+&lt;h2 id="habit-reversal-training">Habit Reversal Training&lt;sup>&lt;a class="h__anchor" href="#habit-reversal-training">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>Phases 1: awareness training&lt;/p>
+&lt;ol>
+&lt;li>Identify the habit or the problem behavior you want to break.&lt;/li>
+&lt;li>Recognize when you engage in the behavior, what triggers it.
+(stress, boredom etc.)&lt;/li>
+&lt;li>Identify the earliest signs of the behavior when you first
+feel the urge to do it. (early warning training)&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>
+&lt;p>Phases 2: competing response training&lt;/p>
+&lt;ul>
+&lt;li>substitue a new behavior for the old one that you want to extinguish.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Phases 3: establishing motivation and support&lt;/p>
+&lt;ul>
+&lt;li>write down all of the negative consequences of the behavior. Use
+this list as a reminder for why you need to stick to the plan.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Add-on technique: stimulus control&lt;/p>
+&lt;ul>
+&lt;li>Reduce the things in your enviroment that can trigger you behavior.&lt;/li>
+&lt;li>Put blocks in place to make it harder for you to be triggered.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></article></item><item><title>How the Phone Network Works</title><link>https://zyprex.github.io/zyprex.blog/2022/how-the-phone-network-works/</link><pubDate>Tue, 10 May 2022 19:35:17 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/how-the-phone-network-works/</guid><description/><article>&lt;h1 id="how-the-phone-network-works">How The Phone Network Works&lt;sup>&lt;a class="h__anchor" href="#how-the-phone-network-works">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Origin From: Scishow&lt;/p>
+&lt;h1 id="the-basic-way-a-cell-phone-works">The Basic Way A Cell Phone Works&lt;sup>&lt;a class="h__anchor" href="#the-basic-way-a-cell-phone-works">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Cell phones are basically just complicated radios, send radio waves
+carrying a signal back and forth between radio towers.&lt;/p>
+&lt;p>&lt;strong>Complicated part&lt;/strong>&lt;/p>
+&lt;p>Encoding data on a radio wave.&lt;/p>
+&lt;p>&lt;strong>Radio waves have two properties&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>Amplitude: how large the wave is.&lt;/li>
+&lt;li>Frequency: the number of times a wave cycles in a given tiem.&lt;/li>
+&lt;/ol>
+&lt;p>We can encoding information by changing both of those properties
+across a wave. (for instance, we could use a series of high and low
+frequencies to represent a stream of 1s and 0s, encoding digital data)&lt;/p>
+&lt;p>Cell phones use a slice of the radio frequency spectrum in 800 to 4000
+Megahertz range.&lt;/p>
+&lt;p>&lt;strong>Bandwidth&lt;/strong>&lt;/p>
+&lt;p>Bandwidth is the amount of frequencies we can use for a whole network.&lt;/p>
+&lt;p>&lt;strong>Interface&lt;/strong>&lt;/p>
+&lt;p>If lots of cell phones all use the same band of frequencies in the
+same way to communicate with a cell tower, their signals overlap with
+each other and become garbled.&lt;/p>
+&lt;p>Radio waves can add and subtract from one another to create new waves.&lt;/p>
+&lt;h1 id="overview-of-1g-to-5g">Overview of 1G to 5G&lt;sup>&lt;a class="h__anchor" href="#overview-of-1g-to-5g">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>&lt;strong>The &amp;ldquo;gees&amp;rdquo;&lt;/strong>&lt;/p>
+&lt;p>The letter G in 4G or 5G refers to the generation of technology used
+for sending radio waves around.&lt;/p>
+&lt;h2 id="1g">1G&lt;sup>&lt;a class="h__anchor" href="#1g">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>FDMA: frequency domain multiple access&lt;/p>
+&lt;p>Distributing frequencies in cells (a kind of honeycomb pattern), each
+of those cells uses a difference cell tower or base station to
+transmit to.&lt;/p>
+&lt;p>The trick is that nearby cells are allocated different frequencies to
+use, but distant ones can use the same frequencies without
+overlapping.&lt;/p>
+&lt;h2 id="2g">2G&lt;sup>&lt;a class="h__anchor" href="#2g">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>TDMA: time division multiple access&lt;/p>
+&lt;p>Use the same channel by chunking signals into bits that take turns.&lt;/p>
+&lt;h2 id="3g">3G&lt;sup>&lt;a class="h__anchor" href="#3g">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>CDMA: code division multiple access&lt;/p>
+&lt;p>Encoding the signals in such way that they can still be made out
+distinctly on the other end (the codes are orthogonal, meaning
+that they can&amp;rsquo;t get mixed up with one another).&lt;/p>
+&lt;h2 id="4g">4G&lt;sup>&lt;a class="h__anchor" href="#4g">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>OFDM: orthoganal frequency division multiplexing&lt;/p>
+&lt;p>Chopes up a single band into small divisions called carriers whose
+frequencies are less likely to interface with each other.&lt;/p>
+&lt;p>&lt;strong>ICI: Intercell Interference&lt;/strong>&lt;/p>
+&lt;p>Signals interfering at the edge of two cells using the same frequencies.&lt;/p>
+&lt;h2 id="5g">5G&lt;sup>&lt;a class="h__anchor" href="#5g">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>5G is a network of what are called &amp;ldquo;ultra-dense networks&amp;rdquo; consisting
+of lots of smaller cells providing reception to many users.&lt;/p>
+&lt;p>&lt;strong>The problem&lt;/strong>&lt;/p>
+&lt;p>More boundaries, increasing the amount of ICI, lead you cell phone
+drop reception very often.&lt;/p></article></item><item><title>Remap Capslock on Windows</title><link>https://zyprex.github.io/zyprex.blog/2022/remap-capslock-on-windows/</link><pubDate>Mon, 09 May 2022 13:26:22 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/remap-capslock-on-windows/</guid><description/><article>&lt;h1 id="remap-capslock-on-windows">Remap Capslock on Windows&lt;sup>&lt;a class="h__anchor" href="#remap-capslock-on-windows">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Dual key remap is a more clean, safe and powerful way to remap the
+almost useless capslock key.&lt;/p>
+&lt;h1 id="use-dual-key-remap">Use &amp;lsquo;dual key remap&amp;rsquo;&lt;sup>&lt;a class="h__anchor" href="#use-dual-key-remap">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>The project home:
+&lt;a class="md__link" href="https://github.com/ililim/dual-key-remap/"
+target="_blank" rel="noopener"
+>
+dual-key-remap
+↗
+&lt;/a>
+&lt;/p>
+&lt;h1 id="auto-start-dual-key-remap-when-windows-launch">Auto Start &amp;lsquo;dual key remap&amp;rsquo; when windows launch&lt;sup>&lt;a class="h__anchor" href="#auto-start-dual-key-remap-when-windows-launch">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Make a &amp;lsquo;dual-key-remap.exe&amp;rsquo; shortcut (by press Alt and drag to
+somewhere) and put it in Startup folder (&lt;code>win + R&lt;/code> and input
+&lt;code>shell:startup&lt;/code> you can directly open this folder).&lt;/p>
+&lt;h1 id="stop-dual-key-remap">Stop &amp;lsquo;dual key remap&amp;rsquo;&lt;sup>&lt;a class="h__anchor" href="#stop-dual-key-remap">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;pre>&lt;code>C:\&amp;gt;tasklist | findstr dual
+dual-key-remap.exe 1556 Console 4 4,148 K
+C:\&amp;gt;taskkill /pid 1556
+&lt;/code>&lt;/pre>&lt;p>Or: &lt;code>taskkill /im dual-key-remap.exe&lt;/code>&lt;/p></article></item><item><title>Emacs Eglot Use jdtls</title><link>https://zyprex.github.io/zyprex.blog/2022/emacs-eglot-use-jdtls/</link><pubDate>Sat, 07 May 2022 12:06:00 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/emacs-eglot-use-jdtls/</guid><description/><article>&lt;h1 id="emacs-eglot-use-jdtls-on-windows">Emacs eglot use jdtls on windows&lt;sup>&lt;a class="h__anchor" href="#emacs-eglot-use-jdtls-on-windows">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>CAUTION: the newest jdtls does not support java8.&lt;/p>
+&lt;h1 id="enviroment">Enviroment&lt;sup>&lt;a class="h__anchor" href="#enviroment">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;ul>
+&lt;li>windows10 Home 21H2&lt;/li>
+&lt;li>GNU Emacs 28.1 (build 2, x86_64-w64-mingw32)&lt;/li>
+&lt;/ul>
+&lt;h1 id="requirements">Requirements&lt;sup>&lt;a class="h__anchor" href="#requirements">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;ul>
+&lt;li>&lt;a class="md__link" href="https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip"
+target="_blank" rel="noopener"
+>
+openjdk-8u41-windows-i586
+↗
+&lt;/a>
+&lt;/li>
+&lt;li>&lt;a class="md__link" href="https://download.eclipse.org/jdtls/milestones/0.55.0/jdt-language-server-0.55.0-202004300028.tar.gz"
+target="_blank" rel="noopener"
+>
+jdt-language-server-0.55.0-20200430002
+↗
+&lt;/a>
+&lt;/li>
+&lt;/ul>
+&lt;p>Extract &amp;lsquo;openjdk&amp;rsquo; and &amp;lsquo;jdt-language-server&amp;rsquo; somewhere, ensure &amp;lsquo;%JAVA_HOME%\bin&amp;rsquo; is in &lt;code>PATH&lt;/code>.&lt;/p>
+&lt;h1 id="configuration">Configuration&lt;sup>&lt;a class="h__anchor" href="#configuration">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-elisp" data-lang="elisp">&lt;span class="p">(&lt;/span>&lt;span class="nb">with-eval-after-load&lt;/span> &lt;span class="s">&amp;#34;eglot&amp;#34;&lt;/span>
+&lt;span class="p">(&lt;/span>&lt;span class="nv">add-to-list&lt;/span> &lt;span class="ss">&amp;#39;eglot-server-programs&lt;/span>
+&lt;span class="o">`&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">java-mode&lt;/span> &lt;span class="o">.&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;java&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-Declipse.application=org.eclipse.jdt.ls.core.id1&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-Dosgi.bundles.defaultStartLevel=4&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-Declipse.product=org.eclipse.jdt.ls.core.product&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-Dlog.level=ALL&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-noverify&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-Xmx256m&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-jar&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;c:\\SDK\\jdt-language-server-0.55.0-202004300028\\plugins\\org.eclipse.equinox.launcher_1.5.700.v20200207-2156.jar&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-configuration&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;c:\\SDK\\jdt-language-server-0.55.0-202004300028\\config_win&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-data&amp;#34;&lt;/span>
+&lt;span class="nv">jdtls-cahce-dir&lt;/span>
+&lt;span class="p">))))&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></article></item><item><title>Android Misc Debug</title><link>https://zyprex.github.io/zyprex.blog/2022/android-misc-debug/</link><pubDate>Mon, 18 Apr 2022 20:18:24 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/android-misc-debug/</guid><description/><article>&lt;h1 id="app-crashed-when-use-androidthemeandroidstylethemedialog">App Crashed When use &lt;code>android:theme=&amp;quot;@android:style/Theme.Dialog&amp;quot;&lt;/code>&lt;sup>&lt;a class="h__anchor" href="#app-crashed-when-use-androidthemeandroidstylethemedialog">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>For Android Studio set android theme, in AndroidManifest.xml, correct the
 &lt;code>android:theme&lt;/code> value:&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -746,462 +945,4 @@ implementation fileTree(dir: 'libs', includes: ['*.jar'])
 &lt;p>Enlarge jvm max heap to 256m (I origin set it to 128m)&lt;/p>
 &lt;blockquote>
 &lt;p>org.gradle.jvmargs=-Xmx256m -Dfile.encoding=UTF-8&lt;/p>
-&lt;/blockquote></article></item><item><title>Install Android Studio</title><link>https://zyprex.github.io/zyprex.blog/2022/install-android-studio/</link><pubDate>Thu, 10 Mar 2022 17:35:43 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/install-android-studio/</guid><description/><article>&lt;h1 id="take-care-of-my-low-memory-machine">Take Care of My Low Memory Machine&lt;sup>&lt;a class="h__anchor" href="#take-care-of-my-low-memory-machine">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;ul>
-&lt;li>Enable Power Save Mode&lt;/li>
-&lt;li>Reduce maximum heap size to 512m&lt;/li>
-&lt;li>Disable parallel compilation&lt;/li>
-&lt;li>Disable unnecessary lint checks (File&amp;gt;Settings&amp;gt;Editor)&lt;/li>
-&lt;li>Reduce maximum heap size available for Gradle. (the &lt;code>org.gradle.jvmargs&lt;/code> in
-&lt;code>gradle.properites&lt;/code> is located at project root folder, set it to 128m)&lt;/li>
-&lt;li>Debug on a physical device&lt;/li>
-&lt;/ul>
-&lt;h1 id="fix-up-avd-related-problem">Fix up AVD related problem&lt;sup>&lt;a class="h__anchor" href="#fix-up-avd-related-problem">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>(1) Add system path&lt;/p>
-&lt;blockquote>
-&lt;p>PANIC: Cannot find AVD system path. Please define &lt;code>ANDROID_SDK_ROOT&lt;/code>.&lt;/p>
-&lt;/blockquote>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="c1"># ~/.profile or ~/.zshenv&lt;/span>
-&lt;span class="nb">export&lt;/span> &lt;span class="nv">ANDROID_SDK_ROOT&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$HOME&lt;/span>/Android/Sdk
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>(2) Configure BIOS&lt;/p>
-&lt;blockquote>
-&lt;p>VT-x is disabled in BIOS.&lt;/p>
-&lt;/blockquote>
-&lt;p>Enable &lt;code>Intel Virtual Technology&lt;/code> in BIOS.&lt;/p>
-&lt;p>&lt;strong>Sadly to say&lt;/strong>: although AVD successful launched, it&amp;rsquo;s performance is
-really bad in low memory machine :(.&lt;/p></article></item><item><title>Try SDCC on Linux</title><link>https://zyprex.github.io/zyprex.blog/2022/try-sdcc-on-linux/</link><pubDate>Thu, 03 Mar 2022 11:57:17 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/try-sdcc-on-linux/</guid><description/><article>&lt;h1 id="why-try-sdcc-on-linux">Why try SDCC on linux&lt;sup>&lt;a class="h__anchor" href="#why-try-sdcc-on-linux">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>I try sdcc on linux because I think I could spark off my interst in mcu programming again. The facts are just the opposite, I found all intersting lost to somewhere unconsciously. So I end it by collect old material thoungh I don&amp;rsquo;t think it can help for anybody. Just a record.&lt;/p>
-&lt;h1 id="getting-start">Getting Start&lt;sup>&lt;a class="h__anchor" href="#getting-start">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>mcu: STC90C52RC&lt;/p>
-&lt;p>compiler: SDCC&lt;/p>
-&lt;p>platform: linux&lt;/p>
-&lt;h1 id="prerequisites">Prerequisites&lt;sup>&lt;a class="h__anchor" href="#prerequisites">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;ul>
-&lt;li>&lt;a class="md__link" href="http://sdcc.sourceforge.net/index.php#Download"
-target="_blank" rel="noopener"
->
-sdcc
-↗
-&lt;/a>
-&lt;/li>
-&lt;li>&lt;a class="md__link" href="https://github.com/grigorig/stcgal"
-target="_blank" rel="noopener"
->
-stcgal
-↗
-&lt;/a>
-&lt;ul>
-&lt;li>pip3 install stcgal&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;h1 id="step-by-step">Step By Step&lt;sup>&lt;a class="h__anchor" href="#step-by-step">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>Compile sdcc from source:&lt;/p>
-&lt;pre>&lt;code>cd sdcc
-./configure
-&lt;/code>&lt;/pre>&lt;p>configure: error: boost library not found (boost/graph/adjacency_list.hpp).&lt;/p>
-&lt;pre>&lt;code>sudo pacman -S boost
-&lt;/code>&lt;/pre>&lt;p>configure: error: gputils (gpasm, gplink, and gplib) are required but not found.
-Either install gputils or reconfigure with &amp;ndash;disable-pic14-port and &amp;ndash;disable-pic16-port.
-configure: error: ./configure failed for device/lib/pic14&lt;/p>
-&lt;pre>&lt;code>sudo pacman -S gputils
-&lt;/code>&lt;/pre>&lt;pre>&lt;code>./configure
-make
-&lt;/code>&lt;/pre>&lt;p>wait at least 45 minutes&lt;/p>
-&lt;pre>&lt;code>sudo make install
-&lt;/code>&lt;/pre>&lt;!-- According to `sdccman.pdf` 2.2 install path -->
-&lt;p>Test sdcc compiler with &lt;code>sdcc --version&lt;/code>
-You may see:&lt;/p>
-&lt;pre>&lt;code>SDCC : mcs51/z80/z180/r2k/r2ka/r3ka/gbz80/tlcs90/ez80_z80/z80n/ds390/pic16/pic14/TININative/ds400/hc08/s08/stm8/pdk13/pdk14/pdk15 4.1.0 #12072 (Linux)
-published under GNU General Public License (GPL)
-&lt;/code>&lt;/pre>&lt;h1 id="generate-binary-file">Generate Binary File&lt;sup>&lt;a class="h__anchor" href="#generate-binary-file">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;pre>&lt;code>sdcc main.c
-packihx main.ihx
-xxd -r -p main.hex main.bin
-&lt;/code>&lt;/pre>&lt;h1 id="download-binary-file-to-flash">Download Binary File to Flash&lt;sup>&lt;a class="h__anchor" href="#download-binary-file-to-flash">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>If occur &amp;ldquo;ModuleNotFoundError: No module named &amp;lsquo;stcgal&amp;rsquo;&amp;rdquo;, try, (another way is install &amp;lsquo;stcgal&amp;rsquo; for root user):&lt;/p>
-&lt;pre>&lt;code>chown &amp;lt;username&amp;gt; /dev/ttyUSB0
-&lt;/code>&lt;/pre>&lt;p>When stuck on &amp;lsquo;Waiting for MCU, please cycle power:&amp;rsquo;, maybe you are use chip does not support by stcgal.&lt;/p>
-&lt;pre>&lt;code>stcgal -P stc89 -p /dev/ttyUSB0 main.bin
-&lt;/code>&lt;/pre>&lt;h1 id="test-code">Test code&lt;sup>&lt;a class="h__anchor" href="#test-code">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;h2 id="mainc">main.c&lt;sup>&lt;a class="h__anchor" href="#mainc">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;mcs51/8051.h&amp;gt;&lt;/span>&lt;span class="cp">
-&lt;/span>&lt;span class="cp">&lt;/span>&lt;span class="kt">void&lt;/span> &lt;span class="nf">delay&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">100&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">j&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">j&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="n">j&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="p">}&lt;/span>
-&lt;span class="p">}&lt;/span>
-&lt;span class="p">}&lt;/span>
-&lt;span class="kt">int&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">void&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="n">P1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mh">0xAF&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="k">for&lt;/span> &lt;span class="p">(;;)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="n">delay&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;span class="n">P1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">~&lt;/span>&lt;span class="n">P1&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="p">}&lt;/span>
-&lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;span class="p">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h2 id="makefile">makefile&lt;sup>&lt;a class="h__anchor" href="#makefile">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;span class="lnt">18
-&lt;/span>&lt;span class="lnt">19
-&lt;/span>&lt;span class="lnt">20
-&lt;/span>&lt;span class="lnt">21
-&lt;/span>&lt;span class="lnt">22
-&lt;/span>&lt;span class="lnt">23
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-make" data-lang="make">&lt;span class="c"># LAST MODIFIED : March 23, 2021
-&lt;/span>&lt;span class="c"># MAKE PROGRAM : make
-&lt;/span>&lt;span class="c"># PLATFORM : unix
-&lt;/span>&lt;span class="c"># DESCRIPTION : this makefile is used to compile mcs51 program
-&lt;/span>&lt;span class="c"># -I/usr/local/share/sdcc/include/
-&lt;/span>&lt;span class="c">&lt;/span>&lt;span class="nv">CC&lt;/span> &lt;span class="o">:=&lt;/span> sdcc
-&lt;span class="nv">FLAGS&lt;/span> &lt;span class="o">:=&lt;/span>
-&lt;span class="nv">RM&lt;/span> &lt;span class="o">:=&lt;/span> rm
-&lt;span class="nv">MAIN&lt;/span> &lt;span class="o">:=&lt;/span> main
-&lt;span class="nv">REL&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="k">$(&lt;/span>patsubst %.c, %.rel, &lt;span class="k">$(&lt;/span>filter-out &lt;span class="k">$(&lt;/span>MAIN&lt;span class="k">)&lt;/span>.c, &lt;span class="k">$(&lt;/span>wildcard *.c&lt;span class="k">)))&lt;/span>
-&lt;span class="nv">DUMP&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="k">$(&lt;/span>wildcard *.asm *.lst *.rst *.sym *.map *.mem *.lk *.hex *.ihx *.rel&lt;span class="k">)&lt;/span>
-&lt;span class="nf">all&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="k">$(&lt;/span>&lt;span class="nv">REL&lt;/span>&lt;span class="k">)&lt;/span>
-&lt;span class="k">$(&lt;/span>CC&lt;span class="k">)&lt;/span> &lt;span class="k">$(&lt;/span>MAIN&lt;span class="k">)&lt;/span>.c $^
-packihx &lt;span class="k">$(&lt;/span>MAIN&lt;span class="k">)&lt;/span>.ihx &amp;gt; &lt;span class="k">$(&lt;/span>MAIN&lt;span class="k">)&lt;/span>.hex
-xxd -r -p &lt;span class="k">$(&lt;/span>MAIN&lt;span class="k">)&lt;/span>.hex &lt;span class="k">$(&lt;/span>MAIN&lt;span class="k">)&lt;/span>.bin
-&lt;span class="nf">%.rel&lt;/span>&lt;span class="o">:&lt;/span> %.&lt;span class="n">c&lt;/span>
-&lt;span class="k">$(&lt;/span>CC&lt;span class="k">)&lt;/span> -c $&amp;lt;
-&lt;span class="nf">.PHONY&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">clean&lt;/span>
-&lt;span class="nf">clean&lt;/span>&lt;span class="o">:&lt;/span>
-&lt;span class="k">$(&lt;/span>RM&lt;span class="k">)&lt;/span> &lt;span class="k">$(&lt;/span>DUMP&lt;span class="k">)&lt;/span>
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div></article></item><item><title>Connect Internet From Command Line</title><link>https://zyprex.github.io/zyprex.blog/2021/connect-internet-from-command-line/</link><pubDate>Tue, 24 Aug 2021 11:38:54 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2021/connect-internet-from-command-line/</guid><description/><article>&lt;h1 id="connect-internet-from-command-line">Connect Internet From Command Line&lt;sup>&lt;a class="h__anchor" href="#connect-internet-from-command-line">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>The &lt;code>&amp;lt;SSID&amp;gt;&lt;/code> is your wifi name.&lt;/p>
-&lt;h2 id="on-windows">On Windows&lt;sup>&lt;a class="h__anchor" href="#on-windows">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>Connect to WIFI: &lt;code>netsh wlan connect name=&amp;lt;SSID&amp;gt;&lt;/code>&lt;/p>
-&lt;p>Disconnect to WIFI: &lt;code>netsh wlan disconnect&lt;/code>&lt;/p>
-&lt;h2 id="on-linux">On Linux&lt;sup>&lt;a class="h__anchor" href="#on-linux">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>Check WIFI status: &lt;code>nmcli radio wifi&lt;/code>, it should output &lt;code>enabled&lt;/code>,
-or else you will need run &lt;code>nmcli radio wifi on&lt;/code>.&lt;/p>
-&lt;p>Check Network status: &lt;code>nmcli d status&lt;/code>, &lt;code>nmcli c show&lt;/code>&lt;/p>
-&lt;p>List WIFI SSID: &lt;code>mncli d wifi list&lt;/code> , &lt;code>mncli d wifi rescan&lt;/code>&lt;/p>
-&lt;p>Delete a WIFI: &lt;code>nmcli c delete &amp;lt;SSID&amp;gt;&lt;/code>, &lt;code>nmcli c delete &amp;lt;UUID&amp;gt;&lt;/code>&lt;/p>
-&lt;p>Connect to new WIFI: &lt;code>nmcli d wifi connect &amp;quot;&amp;lt;SSID&amp;gt;&amp;quot; --ask&lt;/code>&lt;/p>
-&lt;p>Connect to hidden WIFI: &lt;code>nmcli d wifi connect &amp;quot;&amp;lt;SSID&amp;gt;&amp;quot; hidden yes --ask&lt;/code>&lt;/p>
-&lt;p>Connect to WIFI: &lt;code>nmcli c up &amp;lt;SSID&amp;gt;&lt;/code>, or &lt;code>nmcli c up&lt;/code>&lt;/p>
-&lt;p>Disconnect to WIFI: &lt;code>nmcli c down &amp;lt;SSID&amp;gt;&lt;/code>, or &lt;code>nmcli c down&lt;/code>&lt;/p>
-&lt;p>&lt;a class="md__link" href="https://developer-old.gnome.org/NetworkManager/stable/nmcli.html"
-target="_blank" rel="noopener"
->
-nmcli — command-line tool for controlling NetworkManager
-↗
-&lt;/a>
-&lt;/p></article></item><item><title>Use Macros in C</title><link>https://zyprex.github.io/zyprex.blog/2021/use-macros-in-c/</link><pubDate>Sat, 17 Jul 2021 11:48:59 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2021/use-macros-in-c/</guid><description/><article>&lt;h1 id="use-macros-in-c">Use Macros in C&lt;sup>&lt;a class="h__anchor" href="#use-macros-in-c">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>Macros in C programming language, are notorious for it&amp;rsquo;s extremely unsafe,
-esoterically hard to debug.&lt;/p>
-&lt;p>Thus, we should strived to understand its pros and cons.&lt;/p>
-&lt;h2 id="feature-of-macros">Feature of Macros&lt;sup>&lt;a class="h__anchor" href="#feature-of-macros">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>In C, macro&amp;rsquo;s main duty is &lt;em>text precessing&lt;/em> &amp;ndash; e.g. replace a piece of text
-with another text, in many other case, they&amp;rsquo;re used to encapsulated function,
-and in minor case, they can minic some other language&amp;rsquo;s feature, or syntactic
-sugar.&lt;/p>
-&lt;h2 id="expansion-of-macros">Expansion of Macros&lt;sup>&lt;a class="h__anchor" href="#expansion-of-macros">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>Do expansion of macros use &lt;code>gcc&lt;/code> with &lt;code>-E [file]&lt;/code> option.&lt;/p>
-&lt;h2 id="comparison-of-macros-pros-and-cons">Comparison of Macros Pros and Cons&lt;sup>&lt;a class="h__anchor" href="#comparison-of-macros-pros-and-cons">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>&lt;strong>CONS&lt;/strong>&lt;/p>
-&lt;ul>
-&lt;li>The variable defined in macro share same scope near to its used place.&lt;/li>
-&lt;li>No type checking with macros parameters as functions parameters.&lt;/li>
-&lt;li>Macros can&amp;rsquo;t be debugged by debugger.&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>PROS&lt;/strong>&lt;/p>
-&lt;ul>
-&lt;li>Efficiency &amp;ndash; faster than same function call.
-&lt;ul>
-&lt;li>TIPS: prefer to use C99&amp;rsquo;s &lt;code>inline&lt;/code> , &lt;code>always_inline&lt;/code> keywords&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Passing default arguments&lt;/li>
-&lt;li>Debug strings
-&lt;ul>
-&lt;li>&lt;code>__FILE__, __LINE__, __func__, __TIME__, __DATE__, __STDC__, __STDC_VERSION__&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="true-constant-variable-in-c">True Constant variable in C&lt;sup>&lt;a class="h__anchor" href="#true-constant-variable-in-c">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>In C, the &lt;code>const&lt;/code> variables are not true constants, so can&amp;rsquo;t use in switch-case
-or use them for defined an array&amp;rsquo;s size (C++ can). Enumerations are real consts,
-but their type is only integer. So, in dired need to define true constants, just
-use macro.&lt;/p>
-&lt;h2 id="example-of-macro-usage">Example of Macro Usage&lt;sup>&lt;a class="h__anchor" href="#example-of-macro-usage">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;h3 id="defined-new-macro">Defined New Macro&lt;sup>&lt;a class="h__anchor" href="#defined-new-macro">¶&lt;/a>&lt;/sup>&lt;/h3>
-&lt;p>Sometimes test macro existence before define is a good idea.&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#ifndef M1
-&lt;/span>&lt;span class="cp">#define M1 100
-&lt;/span>&lt;span class="cp">#endif
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h3 id="brackets-protected">Brackets Protected&lt;sup>&lt;a class="h__anchor" href="#brackets-protected">¶&lt;/a>&lt;/sup>&lt;/h3>
-&lt;p>Directly substituted in code will cause some pretty nasty side effects,
-because of operator precedence.&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#define MUX(x) (x*x)
-&lt;/span>&lt;span class="cp">&lt;/span>&lt;span class="c1">// ...
-&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="n">MUX&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// incorrect!
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h3 id="increment--decrement-operation">Increment / Decrement Operation&lt;sup>&lt;a class="h__anchor" href="#increment--decrement-operation">¶&lt;/a>&lt;/sup>&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#define ABS(x) ((x)&amp;gt;0?(x):-(x))
-&lt;/span>&lt;span class="cp">&lt;/span>&lt;span class="c1">// ...
-&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="n">ABS&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// incorrect!
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h3 id="duplicated-function-call">Duplicated Function Call&lt;sup>&lt;a class="h__anchor" href="#duplicated-function-call">¶&lt;/a>&lt;/sup>&lt;/h3>
-&lt;p>If pass functions as macro&amp;rsquo;s parameter, may cause duplicated function call.&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#define MIN(x, y) ((x) &amp;lt; (y) ? (x) : (y))
-&lt;/span>&lt;span class="cp">&lt;/span>&lt;span class="c1">// ...
-&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="n">MIN&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">foo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">z&lt;/span>&lt;span class="p">));&lt;/span> &lt;span class="c1">// incorrect!
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h3 id="multiple-line-macros">Multiple Line Macros&lt;sup>&lt;a class="h__anchor" href="#multiple-line-macros">¶&lt;/a>&lt;/sup>&lt;/h3>
-&lt;p>Be careful in define multiple line macros. Wrap them in &lt;code>do{}while(0)&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;span class="lnt">7
-&lt;/span>&lt;span class="lnt">8
-&lt;/span>&lt;span class="lnt">9
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#define MIN(x, y) \
-&lt;/span>&lt;span class="cp">{ \
-&lt;/span>&lt;span class="cp"> if((x) &amp;lt; (y)) \
-&lt;/span>&lt;span class="cp"> return x; \
-&lt;/span>&lt;span class="cp"> else \
-&lt;/span>&lt;span class="cp"> return y; \
-&lt;/span>&lt;span class="cp">} &lt;/span>&lt;span class="c1">// &amp;lt;= can&amp;#39;t add semicolon, here.
-&lt;/span>&lt;span class="c1">// ...
-&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="n">MIN&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// incorrect!
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h3 id="passing-default-arguments">Passing Default Arguments&lt;sup>&lt;a class="h__anchor" href="#passing-default-arguments">¶&lt;/a>&lt;/sup>&lt;/h3>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="kt">void&lt;/span> &lt;span class="nf">fun&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">a2&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;span class="cp">#define m_fun_a1(x) fun(x, 2)
-&lt;/span>&lt;span class="cp">#define m_fun_a2(x) fun(1, x)
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h3 id="variadic-macros">Variadic Macros&lt;sup>&lt;a class="h__anchor" href="#variadic-macros">¶&lt;/a>&lt;/sup>&lt;/h3>
-&lt;p>Note this type of macros are GCC standard, and may not supported by other
-compiler.&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#define eprintf(format, ...) fprintf(stderr, __VAR_ARGS__)
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h3 id="stringizing-and-concatenation">Stringizing and Concatenation&lt;sup>&lt;a class="h__anchor" href="#stringizing-and-concatenation">¶&lt;/a>&lt;/sup>&lt;/h3>
-&lt;p>Use &lt;code>#&lt;/code> to stringizing, use &lt;code>##&lt;/code> concatenation, but do not relay on those
-tricks too much.&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="kr">inline&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="nf">calc_0&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">){&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
-&lt;span class="kr">inline&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="nf">calc_1&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">){&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
-&lt;span class="cp">#define calc_x(x, a, b) calc_##x(a, b)
-&lt;/span>&lt;span class="cp">&lt;/span>&lt;span class="c1">// ...
-&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="n">calc_x&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h1 id="ref">Ref.&lt;sup>&lt;a class="h__anchor" href="#ref">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;ul>
-&lt;li>&lt;a href="https://pmihaylov.com/macros-in-c/">https://pmihaylov.com/macros-in-c/&lt;/a>&lt;/li>
-&lt;li>&lt;a href="http://gnu.org/onlinedocs/cpp/Macro-Arguments.html">http://gnu.org/onlinedocs/cpp/Macro-Arguments.html&lt;/a>&lt;/li>
-&lt;li>&lt;a href="http://gnu.org/onlinedocs/cpp/Macro-Pitfalls.html">http://gnu.org/onlinedocs/cpp/Macro-Pitfalls.html&lt;/a>&lt;/li>
-&lt;li>&lt;a href="http://gnu.org/onlinedocs/cpp/Variadic-Macros.html">http://gnu.org/onlinedocs/cpp/Variadic-Macros.html&lt;/a>&lt;/li>
-&lt;/ul></article></item><item><title>Git Security Change</title><link>https://zyprex.github.io/zyprex.blog/2021/git-security-change/</link><pubDate>Mon, 14 Jun 2021 13:11:05 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2021/git-security-change/</guid><description/><article>&lt;h1 id="reason">Reason&lt;sup>&lt;a class="h__anchor" href="#reason">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>&lt;a class="md__link" href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/"
-target="_blank" rel="noopener"
->
-token-authentication-requirements-for-git-operations
-↗
-&lt;/a>
-&lt;/p>
-&lt;h1 id="take-action">Take Action&lt;sup>&lt;a class="h__anchor" href="#take-action">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;h2 id="use-ssh">Use SSH&lt;sup>&lt;a class="h__anchor" href="#use-ssh">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;ol>
-&lt;li>Generate Public Key&lt;/li>
-&lt;/ol>
-&lt;pre>&lt;code>ssh-keygen -t rsa &amp;quot;mypersonal@email.com&amp;quot;
-&lt;/code>&lt;/pre>&lt;p>Note: email is optional.&lt;/p>
-&lt;ol start="2">
-&lt;li>Login in Github&lt;/li>
-&lt;/ol>
-&lt;p>Settings -&amp;gt; SSH and GPG keys -&amp;gt; New SSH key&lt;/p>
-&lt;p>Copy content in &lt;code>~/.ssh/id_rsa.pub&lt;/code>.&lt;/p>
-&lt;ol start="3">
-&lt;li>Verify&lt;/li>
-&lt;/ol>
-&lt;pre>&lt;code>ssh -T git@github.com
-&lt;/code>&lt;/pre>&lt;p>If corrent verified, will see:&lt;/p>
-&lt;pre>&lt;code>Hi xxx! You’ve successfully authenticated, but GitHub does not # provide shell access.
-&lt;/code>&lt;/pre>&lt;h2 id="change-remote-url">Change Remote URL&lt;sup>&lt;a class="h__anchor" href="#change-remote-url">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>First verify current remote URL.&lt;/p>
-&lt;pre>&lt;code>git remote -v
-&lt;/code>&lt;/pre>&lt;p>Then Change remote&amp;rsquo;s URL from HTTPS to SSH.&lt;/p>
-&lt;pre>&lt;code>git remote set-url origin git@github.com:user/repository.git
-&lt;/code>&lt;/pre></article></item><item><title>About Nagging</title><link>https://zyprex.github.io/zyprex.blog/2021/about-nagging/</link><pubDate>Fri, 21 May 2021 12:36:29 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2021/about-nagging/</guid><description/><article>&lt;p>&lt;em>Anonymous reprinting this article due to unknown source.&lt;/em>&lt;/p>
-&lt;p>Nagging is the dispiriting, unpleasant, counter-productive but wholly
-understandable and poignant version of a hugely noble ambition the desire to
-change other people.&lt;/p>
-&lt;p>There is so much we might fairly want to change about them.&lt;/p>
-&lt;p>We&amp;rsquo;re an entirely imperfect lot and therefore we want other people to be more
-self-aware, punctual, generous, reliable, introspective, resilient,
-communicative, profound.&lt;/p>
-&lt;p>At home, we want them to focus more on the sink, the children, the bins, the
-money and the need to put the phone down and look up.&lt;/p>
-&lt;p>At a macro-dimension, we want people to think more about the suffering of
-encaged animals the destruction of our habitat and the iniquities of
-international capitalism.&lt;/p>
-&lt;p>&lt;strong>Most of us, very far from our ideal selves.&lt;/strong>&lt;/p>
-&lt;p>And at the level of the species, we come close to an evolutionary error.&lt;/p>
-&lt;p>The desire to change people is therefore no pathology.&lt;/p>
-&lt;p>It&amp;rsquo;s a clear-sighted recognition of the scale of human wickedness.&lt;/p>
-&lt;p>Nagging is, in its essence, an attempt at teaching, at getting an idea for
-improvement from one mind into another.&lt;/p>
-&lt;p>But it&amp;rsquo;s also a version of teaching that has given up hope.&lt;/p>
-&lt;p>It has descended into an attempt to insist rather than invite to coerce rather
-than charm.&lt;/p>
-&lt;p>One is too panicked by the thought of the unteachable student is ruining one&amp;rsquo;s
-life to find the inner resources to see it a little more from their point of
-view.&lt;/p>
-&lt;p>It&amp;rsquo;s one&amp;rsquo;s own suffering that dominates all the available imaginative capacity.&lt;/p>
-&lt;p>And so one gets straight to the point, gets rid of garlands, omits the honey
-and says it in plain terms.&lt;/p>
-&lt;p>&amp;ldquo;The bins nee attention now.&amp;rdquo;&lt;/p>
-&lt;p>&amp;ldquo;Get to the table immediately&amp;rdquo;&lt;/p>
-&lt;p>&amp;ldquo;You&amp;rsquo;re a selfish layabout.&amp;rdquo;&lt;/p>
-&lt;p>&amp;ldquo;Not there, here &amp;hellip;&amp;rdquo;&lt;/p>
-&lt;p>One isn&amp;rsquo;t wrong. One is really very right, but also very tired and deep down,
-quite sad.&lt;/p>
-&lt;p>Lamentably, also, it just doesn&amp;rsquo;t work.&lt;/p>
-&lt;p>By the time one start to humiliating the student, the lesson is over.&lt;/p>
-&lt;p>Nagging breeds its evil twin, shirking.&lt;/p>
-&lt;p>The other pretends to read the paper, goes upstairs and feels righteous.&lt;/p>
-&lt;p>The shrillness of one&amp;rsquo;s tone gives them all the excuse they need to trust that
-we have nothing kind or true to tell them.&lt;/p>
-&lt;p>One changes other people only when the desire that they change has not reached
-an insistent pitch, when we can still bear that they remain as they are.&lt;/p>
-&lt;p>All of us improve only when we have not been badgered or made to feel guilty,
-only when we have a sense that we are loved and deeply understood for the many
-reasons why change is so hard for us.&lt;/p>
-&lt;p>We know, of course, the bins need our attention, that we should strive to get
-to bed earlier and that we have been a disappointment in the couple.&lt;/p>
-&lt;p>But we can&amp;rsquo;t to hear these lessons in an unsympathetic tone.&lt;/p>
-&lt;p>We want tricky children that we are to be indulged for our ambivalence about
-becoming better people.&lt;/p>
-&lt;p>The same obtuse dynamic is a play at the political level.&lt;/p>
-&lt;p>We know we shouldn&amp;rsquo;t abuse the planet, bend rules or close our hearts to the
-unfortunate.&lt;/p>
-&lt;p>But we won&amp;rsquo;t do any of the good things if a dour figure wags his finger and
-delivers stern lectures.&lt;/p>
-&lt;p>We want to be charmed not dragged into goodness.&lt;/p>
-&lt;p>The tragedy of nagging is that its causes are usually so noble and yet that it
-doesn&amp;rsquo;t work.&lt;/p>
-&lt;p>We nag because we feel that our possession of the truth lets us off having to
-convey it elegantly.&lt;/p>
-&lt;p>It never does.&lt;/p>
-&lt;p>The solution to nagging isn&amp;rsquo;t to give up trying to get others to do what we
-want.&lt;/p>
-&lt;p>Rather, it&amp;rsquo;s to recognise that persuasion always needs to occur in terms that
-make sense to those who so badly need to be altered.&lt;/p></article></item></channel></rss>
+&lt;/blockquote></article></item></channel></rss>

@@ -1,0 +1,948 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>https://zyprex.github.io/zyprex.blog/tags/tool/</link><language>en</language><updated>Mon, 09 May 2022 13:26:22 CST</updated><item><title>Create WLAN Hotspot on Linux</title><link>https://zyprex.github.io/zyprex.blog/2023/create-wlan-hotspot-on-linux/</link><pubDate>Fri, 31 Mar 2023 12:23:21 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2023/create-wlan-hotspot-on-linux/</guid><description/><article>&lt;p>When I try to start a Hotspot, I finally found that
+my computer doesn&amp;rsquo;t support AP mode.&lt;/p>
+&lt;p>Here is a link for where I stopped.&lt;/p>
+&lt;p>&lt;a class="md__link" href="https://wiki.archlinux.org/title/Software_access_point"
+target="_blank" rel="noopener"
+>
+software access point
+↗
+&lt;/a>
+&lt;/p></article></item><item><title>Useful Chrome Flags</title><link>https://zyprex.github.io/zyprex.blog/2023/useful-chrome-flags/</link><pubDate>Sat, 25 Mar 2023 11:44:28 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2023/useful-chrome-flags/</guid><description/><article>&lt;h1 id="useful-chrome-flags">Useful Chrome Flags&lt;sup>&lt;a class="h__anchor" href="#useful-chrome-flags">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>To Access the flags, type &lt;code>chrome://flags&lt;/code> in browser address bar (omnibox),
+then search those word and enable them.&lt;/p>
+&lt;ul>
+&lt;li>forced color&lt;/li>
+&lt;li>reader mode&lt;/li>
+&lt;li>smooth scrolling&lt;/li>
+&lt;li>GPU rasterization&lt;/li>
+&lt;li>zero-copy rasterization&lt;/li>
+&lt;li>turn off caching of streaming media to disk&lt;/li>
+&lt;li>back-forward caching&lt;/li>
+&lt;li>QUIC protocol&lt;/li>
+&lt;li>parallel downloading&lt;/li>
+&lt;li>download range support&lt;/li>
+&lt;/ul></article></item><item><title>Use Batch Scripts Monitor Register Values</title><link>https://zyprex.github.io/zyprex.blog/2022/use-batch-scripts-monitor-register-values/</link><pubDate>Mon, 04 Jul 2022 17:30:12 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/use-batch-scripts-monitor-register-values/</guid><description/><article>&lt;h1 id="use-batch-scripts-monitor-register-values">Use Batch Scripts Monitor Register Values&lt;sup>&lt;a class="h__anchor" href="#use-batch-scripts-monitor-register-values">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Recently I noticed that some software, even after they&amp;rsquo;re uninstalled, didn&amp;rsquo;t
+clear their register values. It&amp;rsquo;s drive me mad. So I decide to monitor
+reigister values to find who in charge of abused register write action.&lt;/p>
+&lt;p>At first glance, it could use &lt;code>RegOpenKeyEx()&lt;/code> and &lt;code>RegCloseKey()&lt;/code> to read
+latest register values, but use a c program to achieve all of this, may seems
+too overhead, and I don&amp;rsquo;t want for another software do this for me. All in all,
+I finally figure out the pure and simple batch script is just perfect for me.&lt;/p>
+&lt;p>How I did it?&lt;/p>
+&lt;ol>
+&lt;li>read the register values&lt;/li>
+&lt;li>save the values to file&lt;/li>
+&lt;li>wait for a register values change&lt;/li>
+&lt;li>read the register values again&lt;/li>
+&lt;li>compare previous saved values with current&lt;/li>
+&lt;li>if anything changed, report this changed, keep a log for what have changed&lt;/li>
+&lt;/ol>
+&lt;p>For the waitting of register values change, run scripts in backgrounds is waste
+of computer resources, it could replace by check every times when computer boot
+up, or use schedule task check every X hours if you like.&lt;/p>
+&lt;p>Times to show you code, feel free to change it to suit your particular needs:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-batch" data-lang="batch">&lt;span class="p">:&lt;/span>&lt;span class="c1">: This batch script attempt to compare register key change before and after&lt;/span>
+&lt;span class="p">:&lt;/span>&lt;span class="c1">: the script run, if any diff exist, it paused.&lt;/span>
+&lt;span class="p">@&lt;/span>&lt;span class="k">ECHO&lt;/span> OFF
+&lt;span class="k">SET&lt;/span> &lt;span class="nv">from_reg_keyname&lt;/span>&lt;span class="p">=&lt;/span>HKCU\Software
+&lt;span class="k">SET&lt;/span> &lt;span class="nv">latest_reg&lt;/span>&lt;span class="p">=&lt;/span>latest.txt
+&lt;span class="k">SET&lt;/span> &lt;span class="nv">origin_reg&lt;/span>&lt;span class="p">=&lt;/span>origin.txt
+&lt;span class="k">SET&lt;/span> &lt;span class="nv">log_file&lt;/span>&lt;span class="p">=&lt;/span>diffReg.log
+&lt;span class="k">IF&lt;/span> &lt;span class="k">EXIST&lt;/span> &lt;span class="nv">%latest_reg%&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;span class="k">GOTO&lt;/span> &lt;span class="nl">label_diff&lt;/span>
+&lt;span class="p">)&lt;/span> &lt;span class="k">ELSE&lt;/span> &lt;span class="p">(&lt;/span>
+REG QUERY &lt;span class="nv">%from_reg_keyname%&lt;/span> &lt;span class="p">&amp;gt;&lt;/span> &lt;span class="nv">%latest_reg%&lt;/span>
+&lt;span class="k">EXIT&lt;/span>
+&lt;span class="p">)&lt;/span>
+&lt;span class="p">:&lt;/span>&lt;span class="nl">label_diff&lt;/span>
+&lt;span class="k">MOVE&lt;/span> &lt;span class="nv">%latest_reg%&lt;/span> &lt;span class="nv">%origin_reg%&lt;/span> &lt;span class="p">&amp;gt;&lt;/span>NUL
+REG QUERY &lt;span class="nv">%from_reg_keyname%&lt;/span> &lt;span class="p">&amp;gt;&lt;/span> &lt;span class="nv">%latest_reg%&lt;/span>
+FC &lt;span class="nv">%latest_reg%&lt;/span> &lt;span class="nv">%origin_reg%&lt;/span>
+&lt;span class="p">:&lt;/span>&lt;span class="c1">: IF has diff print diff and pause ELSE delete origin_reg&lt;/span>
+&lt;span class="k">IF&lt;/span> &lt;span class="nv">%ERRORLEVEL%&lt;/span> &lt;span class="ow">GEQ&lt;/span> 1 &lt;span class="p">(&lt;/span>
+&lt;span class="k">ECHO&lt;/span> ---------------- &lt;span class="p">&amp;gt;&amp;gt;&lt;/span>&lt;span class="nv">%log_file%&lt;/span>
+&lt;span class="k">date&lt;/span> /T &lt;span class="p">&amp;gt;&amp;gt;&lt;/span>&lt;span class="nv">%log_file%&lt;/span>
+&lt;span class="k">ECHO&lt;/span> ---------------- &lt;span class="p">&amp;gt;&amp;gt;&lt;/span>&lt;span class="nv">%log_file%&lt;/span>
+FC &lt;span class="nv">%latest_reg%&lt;/span> &lt;span class="nv">%origin_reg%&lt;/span> &lt;span class="p">&amp;gt;&amp;gt;&lt;/span>&lt;span class="nv">%log_file%&lt;/span>
+&lt;span class="k">ECHO&lt;/span>. &lt;span class="p">&amp;gt;&amp;gt;&lt;/span>&lt;span class="nv">%log_file%&lt;/span>
+&lt;span class="k">PAUSE&lt;/span>
+&lt;span class="p">)&lt;/span> &lt;span class="k">ELSE&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;span class="k">DEL&lt;/span> &lt;span class="nv">%origin_reg%&lt;/span>
+&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></article></item><item><title>Prove Kaprekar Constant With C Program</title><link>https://zyprex.github.io/zyprex.blog/2022/prove-kaprekar-constant-with-c-program/</link><pubDate>Mon, 16 May 2022 14:39:04 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/prove-kaprekar-constant-with-c-program/</guid><description/><article>&lt;h1 id="prove-kaprekar-constant-with-c-program">Prove Kaprekar Constant with C Program&lt;sup>&lt;a class="h__anchor" href="#prove-kaprekar-constant-with-c-program">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;h2 id="know-the-kaprekar-constant">Know the kaprekar constant&lt;sup>&lt;a class="h__anchor" href="#know-the-kaprekar-constant">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>What is a kaprekar constant ?&lt;/p>
+&lt;ol>
+&lt;li>Given by a 4 digit integer number, for example 1000.&lt;/li>
+&lt;li>Form the largest and the smallest number from it&amp;rsquo;s digits.&lt;/li>
+&lt;li>Substract these two numbers and get the new integer.&lt;/li>
+&lt;li>Continue with the process, until stop by number 6174.&lt;/li>
+&lt;/ol>
+&lt;p>The 6174 is kaprekar constant. Because use 6174 to calculate will get 6174.&lt;/p>
+&lt;p>A manual calculate example:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-text" data-lang="text">1000 - 0001 = 0999
+9990 - 0999 = 8991
+9981 - 1899 = 8082
+8820 - 0288 = 8532
+8532 - 2358 = 6174
+7641 - 1467 = 6174
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>All 4 digit integer numbers have the same pitfall loop end.&lt;/p>
+&lt;p>Let&amp;rsquo;s use c program to prove it.&lt;/p>
+&lt;h2 id="draw-sketch">Draw Sketch&lt;sup>&lt;a class="h__anchor" href="#draw-sketch">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;ol>
+&lt;li>Decide how to pass parameter&lt;/li>
+&lt;/ol>
+&lt;p>Pass integer is intuitive, but in this case I use string , because reform digit
+generated a char array, and with string parameter, test in terminal with bash
+script more convient.&lt;/p>
+&lt;ol start="2">
+&lt;li>Overview of plan&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>convert strings to a char array.&lt;/li>
+&lt;li>sort char array descend.&lt;/li>
+&lt;li>calculate loop until 6174.&lt;/li>
+&lt;/ul>
+&lt;h2 id="jump-into-detail">Jump into Detail&lt;sup>&lt;a class="h__anchor" href="#jump-into-detail">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;ol>
+&lt;li>convert strings to a char array.&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="kt">unsigned&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="n">num_len&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">strlen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">arr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">malloc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num_len&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="k">sizeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">num&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="sc">&amp;#39;0&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="2">
+&lt;li>sort char array descend&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="kt">void&lt;/span> &lt;span class="nf">sort_char_array_descend&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">len&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">j&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">idx&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">len&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">idx&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">j&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">j&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">len&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">j&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">idx&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">j&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">idx&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">j&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">idx&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">char&lt;/span> &lt;span class="n">temp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">idx&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">idx&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">temp&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="3">
+&lt;li>calculate loop to end&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="kt">void&lt;/span> &lt;span class="nf">calc_kaprekar_constant&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span> &lt;span class="n">num&lt;/span>&lt;span class="p">[])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">ret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">j&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">idx&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kt">unsigned&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="n">num_len&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">strlen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">arr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">malloc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num_len&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="k">sizeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">num&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="sc">&amp;#39;0&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">times&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">origin_num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next_num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">num_len&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">*=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">origin_num&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">times&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">step_count&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">do&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">sort_char_array_descend&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="cm">/* max digital */&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">num_len&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">*=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">n1&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">times&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="cm">/* min digital */&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">*=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">n2&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">times&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="n">next_num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">n1&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">n2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">DEBUG&lt;/span>&lt;span class="err">$&lt;/span> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d-%d=%d&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next_num&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">next_num&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">origin_num&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="n">next_num&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">DEBUG&lt;/span>&lt;span class="err">$&lt;/span> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d (jump into black hole after step %d)&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next_num&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">step_count&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">ret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="n">origin_num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">next_num&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">step_count&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">int_to_char_arr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">next_num&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span> &lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">free&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">arr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="n">ret&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="small-tips-for-debug-print">Small Tips for Debug Print&lt;sup>&lt;a class="h__anchor" href="#small-tips-for-debug-print">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#define DEBUG &lt;/span>&lt;span class="cm">/* comment this line to remove all debug code sentence */&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;span class="cp">#ifdef DEBUG
+&lt;/span>&lt;span class="cp">#define DEBUG$
+&lt;/span>&lt;span class="cp">#else
+&lt;/span>&lt;span class="cp">#define DEBUG$ for (;0;)
+&lt;/span>&lt;span class="cp">#endif
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="handle-other-case">Handle Other Case&lt;sup>&lt;a class="h__anchor" href="#handle-other-case">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>Prove other than 4-digits integer may cause infinite loop, so use a link
+list avoid those case. The link list save each steps result, when a calculate
+done, check whether it is in previous&amp;rsquo;s results list.&lt;/p>
+&lt;h2 id="complete-program">Complete Program&lt;sup>&lt;a class="h__anchor" href="#complete-program">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>In this program, you can define different macro to run differnt test case.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt"> 10
+&lt;/span>&lt;span class="lnt"> 11
+&lt;/span>&lt;span class="lnt"> 12
+&lt;/span>&lt;span class="lnt"> 13
+&lt;/span>&lt;span class="lnt"> 14
+&lt;/span>&lt;span class="lnt"> 15
+&lt;/span>&lt;span class="lnt"> 16
+&lt;/span>&lt;span class="lnt"> 17
+&lt;/span>&lt;span class="lnt"> 18
+&lt;/span>&lt;span class="lnt"> 19
+&lt;/span>&lt;span class="lnt"> 20
+&lt;/span>&lt;span class="lnt"> 21
+&lt;/span>&lt;span class="lnt"> 22
+&lt;/span>&lt;span class="lnt"> 23
+&lt;/span>&lt;span class="lnt"> 24
+&lt;/span>&lt;span class="lnt"> 25
+&lt;/span>&lt;span class="lnt"> 26
+&lt;/span>&lt;span class="lnt"> 27
+&lt;/span>&lt;span class="lnt"> 28
+&lt;/span>&lt;span class="lnt"> 29
+&lt;/span>&lt;span class="lnt"> 30
+&lt;/span>&lt;span class="lnt"> 31
+&lt;/span>&lt;span class="lnt"> 32
+&lt;/span>&lt;span class="lnt"> 33
+&lt;/span>&lt;span class="lnt"> 34
+&lt;/span>&lt;span class="lnt"> 35
+&lt;/span>&lt;span class="lnt"> 36
+&lt;/span>&lt;span class="lnt"> 37
+&lt;/span>&lt;span class="lnt"> 38
+&lt;/span>&lt;span class="lnt"> 39
+&lt;/span>&lt;span class="lnt"> 40
+&lt;/span>&lt;span class="lnt"> 41
+&lt;/span>&lt;span class="lnt"> 42
+&lt;/span>&lt;span class="lnt"> 43
+&lt;/span>&lt;span class="lnt"> 44
+&lt;/span>&lt;span class="lnt"> 45
+&lt;/span>&lt;span class="lnt"> 46
+&lt;/span>&lt;span class="lnt"> 47
+&lt;/span>&lt;span class="lnt"> 48
+&lt;/span>&lt;span class="lnt"> 49
+&lt;/span>&lt;span class="lnt"> 50
+&lt;/span>&lt;span class="lnt"> 51
+&lt;/span>&lt;span class="lnt"> 52
+&lt;/span>&lt;span class="lnt"> 53
+&lt;/span>&lt;span class="lnt"> 54
+&lt;/span>&lt;span class="lnt"> 55
+&lt;/span>&lt;span class="lnt"> 56
+&lt;/span>&lt;span class="lnt"> 57
+&lt;/span>&lt;span class="lnt"> 58
+&lt;/span>&lt;span class="lnt"> 59
+&lt;/span>&lt;span class="lnt"> 60
+&lt;/span>&lt;span class="lnt"> 61
+&lt;/span>&lt;span class="lnt"> 62
+&lt;/span>&lt;span class="lnt"> 63
+&lt;/span>&lt;span class="lnt"> 64
+&lt;/span>&lt;span class="lnt"> 65
+&lt;/span>&lt;span class="lnt"> 66
+&lt;/span>&lt;span class="lnt"> 67
+&lt;/span>&lt;span class="lnt"> 68
+&lt;/span>&lt;span class="lnt"> 69
+&lt;/span>&lt;span class="lnt"> 70
+&lt;/span>&lt;span class="lnt"> 71
+&lt;/span>&lt;span class="lnt"> 72
+&lt;/span>&lt;span class="lnt"> 73
+&lt;/span>&lt;span class="lnt"> 74
+&lt;/span>&lt;span class="lnt"> 75
+&lt;/span>&lt;span class="lnt"> 76
+&lt;/span>&lt;span class="lnt"> 77
+&lt;/span>&lt;span class="lnt"> 78
+&lt;/span>&lt;span class="lnt"> 79
+&lt;/span>&lt;span class="lnt"> 80
+&lt;/span>&lt;span class="lnt"> 81
+&lt;/span>&lt;span class="lnt"> 82
+&lt;/span>&lt;span class="lnt"> 83
+&lt;/span>&lt;span class="lnt"> 84
+&lt;/span>&lt;span class="lnt"> 85
+&lt;/span>&lt;span class="lnt"> 86
+&lt;/span>&lt;span class="lnt"> 87
+&lt;/span>&lt;span class="lnt"> 88
+&lt;/span>&lt;span class="lnt"> 89
+&lt;/span>&lt;span class="lnt"> 90
+&lt;/span>&lt;span class="lnt"> 91
+&lt;/span>&lt;span class="lnt"> 92
+&lt;/span>&lt;span class="lnt"> 93
+&lt;/span>&lt;span class="lnt"> 94
+&lt;/span>&lt;span class="lnt"> 95
+&lt;/span>&lt;span class="lnt"> 96
+&lt;/span>&lt;span class="lnt"> 97
+&lt;/span>&lt;span class="lnt"> 98
+&lt;/span>&lt;span class="lnt"> 99
+&lt;/span>&lt;span class="lnt">100
+&lt;/span>&lt;span class="lnt">101
+&lt;/span>&lt;span class="lnt">102
+&lt;/span>&lt;span class="lnt">103
+&lt;/span>&lt;span class="lnt">104
+&lt;/span>&lt;span class="lnt">105
+&lt;/span>&lt;span class="lnt">106
+&lt;/span>&lt;span class="lnt">107
+&lt;/span>&lt;span class="lnt">108
+&lt;/span>&lt;span class="lnt">109
+&lt;/span>&lt;span class="lnt">110
+&lt;/span>&lt;span class="lnt">111
+&lt;/span>&lt;span class="lnt">112
+&lt;/span>&lt;span class="lnt">113
+&lt;/span>&lt;span class="lnt">114
+&lt;/span>&lt;span class="lnt">115
+&lt;/span>&lt;span class="lnt">116
+&lt;/span>&lt;span class="lnt">117
+&lt;/span>&lt;span class="lnt">118
+&lt;/span>&lt;span class="lnt">119
+&lt;/span>&lt;span class="lnt">120
+&lt;/span>&lt;span class="lnt">121
+&lt;/span>&lt;span class="lnt">122
+&lt;/span>&lt;span class="lnt">123
+&lt;/span>&lt;span class="lnt">124
+&lt;/span>&lt;span class="lnt">125
+&lt;/span>&lt;span class="lnt">126
+&lt;/span>&lt;span class="lnt">127
+&lt;/span>&lt;span class="lnt">128
+&lt;/span>&lt;span class="lnt">129
+&lt;/span>&lt;span class="lnt">130
+&lt;/span>&lt;span class="lnt">131
+&lt;/span>&lt;span class="lnt">132
+&lt;/span>&lt;span class="lnt">133
+&lt;/span>&lt;span class="lnt">134
+&lt;/span>&lt;span class="lnt">135
+&lt;/span>&lt;span class="lnt">136
+&lt;/span>&lt;span class="lnt">137
+&lt;/span>&lt;span class="lnt">138
+&lt;/span>&lt;span class="lnt">139
+&lt;/span>&lt;span class="lnt">140
+&lt;/span>&lt;span class="lnt">141
+&lt;/span>&lt;span class="lnt">142
+&lt;/span>&lt;span class="lnt">143
+&lt;/span>&lt;span class="lnt">144
+&lt;/span>&lt;span class="lnt">145
+&lt;/span>&lt;span class="lnt">146
+&lt;/span>&lt;span class="lnt">147
+&lt;/span>&lt;span class="lnt">148
+&lt;/span>&lt;span class="lnt">149
+&lt;/span>&lt;span class="lnt">150
+&lt;/span>&lt;span class="lnt">151
+&lt;/span>&lt;span class="lnt">152
+&lt;/span>&lt;span class="lnt">153
+&lt;/span>&lt;span class="lnt">154
+&lt;/span>&lt;span class="lnt">155
+&lt;/span>&lt;span class="lnt">156
+&lt;/span>&lt;span class="lnt">157
+&lt;/span>&lt;span class="lnt">158
+&lt;/span>&lt;span class="lnt">159
+&lt;/span>&lt;span class="lnt">160
+&lt;/span>&lt;span class="lnt">161
+&lt;/span>&lt;span class="lnt">162
+&lt;/span>&lt;span class="lnt">163
+&lt;/span>&lt;span class="lnt">164
+&lt;/span>&lt;span class="lnt">165
+&lt;/span>&lt;span class="lnt">166
+&lt;/span>&lt;span class="lnt">167
+&lt;/span>&lt;span class="lnt">168
+&lt;/span>&lt;span class="lnt">169
+&lt;/span>&lt;span class="lnt">170
+&lt;/span>&lt;span class="lnt">171
+&lt;/span>&lt;span class="lnt">172
+&lt;/span>&lt;span class="lnt">173
+&lt;/span>&lt;span class="lnt">174
+&lt;/span>&lt;span class="lnt">175
+&lt;/span>&lt;span class="lnt">176
+&lt;/span>&lt;span class="lnt">177
+&lt;/span>&lt;span class="lnt">178
+&lt;/span>&lt;span class="lnt">179
+&lt;/span>&lt;span class="lnt">180
+&lt;/span>&lt;span class="lnt">181
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;stdio.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;stdlib.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;string.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;strings.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;span class="cp">#define DEBUG &lt;/span>&lt;span class="cm">/* comment this line to remove all debug code sentence */&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;span class="cp">#ifdef DEBUG
+&lt;/span>&lt;span class="cp">#define DEBUG$
+&lt;/span>&lt;span class="cp">#else
+&lt;/span>&lt;span class="cp">#define DEBUG$ for (; 0;)
+&lt;/span>&lt;span class="cp">#endif
+&lt;/span>&lt;span class="cp">&lt;/span>
+&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">};&lt;/span>
+&lt;span class="kt">void&lt;/span> &lt;span class="nf">init_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">**&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">malloc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">sizeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;span class="p">(&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">(&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">void&lt;/span> &lt;span class="nf">insert_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;insert failed&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">new_node&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">malloc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">sizeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;span class="n">new_node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">new_node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new_node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">void&lt;/span> &lt;span class="nf">print_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;print failed&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">cur&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d &amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">cur&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d &amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="nf">search_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">cur&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">pos&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">data&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="n">pos&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="n">cur&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">pos&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">void&lt;/span> &lt;span class="nf">clean_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">**&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;del failed.&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">cur&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">temp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">temp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cur&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">free&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cur&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">cur&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">temp&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">temp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">void&lt;/span> &lt;span class="nf">sort_char_array_descend&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">len&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">j&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">idx&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">len&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">idx&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">j&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">j&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">len&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">j&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">idx&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">j&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">idx&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">j&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">idx&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">char&lt;/span> &lt;span class="n">temp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">idx&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">idx&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">temp&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">void&lt;/span> &lt;span class="nf">int_to_char_arr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">char&lt;/span> &lt;span class="n">num&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">len&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">bzero&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">len&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="mi">0&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">len&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">char&lt;/span> &lt;span class="n">digit&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">n&lt;/span> &lt;span class="o">%&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">num&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">len&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">digit&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">n&lt;/span> &lt;span class="o">/=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="nf">calc_kaprekar_constant&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span> &lt;span class="n">num&lt;/span>&lt;span class="p">[])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">ret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">j&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">idx&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kt">unsigned&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="n">num_len&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">strlen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">arr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">malloc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num_len&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="k">sizeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">num&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="sc">&amp;#39;0&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">times&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">origin_num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next_num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">num_len&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">*=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">origin_num&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">times&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="n">step_count&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">init_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">do&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">sort_char_array_descend&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="cm">/* max digital */&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">num_len&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">*=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">n1&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">times&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="cm">/* min digital */&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">n2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">times&lt;/span> &lt;span class="o">*=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">n2&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">times&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="n">next_num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">n1&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">n2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">DEBUG&lt;/span>&lt;span class="err">$&lt;/span> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d-%d=%d&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next_num&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">next_num&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">origin_num&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="n">next_num&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">DEBUG&lt;/span>&lt;span class="err">$&lt;/span> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d (jump into black hole after step %d)&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next_num&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">step_count&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">clean_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">ret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">search_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next_num&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="n">DEBUG&lt;/span>&lt;span class="err">$&lt;/span> &lt;span class="n">print_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">DEBUG&lt;/span>&lt;span class="err">$&lt;/span> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d (infinit loop after %d step)&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next_num&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">step_count&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">clean_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">ret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="n">origin_num&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">next_num&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">insert_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">origin_num&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">step_count&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">int_to_char_arr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">next_num&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">arr&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_len&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span> &lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">free&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">arr&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">arr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="n">ret&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kt">int&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">argc&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">argv&lt;/span>&lt;span class="p">[])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="cm">/* #define TEST_NODE */&lt;/span>
+&lt;span class="cm">/* #define TEST_PRE */&lt;/span>
+&lt;span class="cp">#ifdef TEST_NODE
+&lt;/span>&lt;span class="cp">&lt;/span> &lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="n">init_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">insert_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">insert_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">insert_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">print_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">clean_node&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="cp">#elif defined(TEST_PRE)
+&lt;/span>&lt;span class="cp">&lt;/span> &lt;span class="n">calc_kaprekar_constant&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;13&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="cm">/* 31-13=18 */&lt;/span>
+&lt;span class="cm">/* 81-18=63 */&lt;/span>
+&lt;span class="cm">/* 63-36=27 */&lt;/span>
+&lt;span class="cm">/* 72-27=45 */&lt;/span>
+&lt;span class="cm">/* 54-45=9 */&lt;/span>
+&lt;span class="cm">/* 90-9=81 */&lt;/span>
+&lt;span class="cm">/* 81-18=63 */&lt;/span> &lt;span class="cm">/* &amp;lt;- went to 63 again */&lt;/span>
+&lt;span class="cp">#else
+&lt;/span>&lt;span class="cp">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">argc&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="n">calc_kaprekar_constant&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">argv&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="cp">#endif
+&lt;/span>&lt;span class="cp">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="test-with-a-bash-script">Test with a Bash Script&lt;sup>&lt;a class="h__anchor" href="#test-with-a-bash-script">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="k">for&lt;/span> num in &lt;span class="k">$(&lt;/span>seq &lt;span class="nv">$1&lt;/span> &lt;span class="nv">$2&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
+./kaprekar_constant &lt;span class="nv">$num&lt;/span> &amp;gt;/dev/null
+&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="nv">$?&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="m">2&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;some number went to infinite loop&amp;#34;&lt;/span>
+&lt;span class="nb">exit&lt;/span>
+&lt;span class="k">fi&lt;/span>
+&lt;span class="k">done&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Usage: execute &lt;code>./kaprekar_constant_test.sh 1000 9999&lt;/code>, if successful, will output nothing.&lt;/p>
+&lt;h1 id="ref">Ref.&lt;sup>&lt;a class="h__anchor" href="#ref">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>&lt;a class="md__link" href="https://newbedev.com/define-macro-for-debug-printing-in-c"
+target="_blank" rel="noopener"
+>
+debug-pringing-in-c
+↗
+&lt;/a>
+&lt;/p></article></item><item><title>Dont Conform to the Norm</title><link>https://zyprex.github.io/zyprex.blog/2022/dont-conform-to-the-norm/</link><pubDate>Sun, 15 May 2022 18:29:01 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/dont-conform-to-the-norm/</guid><description/><article>&lt;h1 id="dont-conform-to-the-norm">Don&amp;rsquo;t Conform To The Norm&lt;sup>&lt;a class="h__anchor" href="#dont-conform-to-the-norm">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Three concepts that lead you to conform to the norm.&lt;/p>
+&lt;ol>
+&lt;li>the individuation.&lt;/li>
+&lt;li>the inaction of others.&lt;/li>
+&lt;li>the scarcity principle.&lt;/li>
+&lt;/ol>
+&lt;h2 id="the-individuation">The Individuation&lt;sup>&lt;a class="h__anchor" href="#the-individuation">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>A person seeing themselves as a part of the bigger society or culture can
+increase their levels, but this can obscure moral elements.&lt;/p>
+&lt;h2 id="the-inaction-of-others">The Inaction of Others&lt;sup>&lt;a class="h__anchor" href="#the-inaction-of-others">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>If other&amp;rsquo;s don&amp;rsquo;t judged your immoral behavior, then it&amp;rsquo;s more likely to occur.&lt;/p>
+&lt;h2 id="the-scarcity-principle">The Scarcity Principle&lt;sup>&lt;a class="h__anchor" href="#the-scarcity-principle">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>People tend to place less value on objects or opportunities that are in
+abundance rather than those that are rare. But does those rare fitter more ?&lt;/p></article></item><item><title>Stop Nail Biting</title><link>https://zyprex.github.io/zyprex.blog/2022/stop-nail-biting/</link><pubDate>Tue, 10 May 2022 21:18:47 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/stop-nail-biting/</guid><description/><article>&lt;h1 id="stop-nail-biting">Stop Nail Biting&lt;sup>&lt;a class="h__anchor" href="#stop-nail-biting">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Nail biting is a compulsive behaviors that can cause a lot of
+problems. I try to overcome this bad habit, but failed every time.&lt;/p>
+&lt;p>Here are some concepts. I hope with the apply of those concepts I
+could finally get rid of this bad habit.&lt;/p>
+&lt;h2 id="habit-reversal-training">Habit Reversal Training&lt;sup>&lt;a class="h__anchor" href="#habit-reversal-training">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>Phases 1: awareness training&lt;/p>
+&lt;ol>
+&lt;li>Identify the habit or the problem behavior you want to break.&lt;/li>
+&lt;li>Recognize when you engage in the behavior, what triggers it.
+(stress, boredom etc.)&lt;/li>
+&lt;li>Identify the earliest signs of the behavior when you first
+feel the urge to do it. (early warning training)&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>
+&lt;p>Phases 2: competing response training&lt;/p>
+&lt;ul>
+&lt;li>substitue a new behavior for the old one that you want to extinguish.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Phases 3: establishing motivation and support&lt;/p>
+&lt;ul>
+&lt;li>write down all of the negative consequences of the behavior. Use
+this list as a reminder for why you need to stick to the plan.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Add-on technique: stimulus control&lt;/p>
+&lt;ul>
+&lt;li>Reduce the things in your enviroment that can trigger you behavior.&lt;/li>
+&lt;li>Put blocks in place to make it harder for you to be triggered.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></article></item><item><title>How the Phone Network Works</title><link>https://zyprex.github.io/zyprex.blog/2022/how-the-phone-network-works/</link><pubDate>Tue, 10 May 2022 19:35:17 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/how-the-phone-network-works/</guid><description/><article>&lt;h1 id="how-the-phone-network-works">How The Phone Network Works&lt;sup>&lt;a class="h__anchor" href="#how-the-phone-network-works">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Origin From: Scishow&lt;/p>
+&lt;h1 id="the-basic-way-a-cell-phone-works">The Basic Way A Cell Phone Works&lt;sup>&lt;a class="h__anchor" href="#the-basic-way-a-cell-phone-works">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Cell phones are basically just complicated radios, send radio waves
+carrying a signal back and forth between radio towers.&lt;/p>
+&lt;p>&lt;strong>Complicated part&lt;/strong>&lt;/p>
+&lt;p>Encoding data on a radio wave.&lt;/p>
+&lt;p>&lt;strong>Radio waves have two properties&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>Amplitude: how large the wave is.&lt;/li>
+&lt;li>Frequency: the number of times a wave cycles in a given tiem.&lt;/li>
+&lt;/ol>
+&lt;p>We can encoding information by changing both of those properties
+across a wave. (for instance, we could use a series of high and low
+frequencies to represent a stream of 1s and 0s, encoding digital data)&lt;/p>
+&lt;p>Cell phones use a slice of the radio frequency spectrum in 800 to 4000
+Megahertz range.&lt;/p>
+&lt;p>&lt;strong>Bandwidth&lt;/strong>&lt;/p>
+&lt;p>Bandwidth is the amount of frequencies we can use for a whole network.&lt;/p>
+&lt;p>&lt;strong>Interface&lt;/strong>&lt;/p>
+&lt;p>If lots of cell phones all use the same band of frequencies in the
+same way to communicate with a cell tower, their signals overlap with
+each other and become garbled.&lt;/p>
+&lt;p>Radio waves can add and subtract from one another to create new waves.&lt;/p>
+&lt;h1 id="overview-of-1g-to-5g">Overview of 1G to 5G&lt;sup>&lt;a class="h__anchor" href="#overview-of-1g-to-5g">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>&lt;strong>The &amp;ldquo;gees&amp;rdquo;&lt;/strong>&lt;/p>
+&lt;p>The letter G in 4G or 5G refers to the generation of technology used
+for sending radio waves around.&lt;/p>
+&lt;h2 id="1g">1G&lt;sup>&lt;a class="h__anchor" href="#1g">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>FDMA: frequency domain multiple access&lt;/p>
+&lt;p>Distributing frequencies in cells (a kind of honeycomb pattern), each
+of those cells uses a difference cell tower or base station to
+transmit to.&lt;/p>
+&lt;p>The trick is that nearby cells are allocated different frequencies to
+use, but distant ones can use the same frequencies without
+overlapping.&lt;/p>
+&lt;h2 id="2g">2G&lt;sup>&lt;a class="h__anchor" href="#2g">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>TDMA: time division multiple access&lt;/p>
+&lt;p>Use the same channel by chunking signals into bits that take turns.&lt;/p>
+&lt;h2 id="3g">3G&lt;sup>&lt;a class="h__anchor" href="#3g">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>CDMA: code division multiple access&lt;/p>
+&lt;p>Encoding the signals in such way that they can still be made out
+distinctly on the other end (the codes are orthogonal, meaning
+that they can&amp;rsquo;t get mixed up with one another).&lt;/p>
+&lt;h2 id="4g">4G&lt;sup>&lt;a class="h__anchor" href="#4g">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>OFDM: orthoganal frequency division multiplexing&lt;/p>
+&lt;p>Chopes up a single band into small divisions called carriers whose
+frequencies are less likely to interface with each other.&lt;/p>
+&lt;p>&lt;strong>ICI: Intercell Interference&lt;/strong>&lt;/p>
+&lt;p>Signals interfering at the edge of two cells using the same frequencies.&lt;/p>
+&lt;h2 id="5g">5G&lt;sup>&lt;a class="h__anchor" href="#5g">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>5G is a network of what are called &amp;ldquo;ultra-dense networks&amp;rdquo; consisting
+of lots of smaller cells providing reception to many users.&lt;/p>
+&lt;p>&lt;strong>The problem&lt;/strong>&lt;/p>
+&lt;p>More boundaries, increasing the amount of ICI, lead you cell phone
+drop reception very often.&lt;/p></article></item><item><title>Remap Capslock on Windows</title><link>https://zyprex.github.io/zyprex.blog/2022/remap-capslock-on-windows/</link><pubDate>Mon, 09 May 2022 13:26:22 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/remap-capslock-on-windows/</guid><description/><article>&lt;h1 id="remap-capslock-on-windows">Remap Capslock on Windows&lt;sup>&lt;a class="h__anchor" href="#remap-capslock-on-windows">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Dual key remap is a more clean, safe and powerful way to remap the
+almost useless capslock key.&lt;/p>
+&lt;h1 id="use-dual-key-remap">Use &amp;lsquo;dual key remap&amp;rsquo;&lt;sup>&lt;a class="h__anchor" href="#use-dual-key-remap">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>The project home:
+&lt;a class="md__link" href="https://github.com/ililim/dual-key-remap/"
+target="_blank" rel="noopener"
+>
+dual-key-remap
+↗
+&lt;/a>
+&lt;/p>
+&lt;h1 id="auto-start-dual-key-remap-when-windows-launch">Auto Start &amp;lsquo;dual key remap&amp;rsquo; when windows launch&lt;sup>&lt;a class="h__anchor" href="#auto-start-dual-key-remap-when-windows-launch">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Make a &amp;lsquo;dual-key-remap.exe&amp;rsquo; shortcut (by press Alt and drag to
+somewhere) and put it in Startup folder (&lt;code>win + R&lt;/code> and input
+&lt;code>shell:startup&lt;/code> you can directly open this folder).&lt;/p>
+&lt;h1 id="stop-dual-key-remap">Stop &amp;lsquo;dual key remap&amp;rsquo;&lt;sup>&lt;a class="h__anchor" href="#stop-dual-key-remap">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;pre>&lt;code>C:\&amp;gt;tasklist | findstr dual
+dual-key-remap.exe 1556 Console 4 4,148 K
+C:\&amp;gt;taskkill /pid 1556
+&lt;/code>&lt;/pre>&lt;p>Or: &lt;code>taskkill /im dual-key-remap.exe&lt;/code>&lt;/p></article></item><item><title>Emacs Eglot Use jdtls</title><link>https://zyprex.github.io/zyprex.blog/2022/emacs-eglot-use-jdtls/</link><pubDate>Sat, 07 May 2022 12:06:00 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/emacs-eglot-use-jdtls/</guid><description/><article>&lt;h1 id="emacs-eglot-use-jdtls-on-windows">Emacs eglot use jdtls on windows&lt;sup>&lt;a class="h__anchor" href="#emacs-eglot-use-jdtls-on-windows">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>CAUTION: the newest jdtls does not support java8.&lt;/p>
+&lt;h1 id="enviroment">Enviroment&lt;sup>&lt;a class="h__anchor" href="#enviroment">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;ul>
+&lt;li>windows10 Home 21H2&lt;/li>
+&lt;li>GNU Emacs 28.1 (build 2, x86_64-w64-mingw32)&lt;/li>
+&lt;/ul>
+&lt;h1 id="requirements">Requirements&lt;sup>&lt;a class="h__anchor" href="#requirements">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;ul>
+&lt;li>&lt;a class="md__link" href="https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip"
+target="_blank" rel="noopener"
+>
+openjdk-8u41-windows-i586
+↗
+&lt;/a>
+&lt;/li>
+&lt;li>&lt;a class="md__link" href="https://download.eclipse.org/jdtls/milestones/0.55.0/jdt-language-server-0.55.0-202004300028.tar.gz"
+target="_blank" rel="noopener"
+>
+jdt-language-server-0.55.0-20200430002
+↗
+&lt;/a>
+&lt;/li>
+&lt;/ul>
+&lt;p>Extract &amp;lsquo;openjdk&amp;rsquo; and &amp;lsquo;jdt-language-server&amp;rsquo; somewhere, ensure &amp;lsquo;%JAVA_HOME%\bin&amp;rsquo; is in &lt;code>PATH&lt;/code>.&lt;/p>
+&lt;h1 id="configuration">Configuration&lt;sup>&lt;a class="h__anchor" href="#configuration">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-elisp" data-lang="elisp">&lt;span class="p">(&lt;/span>&lt;span class="nb">with-eval-after-load&lt;/span> &lt;span class="s">&amp;#34;eglot&amp;#34;&lt;/span>
+&lt;span class="p">(&lt;/span>&lt;span class="nv">add-to-list&lt;/span> &lt;span class="ss">&amp;#39;eglot-server-programs&lt;/span>
+&lt;span class="o">`&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">java-mode&lt;/span> &lt;span class="o">.&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;java&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-Declipse.application=org.eclipse.jdt.ls.core.id1&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-Dosgi.bundles.defaultStartLevel=4&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-Declipse.product=org.eclipse.jdt.ls.core.product&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-Dlog.level=ALL&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-noverify&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-Xmx256m&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-jar&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;c:\\SDK\\jdt-language-server-0.55.0-202004300028\\plugins\\org.eclipse.equinox.launcher_1.5.700.v20200207-2156.jar&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-configuration&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;c:\\SDK\\jdt-language-server-0.55.0-202004300028\\config_win&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;-data&amp;#34;&lt;/span>
+&lt;span class="nv">jdtls-cahce-dir&lt;/span>
+&lt;span class="p">))))&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></article></item><item><title>Android Misc Debug</title><link>https://zyprex.github.io/zyprex.blog/2022/android-misc-debug/</link><pubDate>Mon, 18 Apr 2022 20:18:24 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/android-misc-debug/</guid><description/><article>&lt;h1 id="app-crashed-when-use-androidthemeandroidstylethemedialog">App Crashed When use &lt;code>android:theme=&amp;quot;@android:style/Theme.Dialog&amp;quot;&lt;/code>&lt;sup>&lt;a class="h__anchor" href="#app-crashed-when-use-androidthemeandroidstylethemedialog">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>For Android Studio set android theme, in AndroidManifest.xml, correct the
+&lt;code>android:theme&lt;/code> value:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="nt">&amp;lt;activity&lt;/span>
+&lt;span class="na">android:name=&lt;/span>&lt;span class="s">&amp;#34;.DialogActivity&amp;#34;&lt;/span>
+&lt;span class="na">android:theme=&lt;/span>&lt;span class="s">&amp;#34;@style/Theme.AppCompat.Dialog&amp;#34;&lt;/span>
+&lt;span class="na">android:exported=&lt;/span>&lt;span class="s">&amp;#34;false&amp;#34;&lt;/span>&lt;span class="nt">/&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="comandroidsupportpercent-with-androidx">&amp;lsquo;com.android.support.percent&amp;rsquo; with AndroidX&lt;sup>&lt;a class="h__anchor" href="#comandroidsupportpercent-with-androidx">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>The new &lt;code>androidx&lt;/code> standard didn&amp;rsquo;t compatible with old &lt;code>support&lt;/code> packcage.&lt;/p>
+&lt;p>&lt;a class="md__link" href="https://blog.csdn.net/qq_21331159/article/details/114024546"
+target="_blank" rel="noopener"
+>
+无法导入‘com.android.support.percent‘(百分比布局依赖库)的解决方法
+↗
+&lt;/a>
+&lt;/p>
+&lt;h1 id="getadapterposition-always-return--1">&amp;lsquo;getAdapterPosition&amp;rsquo; always return -1&lt;sup>&lt;a class="h__anchor" href="#getadapterposition-always-return--1">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Move it into &lt;code>onBindViewHolder&lt;/code> function.&lt;/p>
+&lt;h1 id="add-local-dependencies">Add Local Dependencies&lt;sup>&lt;a class="h__anchor" href="#add-local-dependencies">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;pre>&lt;code>dependencies {
+implementation fileTree(dir: 'libs', includes: ['*.jar'])
+}
+&lt;/code>&lt;/pre>&lt;p>File-&amp;gt;Invalidate Caches-&amp;gt;Invalidate and Restart&lt;/p>
+&lt;h1 id="on-building-apk">On building APK&lt;sup>&lt;a class="h__anchor" href="#on-building-apk">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;blockquote>
+&lt;p>Generate Signed APK: Errors while building APK. You can find the errors in the &amp;lsquo;Messages&amp;rsquo; view.&lt;/p>
+&lt;/blockquote>
+&lt;p>Enlarge jvm max heap to 256m (I origin set it to 128m)&lt;/p>
+&lt;blockquote>
+&lt;p>org.gradle.jvmargs=-Xmx256m -Dfile.encoding=UTF-8&lt;/p>
+&lt;/blockquote></article></item></channel></rss>
