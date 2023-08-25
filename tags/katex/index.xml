@@ -1,4 +1,147 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>https://zyprex.github.io/zyprex.blog/tags/katex/</link><language>en</language><updated>Wed, 03 Feb 2021 12:41:04 CST</updated><item><title>Create WLAN Hotspot on Linux</title><link>https://zyprex.github.io/zyprex.blog/2023/create-wlan-hotspot-on-linux/</link><pubDate>Fri, 31 Mar 2023 12:23:21 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2023/create-wlan-hotspot-on-linux/</guid><description/><article>&lt;p>When I try to start a Hotspot, I finally found that
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>https://zyprex.github.io/zyprex.blog/tags/katex/</link><language>en</language><updated>Wed, 03 Feb 2021 12:41:04 CST</updated><item><title>Use ffmpeg Convert Videos</title><link>https://zyprex.github.io/zyprex.blog/2023/use-ffmpeg-convert-videos/</link><pubDate>Fri, 25 Aug 2023 12:52:44 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2023/use-ffmpeg-convert-videos/</guid><description/><article>&lt;h1 id="convert-m3u8-to-mp4-file">Convert m3u8 to mp4 file&lt;sup>&lt;a class="h__anchor" href="#convert-m3u8-to-mp4-file">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Use &lt;code>index.m3u8&lt;/code> convert all TS files to a mp4 file.
+(note: it can use web link as input)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">ffmpeg -i index.m3u8 -c copy -bsf:a aac_adtstoasc out.mp4
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="split-mp4-file-to-m3u8-list">Split mp4 file to m3u8 list&lt;sup>&lt;a class="h__anchor" href="#split-mp4-file-to-m3u8-list">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Split &lt;code>a.mp4&lt;/code> to list of 240 seconds TS files in &lt;code>out&lt;/code> folder.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">ffmpeg -i a.mp4 -vcodec copy -acodec copy -vbsf h264_mp4toannexb a.ts
+ffmpeg -i a.ts -c copy -map &lt;span class="m">0&lt;/span> -f segment -segment_list &lt;span class="s2">&amp;#34;out/index.m3u8&amp;#34;&lt;/span> -segment_time &lt;span class="m">240&lt;/span> &lt;span class="s2">&amp;#34;out/%%2d.ts&amp;#34;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="merge-videos">Merge Videos&lt;sup>&lt;a class="h__anchor" href="#merge-videos">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>A use case to merge videos by use a text file.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="c1">#file_name: a.txt&lt;/span>
+&lt;span class="c1">#-----------&lt;/span>
+&lt;span class="c1">#file &amp;#39;0.mp4&amp;#39;&lt;/span>
+&lt;span class="c1">#file &amp;#39;1.mp4&amp;#39;&lt;/span>
+&lt;span class="c1">#file &amp;#39;...&amp;#39;&lt;/span>
+&lt;span class="c1">#-----------&lt;/span>
+ffmpeg -f concat -safe &lt;span class="m">0&lt;/span> -i a.txt -c copy a.mp4
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="cut-video">Cut Video&lt;sup>&lt;a class="h__anchor" href="#cut-video">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>A use case to cut video 5 minutes start from 1 minutes.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="nv">start_time&lt;/span>&lt;span class="o">=&lt;/span>00:01:00
+&lt;span class="nv">end_time&lt;/span>&lt;span class="o">=&lt;/span>00:05:00
+ffmpeg -threads &lt;span class="m">16&lt;/span> -ss &lt;span class="si">${&lt;/span>&lt;span class="nv">start_time&lt;/span>&lt;span class="si">}&lt;/span> -i &lt;span class="si">${&lt;/span>&lt;span class="nv">input&lt;/span>&lt;span class="si">}&lt;/span> -to &lt;span class="si">${&lt;/span>&lt;span class="nv">end_time&lt;/span>&lt;span class="si">}&lt;/span> -c:v copy -c:a copy &lt;span class="si">${&lt;/span>&lt;span class="nv">output&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="compress-videos">Compress videos&lt;sup>&lt;a class="h__anchor" href="#compress-videos">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;h2 id="strategy-1-lower-resolution">Strategy 1. Lower Resolution&lt;sup>&lt;a class="h__anchor" href="#strategy-1-lower-resolution">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="c1"># resolution (1920x1080/1280x720/640x360/426x240)&lt;/span>
+ffmpeg -threads &lt;span class="m">16&lt;/span> -i &lt;span class="si">${&lt;/span>&lt;span class="nv">input&lt;/span>&lt;span class="si">}&lt;/span> -s 426x240 -c:a copy &lt;span class="si">${&lt;/span>&lt;span class="nv">output&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Evalutation:&lt;/p>
+&lt;ul>
+&lt;li>lose: high&lt;/li>
+&lt;li>compress: high&lt;/li>
+&lt;/ul>
+&lt;h2 id="strategy-2-lower-frame-rate">Strategy 2. Lower Frame Rate&lt;sup>&lt;a class="h__anchor" href="#strategy-2-lower-frame-rate">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">ffmpeg -threads &lt;span class="m">16&lt;/span> -i &lt;span class="si">${&lt;/span>&lt;span class="nv">input&lt;/span>&lt;span class="si">}&lt;/span> -r &lt;span class="m">24&lt;/span> -c:a copy &lt;span class="si">${&lt;/span>&lt;span class="nv">output&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Evalutation:&lt;/p>
+&lt;ul>
+&lt;li>lose: medium&lt;/li>
+&lt;li>compress: low&lt;/li>
+&lt;/ul>
+&lt;h2 id="strategy-3-lower-bit-rate">Strategy 3. Lower Bit Rate&lt;sup>&lt;a class="h__anchor" href="#strategy-3-lower-bit-rate">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">ffmpeg -threads &lt;span class="m">16&lt;/span> -i &lt;span class="si">${&lt;/span>&lt;span class="nv">input&lt;/span>&lt;span class="si">}&lt;/span> -b:v 128k -c:a copy &lt;span class="si">${&lt;/span>&lt;span class="nv">output&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Evalutation:&lt;/p>
+&lt;ul>
+&lt;li>lose: high&lt;/li>
+&lt;li>compress: low&lt;/li>
+&lt;/ul>
+&lt;h2 id="strategy-4-h264-to-h265">Strategy 4. H264 to H265&lt;sup>&lt;a class="h__anchor" href="#strategy-4-h264-to-h265">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">ffmpeg -threads &lt;span class="m">16&lt;/span> -i &lt;span class="si">${&lt;/span>&lt;span class="nv">input&lt;/span>&lt;span class="si">}&lt;/span> -c:v libx265 -c:a copy %&lt;span class="o">{&lt;/span>output&lt;span class="o">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Evalutation:&lt;/p>
+&lt;ul>
+&lt;li>lose: low&lt;/li>
+&lt;li>compress: medium&lt;/li>
+&lt;/ul>
+&lt;h2 id="strategy-5-rise-crf">Strategy 5. Rise CRF&lt;sup>&lt;a class="h__anchor" href="#strategy-5-rise-crf">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="c1"># crf 0-51&lt;/span>
+ffmpeg -threads &lt;span class="m">16&lt;/span> -i &lt;span class="si">${&lt;/span>&lt;span class="nv">input&lt;/span>&lt;span class="si">}&lt;/span> -c:v libx264 -crf &lt;span class="m">28&lt;/span> -preset veryslow -c:a copy %&lt;span class="o">{&lt;/span>output&lt;span class="o">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Evalutation:&lt;/p>
+&lt;ul>
+&lt;li>lose: medium&lt;/li>
+&lt;li>compress: high&lt;/li>
+&lt;/ul>
+&lt;h1 id="read-more">Read More&lt;sup>&lt;a class="h__anchor" href="#read-more">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;ul>
+&lt;li>&lt;a class="md__link" href="https://itsfoss.com/ffmpeg"
+target="_blank" rel="noopener"
+>
+The Complete Guide for Using ffmpeg in Linux
+↗
+&lt;/a>
+&lt;/li>
+&lt;/ul></article></item><item><title>Create WLAN Hotspot on Linux</title><link>https://zyprex.github.io/zyprex.blog/2023/create-wlan-hotspot-on-linux/</link><pubDate>Fri, 31 Mar 2023 12:23:21 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2023/create-wlan-hotspot-on-linux/</guid><description/><article>&lt;p>When I try to start a Hotspot, I finally found that
 my computer doesn&amp;rsquo;t support AP mode.&lt;/p>
 &lt;p>Here is a link for where I stopped.&lt;/p>
 &lt;p>&lt;a class="md__link" href="https://wiki.archlinux.org/title/Software_access_point"
@@ -905,44 +1048,4 @@ jdt-language-server-0.55.0-20200430002
 &lt;span class="p">))))&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div></article></item><item><title>Android Misc Debug</title><link>https://zyprex.github.io/zyprex.blog/2022/android-misc-debug/</link><pubDate>Mon, 18 Apr 2022 20:18:24 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/android-misc-debug/</guid><description/><article>&lt;h1 id="app-crashed-when-use-androidthemeandroidstylethemedialog">App Crashed When use &lt;code>android:theme=&amp;quot;@android:style/Theme.Dialog&amp;quot;&lt;/code>&lt;sup>&lt;a class="h__anchor" href="#app-crashed-when-use-androidthemeandroidstylethemedialog">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>For Android Studio set android theme, in AndroidManifest.xml, correct the
-&lt;code>android:theme&lt;/code> value:&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="nt">&amp;lt;activity&lt;/span>
-&lt;span class="na">android:name=&lt;/span>&lt;span class="s">&amp;#34;.DialogActivity&amp;#34;&lt;/span>
-&lt;span class="na">android:theme=&lt;/span>&lt;span class="s">&amp;#34;@style/Theme.AppCompat.Dialog&amp;#34;&lt;/span>
-&lt;span class="na">android:exported=&lt;/span>&lt;span class="s">&amp;#34;false&amp;#34;&lt;/span>&lt;span class="nt">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h1 id="comandroidsupportpercent-with-androidx">&amp;lsquo;com.android.support.percent&amp;rsquo; with AndroidX&lt;sup>&lt;a class="h__anchor" href="#comandroidsupportpercent-with-androidx">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>The new &lt;code>androidx&lt;/code> standard didn&amp;rsquo;t compatible with old &lt;code>support&lt;/code> packcage.&lt;/p>
-&lt;p>&lt;a class="md__link" href="https://blog.csdn.net/qq_21331159/article/details/114024546"
-target="_blank" rel="noopener"
->
-无法导入‘com.android.support.percent‘(百分比布局依赖库)的解决方法
-↗
-&lt;/a>
-&lt;/p>
-&lt;h1 id="getadapterposition-always-return--1">&amp;lsquo;getAdapterPosition&amp;rsquo; always return -1&lt;sup>&lt;a class="h__anchor" href="#getadapterposition-always-return--1">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>Move it into &lt;code>onBindViewHolder&lt;/code> function.&lt;/p>
-&lt;h1 id="add-local-dependencies">Add Local Dependencies&lt;sup>&lt;a class="h__anchor" href="#add-local-dependencies">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;pre>&lt;code>dependencies {
-implementation fileTree(dir: 'libs', includes: ['*.jar'])
-}
-&lt;/code>&lt;/pre>&lt;p>File-&amp;gt;Invalidate Caches-&amp;gt;Invalidate and Restart&lt;/p>
-&lt;h1 id="on-building-apk">On building APK&lt;sup>&lt;a class="h__anchor" href="#on-building-apk">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;blockquote>
-&lt;p>Generate Signed APK: Errors while building APK. You can find the errors in the &amp;lsquo;Messages&amp;rsquo; view.&lt;/p>
-&lt;/blockquote>
-&lt;p>Enlarge jvm max heap to 256m (I origin set it to 128m)&lt;/p>
-&lt;blockquote>
-&lt;p>org.gradle.jvmargs=-Xmx256m -Dfile.encoding=UTF-8&lt;/p>
-&lt;/blockquote></article></item></channel></rss>
+&lt;/div></article></item></channel></rss>
