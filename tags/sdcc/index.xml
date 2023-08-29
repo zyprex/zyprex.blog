@@ -1,4 +1,26 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>https://zyprex.github.io/zyprex.blog/tags/sdcc/</link><language>en</language><updated>Thu, 03 Mar 2022 11:57:17 CST</updated><item><title>Use ffmpeg Convert Videos</title><link>https://zyprex.github.io/zyprex.blog/2023/use-ffmpeg-convert-videos/</link><pubDate>Fri, 25 Aug 2023 12:52:44 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2023/use-ffmpeg-convert-videos/</guid><description/><article>&lt;h1 id="convert-m3u8-to-mp4-file">Convert m3u8 to mp4 file&lt;sup>&lt;a class="h__anchor" href="#convert-m3u8-to-mp4-file">¶&lt;/a>&lt;/sup>&lt;/h1>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>https://zyprex.github.io/zyprex.blog/tags/sdcc/</link><language>en</language><updated>Thu, 03 Mar 2022 11:57:17 CST</updated><item><title>How the Vim Save My Life</title><link>https://zyprex.github.io/zyprex.blog/2023/how-the-vim-save-my-life/</link><pubDate>Tue, 29 Aug 2023 12:30:37 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2023/how-the-vim-save-my-life/</guid><description/><article>&lt;h1 id="prologue">Prologue&lt;sup>&lt;a class="h__anchor" href="#prologue">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>I use vim editor about 2 years before.
+There are so many guides in the web.
+I think it&amp;rsquo;s not my duties to proclaimed the powerful of vim editor.
+But the vim editor really save my life from a mistake of file deletion.&lt;/p>
+&lt;h1 id="the-bitter-after-disaster">The Bitter After Disaster&lt;sup>&lt;a class="h__anchor" href="#the-bitter-after-disaster">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>When I delete files in an accident, I feel the whole world swirled around me,
+and angry, agony filled my heart. It&amp;rsquo;s suffered a lot.
+I try the &lt;code>Windows File Recovery&lt;/code>, but it&amp;rsquo;s recover other files and just not
+the files I deleted a moment ago.&lt;/p>
+&lt;p>If you curious my steps, I use &lt;code>winfr E: C: /regular /n *.*&lt;/code>, it&amp;rsquo;s works somehow,
+but for me is not enough.&lt;/p>
+&lt;p>Soon I realized the vim&amp;rsquo;s backup file, and successful get lost files.
+Admirable vim!, all is thanks to I edit files in vim.&lt;/p>
+&lt;h1 id="the-vim-editor">The Vim Editor&lt;sup>&lt;a class="h__anchor" href="#the-vim-editor">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Do you know how to set the backup for vim ?&lt;/p>
+&lt;p>Type &lt;code>:e $MYVIMRC&lt;/code>, and write those line.&lt;/p>
+&lt;pre>&lt;code>set backup backupdir=~/.cache/vim/backup,$TMP/vim/backup.
+&lt;/code>&lt;/pre>&lt;p>It&amp;rsquo;s useful when you delete files that you just edited by accident.
+You can find the files in &lt;code>~/.cache/vim/backup/&lt;/code>, with a &lt;code>~&lt;/code> suffix.&lt;/p>
+&lt;h1 id="epilogue">Epilogue&lt;sup>&lt;a class="h__anchor" href="#epilogue">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>August 7, 2023, the creator of vim &amp;ndash; Bram Moolenaar, aged 62, passed away.&lt;/p>
+&lt;p>What a pity.&lt;/p></article></item><item><title>Use ffmpeg Convert Videos</title><link>https://zyprex.github.io/zyprex.blog/2023/use-ffmpeg-convert-videos/</link><pubDate>Fri, 25 Aug 2023 12:52:44 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2023/use-ffmpeg-convert-videos/</guid><description/><article>&lt;h1 id="convert-m3u8-to-mp4-file">Convert m3u8 to mp4 file&lt;sup>&lt;a class="h__anchor" href="#convert-m3u8-to-mp4-file">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>Use &lt;code>index.m3u8&lt;/code> convert all TS files to a mp4 file.
 (note: it can use web link as input)&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -984,68 +1006,4 @@ somewhere) and put it in Startup folder (&lt;code>win + R&lt;/code> and input
 &lt;pre>&lt;code>C:\&amp;gt;tasklist | findstr dual
 dual-key-remap.exe 1556 Console 4 4,148 K
 C:\&amp;gt;taskkill /pid 1556
-&lt;/code>&lt;/pre>&lt;p>Or: &lt;code>taskkill /im dual-key-remap.exe&lt;/code>&lt;/p></article></item><item><title>Emacs Eglot Use jdtls</title><link>https://zyprex.github.io/zyprex.blog/2022/emacs-eglot-use-jdtls/</link><pubDate>Sat, 07 May 2022 12:06:00 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/emacs-eglot-use-jdtls/</guid><description/><article>&lt;h1 id="emacs-eglot-use-jdtls-on-windows">Emacs eglot use jdtls on windows&lt;sup>&lt;a class="h__anchor" href="#emacs-eglot-use-jdtls-on-windows">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>CAUTION: the newest jdtls does not support java8.&lt;/p>
-&lt;h1 id="enviroment">Enviroment&lt;sup>&lt;a class="h__anchor" href="#enviroment">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;ul>
-&lt;li>windows10 Home 21H2&lt;/li>
-&lt;li>GNU Emacs 28.1 (build 2, x86_64-w64-mingw32)&lt;/li>
-&lt;/ul>
-&lt;h1 id="requirements">Requirements&lt;sup>&lt;a class="h__anchor" href="#requirements">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;ul>
-&lt;li>&lt;a class="md__link" href="https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip"
-target="_blank" rel="noopener"
->
-openjdk-8u41-windows-i586
-↗
-&lt;/a>
-&lt;/li>
-&lt;li>&lt;a class="md__link" href="https://download.eclipse.org/jdtls/milestones/0.55.0/jdt-language-server-0.55.0-202004300028.tar.gz"
-target="_blank" rel="noopener"
->
-jdt-language-server-0.55.0-20200430002
-↗
-&lt;/a>
-&lt;/li>
-&lt;/ul>
-&lt;p>Extract &amp;lsquo;openjdk&amp;rsquo; and &amp;lsquo;jdt-language-server&amp;rsquo; somewhere, ensure &amp;lsquo;%JAVA_HOME%\bin&amp;rsquo; is in &lt;code>PATH&lt;/code>.&lt;/p>
-&lt;h1 id="configuration">Configuration&lt;sup>&lt;a class="h__anchor" href="#configuration">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-elisp" data-lang="elisp">&lt;span class="p">(&lt;/span>&lt;span class="nb">with-eval-after-load&lt;/span> &lt;span class="s">&amp;#34;eglot&amp;#34;&lt;/span>
-&lt;span class="p">(&lt;/span>&lt;span class="nv">add-to-list&lt;/span> &lt;span class="ss">&amp;#39;eglot-server-programs&lt;/span>
-&lt;span class="o">`&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">java-mode&lt;/span> &lt;span class="o">.&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;java&amp;#34;&lt;/span>
-&lt;span class="s">&amp;#34;-Declipse.application=org.eclipse.jdt.ls.core.id1&amp;#34;&lt;/span>
-&lt;span class="s">&amp;#34;-Dosgi.bundles.defaultStartLevel=4&amp;#34;&lt;/span>
-&lt;span class="s">&amp;#34;-Declipse.product=org.eclipse.jdt.ls.core.product&amp;#34;&lt;/span>
-&lt;span class="s">&amp;#34;-Dlog.level=ALL&amp;#34;&lt;/span>
-&lt;span class="s">&amp;#34;-noverify&amp;#34;&lt;/span>
-&lt;span class="s">&amp;#34;-Xmx256m&amp;#34;&lt;/span>
-&lt;span class="s">&amp;#34;-jar&amp;#34;&lt;/span>
-&lt;span class="s">&amp;#34;c:\\SDK\\jdt-language-server-0.55.0-202004300028\\plugins\\org.eclipse.equinox.launcher_1.5.700.v20200207-2156.jar&amp;#34;&lt;/span>
-&lt;span class="s">&amp;#34;-configuration&amp;#34;&lt;/span>
-&lt;span class="s">&amp;#34;c:\\SDK\\jdt-language-server-0.55.0-202004300028\\config_win&amp;#34;&lt;/span>
-&lt;span class="s">&amp;#34;-data&amp;#34;&lt;/span>
-&lt;span class="nv">jdtls-cahce-dir&lt;/span>
-&lt;span class="p">))))&lt;/span>
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div></article></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>Or: &lt;code>taskkill /im dual-key-remap.exe&lt;/code>&lt;/p></article></item></channel></rss>
