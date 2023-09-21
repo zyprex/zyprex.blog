@@ -1,4 +1,17 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>https://zyprex.github.io/zyprex.blog/2022/</link><language>en</language><updated>Mon, 04 Jul 2022 17:30:12 CST</updated><item><title>How the Vim Save My Life</title><link>https://zyprex.github.io/zyprex.blog/2023/how-the-vim-save-my-life/</link><pubDate>Tue, 29 Aug 2023 12:30:37 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2023/how-the-vim-save-my-life/</guid><description/><article>&lt;h1 id="prologue">Prologue&lt;sup>&lt;a class="h__anchor" href="#prologue">¶&lt;/a>&lt;/sup>&lt;/h1>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>https://zyprex.github.io/zyprex.blog/2022/</link><language>en</language><updated>Mon, 04 Jul 2022 17:30:12 CST</updated><item><title>Open Old Project on Android Studio</title><link>https://zyprex.github.io/zyprex.blog/2023/open-old-project-on-android-studio/</link><pubDate>Thu, 21 Sep 2023 14:52:26 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2023/open-old-project-on-android-studio/</guid><description>gradle connection timed out again</description><article>&lt;h1 id="open-old-project-on-android-studio">Open Old Project on Android Studio&lt;sup>&lt;a class="h__anchor" href="#open-old-project-on-android-studio">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>The problem:&lt;/p>
+&lt;blockquote>
+&lt;p>gradle ERROR: Connection timed out&lt;/p>
+&lt;/blockquote>
+&lt;p>Didn&amp;rsquo;t know why android studio delete old version gradle.&lt;/p>
+&lt;p>Resolution:&lt;/p>
+&lt;pre>&lt;code>curl -o ~/.gradle/wrapper/dists/gradle-7.4-bin/.../gradle-7.4-bin.zip https://mirrors.aliyun.com/macports/distfiles/gradle/gradle-7.4-bin.zip
+&lt;/code>&lt;/pre>&lt;p>Replace the &lt;code>...&lt;/code> to the true folder name.&lt;/p>
+&lt;p>Keep any &lt;code>build.gradle&lt;/code> files untouched.&lt;/p>
+&lt;p>Ignore kotlin not configured.&lt;/p>
+&lt;p>The android studio auto change my &lt;code>build.gradle&lt;/code> or if I do click uncarefully.
+This will cause many unexpected error, then I have to use git diff restore the &lt;code>build.gradle&lt;/code>.&lt;/p>
+&lt;p>BTW: android studio always had some delay to load external modified files.&lt;/p></article></item><item><title>How the Vim Save My Life</title><link>https://zyprex.github.io/zyprex.blog/2023/how-the-vim-save-my-life/</link><pubDate>Tue, 29 Aug 2023 12:30:37 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2023/how-the-vim-save-my-life/</guid><description/><article>&lt;h1 id="prologue">Prologue&lt;sup>&lt;a class="h__anchor" href="#prologue">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>I use vim editor about 2 years before.
 There are so many guides in the web.
 I think it&amp;rsquo;s not my duties to proclaimed the powerful of vim editor.
@@ -986,24 +999,4 @@ frequencies are less likely to interface with each other.&lt;/p>
 of lots of smaller cells providing reception to many users.&lt;/p>
 &lt;p>&lt;strong>The problem&lt;/strong>&lt;/p>
 &lt;p>More boundaries, increasing the amount of ICI, lead you cell phone
-drop reception very often.&lt;/p></article></item><item><title>Remap Capslock on Windows</title><link>https://zyprex.github.io/zyprex.blog/2022/remap-capslock-on-windows/</link><pubDate>Mon, 09 May 2022 13:26:22 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/remap-capslock-on-windows/</guid><description/><article>&lt;h1 id="remap-capslock-on-windows">Remap Capslock on Windows&lt;sup>&lt;a class="h__anchor" href="#remap-capslock-on-windows">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>Dual key remap is a more clean, safe and powerful way to remap the
-almost useless capslock key.&lt;/p>
-&lt;h1 id="use-dual-key-remap">Use &amp;lsquo;dual key remap&amp;rsquo;&lt;sup>&lt;a class="h__anchor" href="#use-dual-key-remap">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>The project home:
-&lt;a class="md__link" href="https://github.com/ililim/dual-key-remap/"
-target="_blank" rel="noopener"
->
-dual-key-remap
-↗
-&lt;/a>
-&lt;/p>
-&lt;h1 id="auto-start-dual-key-remap-when-windows-launch">Auto Start &amp;lsquo;dual key remap&amp;rsquo; when windows launch&lt;sup>&lt;a class="h__anchor" href="#auto-start-dual-key-remap-when-windows-launch">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>Make a &amp;lsquo;dual-key-remap.exe&amp;rsquo; shortcut (by press Alt and drag to
-somewhere) and put it in Startup folder (&lt;code>win + R&lt;/code> and input
-&lt;code>shell:startup&lt;/code> you can directly open this folder).&lt;/p>
-&lt;h1 id="stop-dual-key-remap">Stop &amp;lsquo;dual key remap&amp;rsquo;&lt;sup>&lt;a class="h__anchor" href="#stop-dual-key-remap">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;pre>&lt;code>C:\&amp;gt;tasklist | findstr dual
-dual-key-remap.exe 1556 Console 4 4,148 K
-C:\&amp;gt;taskkill /pid 1556
-&lt;/code>&lt;/pre>&lt;p>Or: &lt;code>taskkill /im dual-key-remap.exe&lt;/code>&lt;/p></article></item></channel></rss>
+drop reception very often.&lt;/p></article></item></channel></rss>
