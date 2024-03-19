@@ -1,4 +1,47 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>https://zyprex.github.io/zyprex.blog/2023/</link><language>en</language><updated>Thu, 21 Sep 2023 14:52:26 CST</updated><item><title>Open Old Project on Android Studio</title><link>https://zyprex.github.io/zyprex.blog/2023/open-old-project-on-android-studio/</link><pubDate>Thu, 21 Sep 2023 14:52:26 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2023/open-old-project-on-android-studio/</guid><description>gradle connection timed out again</description><article>&lt;h1 id="open-old-project-on-android-studio">Open Old Project on Android Studio&lt;sup>&lt;a class="h__anchor" href="#open-old-project-on-android-studio">¶&lt;/a>&lt;/sup>&lt;/h1>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>https://zyprex.github.io/zyprex.blog/2023/</link><language>en</language><updated>Thu, 21 Sep 2023 14:52:26 CST</updated><item><title>Batch Replace Epub CSS</title><link>https://zyprex.github.io/zyprex.blog/2024/batch-replace-epub-css/</link><pubDate>Mon, 04 Mar 2024 15:18:36 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2024/batch-replace-epub-css/</guid><description/><article>&lt;h1 id="batch-replace-epub-css">Batch Replace Epub CSS&lt;sup>&lt;a class="h__anchor" href="#batch-replace-epub-css">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;h2 id="step-1">Step 1&lt;sup>&lt;a class="h__anchor" href="#step-1">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>Rename the epub extension to zip, and unpack it to a directory.&lt;/p>
+&lt;h2 id="step-2">Step 2&lt;sup>&lt;a class="h__anchor" href="#step-2">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>Create the &lt;code>replace.css&lt;/code> file, write some styles in.&lt;/p>
+&lt;p>Write a batch file called &lt;code>replace_main_css.bat&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-batch" data-lang="batch">&lt;span class="p">:&lt;/span>&lt;span class="c1">: Find all main.css, replace it content to replace.css&lt;/span>
+&lt;span class="p">@&lt;/span>&lt;span class="k">ECHO&lt;/span> OFF
+&lt;span class="k">DEL&lt;/span> replace.bat
+&lt;span class="k">FOR&lt;/span> /R .\ &lt;span class="se">%%&lt;/span>G &lt;span class="k">IN&lt;/span> &lt;span class="p">(&lt;/span>main.css&lt;span class="p">)&lt;/span> &lt;span class="k">DO&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;span class="k">IF&lt;/span> &lt;span class="k">EXIST&lt;/span> &lt;span class="se">%%&lt;/span>G &lt;span class="k">ECHO&lt;/span> TYPE replace.css &lt;span class="se">^&amp;gt;&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">%%&lt;/span>&lt;span class="s2">G&amp;#34;&lt;/span> &lt;span class="p">&amp;gt;&amp;gt;&lt;/span> replace.bat
+&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Run it.&lt;/p>
+&lt;h2 id="step-2-1">Step 2&lt;sup>&lt;a class="h__anchor" href="#step-2-1">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>Quick review the &lt;code>replace.bat&lt;/code>, make sure that all files
+list here are need replaced.
+The file should look like:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-batch" data-lang="batch">&lt;span class="k">TYPE&lt;/span> replace &lt;span class="p">&amp;gt;&lt;/span> &lt;span class="s2">&amp;#34;...main.css&amp;#34;&lt;/span>
+&lt;span class="k">TYPE&lt;/span> replace &lt;span class="p">&amp;gt;&lt;/span> &lt;span class="s2">&amp;#34;...main.css&amp;#34;&lt;/span>
+&lt;span class="k">TYPE&lt;/span> replace &lt;span class="p">&amp;gt;&lt;/span> &lt;span class="s2">&amp;#34;...main.css&amp;#34;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then just run &lt;code>replace.bat&lt;/code>.&lt;/p>
+&lt;h2 id="step-4">Step 4&lt;sup>&lt;a class="h__anchor" href="#step-4">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>Repack directory to zip and rename the extension to epub.&lt;/p></article></item><item><title>Open Old Project on Android Studio</title><link>https://zyprex.github.io/zyprex.blog/2023/open-old-project-on-android-studio/</link><pubDate>Thu, 21 Sep 2023 14:52:26 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2023/open-old-project-on-android-studio/</guid><description>gradle connection timed out again</description><article>&lt;h1 id="open-old-project-on-android-studio">Open Old Project on Android Studio&lt;sup>&lt;a class="h__anchor" href="#open-old-project-on-android-studio">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>The problem:&lt;/p>
 &lt;blockquote>
 &lt;p>gradle ERROR: Connection timed out&lt;/p>
@@ -944,59 +987,4 @@ this list as a reminder for why you need to stick to the plan.&lt;/li>
 &lt;li>Put blocks in place to make it harder for you to be triggered.&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;/ul></article></item><item><title>How the Phone Network Works</title><link>https://zyprex.github.io/zyprex.blog/2022/how-the-phone-network-works/</link><pubDate>Tue, 10 May 2022 19:35:17 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/how-the-phone-network-works/</guid><description/><article>&lt;h1 id="how-the-phone-network-works">How The Phone Network Works&lt;sup>&lt;a class="h__anchor" href="#how-the-phone-network-works">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>Origin From: Scishow&lt;/p>
-&lt;h1 id="the-basic-way-a-cell-phone-works">The Basic Way A Cell Phone Works&lt;sup>&lt;a class="h__anchor" href="#the-basic-way-a-cell-phone-works">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>Cell phones are basically just complicated radios, send radio waves
-carrying a signal back and forth between radio towers.&lt;/p>
-&lt;p>&lt;strong>Complicated part&lt;/strong>&lt;/p>
-&lt;p>Encoding data on a radio wave.&lt;/p>
-&lt;p>&lt;strong>Radio waves have two properties&lt;/strong>&lt;/p>
-&lt;ol>
-&lt;li>Amplitude: how large the wave is.&lt;/li>
-&lt;li>Frequency: the number of times a wave cycles in a given tiem.&lt;/li>
-&lt;/ol>
-&lt;p>We can encoding information by changing both of those properties
-across a wave. (for instance, we could use a series of high and low
-frequencies to represent a stream of 1s and 0s, encoding digital data)&lt;/p>
-&lt;p>Cell phones use a slice of the radio frequency spectrum in 800 to 4000
-Megahertz range.&lt;/p>
-&lt;p>&lt;strong>Bandwidth&lt;/strong>&lt;/p>
-&lt;p>Bandwidth is the amount of frequencies we can use for a whole network.&lt;/p>
-&lt;p>&lt;strong>Interface&lt;/strong>&lt;/p>
-&lt;p>If lots of cell phones all use the same band of frequencies in the
-same way to communicate with a cell tower, their signals overlap with
-each other and become garbled.&lt;/p>
-&lt;p>Radio waves can add and subtract from one another to create new waves.&lt;/p>
-&lt;h1 id="overview-of-1g-to-5g">Overview of 1G to 5G&lt;sup>&lt;a class="h__anchor" href="#overview-of-1g-to-5g">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>&lt;strong>The &amp;ldquo;gees&amp;rdquo;&lt;/strong>&lt;/p>
-&lt;p>The letter G in 4G or 5G refers to the generation of technology used
-for sending radio waves around.&lt;/p>
-&lt;h2 id="1g">1G&lt;sup>&lt;a class="h__anchor" href="#1g">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>FDMA: frequency domain multiple access&lt;/p>
-&lt;p>Distributing frequencies in cells (a kind of honeycomb pattern), each
-of those cells uses a difference cell tower or base station to
-transmit to.&lt;/p>
-&lt;p>The trick is that nearby cells are allocated different frequencies to
-use, but distant ones can use the same frequencies without
-overlapping.&lt;/p>
-&lt;h2 id="2g">2G&lt;sup>&lt;a class="h__anchor" href="#2g">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>TDMA: time division multiple access&lt;/p>
-&lt;p>Use the same channel by chunking signals into bits that take turns.&lt;/p>
-&lt;h2 id="3g">3G&lt;sup>&lt;a class="h__anchor" href="#3g">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>CDMA: code division multiple access&lt;/p>
-&lt;p>Encoding the signals in such way that they can still be made out
-distinctly on the other end (the codes are orthogonal, meaning
-that they can&amp;rsquo;t get mixed up with one another).&lt;/p>
-&lt;h2 id="4g">4G&lt;sup>&lt;a class="h__anchor" href="#4g">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>OFDM: orthoganal frequency division multiplexing&lt;/p>
-&lt;p>Chopes up a single band into small divisions called carriers whose
-frequencies are less likely to interface with each other.&lt;/p>
-&lt;p>&lt;strong>ICI: Intercell Interference&lt;/strong>&lt;/p>
-&lt;p>Signals interfering at the edge of two cells using the same frequencies.&lt;/p>
-&lt;h2 id="5g">5G&lt;sup>&lt;a class="h__anchor" href="#5g">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>5G is a network of what are called &amp;ldquo;ultra-dense networks&amp;rdquo; consisting
-of lots of smaller cells providing reception to many users.&lt;/p>
-&lt;p>&lt;strong>The problem&lt;/strong>&lt;/p>
-&lt;p>More boundaries, increasing the amount of ICI, lead you cell phone
-drop reception very often.&lt;/p></article></item></channel></rss>
+&lt;/ul></article></item></channel></rss>

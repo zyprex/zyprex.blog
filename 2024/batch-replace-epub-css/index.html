@@ -1,0 +1,21 @@
+<!doctype html><html><meta charset=utf-8><meta name=generator content="Hugo 0.76.5"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel=icon type=image/png href=https://zyprex.github.io/zyprex.blog><link rel=stylesheet type=text/css href=https://zyprex.github.io/zyprex.blog/css/main.css><link rel=stylesheet type=text/css href=https://zyprex.github.io/zyprex.blog/css/syntax.css><title>Batch Replace Epub CSS@Zyprex's Blog</title><body><div class=fence><div style=height:2em;margin-top:1em;margin-bottom:1em;font-size:1.1em;overflow-x:scroll;overflow-y:hidden;white-space:nowrap><nav>|&emsp;<a href=/zyprex.blog/>HOME</a>&emsp;|&emsp;<a href=/zyprex.blog/tags/>TAGS</a>&emsp;|&emsp;<a href=/zyprex.blog/categories/>CATEGORIES</a>&emsp;|&emsp;<a href=/zyprex.blog/index.xml>RSS</a>&emsp;|&emsp;<a href=/zyprex.blog/search/>SEARCH</a>&emsp;|&emsp;<a href=/zyprex.blog/about/>ABOUT</a>&emsp;|</nav></div><div class=Hp><em class=T>Batch Replace Epub CSS</em><br><em>2024/03/04 Mon 15:18</em></div><div id=C><h1 id=batch-replace-epub-css>Batch Replace Epub CSS<sup><a class=h__anchor href=#batch-replace-epub-css>¶</a></sup></h1><h2 id=step-1>Step 1<sup><a class=h__anchor href=#step-1>¶</a></sup></h2><p>Rename the epub extension to zip, and unpack it to a directory.</p><h2 id=step-2>Step 2<sup><a class=h__anchor href=#step-2>¶</a></sup></h2><p>Create the <code>replace.css</code> file, write some styles in.</p><p>Write a batch file called <code>replace_main_css.bat</code>.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-batch data-lang=batch><span class=p>:</span><span class=c1>: Find all main.css, replace it content to replace.css</span>
+<span class=p>@</span><span class=k>ECHO</span> OFF
+<span class=k>DEL</span> replace.bat
+<span class=k>FOR</span> /R  .\ <span class=se>%%</span>G <span class=k>IN</span> <span class=p>(</span>main.css<span class=p>)</span> <span class=k>DO</span> <span class=p>(</span>
+  <span class=k>IF</span> <span class=k>EXIST</span> <span class=se>%%</span>G <span class=k>ECHO</span> TYPE replace.css <span class=se>^&gt;</span> <span class=s2>&#34;</span><span class=se>%%</span><span class=s2>G&#34;</span> <span class=p>&gt;&gt;</span> replace.bat 
+<span class=p>)</span>
+</code></pre></td></tr></table></div></div><p>Run it.</p><h2 id=step-2-1>Step 2<sup><a class=h__anchor href=#step-2-1>¶</a></sup></h2><p>Quick review the <code>replace.bat</code>, make sure that all files
+list here are need replaced.
+The file should look like:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-batch data-lang=batch><span class=k>TYPE</span> replace <span class=p>&gt;</span> <span class=s2>&#34;...main.css&#34;</span>
+<span class=k>TYPE</span> replace <span class=p>&gt;</span> <span class=s2>&#34;...main.css&#34;</span>
+<span class=k>TYPE</span> replace <span class=p>&gt;</span> <span class=s2>&#34;...main.css&#34;</span>
+</code></pre></td></tr></table></div></div><p>Then just run <code>replace.bat</code>.</p><h2 id=step-4>Step 4<sup><a class=h__anchor href=#step-4>¶</a></sup></h2><p>Repack directory to zip and rename the extension to epub.</p></div><div class=pager><br>▼ <a href=/zyprex.blog/2023/open-old-project-on-android-studio/>Open Old Project on Android Studio</a></div><footer style="text-align:right;margin:5rem .2rem .2rem"><div><section><a class=taxo href=https://zyprex.github.io/zyprex.blog/tags/batch/>#batch</a></section></div><div>&copy; 2020 - 2024</div><small>page 2024</small></footer></div><script defer type=application/javascript src=https://zyprex.github.io/zyprex.blog/js/norm.js></script></body></html>
