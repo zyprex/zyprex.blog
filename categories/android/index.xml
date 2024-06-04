@@ -1,4 +1,9 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>https://zyprex.github.io/zyprex.blog/categories/android/</link><language>en</language><updated>Thu, 21 Sep 2023 14:52:26 CST</updated><item><title>Batch Replace Epub CSS</title><link>https://zyprex.github.io/zyprex.blog/2024/batch-replace-epub-css/</link><pubDate>Mon, 04 Mar 2024 15:18:36 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2024/batch-replace-epub-css/</guid><description/><article>&lt;h1 id="batch-replace-epub-css">Batch Replace Epub CSS&lt;sup>&lt;a class="h__anchor" href="#batch-replace-epub-css">¶&lt;/a>&lt;/sup>&lt;/h1>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>https://zyprex.github.io/zyprex.blog/categories/android/</link><language>en</language><updated>Thu, 21 Sep 2023 14:52:26 CST</updated><item><title>Calibre Ebook Convert Keep Image Resolutions</title><link>https://zyprex.github.io/zyprex.blog/2024/calibre-ebook-convert-keep-image-resolutions/</link><pubDate>Tue, 04 Jun 2024 12:08:22 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2024/calibre-ebook-convert-keep-image-resolutions/</guid><description/><article>&lt;h1 id="calibre-ebook-convert-keep-image-resolutions">Calibre Ebook Convert Keep Image Resolutions&lt;sup>&lt;a class="h__anchor" href="#calibre-ebook-convert-keep-image-resolutions">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>When I convert ebook use calibre&amp;rsquo;s &lt;code>ebook-convert&lt;/code> command,
+I discover the output file&amp;rsquo;s image size has been downscaled.&lt;/p>
+&lt;p>This can be avoid by add an argument.&lt;/p>
+&lt;pre>&lt;code>ebook-convert mybook.mobi mybook.epub --output-profile tablet
+&lt;/code>&lt;/pre></article></item><item><title>Batch Replace Epub CSS</title><link>https://zyprex.github.io/zyprex.blog/2024/batch-replace-epub-css/</link><pubDate>Mon, 04 Mar 2024 15:18:36 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2024/batch-replace-epub-css/</guid><description/><article>&lt;h1 id="batch-replace-epub-css">Batch Replace Epub CSS&lt;sup>&lt;a class="h__anchor" href="#batch-replace-epub-css">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;h2 id="step-1">Step 1&lt;sup>&lt;a class="h__anchor" href="#step-1">¶&lt;/a>&lt;/sup>&lt;/h2>
 &lt;p>Rename the epub extension to zip, and unpack it to a directory.&lt;/p>
 &lt;h2 id="step-2">Step 2&lt;sup>&lt;a class="h__anchor" href="#step-2">¶&lt;/a>&lt;/sup>&lt;/h2>
@@ -950,41 +955,4 @@ increase their levels, but this can obscure moral elements.&lt;/p>
 &lt;p>If other&amp;rsquo;s don&amp;rsquo;t judged your immoral behavior, then it&amp;rsquo;s more likely to occur.&lt;/p>
 &lt;h2 id="the-scarcity-principle">The Scarcity Principle&lt;sup>&lt;a class="h__anchor" href="#the-scarcity-principle">¶&lt;/a>&lt;/sup>&lt;/h2>
 &lt;p>People tend to place less value on objects or opportunities that are in
-abundance rather than those that are rare. But does those rare fitter more ?&lt;/p></article></item><item><title>Stop Nail Biting</title><link>https://zyprex.github.io/zyprex.blog/2022/stop-nail-biting/</link><pubDate>Tue, 10 May 2022 21:18:47 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/stop-nail-biting/</guid><description/><article>&lt;h1 id="stop-nail-biting">Stop Nail Biting&lt;sup>&lt;a class="h__anchor" href="#stop-nail-biting">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>Nail biting is a compulsive behaviors that can cause a lot of
-problems. I try to overcome this bad habit, but failed every time.&lt;/p>
-&lt;p>Here are some concepts. I hope with the apply of those concepts I
-could finally get rid of this bad habit.&lt;/p>
-&lt;h2 id="habit-reversal-training">Habit Reversal Training&lt;sup>&lt;a class="h__anchor" href="#habit-reversal-training">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;ul>
-&lt;li>
-&lt;p>Phases 1: awareness training&lt;/p>
-&lt;ol>
-&lt;li>Identify the habit or the problem behavior you want to break.&lt;/li>
-&lt;li>Recognize when you engage in the behavior, what triggers it.
-(stress, boredom etc.)&lt;/li>
-&lt;li>Identify the earliest signs of the behavior when you first
-feel the urge to do it. (early warning training)&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>
-&lt;p>Phases 2: competing response training&lt;/p>
-&lt;ul>
-&lt;li>substitue a new behavior for the old one that you want to extinguish.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>Phases 3: establishing motivation and support&lt;/p>
-&lt;ul>
-&lt;li>write down all of the negative consequences of the behavior. Use
-this list as a reminder for why you need to stick to the plan.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>Add-on technique: stimulus control&lt;/p>
-&lt;ul>
-&lt;li>Reduce the things in your enviroment that can trigger you behavior.&lt;/li>
-&lt;li>Put blocks in place to make it harder for you to be triggered.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul></article></item></channel></rss>
+abundance rather than those that are rare. But does those rare fitter more ?&lt;/p></article></item></channel></rss>
