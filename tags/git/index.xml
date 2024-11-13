@@ -1,4 +1,233 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>https://zyprex.github.io/zyprex.blog/tags/git/</link><language>en</language><updated>Mon, 14 Jun 2021 13:11:05 CST</updated><item><title>Calibre Ebook Convert Keep Image Resolutions</title><link>https://zyprex.github.io/zyprex.blog/2024/calibre-ebook-convert-keep-image-resolutions/</link><pubDate>Tue, 04 Jun 2024 12:08:22 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2024/calibre-ebook-convert-keep-image-resolutions/</guid><description/><article>&lt;h1 id="calibre-ebook-convert-keep-image-resolutions">Calibre Ebook Convert Keep Image Resolutions&lt;sup>&lt;a class="h__anchor" href="#calibre-ebook-convert-keep-image-resolutions">¶&lt;/a>&lt;/sup>&lt;/h1>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zyprex's Blog</title><generator uri="https://gohugo.io">Hugo</generator><link>https://zyprex.github.io/zyprex.blog/tags/git/</link><language>en</language><updated>Mon, 14 Jun 2021 13:11:05 CST</updated><item><title>Ebook Convert Wrapper Script</title><link>https://zyprex.github.io/zyprex.blog/2024/ebook-convert-wrapper-script/</link><pubDate>Wed, 13 Nov 2024 12:34:15 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2024/ebook-convert-wrapper-script/</guid><description/><article>&lt;h1 id="intro">Intro&lt;sup>&lt;a class="h__anchor" href="#intro">¶&lt;/a>&lt;/sup>&lt;/h1>
+&lt;p>Calibre has a program called &lt;code>ebook_convert.exe&lt;/code>.
+So I wrote some useful scripts for it.&lt;/p>
+&lt;h2 id="1-batch-convert">1. Batch Convert&lt;sup>&lt;a class="h__anchor" href="#1-batch-convert">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>One shot convert all epub to azw3.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-batch" data-lang="batch">&lt;span class="p">:&lt;/span>&lt;span class="c1">: Set delims empty, split new line only&lt;/span>
+&lt;span class="k">FOR&lt;/span> &lt;span class="k">/F&lt;/span> &lt;span class="s2">&amp;#34;delims=&amp;#34;&lt;/span> &lt;span class="se">%%&lt;/span>F &lt;span class="k">IN&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;DIR/B/A:-D *.epub&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">DO&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;span class="nv">%ebconv%&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">%%&lt;/span>&lt;span class="s2">~nxF&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">%%&lt;/span>&lt;span class="s2">~nF.azw3&amp;#34;&lt;/span> --output-profile tablet
+&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="2-clean-sdr-dir">2. Clean SDR dir&lt;sup>&lt;a class="h__anchor" href="#2-clean-sdr-dir">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>Kindle always create may sdr directories, also swipe them by one shot!&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-batch" data-lang="batch">&lt;span class="p">:&lt;/span>&lt;span class="c1">: Set delims empty, split new line only&lt;/span>
+&lt;span class="k">FOR&lt;/span> &lt;span class="k">/F&lt;/span> &lt;span class="s2">&amp;#34;delims=&amp;#34;&lt;/span> &lt;span class="se">%%&lt;/span>F &lt;span class="k">IN&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;DIR/B/S/A:D *.sdr&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">DO&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;span class="p">:&lt;/span>&lt;span class="c1">: echo &amp;#34;%%F&amp;#34;&lt;/span>
+&lt;span class="p">:&lt;/span>&lt;span class="c1">: By not use /S/Q, only delete empty dir&lt;/span>
+&lt;span class="k">rmdir&lt;/span> /S &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">%%&lt;/span>&lt;span class="s2">F&amp;#34;&lt;/span>
+&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Actually we can do more, such as clean empty directories.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-batch" data-lang="batch">&lt;span class="p">:&lt;/span>&lt;span class="c1">: Set delims empty, split new line only&lt;/span>
+&lt;span class="k">FOR&lt;/span> &lt;span class="k">/F&lt;/span> &lt;span class="s2">&amp;#34;delims=&amp;#34;&lt;/span> &lt;span class="se">%%&lt;/span>F &lt;span class="k">IN&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;DIR/B/S/A:D *.*&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">DO&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;span class="p">:&lt;/span>&lt;span class="c1">: echo &amp;#34;%%F&amp;#34;&lt;/span>
+&lt;span class="p">:&lt;/span>&lt;span class="c1">: By not use /S/Q, only delete empty dir&lt;/span>
+&lt;span class="k">rmdir&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">%%&lt;/span>&lt;span class="s2">F&amp;#34;&lt;/span>
+&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="3-extract-images-in-order">3. Extract Images In Order&lt;sup>&lt;a class="h__anchor" href="#3-extract-images-in-order">¶&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>This time, I will use &lt;strong>git bash&lt;/strong>, &lt;strong>unzip&lt;/strong> and &lt;strong>ripgrep&lt;/strong>.&lt;/p>
+&lt;h3 id="1-epub-format">(1) EPUB format&lt;sup>&lt;a class="h__anchor" href="#1-epub-format">¶&lt;/a>&lt;/sup>&lt;/h3>
+&lt;ol>
+&lt;li>Find the OPF file name, by extract epub as archieve.&lt;/li>
+&lt;li>Modify the var &lt;code>vol_indexer&lt;/code>.&lt;/li>
+&lt;li>Run script below.&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;span class="cp">&lt;/span>
+epub_to_img&lt;span class="o">()&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;span class="nv">file&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$1&lt;/span>
+&lt;span class="nv">filenoext&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">1&lt;/span>&lt;span class="p">%.*&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;span class="c1"># -- remove any [...] text!&lt;/span>
+&lt;span class="nv">filenoext&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="se">\[&lt;/span>&lt;span class="p">*]/&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;span class="c1"># -- extract index file&lt;/span>
+unzip -n &lt;span class="nv">$file&lt;/span> &lt;span class="s2">&amp;#34;vol.opf&amp;#34;&lt;/span> -d &lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="si">}&lt;/span> 1&amp;gt; /dev/null
+&lt;span class="c1"># -- extract html files&lt;/span>
+unzip -n &lt;span class="nv">$file&lt;/span> &lt;span class="s2">&amp;#34;html/*.html&amp;#34;&lt;/span> -d &lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="si">}&lt;/span> 1&amp;gt; /dev/null
+&lt;span class="c1"># -- extract image files&lt;/span>
+unzip -n &lt;span class="nv">$file&lt;/span> &lt;span class="s2">&amp;#34;image/*.*&amp;#34;&lt;/span> -d &lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="si">}&lt;/span> 1&amp;gt; /dev/null
+&lt;span class="nv">vol_indexer&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="si">}&lt;/span>/vol.opf
+&lt;span class="nv">seq&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">0&lt;/span>
+&lt;span class="c1"># -- use ripgrep match html path, replace line to relative html url&lt;/span>
+&lt;span class="k">for&lt;/span> i in &lt;span class="k">$(&lt;/span>rg -N -o -e &lt;span class="s1">&amp;#39;&amp;#34;(html/\S+\.html)&amp;#34; &amp;#39;&lt;/span> -r &lt;span class="s1">&amp;#39;$1&amp;#39;&lt;/span> -i &lt;span class="nv">$vol_indexer&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
+&lt;span class="c1"># echo $i&lt;/span>
+&lt;span class="c1"># -- match image path from html page&lt;/span>
+&lt;span class="nv">image_path&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$(&lt;/span>rg -N -o -e &lt;span class="s1">&amp;#39;(image/\S+)&amp;#34; &amp;#39;&lt;/span> -r &lt;span class="s1">&amp;#39;$1&amp;#39;&lt;/span> -i &lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="si">}&lt;/span>/&lt;span class="nv">$i&lt;/span>&lt;span class="k">)&lt;/span>
+&lt;span class="c1"># echo $image_path&lt;/span>
+&lt;span class="c1"># -- rename the image file, keep it&amp;#39;s extension&lt;/span>
+&lt;span class="nv">filename&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$(&lt;/span>&lt;span class="nb">printf&lt;/span> &lt;span class="s2">&amp;#34;%03d.%s&amp;#34;&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">seq&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">image_path&lt;/span>&lt;span class="p">##*.&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="k">)&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$image_path&lt;/span>&lt;span class="s2"> -&amp;gt; &lt;/span>&lt;span class="nv">$filename&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+mv &lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="si">}&lt;/span>/&lt;span class="nv">$image_path&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="si">}&lt;/span>/&lt;span class="nv">$filename&lt;/span>
+&lt;span class="c1"># -- add seq number&lt;/span>
+&lt;span class="nv">seq&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$((&lt;/span>seq+1&lt;span class="k">))&lt;/span>
+&lt;span class="k">done&lt;/span>
+&lt;span class="c1"># clean some files&lt;/span>
+rm &lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="si">}&lt;/span>/html/*.html
+rmdir &lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="si">}&lt;/span>/html
+rmdir &lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="si">}&lt;/span>/image
+rm &lt;span class="nv">$vol_indexer&lt;/span>
+&lt;span class="o">}&lt;/span>
+&lt;span class="k">for&lt;/span> f in &lt;span class="k">$(&lt;/span>ls *.epub&lt;span class="k">)&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
+epub_to_img &lt;span class="nv">$f&lt;/span>
+&lt;span class="k">done&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="2-mobi-format">(2) MOBI format&lt;sup>&lt;a class="h__anchor" href="#2-mobi-format">¶&lt;/a>&lt;/sup>&lt;/h3>
+&lt;ol>
+&lt;li>Modified the var &lt;code>ebook_convert&lt;/code>.&lt;/li>
+&lt;li>Run script below.&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="nv">ebook_convert&lt;/span>&lt;span class="o">=&lt;/span>../Calibre/ebook-convert.exe
+&lt;span class="c1"># case the file name may contain space char&lt;/span>
+&lt;span class="nv">OIFS&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$IFS&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;span class="nv">IFS&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">$&amp;#39;\n&amp;#39;&lt;/span>
+mobi_to_epub&lt;span class="o">()&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;span class="k">for&lt;/span> f in &lt;span class="k">$(&lt;/span>ls *.mobi&lt;span class="k">)&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
+&lt;span class="c1"># echo ${f##*.}&lt;/span>
+&lt;span class="nv">file&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$f&lt;/span>
+&lt;span class="nv">filenoext&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">f&lt;/span>&lt;span class="p">%.*&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;span class="c1"># remove any [...] text!&lt;/span>
+&lt;span class="nv">filenoext&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="se">\[&lt;/span>&lt;span class="p">*]/&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$filenoext&lt;/span>
+&lt;span class="si">${&lt;/span>&lt;span class="nv">ebook_convert&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">file&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="si">}&lt;/span>.epub --output-profile tablet
+&lt;span class="si">${&lt;/span>&lt;span class="nv">file&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="si">}&lt;/span>.epub 1&amp;gt; /dev/null
+&lt;span class="k">done&lt;/span>
+&lt;span class="o">}&lt;/span>
+epub_to_dir&lt;span class="o">()&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;span class="k">for&lt;/span> f in &lt;span class="k">$(&lt;/span>ls *.epub&lt;span class="k">)&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
+&lt;span class="nv">file&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$f&lt;/span>
+&lt;span class="nv">filenoext&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">f&lt;/span>&lt;span class="p">%.*&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;span class="nb">echo&lt;/span> unpack &lt;span class="nv">$file&lt;/span>
+unzip -n &lt;span class="nv">$file&lt;/span> &lt;span class="s2">&amp;#34;**/*.jpeg&amp;#34;&lt;/span> -d &lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="si">}&lt;/span>
+mv &lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="si">}&lt;/span>/*/*.jpeg &lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="si">}&lt;/span>
+rmdir &lt;span class="si">${&lt;/span>&lt;span class="nv">filenoext&lt;/span>&lt;span class="si">}&lt;/span>/images/
+&lt;span class="k">done&lt;/span>
+&lt;span class="o">}&lt;/span>
+&lt;span class="nv">ans&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;i&amp;#34;&lt;/span>
+&lt;span class="nb">read&lt;/span> -p &lt;span class="s2">&amp;#34;run mobi_to_epub? (y or else not):&amp;#34;&lt;/span> ans
+&lt;span class="o">[[&lt;/span> &lt;span class="nv">$ans&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;y&amp;#34;&lt;/span> &lt;span class="o">]]&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> mobi_to_epub
+&lt;span class="nb">read&lt;/span> -p &lt;span class="s2">&amp;#34;run epub_to_dir? (y or else not):&amp;#34;&lt;/span> ans
+&lt;span class="o">[[&lt;/span> &lt;span class="nv">$ans&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;y&amp;#34;&lt;/span> &lt;span class="o">]]&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> epub_to_dir
+&lt;span class="nb">read&lt;/span> -p &lt;span class="s2">&amp;#34;delete all epub files? (y or else not):&amp;#34;&lt;/span> ans
+&lt;span class="o">[[&lt;/span> &lt;span class="nv">$ans&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;y&amp;#34;&lt;/span> &lt;span class="o">]]&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> rm *.epub
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></article></item><item><title>Calibre Ebook Convert Keep Image Resolutions</title><link>https://zyprex.github.io/zyprex.blog/2024/calibre-ebook-convert-keep-image-resolutions/</link><pubDate>Tue, 04 Jun 2024 12:08:22 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2024/calibre-ebook-convert-keep-image-resolutions/</guid><description/><article>&lt;h1 id="calibre-ebook-convert-keep-image-resolutions">Calibre Ebook Convert Keep Image Resolutions&lt;sup>&lt;a class="h__anchor" href="#calibre-ebook-convert-keep-image-resolutions">¶&lt;/a>&lt;/sup>&lt;/h1>
 &lt;p>When I convert ebook use calibre&amp;rsquo;s &lt;code>ebook-convert&lt;/code> command,
 I discover the output file&amp;rsquo;s image size has been downscaled.&lt;/p>
 &lt;p>This can be avoid by add an argument.&lt;/p>
@@ -941,18 +1170,4 @@ target="_blank" rel="noopener"
 debug-pringing-in-c
 ↗
 &lt;/a>
-&lt;/p></article></item><item><title>Dont Conform to the Norm</title><link>https://zyprex.github.io/zyprex.blog/2022/dont-conform-to-the-norm/</link><pubDate>Sun, 15 May 2022 18:29:01 CST</pubDate><guid>https://zyprex.github.io/zyprex.blog/2022/dont-conform-to-the-norm/</guid><description/><article>&lt;h1 id="dont-conform-to-the-norm">Don&amp;rsquo;t Conform To The Norm&lt;sup>&lt;a class="h__anchor" href="#dont-conform-to-the-norm">¶&lt;/a>&lt;/sup>&lt;/h1>
-&lt;p>Three concepts that lead you to conform to the norm.&lt;/p>
-&lt;ol>
-&lt;li>the individuation.&lt;/li>
-&lt;li>the inaction of others.&lt;/li>
-&lt;li>the scarcity principle.&lt;/li>
-&lt;/ol>
-&lt;h2 id="the-individuation">The Individuation&lt;sup>&lt;a class="h__anchor" href="#the-individuation">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>A person seeing themselves as a part of the bigger society or culture can
-increase their levels, but this can obscure moral elements.&lt;/p>
-&lt;h2 id="the-inaction-of-others">The Inaction of Others&lt;sup>&lt;a class="h__anchor" href="#the-inaction-of-others">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>If other&amp;rsquo;s don&amp;rsquo;t judged your immoral behavior, then it&amp;rsquo;s more likely to occur.&lt;/p>
-&lt;h2 id="the-scarcity-principle">The Scarcity Principle&lt;sup>&lt;a class="h__anchor" href="#the-scarcity-principle">¶&lt;/a>&lt;/sup>&lt;/h2>
-&lt;p>People tend to place less value on objects or opportunities that are in
-abundance rather than those that are rare. But does those rare fitter more ?&lt;/p></article></item></channel></rss>
+&lt;/p></article></item></channel></rss>

@@ -1,0 +1,186 @@
+<!doctype html><html><meta charset=utf-8><meta name=generator content="Hugo 0.76.5"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel=icon type=image/png href=https://zyprex.github.io/zyprex.blog><link rel=stylesheet type=text/css href=https://zyprex.github.io/zyprex.blog/css/main.css><link rel=stylesheet type=text/css href=https://zyprex.github.io/zyprex.blog/css/syntax.css><title>Ebook Convert Wrapper Script@Zyprex's Blog</title><body><div class=fence><div style=height:2em;margin-top:1em;margin-bottom:1em;font-size:1.1em;overflow-x:scroll;overflow-y:hidden;white-space:nowrap><nav>|&emsp;<a href=/zyprex.blog/>HOME</a>&emsp;|&emsp;<a href=/zyprex.blog/tags/>TAGS</a>&emsp;|&emsp;<a href=/zyprex.blog/categories/>CATEGORIES</a>&emsp;|&emsp;<a href=/zyprex.blog/index.xml>RSS</a>&emsp;|&emsp;<a href=/zyprex.blog/search/>SEARCH</a>&emsp;|&emsp;<a href=/zyprex.blog/about/>ABOUT</a>&emsp;|</nav></div><div class=Hp><em class=T>Ebook Convert Wrapper Script</em><br><em>2024/11/13 Wed 12:34</em></div><nav class=toc><b onclick="nav_toc.hidden=!nav_toc.hidden;this.innerText=this.innerText=='+ catalogue'?'- catalogue':'+ catalogue'">+ catalogue</b><div id=nav_toc hidden><nav id=TableOfContents><ul><li><a href=#intro>Intro</a><ul><li><a href=#1-batch-convert>1. Batch Convert</a></li><li><a href=#2-clean-sdr-dir>2. Clean SDR dir</a></li><li><a href=#3-extract-images-in-order>3. Extract Images In Order</a><ul><li><a href=#1-epub-format>(1) EPUB format</a></li><li><a href=#2-mobi-format>(2) MOBI format</a></li></ul></li></ul></li></ul></nav></div></nav><div id=C><h1 id=intro>Intro<sup><a class=h__anchor href=#intro>¶</a></sup></h1><p>Calibre has a program called <code>ebook_convert.exe</code>.
+So I wrote some useful scripts for it.</p><h2 id=1-batch-convert>1. Batch Convert<sup><a class=h__anchor href=#1-batch-convert>¶</a></sup></h2><p>One shot convert all epub to azw3.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-batch data-lang=batch><span class=p>:</span><span class=c1>: Set delims empty, split new line only</span>
+<span class=k>FOR</span> <span class=k>/F</span> <span class=s2>&#34;delims=&#34;</span>  <span class=se>%%</span>F <span class=k>IN</span> <span class=p>(</span><span class=s1>&#39;DIR/B/A:-D *.epub&#39;</span><span class=p>)</span> <span class=k>DO</span> <span class=p>(</span>
+  <span class=nv>%ebconv%</span> <span class=s2>&#34;</span><span class=se>%%</span><span class=s2>~nxF&#34;</span> <span class=s2>&#34;</span><span class=se>%%</span><span class=s2>~nF.azw3&#34;</span> --output-profile tablet
+<span class=p>)</span>
+</code></pre></td></tr></table></div></div><h2 id=2-clean-sdr-dir>2. Clean SDR dir<sup><a class=h__anchor href=#2-clean-sdr-dir>¶</a></sup></h2><p>Kindle always create may sdr directories, also swipe them by one shot!</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-batch data-lang=batch><span class=p>:</span><span class=c1>: Set delims empty, split new line only</span>
+<span class=k>FOR</span> <span class=k>/F</span> <span class=s2>&#34;delims=&#34;</span> <span class=se>%%</span>F <span class=k>IN</span> <span class=p>(</span><span class=s1>&#39;DIR/B/S/A:D *.sdr&#39;</span><span class=p>)</span> <span class=k>DO</span> <span class=p>(</span>
+  <span class=p>:</span><span class=c1>: echo &#34;%%F&#34;</span>
+  <span class=p>:</span><span class=c1>: By not use /S/Q, only delete empty dir</span>
+  <span class=k>rmdir</span> /S <span class=s2>&#34;</span><span class=se>%%</span><span class=s2>F&#34;</span>
+<span class=p>)</span>
+</code></pre></td></tr></table></div></div><p>Actually we can do more, such as clean empty directories.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-batch data-lang=batch><span class=p>:</span><span class=c1>: Set delims empty, split new line only</span>
+<span class=k>FOR</span> <span class=k>/F</span> <span class=s2>&#34;delims=&#34;</span> <span class=se>%%</span>F <span class=k>IN</span> <span class=p>(</span><span class=s1>&#39;DIR/B/S/A:D *.*&#39;</span><span class=p>)</span> <span class=k>DO</span> <span class=p>(</span>
+  <span class=p>:</span><span class=c1>: echo &#34;%%F&#34;</span>
+  <span class=p>:</span><span class=c1>: By not use /S/Q, only delete empty dir</span>
+  <span class=k>rmdir</span> <span class=s2>&#34;</span><span class=se>%%</span><span class=s2>F&#34;</span>
+<span class=p>)</span>
+</code></pre></td></tr></table></div></div><h2 id=3-extract-images-in-order>3. Extract Images In Order<sup><a class=h__anchor href=#3-extract-images-in-order>¶</a></sup></h2><p>This time, I will use <strong>git bash</strong>, <strong>unzip</strong> and <strong>ripgrep</strong>.</p><h3 id=1-epub-format>(1) EPUB format<sup><a class=h__anchor href=#1-epub-format>¶</a></sup></h3><ol><li>Find the OPF file name, by extract epub as archieve.</li><li>Modify the var <code>vol_indexer</code>.</li><li>Run script below.</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-sh data-lang=sh><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+epub_to_img<span class=o>()</span> <span class=o>{</span>
+  <span class=nv>file</span><span class=o>=</span><span class=nv>$1</span>
+  <span class=nv>filenoext</span><span class=o>=</span><span class=si>${</span><span class=nv>1</span><span class=p>%.*</span><span class=si>}</span>
+  <span class=c1># -- remove any [...] text!</span>
+  <span class=nv>filenoext</span><span class=o>=</span><span class=si>${</span><span class=nv>filenoext</span><span class=p>/</span><span class=se>\[</span><span class=p>*]/</span><span class=si>}</span>
+  <span class=c1># -- extract index file</span>
+  unzip -n <span class=nv>$file</span> <span class=s2>&#34;vol.opf&#34;</span> -d <span class=si>${</span><span class=nv>filenoext</span><span class=si>}</span> 1&gt; /dev/null
+  <span class=c1># -- extract html files</span>
+  unzip -n <span class=nv>$file</span> <span class=s2>&#34;html/*.html&#34;</span> -d <span class=si>${</span><span class=nv>filenoext</span><span class=si>}</span> 1&gt; /dev/null
+  <span class=c1># -- extract image files</span>
+  unzip -n <span class=nv>$file</span> <span class=s2>&#34;image/*.*&#34;</span> -d <span class=si>${</span><span class=nv>filenoext</span><span class=si>}</span> 1&gt; /dev/null
+  <span class=nv>vol_indexer</span><span class=o>=</span><span class=si>${</span><span class=nv>filenoext</span><span class=si>}</span>/vol.opf
+  <span class=nv>seq</span><span class=o>=</span><span class=m>0</span>
+  <span class=c1># -- use ripgrep match html path, replace line to relative html url</span>
+  <span class=k>for</span> i in <span class=k>$(</span>rg -N -o -e <span class=s1>&#39;&#34;(html/\S+\.html)&#34; &#39;</span> -r <span class=s1>&#39;$1&#39;</span> -i <span class=nv>$vol_indexer</span><span class=k>)</span><span class=p>;</span> <span class=k>do</span>
+    <span class=c1># echo $i</span>
+    <span class=c1># -- match image path from html page</span>
+    <span class=nv>image_path</span><span class=o>=</span><span class=k>$(</span>rg -N -o -e <span class=s1>&#39;(image/\S+)&#34; &#39;</span> -r <span class=s1>&#39;$1&#39;</span> -i <span class=si>${</span><span class=nv>filenoext</span><span class=si>}</span>/<span class=nv>$i</span><span class=k>)</span>
+    <span class=c1># echo $image_path</span>
+    <span class=c1># -- rename the image file, keep it&#39;s extension</span>
+    <span class=nv>filename</span><span class=o>=</span><span class=k>$(</span><span class=nb>printf</span> <span class=s2>&#34;%03d.%s&#34;</span> <span class=si>${</span><span class=nv>seq</span><span class=si>}</span> <span class=si>${</span><span class=nv>image_path</span><span class=p>##*.</span><span class=si>}</span><span class=k>)</span>
+    <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$image_path</span><span class=s2> -&gt; </span><span class=nv>$filename</span><span class=s2>&#34;</span>
+    mv <span class=si>${</span><span class=nv>filenoext</span><span class=si>}</span>/<span class=nv>$image_path</span> <span class=si>${</span><span class=nv>filenoext</span><span class=si>}</span>/<span class=nv>$filename</span>
+    <span class=c1># -- add seq number</span>
+    <span class=nv>seq</span><span class=o>=</span><span class=k>$((</span>seq+1<span class=k>))</span>
+  <span class=k>done</span>
+  <span class=c1># clean some files</span>
+  rm <span class=si>${</span><span class=nv>filenoext</span><span class=si>}</span>/html/*.html
+  rmdir <span class=si>${</span><span class=nv>filenoext</span><span class=si>}</span>/html
+  rmdir <span class=si>${</span><span class=nv>filenoext</span><span class=si>}</span>/image
+  rm <span class=nv>$vol_indexer</span>
+<span class=o>}</span>
+
+<span class=k>for</span> f in <span class=k>$(</span>ls *.epub<span class=k>)</span><span class=p>;</span> <span class=k>do</span>
+  epub_to_img <span class=nv>$f</span>
+<span class=k>done</span>
+</code></pre></td></tr></table></div></div><h3 id=2-mobi-format>(2) MOBI format<sup><a class=h__anchor href=#2-mobi-format>¶</a></sup></h3><ol><li>Modified the var <code>ebook_convert</code>.</li><li>Run script below.</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-sh data-lang=sh><span class=nv>ebook_convert</span><span class=o>=</span>../Calibre/ebook-convert.exe
+
+<span class=c1># case the file name may contain space char</span>
+<span class=nv>OIFS</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$IFS</span><span class=s2>&#34;</span>
+<span class=nv>IFS</span><span class=o>=</span><span class=s1>$&#39;\n&#39;</span>
+
+mobi_to_epub<span class=o>()</span> <span class=o>{</span>
+  <span class=k>for</span> f in <span class=k>$(</span>ls *.mobi<span class=k>)</span><span class=p>;</span> <span class=k>do</span>
+    <span class=c1># echo ${f##*.}</span>
+    <span class=nv>file</span><span class=o>=</span><span class=nv>$f</span>
+    <span class=nv>filenoext</span><span class=o>=</span><span class=si>${</span><span class=nv>f</span><span class=p>%.*</span><span class=si>}</span>
+    <span class=c1># remove any [...] text!</span>
+    <span class=nv>filenoext</span><span class=o>=</span><span class=si>${</span><span class=nv>filenoext</span><span class=p>/</span><span class=se>\[</span><span class=p>*]/</span><span class=si>}</span>
+    <span class=nb>echo</span> <span class=nv>$filenoext</span>
+    <span class=si>${</span><span class=nv>ebook_convert</span><span class=si>}</span> <span class=si>${</span><span class=nv>file</span><span class=si>}</span> <span class=si>${</span><span class=nv>filenoext</span><span class=si>}</span>.epub --output-profile tablet
+    <span class=si>${</span><span class=nv>file</span><span class=si>}</span> <span class=si>${</span><span class=nv>filenoext</span><span class=si>}</span>.epub 1&gt; /dev/null
+  <span class=k>done</span>
+<span class=o>}</span>
+
+epub_to_dir<span class=o>()</span> <span class=o>{</span>
+  <span class=k>for</span> f in <span class=k>$(</span>ls *.epub<span class=k>)</span><span class=p>;</span> <span class=k>do</span>
+    <span class=nv>file</span><span class=o>=</span><span class=nv>$f</span>
+    <span class=nv>filenoext</span><span class=o>=</span><span class=si>${</span><span class=nv>f</span><span class=p>%.*</span><span class=si>}</span>
+    <span class=nb>echo</span> unpack <span class=nv>$file</span>
+    unzip -n <span class=nv>$file</span> <span class=s2>&#34;**/*.jpeg&#34;</span> -d <span class=si>${</span><span class=nv>filenoext</span><span class=si>}</span>
+    mv <span class=si>${</span><span class=nv>filenoext</span><span class=si>}</span>/*/*.jpeg <span class=si>${</span><span class=nv>filenoext</span><span class=si>}</span>
+    rmdir <span class=si>${</span><span class=nv>filenoext</span><span class=si>}</span>/images/
+  <span class=k>done</span>
+<span class=o>}</span>
+
+<span class=nv>ans</span><span class=o>=</span><span class=s2>&#34;i&#34;</span>
+<span class=nb>read</span> -p <span class=s2>&#34;run mobi_to_epub? (y or else not):&#34;</span> ans
+<span class=o>[[</span> <span class=nv>$ans</span> <span class=o>==</span> <span class=s2>&#34;y&#34;</span> <span class=o>]]</span> <span class=o>&amp;&amp;</span> mobi_to_epub
+<span class=nb>read</span> -p <span class=s2>&#34;run epub_to_dir? (y or else not):&#34;</span> ans
+<span class=o>[[</span> <span class=nv>$ans</span> <span class=o>==</span> <span class=s2>&#34;y&#34;</span> <span class=o>]]</span> <span class=o>&amp;&amp;</span> epub_to_dir
+<span class=nb>read</span> -p <span class=s2>&#34;delete all epub files? (y or else not):&#34;</span> ans
+<span class=o>[[</span> <span class=nv>$ans</span> <span class=o>==</span> <span class=s2>&#34;y&#34;</span> <span class=o>]]</span> <span class=o>&amp;&amp;</span> rm *.epub 
+
+</code></pre></td></tr></table></div></div></div><div class=pager><br>▼ <a href=/zyprex.blog/2024/calibre-ebook-convert-keep-image-resolutions/>Calibre Ebook Convert Keep Image Resolutions</a></div><footer style="text-align:right;margin:5rem .2rem .2rem"><div><section><a class=taxo href=https://zyprex.github.io/zyprex.blog/tags/batch/>#batch</a><a class=taxo href=https://zyprex.github.io/zyprex.blog/tags/shell/>#shell</a></section></div><div>&copy; 2020 - 2024</div><small>page 2024</small></footer></div><script defer type=application/javascript src=https://zyprex.github.io/zyprex.blog/js/norm.js></script></body></html>
